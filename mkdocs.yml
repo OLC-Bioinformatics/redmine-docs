@@ -1,0 +1,22 @@
+site_name: OLC Redmine Automator
+site_url: https://olc-bioinformatics.github.io/redmine-docs
+site_description: Instructions for OLC Redmine Usage
+repo_url: https://github.com/forestdussault/OLCRedmineAutomator
+theme: flatly
+
+pages:
+- Home: 'index.md'
+- Getting Started: 'getting_started.md'
+- Data:
+    - 'External Retrieve': 'data/external_retrieve.md'
+- Analysis:
+    - 'SNVPhyl': 'analysis/snvphyl.md'
+    - 'ConFindr': 'analysis/confindr.md'
+    - 'WGS Assembly': 'analysis/wgsassembly.md'
+    - 'AutoCLARK': 'analysis/autoclark.md'
+    - 'DiversiTree': 'analysis/diversitree.md'
+    - 'StrainMash': 'analysis/strainmash.md'
+    - 'ResFinder': 'analysis/resfinder.md'
+    - 'MobSuite': 'analysis/mobsuite.md'
+- Troubleshooting: 'troubleshooting.md'
+
