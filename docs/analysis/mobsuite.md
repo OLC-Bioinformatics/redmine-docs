@@ -21,6 +21,13 @@ All you need to put in the description is a list of SEQIDs you want to look for 
 
 For an example MobSuite, see [issue 12823](https://redmine.biodiversity.agr.gc.ca/issues/12823).
 
+#### Interpreting Results
+
+MobSuite outputs quite a few files. The zip file uploaded will have one folder for each SEQID requested.
+Within each folder, you will find a number of MobSuite output files. Of particular interest is the `contig_report.txt` file,
+which assigns each contig in your assembly as chromosomal or plasmid, and has typing info on plasmid-derived contigs.
+Full descriptions of all files can be found at the [MobSuite GitHub repository](https://github.com/phac-nml/mob-suite).
+
 ### How long does it take?
 
 MobSuite works fairly quickly - it should take roughly one minute to analyze each SEQID that you have requested.

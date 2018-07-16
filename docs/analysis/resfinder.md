@@ -23,6 +23,13 @@ All you need to put in the description is a list of SEQIDs you want to detect AM
 
 For an example ResFinder, see [issue 12854](https://redmine.biodiversity.agr.gc.ca/issues/12854).
 
+#### Interpreting Results
+
+ResFinder will upload a file called `resfinder.xlsx` once it has completed, which shows every AMR gene found in each
+sample. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
+to look at the __PercentIdentity__ and __PercentCovered__ columns. You can be pretty sure that anything with 100 for both
+is actually there, but anything else requires further analysis to be sure.
+
 ### How long does it take?
 
 ResFinder is very fast - it should only take a few seconds to analyze each SEQID requested.

@@ -22,6 +22,12 @@ Subsequent lines should be the SEQIDs you want CLARK to be looking at.
 
 For an example AutoCLARK, see [issue 12819](https://redmine.biodiversity.agr.gc.ca/issues/12819).
 
+#### Interpreting Results
+
+Once CLARK is complete, a file called `abundance.xlsx` will be uploaded to Redmine. This file shows the species present
+for each strain in the request. These results should be interpreted with caution - species that show up with low
+proportions (less than 1-2 percent) are often not actually there and are just artifacts of the analysis.
+
 ### How long does it take?
 
 CLARK will usually take 10 to 15 minutes to run, though it may take substantially longer if you requested that a large
