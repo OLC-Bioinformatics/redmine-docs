@@ -80,7 +80,7 @@
                     <ul class="dropdown-menu">
                     
                         <li >
-                            <a href="../snvphyl/">SNVPhyl</a>
+                            <a href="../autoclark/">AutoCLARK</a>
                         </li>
                     
                         <li class="active">
@@ -88,19 +88,11 @@
                         </li>
                     
                         <li >
-                            <a href="../wgsassembly/">WGS Assembly</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../autoclark/">AutoCLARK</a>
-                        </li>
-                    
-                        <li >
                             <a href="../diversitree/">DiversiTree</a>
                         </li>
                     
                         <li >
-                            <a href="../strainmash/">StrainMash</a>
+                            <a href="../mobsuite/">MobSuite</a>
                         </li>
                     
                         <li >
@@ -108,7 +100,15 @@
                         </li>
                     
                         <li >
-                            <a href="../mobsuite/">MobSuite</a>
+                            <a href="../snvphyl/">SNVPhyl</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../strainmash/">StrainMash</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../wgsassembly/">WGS Assembly</a>
                         </li>
                     
                     </ul>
@@ -126,12 +126,12 @@
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 <li >
-                    <a rel="next" href="../snvphyl/">
+                    <a rel="next" href="../autoclark/">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
                 <li >
-                    <a rel="prev" href="../wgsassembly/">
+                    <a rel="prev" href="../diversitree/">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -180,6 +180,20 @@ erroneous downstream analysis. More details on ConFindr can be found <a href="ht
 <p>All you need to put in the description is a list of SEQIDs you want to detect contamination in, one per line.</p>
 <h4 id="example">Example</h4>
 <p>For an example ConFindr, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12881">issue 12881</a>.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>When your request is complete, a file called <code>confindr_output.zip</code> will be uploaded. This contains two files: <code>confindr_log.txt</code>,
+and <code>confindr_report.csv</code>. The report file contains 5 columns:</p>
+<ul>
+<li>Sample: The name of the sample</li>
+<li>Genus: What ConFindr thinks the genus of the sample is. If ConFindr finds more than one genus, both will be listed here.</li>
+<li>NumContamSNVs: How many times ConFindr found something that looked like a contaminating SNV. Anything 3 or over
+is enough to call a sample as contaminated.</li>
+<li>NumUniqueKmers: How many unique kmers were found for the rMLST genes. If this number is over 45000, a sample is called
+as contaminated.</li>
+<li>ContamStatus: Shown as <code>True</code> if ConFindr thinks a sample is contaminated, and <code>False</code> if the sample is thought to be
+clean.</li>
+</ul>
+<p>The log file can mostly be ignored - if any unexpected errors come up, we may use it for debugging purposes.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
 <p>ConFindr will take between 1 and 2 minutes for each sample.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>

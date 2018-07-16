@@ -30,7 +30,7 @@
     
         
     <url>
-     <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/snvphyl/</loc>
+     <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/autoclark/</loc>
      <lastmod>2018-07-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -42,25 +42,13 @@
     </url>
         
     <url>
-     <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/wgsassembly/</loc>
-     <lastmod>2018-07-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/autoclark/</loc>
-     <lastmod>2018-07-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
      <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/diversitree/</loc>
      <lastmod>2018-07-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/strainmash/</loc>
+     <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/mobsuite/</loc>
      <lastmod>2018-07-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -72,7 +60,19 @@
     </url>
         
     <url>
-     <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/mobsuite/</loc>
+     <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/snvphyl/</loc>
+     <lastmod>2018-07-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/strainmash/</loc>
+     <lastmod>2018-07-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/wgsassembly/</loc>
      <lastmod>2018-07-16</lastmod>
      <changefreq>daily</changefreq>
     </url>

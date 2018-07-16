@@ -80,7 +80,7 @@
                     <ul class="dropdown-menu">
                     
                         <li >
-                            <a href="../snvphyl/">SNVPhyl</a>
+                            <a href="../autoclark/">AutoCLARK</a>
                         </li>
                     
                         <li >
@@ -88,15 +88,19 @@
                         </li>
                     
                         <li >
-                            <a href="../wgsassembly/">WGS Assembly</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../autoclark/">AutoCLARK</a>
-                        </li>
-                    
-                        <li >
                             <a href="../diversitree/">DiversiTree</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href="./">MobSuite</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../resfinder/">ResFinder</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../snvphyl/">SNVPhyl</a>
                         </li>
                     
                         <li >
@@ -104,11 +108,7 @@
                         </li>
                     
                         <li >
-                            <a href="../resfinder/">ResFinder</a>
-                        </li>
-                    
-                        <li class="active">
-                            <a href="./">MobSuite</a>
+                            <a href="../wgsassembly/">WGS Assembly</a>
                         </li>
                     
                     </ul>
@@ -126,12 +126,12 @@
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 <li >
-                    <a rel="next" href="../resfinder/">
+                    <a rel="next" href="../diversitree/">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
                 <li >
-                    <a rel="prev" href="../../troubleshooting/">
+                    <a rel="prev" href="../resfinder/">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -182,6 +182,11 @@ produced, can be found at the <a href="https://github.com/phac-nml/mob-suite">Mo
 <p>All you need to put in the description is a list of SEQIDs you want to look for plasmids in, one per line.</p>
 <h4 id="example">Example</h4>
 <p>For an example MobSuite, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12823">issue 12823</a>.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>MobSuite outputs quite a few files. The zip file uploaded will have one folder for each SEQID requested.
+Within each folder, you will find a number of MobSuite output files. Of particular interest is the <code>contig_report.txt</code> file,
+which assigns each contig in your assembly as chromosomal or plasmid, and has typing info on plasmid-derived contigs.
+Full descriptions of all files can be found at the <a href="https://github.com/phac-nml/mob-suite">MobSuite GitHub repository</a>.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
 <p>MobSuite works fairly quickly - it should take roughly one minute to analyze each SEQID that you have requested.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>

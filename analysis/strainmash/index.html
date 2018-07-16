@@ -80,7 +80,7 @@
                     <ul class="dropdown-menu">
                     
                         <li >
-                            <a href="../snvphyl/">SNVPhyl</a>
+                            <a href="../autoclark/">AutoCLARK</a>
                         </li>
                     
                         <li >
@@ -88,19 +88,11 @@
                         </li>
                     
                         <li >
-                            <a href="../wgsassembly/">WGS Assembly</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../autoclark/">AutoCLARK</a>
-                        </li>
-                    
-                        <li >
                             <a href="../diversitree/">DiversiTree</a>
                         </li>
                     
-                        <li class="active">
-                            <a href="./">StrainMash</a>
+                        <li >
+                            <a href="../mobsuite/">MobSuite</a>
                         </li>
                     
                         <li >
@@ -108,7 +100,15 @@
                         </li>
                     
                         <li >
-                            <a href="../mobsuite/">MobSuite</a>
+                            <a href="../snvphyl/">SNVPhyl</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href="./">StrainMash</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../wgsassembly/">WGS Assembly</a>
                         </li>
                     
                     </ul>
@@ -126,12 +126,12 @@
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 <li >
-                    <a rel="next" href="../diversitree/">
+                    <a rel="next" href="../snvphyl/">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
                 <li >
-                    <a rel="prev" href="../resfinder/">
+                    <a rel="prev" href="../wgsassembly/">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -181,6 +181,21 @@ it is that you've actually sequnced.</p>
 <p>All you need to put in the description is a list of SEQIDs you want to analyze, one per line.</p>
 <h4 id="example">Example</h4>
 <p>For an example StrainMash, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12860">issue 12860</a>.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>StrainMash will upload a zip file once it finishes. This contains a folder called output, which will have a
+text file for each SEQID entered showing results.</p>
+<p>These text files have 6 columns:</p>
+<ul>
+<li>MashDistance: Represents roughly how close the query sequence is the the reference strain. 1 is a perfect match, 0 is no
+similarity. To say that something very closely matches a reference strain, this number should be <em><em>at least</em></em> 0.98</li>
+<li>NumMatchingHashes: Another measure of how close the query sequence is to the reference strain. 1000/1000 is a perfect match,
+0 is no similarity. Number needs to be fairly high (&gt;850) for close matches to reference.</li>
+<li>MedianMultiplicity: Can mostly be ignored. Should always be 1.</li>
+<li>Pvalue: An attempt to assign significance to the hit. Should be zero for anything that very closely matches a reference
+strain.</li>
+<li>ReferenceStrain: The NCBI Accession for the reference strain.</li>
+<li>Organism: The name of the organism that is the reference strain.</li>
+</ul>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
 <p>StrainMash should take about 30 seconds to 1 minute to analyze each sample you send to it.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>

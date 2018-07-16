@@ -80,7 +80,7 @@
                     <ul class="dropdown-menu">
                     
                         <li >
-                            <a href="../snvphyl/">SNVPhyl</a>
+                            <a href="../autoclark/">AutoCLARK</a>
                         </li>
                     
                         <li >
@@ -88,19 +88,11 @@
                         </li>
                     
                         <li >
-                            <a href="../wgsassembly/">WGS Assembly</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../autoclark/">AutoCLARK</a>
-                        </li>
-                    
-                        <li >
                             <a href="../diversitree/">DiversiTree</a>
                         </li>
                     
                         <li >
-                            <a href="../strainmash/">StrainMash</a>
+                            <a href="../mobsuite/">MobSuite</a>
                         </li>
                     
                         <li class="active">
@@ -108,7 +100,15 @@
                         </li>
                     
                         <li >
-                            <a href="../mobsuite/">MobSuite</a>
+                            <a href="../snvphyl/">SNVPhyl</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../strainmash/">StrainMash</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../wgsassembly/">WGS Assembly</a>
                         </li>
                     
                     </ul>
@@ -126,12 +126,12 @@
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 <li >
-                    <a rel="next" href="../strainmash/">
+                    <a rel="next" href="../mobsuite/">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
                 <li >
-                    <a rel="prev" href="../mobsuite/">
+                    <a rel="prev" href="../snvphyl/">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -183,6 +183,11 @@ assemblies of interest and submit them to an alternate AMR predictor, such as Mc
 <p>All you need to put in the description is a list of SEQIDs you want to detect AMR in, one per line.</p>
 <h4 id="example">Example</h4>
 <p>For an example ResFinder, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12854">issue 12854</a>.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>ResFinder will upload a file called <code>resfinder.xlsx</code> once it has completed, which shows every AMR gene found in each
+sample. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
+to look at the <strong>PercentIdentity</strong> and <strong>PercentCovered</strong> columns. You can be pretty sure that anything with 100 for both
+is actually there, but anything else requires further analysis to be sure.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
 <p>ResFinder is very fast - it should only take a few seconds to analyze each SEQID requested.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
