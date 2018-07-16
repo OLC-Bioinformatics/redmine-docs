@@ -10,13 +10,13 @@ pages:
 - Data:
     - 'External Retrieve': 'data/external_retrieve.md'
 - Analysis:
-    - 'SNVPhyl': 'analysis/snvphyl.md'
-    - 'ConFindr': 'analysis/confindr.md'
-    - 'WGS Assembly': 'analysis/wgsassembly.md'
     - 'AutoCLARK': 'analysis/autoclark.md'
+    - 'ConFindr': 'analysis/confindr.md'
     - 'DiversiTree': 'analysis/diversitree.md'
-    - 'StrainMash': 'analysis/strainmash.md'
-    - 'ResFinder': 'analysis/resfinder.md'
     - 'MobSuite': 'analysis/mobsuite.md'
+    - 'ResFinder': 'analysis/resfinder.md'
+    - 'SNVPhyl': 'analysis/snvphyl.md'
+    - 'StrainMash': 'analysis/strainmash.md'
+    - 'WGS Assembly': 'analysis/wgsassembly.md'
 - Troubleshooting: 'troubleshooting.md'
 
