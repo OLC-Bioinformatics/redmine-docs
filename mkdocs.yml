@@ -14,6 +14,7 @@ pages:
     - 'ConFindr': 'analysis/confindr.md'
     - 'DiversiTree': 'analysis/diversitree.md'
     - 'MobSuite': 'analysis/mobsuite.md'
+    - 'PointFinder': 'analysis/pointfinder.md'
     - 'ResFinder': 'analysis/resfinder.md'
     - 'SNVPhyl': 'analysis/snvphyl.md'
     - 'StrainMash': 'analysis/strainmash.md'
