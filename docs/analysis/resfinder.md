@@ -6,7 +6,8 @@ ResFinder is a program developed by the Danish Center for Genomic Epidemiology f
 in draft genome assemblies. It is very important to note that the Redmine version will only look for acquired antibiotic
 resistance genes (generally plasmid-borne) and not chromosomally encoded AMR genes that are caused by point mutations.
 
-If you're interested in chromosomally encoded AMR genes, you can [External Retrieve](../data/external_retrieve.md) your
+If you're interested in chromosomally encoded AMR genes, use the
+ [PointFinder automator](pointfinder.md) or you can [External Retrieve](../data/external_retrieve.md) your
 assemblies of interest and submit them to an alternate AMR predictor, such as McMaster's [CARD](https://card.mcmaster.ca/analyze/rgi).
 
 ### How do I use it?
