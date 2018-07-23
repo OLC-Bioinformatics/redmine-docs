@@ -14,7 +14,7 @@ To access Redmine, go to [https://redmine.biodiversity.agr.gc.ca](https://redmin
 must be on the CFIA/Agriculture Canada network). Once there, login with your corporate username and password. If this is
 your first time using Redmine, you will need to be added to the CFIA Genomics project. To get access, send an email
 to `andrew.low@canada.ca`, with `adam.koziol@canada.ca` CC'd and say you need access to the OLC Genomics project. Once you have been added to the project,
-head to [the project page](https://redmine.biodiversity.agr.gc.ca/projects/cfia-genomics/issues). This is where you will
+head to [the project page](https://redmine.biodiversity.agr.gc.ca/projects/cfia/issues). This is where you will
 be able to create requests.
 
 #### Changing Email Settings

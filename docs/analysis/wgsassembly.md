@@ -14,7 +14,7 @@ sequencing run from Calgary done on July 16, 2018 would be 180716_CAL.
 
 This folder needs to have the following files:
 
-* SampleSheet.csv
+* SampleSheet.csv (see RDIMS 8040830 for an example SampleSheet)
 * CompletedJobInfo.xml
 * config.xml
 * GenerateFASTQRunStatistics.xml

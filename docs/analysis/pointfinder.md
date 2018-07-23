@@ -52,6 +52,7 @@ PointFinder should take 30 seconds to 1 minutes for analysis of each sample.
 
 1) Requested SEQIDs are not available: If we can't find some of the SEQIDs that you request, you will get a warning
 message informing you of it.
+
 2) Can't run on requested genera: If the SEQIDs you request are not one of the genera that PointFinder works on,
 you will get a message saying so. PointFinder will still run on any SEQIDs specified that are from the correct genera.
 
