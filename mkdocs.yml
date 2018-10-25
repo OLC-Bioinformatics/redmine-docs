@@ -9,6 +9,7 @@ pages:
 - Getting Started: 'getting_started.md'
 - Data:
     - 'External Retrieve': 'data/external_retrieve.md'
+    - 'Report Retrieve': 'data/report_retrieve.md'
 - Analysis:
     - 'AutoCLARK': 'analysis/autoclark.md'
     - 'ConFindr': 'analysis/confindr.md'
