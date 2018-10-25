@@ -16,7 +16,7 @@ Put the SEQIDs you want reports for in the description, one per line.
 
 #### Example
 
-For an example of an External Retrieve, see [issue 13931](https://redmine.biodiversity.agr.gc.ca/issues/12931).
+For an example of an External Retrieve, see [issue 13931](https://redmine.biodiversity.agr.gc.ca/issues/13931).
 
 ### How long does it take?
 
