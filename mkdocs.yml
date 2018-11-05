@@ -11,6 +11,7 @@ pages:
     - 'External Retrieve': 'data/external_retrieve.md'
     - 'Report Retrieve': 'data/report_retrieve.md'
 - Analysis:
+    - 'AMRsummary': 'analysis/amrsummary.md'
     - 'AutoCLARK': 'analysis/autoclark.md'
     - 'ConFindr': 'analysis/confindr.md'
     - 'DiversiTree': 'analysis/diversitree.md'
