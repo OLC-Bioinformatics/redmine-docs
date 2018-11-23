@@ -21,5 +21,7 @@ pages:
     - 'SNVPhyl': 'analysis/snvphyl.md'
     - 'StrainMash': 'analysis/strainmash.md'
     - 'WGS Assembly': 'analysis/wgsassembly.md'
+- Internal Use:
+    - 'Merge': 'internal_only/merge.md'
 - Troubleshooting: 'troubleshooting.md'
 
