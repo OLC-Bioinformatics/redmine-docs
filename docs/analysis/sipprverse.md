@@ -12,7 +12,11 @@ In the `Subject` field, put `sipprverse`. Spelling counts, but case sensitivity 
 
 #### Description
 
-In the `Description` field, you must provide the requested analysis type followed by a list of SEQIDs one per line.
+In the `Description` field, you must provide:
+
+1. the requested `analysis type`
+2. a list of SEQIDs (one per line)
+
 The sipprverse pipeline supports the following analyses (again, spelling counts, but case sensitivity doesn't):
 
 - gdcs - determines the presence of genomically-dispersed conserved sequences in the following genera: *Escherichia, Listeria, Salmonella, Vibrio*
