@@ -14,6 +14,7 @@ pages:
     - 'AMRsummary': 'analysis/amrsummary.md'
     - 'AutoCLARK': 'analysis/autoclark.md'
     - 'ConFindr': 'analysis/confindr.md'
+    - 'CloseRelatives': 'analysis/closerelatives.md'
     - 'DiversiTree': 'analysis/diversitree.md'
     - 'GeneSeekr': 'analysis/geneseekr.md'
     - 'MobSuite': 'analysis/mobsuite.md'
