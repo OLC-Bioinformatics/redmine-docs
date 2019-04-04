@@ -30,7 +30,8 @@ For an example DiversiTree, see [issue 12100](https://redmine.biodiversity.agr.g
 
 #### Interpreting Results
 
-DiversiTree will upload two files to Redmine on completion: `strains.txt`, and `tree.nwk`. The `strains.txt` file contains the
+DiversiTree will upload two files to Redmine on completion: `diversitree_report.html`, and `tree.nwk`. The `diversitree.html` 
+can be opened in any web browser, and has a picture of the tree with selected strains highlighted, and a list of the
 _X_ most diverse strains, where _X_ is the number specified in the first line of the description. The `tree.nwk` file
 contains the phylogenetic tree created in newick format. If you want to view this tree, you can use a program such as
 [FigTree](http://tree.bio.ed.ac.uk/software/figtree/) or a web-based viewer like [phylo.io](http://phylo.io).
