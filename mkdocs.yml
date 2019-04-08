@@ -25,6 +25,7 @@ pages:
     - 'ResFinder': 'analysis/resfinder.md'
     - 'sipprverse': 'analysis/sipprverse.md'
     - 'SNVPhyl': 'analysis/snvphyl.md'
+    - 'staramr': 'analysis/staramr.md'
     - 'StrainMash': 'analysis/strainmash.md'
     - 'WGS Assembly': 'analysis/wgsassembly.md'
 - Internal Use:
