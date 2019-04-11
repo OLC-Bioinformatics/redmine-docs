@@ -10,18 +10,22 @@ pages:
 - Data:
     - 'External Retrieve': 'data/external_retrieve.md'
     - 'Report Retrieve': 'data/report_retrieve.md'
+    - 'SRA Upload': 'data/sra_upload.md'
 - Analysis:
     - 'AMRsummary': 'analysis/amrsummary.md'
     - 'AutoCLARK': 'analysis/autoclark.md'
     - 'ConFindr': 'analysis/confindr.md'
+    - 'CloseRelatives': 'analysis/closerelatives.md'
     - 'DiversiTree': 'analysis/diversitree.md'
     - 'GeneSeekr': 'analysis/geneseekr.md'
     - 'MobSuite': 'analysis/mobsuite.md'
     - 'NearTree': 'analysis/neartree.md'
     - 'PointFinder': 'analysis/pointfinder.md'
+    - 'Prokka': 'analysis/prokka.md'
     - 'ResFinder': 'analysis/resfinder.md'
     - 'sipprverse': 'analysis/sipprverse.md'
     - 'SNVPhyl': 'analysis/snvphyl.md'
+    - 'staramr': 'analysis/staramr.md'
     - 'StrainMash': 'analysis/strainmash.md'
     - 'WGS Assembly': 'analysis/wgsassembly.md'
 - Internal Use:

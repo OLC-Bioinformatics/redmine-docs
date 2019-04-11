@@ -18,13 +18,20 @@ tree and don't care about the number of strains, you can set this to 1. Subseque
 to create the tree from. Note that these strains should all be fairly closely related, or the tree creation may fail (so
 try to keep things to the same species).
 
+By default, DiversiTree uses a tree creation program called `parsnp`. Another option available is `mashtree`, which is 
+generally faster at making trees and can handle more diversity between samples, but may create less accurate
+trees. If you want to use `mashtree`, add a line at the end of your description that says `treeprogram=mashtree`. You can
+look at [issue 14724](https://redmine.biodiversity.agr.gc.ca/issues/14724) for an example request that 
+uses `mashtree`.
+
 #### Example
 
 For an example DiversiTree, see [issue 12100](https://redmine.biodiversity.agr.gc.ca/issues/12100).
 
 #### Interpreting Results
 
-DiversiTree will upload two files to Redmine on completion: `strains.txt`, and `tree.nwk`. The `strains.txt` file contains the
+DiversiTree will upload two files to Redmine on completion: `diversitree_report.html`, and `tree.nwk`. The `diversitree.html` 
+can be opened in any web browser, and has a picture of the tree with selected strains highlighted, and a list of the
 _X_ most diverse strains, where _X_ is the number specified in the first line of the description. The `tree.nwk` file
 contains the phylogenetic tree created in newick format. If you want to view this tree, you can use a program such as
 [FigTree](http://tree.bio.ed.ac.uk/software/figtree/) or a web-based viewer like [phylo.io](http://phylo.io).
@@ -43,4 +50,4 @@ message informing you of it.
 
 2) Strains too far apart. DiversiTree will warn you if it thinks that the strains you want to make a tree from are
 not closely related enough. If you get this warning, you may want to consider creating a new issue while leaving out
-the strains it says are too far.
+the strains it says are too far, or use `mashtree` as your tree creation program.
