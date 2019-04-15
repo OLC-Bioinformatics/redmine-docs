@@ -12,30 +12,54 @@ In the `Subject` field, put `sipprverse`. Spelling counts, but case sensitivity 
 
 #### Description
 
+**Required Components**
+
 In the `Description` field, you must provide:
 
-1. the requested `analysis type`
+1. `analysis=requested_analysis`
+
+    The sipprverse pipeline supports the following analyses (again, spelling counts, but case sensitivity doesn't):
+    
+    - gdcs - determines the presence of genomically-dispersed conserved sequences in the following genera: *Escherichia, Listeria, Salmonella, Vibrio*
+    - genesippr - custom suite of genes derived from the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
+    - mash - finds closest matching RefSeq genome
+    - mlst - determines multi-locus sequence type for the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
+    - pointfinder - detects chromosomal mutations predictive of drug resistance
+    - resfinder - identifies acquired antimicrobial resistance genes
+    - rmlst - determines ribosomal multi-locus sequence type
+    - serosippr - calculates the serotype for *Escherichia*
+    - sixteens - determines closest 16S match
+    - virulence - finds virulence genes
+    - full (all the above analyses)
+    - custom (**you must attach a FASTA-formatted file of targets to the issue**)
+
 2. a list of SEQIDs (one per line)
 
-The sipprverse pipeline supports the following analyses (again, spelling counts, but case sensitivity doesn't):
+**Optional Components**
 
-- gdcs - determines the presence of genomically-dispersed conserved sequences in the following genera: *Escherichia, Listeria, Salmonella, Vibrio*
-- genesippr - custom suite of genes derived from the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
-- mash - finds closest matching RefSeq genome
-- mlst - determines multi-locus sequence type for the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
-- pointfinder - detects chromosomal mutations predictive of drug resistance
-- resfinder - identifies acquired antimicrobial resistance genes
-- rmlst - determines ribosomal multi-locus sequence type
-- serosippr - calculates the serotype for *Escherichia*
-- sixteens - determines closest 16S match
-- virulence - finds virulence genes
-- full (all the above analyses)
-- custom (**you must attach a FASTA-formatted file of targets to the issue**)
+In order to customise your sipprverse analyses, several settings can be optionally modified
 
+- Minimum cutoff for matches to be included in report.
+    - default is `0.90`
+    - modify as follows:
+        - `cutoff=0.85`
+- Average pileup depth cutoff
+    - default is `2`
+    - modify as follows:
+        - `averagedepth=3`
+- Kmer size to use for baiting. Please don't lower this too much (11 is probably about as low as I would recommend)
+    - default is `19`
+    - modify as follows:
+        - `kmersize=11`
+- Do not automatically discard hits if there are internal soft clips present
+    - default is `False`
+    - modify as follows:
+        - `allowsoftclips=True`
 
 #### Example
 
-For an example sipprverse issue, see [issue 14468](https://redmine.biodiversity.agr.gc.ca/issues/14468) or [issue 14469](https://redmine.biodiversity.agr.gc.ca/issues/14469).
+For an example sipprverse issue, see [issue 15706](https://redmine.biodiversity.agr.gc.ca/issues/15706) or 
+[issue 15707](https://redmine.biodiversity.agr.gc.ca/issues/15707).
 
 #### Interpreting Results
 
