@@ -17,6 +17,8 @@ In the `Subject` field, put `SNVPhyl`. Spelling counts, but case sensitivity doe
 The first line of your description needs to be `reference`, and the second line the SEQID of the strain you want to act
 as your reference strain. Ideally, you'll want to pick a high-quality assembly for your reference.
 
+If you wish to attach a reference file instead of providing a SEQID, the second line must be `attached`
+
 The third line of your description should be `compare`, and lines after that the SEQIDs for strains you want to compare
 your reference to.
 
