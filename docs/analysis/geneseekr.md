@@ -28,7 +28,7 @@ The GeneSeekr pipeline supports the following analyses (again, spelling counts, 
 - serosippr - calculates the serotype for *Escherichia*
 - sixteens - determines closest 16S match
 - virulence - finds virulence genes
-- custom (**you must attach a FASTA-formatted file of targets to the issue**)
+- custom (**you must attach a FASTA-formatted file of target(s) to the issue**)
 
 You must also include a list of SEQIDs one per line.
 
@@ -62,6 +62,10 @@ In order to customise your GeneSeekr analyses, several settings can be optionall
     - default is `False`
     - modify as follows:
         - `unique=True`
+- Include FASTA file output of strain-specific target sequence matches 
+    - default is `False`
+    - modify as follows:
+        - `fasta=True`       
 
 
 #### Example
