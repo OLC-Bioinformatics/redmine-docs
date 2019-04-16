@@ -100,6 +100,10 @@
                         </li>
                     
                         <li >
+                            <a href="../cowsnphr/">COWSNPhR</a>
+                        </li>
+                    
+                        <li >
                             <a href="../closerelatives/">CloseRelatives</a>
                         </li>
                     
@@ -117,6 +121,10 @@
                     
                         <li >
                             <a href="../neartree/">NearTree</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                         </li>
                     
                         <li >
@@ -189,15 +197,6 @@
                     </a>
                 </li>
                 
-                <li>
-                    <a href="https://github.com/forestdussault/OLCRedmineAutomator">
-                        
-                            <i class="fa fa-github"></i>
-                        
-                        GitHub
-                    </a>
-                </li>
-                
             </ul>
         </div>
     </div>
@@ -229,8 +228,12 @@
 <h4 id="subject">Subject</h4>
 <p>In the <code>Subject</code> field, put <code>sipprverse</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
-<p>In the <code>Description</code> field, you must provide the requested analysis type followed by a list of SEQIDs one per line.
-The sipprverse pipeline supports the following analyses (again, spelling counts, but case sensitivity doesn't):</p>
+<p><strong>Required Components</strong></p>
+<p>In the <code>Description</code> field, you must provide:</p>
+<ol>
+<li>
+<p><code>analysis=requested_analysis</code></p>
+<p>The sipprverse pipeline supports the following analyses (again, spelling counts, but case sensitivity doesn't):</p>
 <ul>
 <li>gdcs - determines the presence of genomically-dispersed conserved sequences in the following genera: <em>Escherichia, Listeria, Salmonella, Vibrio</em></li>
 <li>genesippr - custom suite of genes derived from the following genera: <em>Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio</em></li>
@@ -245,8 +248,50 @@ The sipprverse pipeline supports the following analyses (again, spelling counts,
 <li>full (all the above analyses)</li>
 <li>custom (<strong>you must attach a FASTA-formatted file of targets to the issue</strong>)</li>
 </ul>
+</li>
+<li>
+<p>a list of SEQIDs (one per line)</p>
+</li>
+</ol>
+<p><strong>Optional Components</strong></p>
+<p>In order to customise your sipprverse analyses, several settings can be optionally modified</p>
+<ul>
+<li>Minimum cutoff for matches to be included in report.<ul>
+<li>default is <code>0.90</code></li>
+<li>modify as follows:<ul>
+<li><code>cutoff=0.85</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Average pileup depth cutoff<ul>
+<li>default is <code>2</code></li>
+<li>modify as follows:<ul>
+<li><code>averagedepth=3</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Kmer size to use for baiting. Please don't lower this too much (11 is probably about as low as I would recommend)<ul>
+<li>default is <code>19</code></li>
+<li>modify as follows:<ul>
+<li><code>kmersize=11</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Do not automatically discard hits if there are internal soft clips present<ul>
+<li>default is <code>False</code></li>
+<li>modify as follows:<ul>
+<li><code>allowsoftclips=True</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h4 id="example">Example</h4>
-<p>For an example sipprverse issue, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/14468">issue 14468</a> or <a href="https://redmine.biodiversity.agr.gc.ca/issues/14469">issue 14469</a>.</p>
+<p>For an example sipprverse issue, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/15706">issue 15706</a> or 
+<a href="https://redmine.biodiversity.agr.gc.ca/issues/15707">issue 15707</a>.</p>
 <h4 id="interpreting-results">Interpreting Results</h4>
 <p>The sipprverse automator will upload a file called <code>sipprverse_output.zip</code> once it has completed. This file will contain all the reports generated for the requested analysis.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>

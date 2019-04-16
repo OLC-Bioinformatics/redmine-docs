@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/staramr/">
+        <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/plasmidborneidentity/">
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
-	<title>staramr - OLC Redmine Automator</title>
+	<title>PlasmidBorneIdentity - OLC Redmine Automator</title>
 
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -123,8 +123,8 @@
                             <a href="../neartree/">NearTree</a>
                         </li>
                     
-                        <li >
-                            <a href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
+                        <li class="active">
+                            <a href="./">PlasmidBorneIdentity</a>
                         </li>
                     
                         <li >
@@ -147,8 +147,8 @@
                             <a href="../snvphyl/">SNVPhyl</a>
                         </li>
                     
-                        <li class="active">
-                            <a href="./">staramr</a>
+                        <li >
+                            <a href="../staramr/">staramr</a>
                         </li>
                     
                         <li >
@@ -187,12 +187,12 @@
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 <li >
-                    <a rel="next" href="../snvphyl/">
+                    <a rel="next" href="../neartree/">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
                 <li >
-                    <a rel="prev" href="../strainmash/">
+                    <a rel="prev" href="../pointfinder/">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -206,7 +206,7 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#pointfinder">PointFinder</a></li>
+        <li class="main active"><a href="#plasmid-borne-identity">Plasmid-Borne Identity</a></li>
         
             <li><a href="#what-does-it-do">What does it do?</a></li>
         
@@ -221,36 +221,43 @@
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="pointfinder">PointFinder</h1>
+<h1 id="plasmid-borne-identity">Plasmid-Borne Identity</h1>
+<p><img alt="Plasmid-Borne Identity" src="../../img/plasmid_borne_identity.png" /></p>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>StarAMR is a program from Canada's National Microbiology Laboratory that combines the ResFinder
-and PointFinder programs for detecting antibiotic resistance from the <a href="http://www.genomicepidemiology.org/">Danish Center for Genomic Epidemiology</a>.</p>
+<p>Plasmid-Borne Identity performs GeneSeekr and MOB-suite analyses on FASTA files, and creates a report combining and 
+summarising the outputs.</p>
+<p>MobSuite is a set of tools developed by the Public Health Agency of Canada for detecting plasmids in draft genome
+assemblies. This tool runs the <code>mob_recon</code> part of the suite, which first detects plasmids in the assemblies, and then
+performs typing on the plasmids. More details on MobSuite, including fairly extensive details on the output files
+produced, can be found at the <a href="https://github.com/phac-nml/mob-suite">MobSuite GitHub repository</a>).</p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>staramr</code>. Spelling counts, but case sensitivity doesn't.</p>
+<p>In the <code>Subject</code> field, put <code>plasmid_borne_identity</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to detect AMR in, one per line.
-Note that StarAMR is limited to detecting mutations in a few genera:</p>
-<ul>
-<li>Campylobacter</li>
-<li>Salmonella</li>
-</ul>
-<p>Our StarAMR automator will automatically determine the genus of your requested SEQIDs, and will not attempt to
-analyze any SEQIDs that are not from one of these genera.</p>
+<p>All you need to put in the description is a list of SEQIDs you want to process, one per line.</p>
+<h4 id="attachments">Attachments</h4>
+<p>You are required to attach a FASTA-formatted file containing the gene(s) you wish analysed </p>
 <h4 id="example">Example</h4>
-<p>For an example StarAMR, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/15625">issue 15625</a>.</p>
+<p>For an example Plasmid-Borne Identity analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/15644">issue 15644</a>.</p>
 <h4 id="interpreting-results">Interpreting Results</h4>
-<p>StarAMR will upload a zip file called <code>staramr_output.zip</code>. Within this folder, you will find a few files for each genus:</p>
-<p><strong><em>Note: Any SEQIDs from genera that are not Campylobacter or Salmonella not have any files uploaded</em></strong></p>
-<p>The most important file for each genus is <code>results.xlsx</code> - this shows what AMR genes were found in each
-SeqID, and also lets you see if the resistance is conferred by a gene or a point mutation.</p>
+<p>Plasmid-Borne Identity will upload five separate reports once it is complete</p>
+<p><code>geneseekr_blastn.xlsx</code> strain name and percent identity match for all query genes</p>
+<p><code>geneseekr_blastn_detailed.csv</code> strain name, and BLAST summary information, including percent match, alignment length, 
+subject length, e-value, number of positives, number of mismatches, and number of gaps for every gene</p>
+<p><code>geneseekr_blastn.csv</code>  same as <code>geneseekr_blastn.csv</code>  same as, but in .csv format</p>
+<p><code>mob_recon_summary.csv</code> shows any contigs that are predicted to be plasmids - note that all contigs calculated to be chromosomal are ignored. <strong>Location</strong> is the name of the predicted plasmid,
+while <strong>Contig</strong> is the name contig predicted to contain plasmid sequence. One plasmid can be composed of several contigs if it could not be circularised.</p>
+<p><code>plasmid_borne_summary.csv</code> combines information from <code>geneseekr_blastn.csv</code>  and <code>mob_recon_summary.csv</code>. 
+The contigs of all predicted AMR genes from the <code>geneseekr_blastn_detailed.csv</code> report are used to search the <code>mob_recon_summary</code> report.
+The plasmid predictions, and well as all the incompatibility types for that plasmid are extracted, and used in the report. <strong>Location</strong> will specify either <code>chromosome</code> or
+the name of the predicted plasmid.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>StarAMR should take 30 seconds to 1 minutes for analysis of each sample.</p>
+<p>GeneSeekr is very fast, while MOB-suite is relatively slow - it should take a few minutes to analyze each SEQID requested.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available: If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) Can't run on requested genera: If the SEQIDs you request are not one of the genera that PointFinder works on,
-you will get a message saying so. PointFinder will still run on any SEQIDs specified that are from the correct genera.</p></div>
+<ol>
+<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
+message informing you of it.</li>
+</ol></div>
         </div>
 
         <footer class="col-md-12">
