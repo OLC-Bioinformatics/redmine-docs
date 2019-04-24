@@ -22,6 +22,7 @@ pages:
     - 'MobSuite': 'analysis/mobsuite.md'
     - 'NearTree': 'analysis/neartree.md'
     - 'PlasmidBorneIdentity': 'analysis/plasmidborneidentity.md'
+    - 'PrimerFinder': 'analysis/primerfinder.md'
     - 'PointFinder': 'analysis/pointfinder.md'
     - 'Prokka': 'analysis/prokka.md'
     - 'ResFinder': 'analysis/resfinder.md'
