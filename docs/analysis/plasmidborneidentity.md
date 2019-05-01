@@ -26,6 +26,30 @@ All you need to put in the description is a list of SEQIDs you want to process, 
 
 You are required to attach a FASTA-formatted file containing the gene(s) you wish analysed 
 
+
+#### Optional arguments
+
+- BLAST program. **NOTE:** GeneSeekr (and therefore PlasmidBorne Identity) does not check to see if your query or 
+database are the appropriate molecule for the requested program. 
+    - default is `blastn`
+    - You can select one of the following BLAST programs to use:
+        - blastn - nt query: nt db
+        - blastp - protein query: protein db
+        - blastx - translated nt query: protein db
+        - tblastn - protein query: translated nt db
+        - tblastx - translated nt query: translated nt db
+    - modify as follows:
+        - `blast=tblastx`
+- Minimum cutoff for matches to be included in report.
+    - default is `70`
+    - modify as follows:
+        - `cutoff=80`
+- E-value cutoff
+    - default is `1E-05`
+    - modify as follows:
+        - `evalue=1E-10` or
+        - `evalue=0.01`
+
 #### Example
 
 For an example Plasmid-Borne Identity analysis, see [issue 15644](https://redmine.biodiversity.agr.gc.ca/issues/15644).
@@ -34,20 +58,21 @@ For an example Plasmid-Borne Identity analysis, see [issue 15644](https://redmin
 
 Plasmid-Borne Identity will upload five separate reports once it is complete
 
-`geneseekr_blastn.xlsx` strain name and percent identity match for all query genes
+`geneseekr_{BLAST_PROGRAM}.xlsx` strain name and percent identity match for all query genes
 
-`geneseekr_blastn_detailed.csv` strain name, and BLAST summary information, including percent match, alignment length, 
+`geneseekr_{BLAST_PROGRAM}_detailed.csv` strain name, and BLAST summary information, including percent match, alignment length, 
 subject length, e-value, number of positives, number of mismatches, and number of gaps for every gene
 
-`geneseekr_blastn.csv`  same as `geneseekr_blastn.csv`  same as, but in .csv format
+`geneseekr_{BLAST_PROGRAM}.csv`  same as `geneseekr_{BLAST_PROGRAM}.csv`  same as, but in .csv format
 
-`mob_recon_summary.csv` shows any contigs that are predicted to be plasmids - note that all contigs calculated to be chromosomal are ignored. __Location__ is the name of the predicted plasmid,
-while __Contig__ is the name contig predicted to contain plasmid sequence. One plasmid can be composed of several contigs if it could not be circularised.
+`mob_recon_summary.csv` shows any contigs that are predicted to be plasmids - note that all contigs calculated to be 
+chromosomal are ignored. __Location__ is the name of the predicted plasmid, while __Contig__ is the name contig 
+predicted to contain plasmid sequence. One plasmid can be composed of several contigs if it could not be circularised.
 
-`plasmid_borne_summary.csv` combines information from `geneseekr_blastn.csv`  and `mob_recon_summary.csv`. 
-The contigs of all predicted AMR genes from the `geneseekr_blastn_detailed.csv` report are used to search the `mob_recon_summary` report.
-The plasmid predictions, and well as all the incompatibility types for that plasmid are extracted, and used in the report. __Location__ will specify either `chromosome` or
-the name of the predicted plasmid.
+`plasmid_borne_summary.csv` combines information from `geneseekr_{BLAST_PROGRAM}.csv`  and `mob_recon_summary.csv`. 
+The contigs of all predicted AMR genes from the `geneseekr_{BLAST_PROGRAM}_detailed.csv` report are used to search 
+the `mob_recon_summary` report. The plasmid predictions, and well as all the incompatibility types for that plasmid 
+are extracted, and used in the report. __Location__ will specify either `chromosome` or the name of the predicted plasmid.
 
 ### How long does it take?
 
@@ -57,4 +82,5 @@ GeneSeekr is very fast, while MOB-suite is relatively slow - it should take a fe
 
 1. Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
 message informing you of it.
-
+1. Issue with required FASTA-formatted targets file, including not attaching the file, or the FASTA formatting being incorrect
+1. Specifying the incorrect BLAST analysis program for the provided sequences e.g. blastp with a nucleotide query and db
