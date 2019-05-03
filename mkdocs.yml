@@ -17,6 +17,7 @@ pages:
     - 'ConFindr': 'analysis/confindr.md'
     - 'COWSNPhR': 'analysis/cowsnphr.md'
     - 'CloseRelatives': 'analysis/closerelatives.md'
+    - 'ECTyper': 'analysis/ectyper.md'
     - 'DiversiTree': 'analysis/diversitree.md'
     - 'GeneSeekr': 'analysis/geneseekr.md'
     - 'MobSuite': 'analysis/mobsuite.md'
