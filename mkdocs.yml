@@ -26,6 +26,7 @@ pages:
     - 'PointFinder': 'analysis/pointfinder.md'
     - 'PrimerFinder': 'analysis/primerfinder.md'
     - 'Prokka': 'analysis/prokka.md'
+    - 'PSORTb': 'analysis/psortb.md'
     - 'ResFinder': 'analysis/resfinder.md'
     - 'sipprverse': 'analysis/sipprverse.md'
     - 'SNVPhyl': 'analysis/snvphyl.md'
