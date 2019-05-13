@@ -13,7 +13,8 @@ suite of tools from NCBI.
 
 __PrimerFinder Supremacy__ is able to process FASTA- and FASTQ-formatted files. If using FASTQ files, 
 [BBMap](https://sourceforge.net/projects/bbmap/) is employed to bait out reads containing primer sequences. A second 
-round of baiting is performed using the previously-baited reads. Contigs are assembled by [SPAdes](http://cab.spbu.ru/software/spades/) with only the baited reads. 
+round of baiting is performed using the previously-baited reads. Contigs are assembled by 
+[SPAdes](http://cab.spbu.ru/software/spades/) with only the baited reads. 
 
 For both FASTA-formatted files and contigs assembled from FASTQ-formatted files, primers are 
 BLASTed against contigs, and outputs are parsed to determine primer binding, and amplicon statistics
@@ -111,52 +112,55 @@ __Please don't add too many degenerate bases, as the number of primers combinati
 
 Example PrimerFinder analyses:
  
-PrimerFinder Legacy, custom analyses [issue 15776](https://redmine.biodiversity.agr.gc.ca/issues/15776)
+PrimerFinder Legacy, custom analyses [issue 16084](https://redmine.biodiversity.agr.gc.ca/issues/16084)
 
-PrimerFinder Legacy, vtyper analyses [issue 15777](https://redmine.biodiversity.agr.gc.ca/issues/15777)
+PrimerFinder Legacy, vtyper analyses [issue 16085](https://redmine.biodiversity.agr.gc.ca/issues/16085)
 
-PrimerFinder Supremacy, custom analyses, FASTA format [issue 15778](https://redmine.biodiversity.agr.gc.ca/issues/15778)
+PrimerFinder Supremacy, custom analyses, FASTA format [issue 16086](https://redmine.biodiversity.agr.gc.ca/issues/16086)
 
-PrimerFinder Supremacy, custom analyses, FASTQ format [issue 15780](https://redmine.biodiversity.agr.gc.ca/issues/15780)
+PrimerFinder Supremacy, custom analyses, FASTQ format [issue 16087](https://redmine.biodiversity.agr.gc.ca/issues/16087)
 
 
 #### Interpreting Results
 
 __PrimerFinder Legacy__
 
-PrimerFinder Legacy will upload `ePCR_report.csv`, which contains the strain name, gene name as parsed from the primer file, location of the calculated amplicon, the size of the amplicon,
-the name of the contig on which the amplicon was found, the total number of mismatches between the primer set and the target sequence, and the primers used to create the amplicon.
+PrimerFinder Legacy will upload `ePCR_report.csv`, which contains the strain name, gene name as parsed from the primer 
+file, location of the calculated amplicon, the size of the amplicon, the name of the contig on which the amplicon was 
+found, the total number of mismatches between the primer set and the target sequence, and the primers used to create the amplicon.
 
-Here's an example created the example primer file from the `Attachments` section of this document:
-
-
-| Sample        | Gene  | GenomeLocation | AmpliconSize | Contig                                            | TotalMismatches | PrimerSet |
-|---------------|-------|----------------|--------------|---------------------------------------------------|-----------------|-----------|
-| 2014-SEQ-1390 | gene1 | 30506-30699    | 194          | 2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219   | 0               | gene1_0_0 |
-| 2014-SEQ-1390 | gene2 | 476139-476423  | 285          | 2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281 | 1               | gene2_1_1 |
+Here's an example created using the example primer file from the `Attachments` section of Redmine [issue 16084](https://redmine.biodiversity.agr.gc.ca/issues/16084)
 
 
-Note that the way the primer set is numbered is based on the number of primer sets with the same gene name: _gene1_ had one primer set, `gene1-F` and `gene1-R`, and these are represented as `gene1_0_0`. There were two
+| Sample        | Gene  | GenomeLocation | AmpliconSize | Contig    | TotalMismatches | PrimerSet |
+|---------------|-------|----------------|--------------|-----------|-----------------|-----------|
+| 2014-SEQ-1390 | gene1 | 30506-30699    | 194          | contig_1  | 0               | gene1_0_0 |
+| 2014-SEQ-1390 | gene2 | 476139-476423  | 285          | contig_32 | 1               | gene2_1_1 |
+
+
+Note that the way the primer set is numbered is based on the number of primer sets with the same gene name: _gene1_ had 
+one primer set, `gene1-F` and `gene1-R`, and these are represented as `gene1_0_0`. There were two
 primer sets for _gene2_, and in this example `gene2-F2` and `gene2-R2` annealed (with one mismatch)
 
 If requested, amplicon sequences for each match will be created. Using the same example as above `2014-SEQ-1390_amplicons.fa` will contain:
 
-    >2014-SEQ-1390_2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219_476139_476423_gene1_0_0
+    >2014-SEQ-1390_contig_1_476139_476423_gene1_0_0
     amplicon..... 
-    >2014-SEQ-1390_2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281_27409_27668_gene2_1_1
+    >2014-SEQ-1390_contig_32_27409_27668_gene2_1_1
     amplicon..... 
 
 __PrimerFinder Supremacy__
 
-PrimerFinder Supremacy will generate `ePCR_report.csv`, with the following fields: strain name, gene name parsed from the primer file, location of the amplicon, size of the amplicon, 
+PrimerFinder Supremacy will generate `ePCR_report.csv`within the `consolidated_report` folder. This report contains the 
+following fields: strain name, gene name parsed from the primer file, location of the amplicon, size of the amplicon, 
 name of contig on which the amplicon was found, the forward and reverse primers used to create the amplicon, the number of mismatches for the forward and reverse primers.
 
-Here's an example created from the example primer file from the `Attachments` section of this document:
+Here's an example created using the example primer file from the `Attachments` section of Redmine [issue 16084](https://redmine.biodiversity.agr.gc.ca/issues/16084)
 
-| Sample        | Gene  | GenomeLocation | AmpliconSize | Contig                                            | ForwardPrimers | ReversePrimers | ForwardMismatches | ReverseMismatches |
-|---------------|-------|----------------|--------------|---------------------------------------------------|----------------|----------------|-------------------|-------------------|
-| 2014-SEQ-1390 | gene1 | 30506-30699    | 194          | 2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219    | gene1-F_0      | gene1-R_0      | 0                 | 0                 |
-| 2014-SEQ-1390 | gene2 | 476139-476423  | 285          | 2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281 | gene2-F2_0     | gene2-R2_0     | 1                 | 0                 |
+| Sample        | Gene  | GenomeLocation | AmpliconSize | Contig    | ForwardPrimers | ReversePrimers | ForwardMismatches | ReverseMismatches |
+|---------------|-------|----------------|--------------|-----------|----------------|----------------|-------------------|-------------------|
+| 2014-SEQ-1390 | gene1 | 30506-30699    | 194          | contig_1  | gene1-F_0      | gene1-R_0      | 0                 | 0                 |
+| 2014-SEQ-1390 | gene2 | 476139-476423  | 285          | contig_32 | gene2-F2_0     | gene2-R2_0     | 1                 | 0                 |
 
 
 Note that the primer names have `_0` appended to the end. In the case of IUPAC bases being present in the primer sequence, this number will be incremented for each primer created to satisfy all possible 
@@ -164,23 +168,24 @@ combinations.
 
 Amplicon sequences are always included. Using the same example as above, `2014-SEQ-1390_amplicons.fa` will contain:
 
-    >2014-SEQ-1390_2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219_476139_476423_gene1-F_0_gene1-R_0
+    >2014-SEQ-1390_contig_1_gene1-F_0_gene1-R_0
     amplicon
-    >2014-SEQ-1390_2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281_27409_27668_gene2-F2_0_gene2-R2_0
+    >2014-SEQ-1390_contig_32_gene2-F2_0_gene2-R2_0
     amplicon
     
 Raw BLAST results are also uploaded. In the example above, `2014-SEQ-1390_rawresults.csv` will contain:
 
-| qseqid                                            | sseqid     | positive | mismatch | gaps | evalue   | bitscore | slen | length | qstart | qend   | qseq                      | sstart | send | sseq                      |
-|---------------------------------------------------|------------|----------|----------|------|----------|----------|------|--------|--------|--------|---------------------------|--------|------|---------------------------|
-| 2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219 | gene1-R_0  | 25       | 0        | 0    | 3.07E-07 | 50.1     | 25   | 25     | 476399 | 476423 | TACGGTTCCTTTGACGGTGCGATGA | 25     | 1    | TACGGTTCCTTTGACGGTGCGATGA |
-| 2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219 | gene1-F_0  | 25       | 0        | 0    | 3.07E-07 | 50.1     | 25   | 25     | 476139 | 476163 | GTGAAATTATCGCCACGTTCGGGCA | 1      | 25   | GTGAAATTATCGCCACGTTCGGGCA |
-| 2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281 | gene2-F2_0 | 20       | 1        | 0    | 4.41E-06 | 42.1     | 21   | 21     | 27648  | 27668  | CGCCTTATTATACGACCAAAG     | 21     | 1    | CGCCTTATTTTACGACCAAAG     |
-| 2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281 | gene2-R2_0 | 20       | 0        | 0    | 1.74E-05 | 40.1     | 20   | 20     | 27409  | 27428  | TGCCCAAAGCAGAGAGATTC      | 1      | 20   | TGCCCAAAGCAGAGAGATTC      |
+| qseqid    | sseqid     | positive | mismatch | gaps | evalue   | bitscore | slen | length | qstart | qend   | qseq                      | sstart | send | sseq                      |
+|-----------|------------|----------|----------|------|----------|----------|------|--------|--------|--------|---------------------------|--------|------|---------------------------|
+| contig_1  | gene1-R_0  | 25       | 0        | 0    | 3.07E-07 | 50.1     | 25   | 25     | 476399 | 476423 | TACGGTTCCTTTGACGGTGCGATGA | 25     | 1    | TACGGTTCCTTTGACGGTGCGATGA |
+| contig_1  | gene1-F_0  | 25       | 0        | 0    | 3.07E-07 | 50.1     | 25   | 25     | 476139 | 476163 | GTGAAATTATCGCCACGTTCGGGCA | 1      | 25   | GTGAAATTATCGCCACGTTCGGGCA |
+| contig_32 | gene2-F2_0 | 20       | 1        | 0    | 4.41E-06 | 42.1     | 21   | 21     | 27648  | 27668  | CGCCTTATTATACGACCAAAG     | 21     | 1    | CGCCTTATTTTACGACCAAAG     |
+| contig_32 | gene2-R2_0 | 20       | 0        | 0    | 1.74E-05 | 40.1     | 20   | 20     | 27409  | 27428  | TGCCCAAAGCAGAGAGATTC      | 1      | 20   | TGCCCAAAGCAGAGAGATTC      |
 
 ### How long does it take?
 
-PrimerFinder Legacy and PrimerFinder Supremacy on FASTA mode are very fast (seconds per sample), while PrimerFinder Supremacy FASTQ mode is relatively slow (a few minutes per sample)
+PrimerFinder Legacy and PrimerFinder Supremacy on FASTA mode are very fast (seconds per sample), while PrimerFinder 
+Supremacy FASTQ mode is relatively slow (a few minutes per sample)
 
 ### What can go wrong?
 
