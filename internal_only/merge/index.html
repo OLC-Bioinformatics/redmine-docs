@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/internal_only/merge/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>Merge - OLC Redmine Automator</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">OLC Redmine Automator</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../..">Home</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../getting_started/">Getting Started</a>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../../data/external_retrieve/">External Retrieve</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../data/report_retrieve/">Report Retrieve</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../data/sra_upload/">SRA Upload</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Analysis <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../../analysis/amrsummary/">AMRsummary</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/autoclark/">AutoCLARK</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/confindr/">ConFindr</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/cowsnphr/">COWSNPhR</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/closerelatives/">CloseRelatives</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/ectyper/">ECTyper</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/diversitree/">DiversiTree</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/geneseekr/">GeneSeekr</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/mobsuite/">MobSuite</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/neartree/">NearTree</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/plasmidborneidentity/">PlasmidBorneIdentity</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/pointfinder/">PointFinder</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/primerfinder/">PrimerFinder</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/prokka/">Prokka</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/psortb/">PSORTb</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/resfinder/">ResFinder</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/sipprverse/">sipprverse</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/snvphyl/">SNVPhyl</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/staramr/">staramr</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/strainmash/">StrainMash</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../../analysis/wgsassembly/">WGS Assembly</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Internal Use <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li class="active">
+                            <a href="./">Merge</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../troubleshooting/">Troubleshooting</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li >
+                    <a rel="next" href="../../analysis/wgsassembly/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../../troubleshooting/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#merge">Merge</a></li>
+        
+            <li><a href="#what-does-it-do">What does it do?</a></li>
+        
+            <li><a href="#how-do-i-use-it">How do I use it?</a></li>
+        
+            <li><a href="#how-long-does-it-take">How long does it take?</a></li>
+        
+            <li><a href="#what-can-go-wrong">What can go wrong?</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="merge">Merge</h1>
+<h3 id="what-does-it-do">What does it do?</h3>
+<p>Merge will take data from multiple MiSeq runs of the same strain and combine the FASTQ files in order 
+to produce a better assembly. </p>
+<h3 id="how-do-i-use-it">How do I use it?</h3>
+<h4 id="subject">Subject</h4>
+<p>In the <code>Subject</code> field, put <code>Merge</code>. Spelling counts, but case sensitivity doesn't.</p>
+<h4 id="description">Description</h4>
+<p>No text necessary in the description. You will, however, need to attach an excel file (.xlsx extension)
+with the following headers: </p>
+<ul>
+<li>Location: Should be 'MER'</li>
+<li>SEQID: Put the name of the merged SEQID (YYYY-MER-####)</li>
+<li>OLNID: Can be blank</li>
+<li>LabID: Can be blank</li>
+<li>LabIDIsolate: Can be blank</li>
+<li>OtherName: The SeqIDs you want to merge, separated by semi-colons.</li>
+<li>Genus: Genus of the isolate. Can be left blank.</li>
+<li>Species: Can be blank </li>
+<li>Subspecies: Can be blank</li>
+<li>Serotype: Can be blank</li>
+</ul>
+<p>An example file can be found with the example issue below.</p>
+<h4 id="example">Example</h4>
+<p>For an example Merge, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/14285">issue 14285</a>.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>You'll get back the reports and assemblies, as you would for a <code>WGS Assembly</code> issue.</p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>Merge will take quite a while, depending on how many samples you have. Probably roughly half an hour per sample.</p>
+<h3 id="what-can-go-wrong">What can go wrong?</h3>
+<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
+message informing you of it.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script src="../../js/base.js"></script>
+    </body>
+</html>
