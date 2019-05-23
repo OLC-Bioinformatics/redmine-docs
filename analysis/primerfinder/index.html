@@ -8,230 +8,206 @@
         
         <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/primerfinder/">
         <link rel="shortcut icon" href="../../img/favicon.ico">
-
-	<title>PrimerFinder - OLC Redmine Automator</title>
-
+        <title>PrimerFinder - OLC Redmine Automator</title>
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
-        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/docco.min.css">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+            <div class="container">
 
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">OLC Redmine Automator</a>
+                </div>
 
-            <!-- Main title -->
-            <a class="navbar-brand" href="../..">OLC Redmine Automator</a>
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Home</a>
+                            </li>
+                            <li >
+                                <a href="../../getting_started/">Getting Started</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../data/external_retrieve/">External Retrieve</a>
+</li>
+                                    
+<li >
+    <a href="../../data/report_retrieve/">Report Retrieve</a>
+</li>
+                                    
+<li >
+    <a href="../../data/sra_upload/">SRA Upload</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Analysis <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../amrsummary/">AMRsummary</a>
+</li>
+                                    
+<li >
+    <a href="../autoclark/">AutoCLARK</a>
+</li>
+                                    
+<li >
+    <a href="../confindr/">ConFindr</a>
+</li>
+                                    
+<li >
+    <a href="../cowsnphr/">COWSNPhR</a>
+</li>
+                                    
+<li >
+    <a href="../closerelatives/">CloseRelatives</a>
+</li>
+                                    
+<li >
+    <a href="../eCGF/">eCGF</a>
+</li>
+                                    
+<li >
+    <a href="../ectyper/">ECTyper</a>
+</li>
+                                    
+<li >
+    <a href="../diversitree/">DiversiTree</a>
+</li>
+                                    
+<li >
+    <a href="../geneseekr/">GeneSeekr</a>
+</li>
+                                    
+<li >
+    <a href="../mobsuite/">MobSuite</a>
+</li>
+                                    
+<li >
+    <a href="../neartree/">NearTree</a>
+</li>
+                                    
+<li >
+    <a href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
+</li>
+                                    
+<li >
+    <a href="../pointfinder/">PointFinder</a>
+</li>
+                                    
+<li class="active">
+    <a href="./">PrimerFinder</a>
+</li>
+                                    
+<li >
+    <a href="../prokka/">Prokka</a>
+</li>
+                                    
+<li >
+    <a href="../psortb/">PSORTb</a>
+</li>
+                                    
+<li >
+    <a href="../resfinder/">ResFinder</a>
+</li>
+                                    
+<li >
+    <a href="../sipprverse/">sipprverse</a>
+</li>
+                                    
+<li >
+    <a href="../snvphyl/">SNVPhyl</a>
+</li>
+                                    
+<li >
+    <a href="../staramr/">staramr</a>
+</li>
+                                    
+<li >
+    <a href="../strainmash/">StrainMash</a>
+</li>
+                                    
+<li >
+    <a href="../wgsassembly/">WGS Assembly</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Internal Use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../internal_only/merge/">Merge</a>
+</li>
+                                </ul>
+                            </li>
+                            <li >
+                                <a href="../../troubleshooting/">Troubleshooting</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../pointfinder/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../prokka/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-            <!-- Main navigation -->
-            <ul class="nav navbar-nav">
-            
-            
-                <li >
-                    <a href="../..">Home</a>
-                </li>
-            
-            
-            
-                <li >
-                    <a href="../../getting_started/">Getting Started</a>
-                </li>
-            
-            
-            
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    
-                        <li >
-                            <a href="../../data/external_retrieve/">External Retrieve</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../../data/report_retrieve/">Report Retrieve</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../../data/sra_upload/">SRA Upload</a>
-                        </li>
-                    
-                    </ul>
-                </li>
-            
-            
-            
-                <li class="dropdown active">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Analysis <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    
-                        <li >
-                            <a href="../amrsummary/">AMRsummary</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../autoclark/">AutoCLARK</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../confindr/">ConFindr</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../cowsnphr/">COWSNPhR</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../closerelatives/">CloseRelatives</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../ectyper/">ECTyper</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../diversitree/">DiversiTree</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../geneseekr/">GeneSeekr</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../mobsuite/">MobSuite</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../neartree/">NearTree</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../pointfinder/">PointFinder</a>
-                        </li>
-                    
-                        <li class="active">
-                            <a href="./">PrimerFinder</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../prokka/">Prokka</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../psortb/">PSORTb</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../resfinder/">ResFinder</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../sipprverse/">sipprverse</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../snvphyl/">SNVPhyl</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../staramr/">staramr</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../strainmash/">StrainMash</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../wgsassembly/">WGS Assembly</a>
-                        </li>
-                    
-                    </ul>
-                </li>
-            
-            
-            
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Internal Use <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    
-                        <li >
-                            <a href="../../internal_only/merge/">Merge</a>
-                        </li>
-                    
-                    </ul>
-                </li>
-            
-            
-            
-                <li >
-                    <a href="../../troubleshooting/">Troubleshooting</a>
-                </li>
-            
-            
-            </ul>
-
-            <!-- Search, Navigation and Repo links -->
-            <ul class="nav navbar-nav navbar-right">
-                <li >
-                    <a rel="next" href="../pointfinder/">
-                        <i class="fa fa-arrow-left"></i> Previous
-                    </a>
-                </li>
-                <li >
-                    <a rel="prev" href="../prokka/">
-                        Next <i class="fa fa-arrow-right"></i>
-                    </a>
-                </li>
-                
-            </ul>
-        </div>
-    </div>
-</div>
 
         <div class="container">
-            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-    
         <li class="main active"><a href="#primerfinder">PrimerFinder</a></li>
-        
             <li><a href="#what-does-it-do">What does it do?</a></li>
-        
             <li><a href="#how-do-i-use-it">How do I use it?</a></li>
-        
             <li><a href="#how-long-does-it-take">How long does it take?</a></li>
-        
             <li><a href="#what-can-go-wrong">What can go wrong?</a></li>
-        
-    
     </ul>
 </div></div>
-            <div class="col-md-9" role="main">
+                <div class="col-md-9" role="main">
 
 <h1 id="primerfinder">PrimerFinder</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
@@ -242,7 +218,8 @@
 suite of tools from NCBI. </p>
 <p><strong>PrimerFinder Supremacy</strong> is able to process FASTA- and FASTQ-formatted files. If using FASTQ files, 
 <a href="https://sourceforge.net/projects/bbmap/">BBMap</a> is employed to bait out reads containing primer sequences. A second 
-round of baiting is performed using the previously-baited reads. Contigs are assembled by <a href="http://cab.spbu.ru/software/spades/">SPAdes</a> with only the baited reads. </p>
+round of baiting is performed using the previously-baited reads. Contigs are assembled by 
+<a href="http://cab.spbu.ru/software/spades/">SPAdes</a> with only the baited reads. </p>
 <p>For both FASTA-formatted files and contigs assembled from FASTQ-formatted files, primers are 
 BLASTed against contigs, and outputs are parsed to determine primer binding, and amplicon statistics</p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
@@ -357,15 +334,16 @@ iupac = {
 </code></pre>
 <h4 id="examples">Examples</h4>
 <p>Example PrimerFinder analyses:</p>
-<p>PrimerFinder Legacy, custom analyses <a href="https://redmine.biodiversity.agr.gc.ca/issues/15776">issue 15776</a></p>
-<p>PrimerFinder Legacy, vtyper analyses <a href="https://redmine.biodiversity.agr.gc.ca/issues/15777">issue 15777</a></p>
-<p>PrimerFinder Supremacy, custom analyses, FASTA format <a href="https://redmine.biodiversity.agr.gc.ca/issues/15778">issue 15778</a></p>
-<p>PrimerFinder Supremacy, custom analyses, FASTQ format <a href="https://redmine.biodiversity.agr.gc.ca/issues/15780">issue 15780</a></p>
+<p>PrimerFinder Legacy, custom analyses <a href="https://redmine.biodiversity.agr.gc.ca/issues/16084">issue 16084</a></p>
+<p>PrimerFinder Legacy, vtyper analyses <a href="https://redmine.biodiversity.agr.gc.ca/issues/16085">issue 16085</a></p>
+<p>PrimerFinder Supremacy, custom analyses, FASTA format <a href="https://redmine.biodiversity.agr.gc.ca/issues/16086">issue 16086</a></p>
+<p>PrimerFinder Supremacy, custom analyses, FASTQ format <a href="https://redmine.biodiversity.agr.gc.ca/issues/16087">issue 16087</a></p>
 <h4 id="interpreting-results">Interpreting Results</h4>
 <p><strong>PrimerFinder Legacy</strong></p>
-<p>PrimerFinder Legacy will upload <code>ePCR_report.csv</code>, which contains the strain name, gene name as parsed from the primer file, location of the calculated amplicon, the size of the amplicon,
-the name of the contig on which the amplicon was found, the total number of mismatches between the primer set and the target sequence, and the primers used to create the amplicon.</p>
-<p>Here's an example created the example primer file from the <code>Attachments</code> section of this document:</p>
+<p>PrimerFinder Legacy will upload <code>ePCR_report.csv</code>, which contains the strain name, gene name as parsed from the primer 
+file, location of the calculated amplicon, the size of the amplicon, the name of the contig on which the amplicon was 
+found, the total number of mismatches between the primer set and the target sequence, and the primers used to create the amplicon.</p>
+<p>Here's an example created using the example primer file from the <code>Attachments</code> section of Redmine <a href="https://redmine.biodiversity.agr.gc.ca/issues/16084">issue 16084</a></p>
 <table>
 <thead>
 <tr>
@@ -384,7 +362,7 @@ the name of the contig on which the amplicon was found, the total number of mism
 <td>gene1</td>
 <td>30506-30699</td>
 <td>194</td>
-<td>2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219</td>
+<td>contig_1</td>
 <td>0</td>
 <td>gene1_0_0</td>
 </tr>
@@ -393,24 +371,26 @@ the name of the contig on which the amplicon was found, the total number of mism
 <td>gene2</td>
 <td>476139-476423</td>
 <td>285</td>
-<td>2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281</td>
+<td>contig_32</td>
 <td>1</td>
 <td>gene2_1_1</td>
 </tr>
 </tbody>
 </table>
-<p>Note that the way the primer set is numbered is based on the number of primer sets with the same gene name: <em>gene1</em> had one primer set, <code>gene1-F</code> and <code>gene1-R</code>, and these are represented as <code>gene1_0_0</code>. There were two
+<p>Note that the way the primer set is numbered is based on the number of primer sets with the same gene name: <em>gene1</em> had 
+one primer set, <code>gene1-F</code> and <code>gene1-R</code>, and these are represented as <code>gene1_0_0</code>. There were two
 primer sets for <em>gene2</em>, and in this example <code>gene2-F2</code> and <code>gene2-R2</code> annealed (with one mismatch)</p>
 <p>If requested, amplicon sequences for each match will be created. Using the same example as above <code>2014-SEQ-1390_amplicons.fa</code> will contain:</p>
-<pre><code>&gt;2014-SEQ-1390_2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219_476139_476423_gene1_0_0
+<pre><code>&gt;2014-SEQ-1390_contig_1_476139_476423_gene1_0_0
 amplicon..... 
-&gt;2014-SEQ-1390_2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281_27409_27668_gene2_1_1
+&gt;2014-SEQ-1390_contig_32_27409_27668_gene2_1_1
 amplicon.....
 </code></pre>
 <p><strong>PrimerFinder Supremacy</strong></p>
-<p>PrimerFinder Supremacy will generate <code>ePCR_report.csv</code>, with the following fields: strain name, gene name parsed from the primer file, location of the amplicon, size of the amplicon, 
+<p>PrimerFinder Supremacy will generate <code>ePCR_report.csv</code>within the <code>consolidated_report</code> folder. This report contains the 
+following fields: strain name, gene name parsed from the primer file, location of the amplicon, size of the amplicon, 
 name of contig on which the amplicon was found, the forward and reverse primers used to create the amplicon, the number of mismatches for the forward and reverse primers.</p>
-<p>Here's an example created from the example primer file from the <code>Attachments</code> section of this document:</p>
+<p>Here's an example created using the example primer file from the <code>Attachments</code> section of Redmine <a href="https://redmine.biodiversity.agr.gc.ca/issues/16084">issue 16084</a></p>
 <table>
 <thead>
 <tr>
@@ -431,7 +411,7 @@ name of contig on which the amplicon was found, the forward and reverse primers 
 <td>gene1</td>
 <td>30506-30699</td>
 <td>194</td>
-<td>2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219</td>
+<td>contig_1</td>
 <td>gene1-F_0</td>
 <td>gene1-R_0</td>
 <td>0</td>
@@ -442,7 +422,7 @@ name of contig on which the amplicon was found, the forward and reverse primers 
 <td>gene2</td>
 <td>476139-476423</td>
 <td>285</td>
-<td>2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281</td>
+<td>contig_32</td>
 <td>gene2-F2_0</td>
 <td>gene2-R2_0</td>
 <td>1</td>
@@ -453,9 +433,9 @@ name of contig on which the amplicon was found, the forward and reverse primers 
 <p>Note that the primer names have <code>_0</code> appended to the end. In the case of IUPAC bases being present in the primer sequence, this number will be incremented for each primer created to satisfy all possible 
 combinations. </p>
 <p>Amplicon sequences are always included. Using the same example as above, <code>2014-SEQ-1390_amplicons.fa</code> will contain:</p>
-<pre><code>&gt;2014-SEQ-1390_2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219_476139_476423_gene1-F_0_gene1-R_0
+<pre><code>&gt;2014-SEQ-1390_contig_1_gene1-F_0_gene1-R_0
 amplicon
-&gt;2014-SEQ-1390_2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281_27409_27668_gene2-F2_0_gene2-R2_0
+&gt;2014-SEQ-1390_contig_32_gene2-F2_0_gene2-R2_0
 amplicon
 </code></pre>
 <p>Raw BLAST results are also uploaded. In the example above, <code>2014-SEQ-1390_rawresults.csv</code> will contain:</p>
@@ -481,7 +461,7 @@ amplicon
 </thead>
 <tbody>
 <tr>
-<td>2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219</td>
+<td>contig_1</td>
 <td>gene1-R_0</td>
 <td>25</td>
 <td>0</td>
@@ -498,7 +478,7 @@ amplicon
 <td>TACGGTTCCTTTGACGGTGCGATGA</td>
 </tr>
 <tr>
-<td>2014-SEQ-1390_1_length_680177_cov_29.8782_ID_2219</td>
+<td>contig_1</td>
 <td>gene1-F_0</td>
 <td>25</td>
 <td>0</td>
@@ -515,7 +495,7 @@ amplicon
 <td>GTGAAATTATCGCCACGTTCGGGCA</td>
 </tr>
 <tr>
-<td>2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281</td>
+<td>contig_32</td>
 <td>gene2-F2_0</td>
 <td>20</td>
 <td>1</td>
@@ -532,7 +512,7 @@ amplicon
 <td>CGCCTTATTTTACGACCAAAG</td>
 </tr>
 <tr>
-<td>2014-SEQ-1390_32_length_32477_cov_33.4201_ID_2281</td>
+<td>contig_32</td>
 <td>gene2-R2_0</td>
 <td>20</td>
 <td>0</td>
@@ -551,7 +531,8 @@ amplicon
 </tbody>
 </table>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>PrimerFinder Legacy and PrimerFinder Supremacy on FASTA mode are very fast (seconds per sample), while PrimerFinder Supremacy FASTQ mode is relatively slow (a few minutes per sample)</p>
+<p>PrimerFinder Legacy and PrimerFinder Supremacy on FASTA mode are very fast (seconds per sample), while PrimerFinder 
+Supremacy FASTQ mode is relatively slow (a few minutes per sample)</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
 <ol>
 <li>Requested SEQIDs are not available. </li>
@@ -567,13 +548,78 @@ amplicon
 
         <footer class="col-md-12">
             <hr>
-            
-            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
 
-        <script src="../../js/jquery-1.10.2.min.js"></script>
-        <script src="../../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../../js/highlight.pack.js"></script>
-        <script src="../../js/base.js"></script>
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>
