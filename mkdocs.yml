@@ -21,6 +21,7 @@ pages:
     - 'ECTyper': 'analysis/ectyper.md'
     - 'DiversiTree': 'analysis/diversitree.md'
     - 'GeneSeekr': 'analysis/geneseekr.md'
+    - 'IntiminTyper': 'analysis/intimintyper.md'
     - 'MobSuite': 'analysis/mobsuite.md'
     - 'NearTree': 'analysis/neartree.md'
     - 'PlasmidBorneIdentity': 'analysis/plasmidborneidentity.md'
