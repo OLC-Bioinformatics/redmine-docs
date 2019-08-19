@@ -20,9 +20,9 @@ In the `Description` field, you must provide the requested analysis type as foll
 
 The GeneSeekr pipeline supports the following analyses (again, spelling counts, but case sensitivity doesn't):
 
-- gdcs - determines the presence of genomically-dispersed conserved sequences in the following genera: *Escherichia, Listeria, Salmonella, Vibrio*
+- gdcs - determines the presence of genomically-dispersed conserved sequences in the following genera: *Escherichia, Listeria, Salmonella, Vibrio*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
 - genesippr - custom suite of genes derived from the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
-- mlst - determines multi-locus sequence type for the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
+- mlst - determines multi-locus sequence type for the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
 - resfinder - identifies acquired antimicrobial resistance genes
 - rmlst - determines ribosomal multi-locus sequence type
 - serosippr - calculates the serotype for *Escherichia*
