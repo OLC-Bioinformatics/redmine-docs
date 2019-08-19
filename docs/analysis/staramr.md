@@ -1,4 +1,4 @@
-# PointFinder
+# StarAMR
 
 ### What does it do?
 
