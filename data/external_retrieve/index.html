@@ -221,11 +221,15 @@ so that you can download it in the event that you need to have your files locall
 <h4 id="subject">Subject</h4>
 <p>In the <code>Subject</code> field, put <code>External Retrieve</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
-<p>The first line of your description tells the process whether you want raw reads or draft assemblies. For reads,
-the first line should be <code>fastq</code>, and for assemblies the first line should be <code>fasta</code>. Every line after that should be a
-SEQID that you want the data for.</p>
+<p>The first line of your description tells the process whether you want to rename the retrieved files for upload to
+the SRA (e.g. 2014-SEQ-0349_S11_L001_R1_001.fastq.gz renamed to 2014-SEQ-0349_R1.fastq.gz). Note that this option requires 
+FASTQ files to be retrieved (see below)</p>
+<p>The next line specifies whether you want raw reads or draft assemblies. For reads,
+the first line should be <code>fastq</code>, and for assemblies the first line should be <code>fasta</code>. </p>
+<p>Every line after that should be a SEQID that you want the data for.</p>
 <h4 id="example">Example</h4>
-<p>For an example of an External Retrieve, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12822">issue 12822</a>.</p>
+<p>For an example of an External Retrieve, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12822">issue 12822</a> or
+SRA formatting <a href="https://redmine.biodiversity.agr.gc.ca/issues/18760">issue 18760</a>.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
 <p>If your request is for a small number of files, it will generally be done within a few minutes. The more files requested,
 the longer the request will take.</p>
