@@ -13,13 +13,20 @@ In the `Subject` field, put `External Retrieve`. Spelling counts, but case sensi
 
 #### Description
 
-The first line of your description tells the process whether you want raw reads or draft assemblies. For reads,
-the first line should be `fastq`, and for assemblies the first line should be `fasta`. Every line after that should be a
-SEQID that you want the data for.
+The first line of your description tells the process whether you want to rename the retrieved files for upload to
+the SRA (e.g. 2014-SEQ-0349_S11_L001_R1_001.fastq.gz renamed to 2014-SEQ-0349_R1.fastq.gz). Note that this option requires 
+FASTQ files to be retrieved (see below)
+
+
+The next line specifies whether you want raw reads or draft assemblies. For reads,
+the first line should be `fastq`, and for assemblies the first line should be `fasta`. 
+
+Every line after that should be a SEQID that you want the data for.
 
 #### Example
 
-For an example of an External Retrieve, see [issue 12822](https://redmine.biodiversity.agr.gc.ca/issues/12822).
+For an example of an External Retrieve, see [issue 12822](https://redmine.biodiversity.agr.gc.ca/issues/12822) or
+SRA formatting [issue 18760](https://redmine.biodiversity.agr.gc.ca/issues/18760).
 
 ### How long does it take?
 
