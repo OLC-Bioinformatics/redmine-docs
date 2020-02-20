@@ -4,7 +4,7 @@ site_description: Instructions for OLC Redmine Usage
 #repo_url: https://github.com/forestdussault/OLCRedmineAutomator
 theme: flatly
 
-pages:
+nav:
 - Home: 'index.md'
 - Getting Started: 'getting_started.md'
 - Data:
