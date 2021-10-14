@@ -9,180 +9,188 @@
         
         <link rel="shortcut icon" href="/redmine-docs/img/favicon.ico">
         <title>OLC Redmine Automator</title>
-        <link href="/redmine-docs/css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="/redmine-docs/css/bootstrap.min.css" rel="stylesheet">
         <link href="/redmine-docs/css/font-awesome.min.css" rel="stylesheet">
         <link href="/redmine-docs/css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/docco.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/docco.min.css">
 
         <script src="/redmine-docs/js/jquery-1.10.2.min.js" defer></script>
-        <script src="/redmine-docs/js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script src="/redmine-docs/js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <!-- Expander button -->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/redmine-docs/.">OLC Redmine Automator</a>
-                </div>
+                <a class="navbar-brand" href="/redmine-docs/.">OLC Redmine Automator</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                 <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
+                <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li >
-                                <a href="/redmine-docs/.">Home</a>
+                            <li class="navitem">
+                                <a href="/redmine-docs/." class="nav-link">Home</a>
                             </li>
-                            <li >
-                                <a href="/redmine-docs/getting_started/">Getting Started</a>
+                            <li class="navitem">
+                                <a href="/redmine-docs/getting_started/" class="nav-link">Getting Started</a>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-<li >
-    <a href="/redmine-docs/data/external_retrieve/">External Retrieve</a>
+<li>
+    <a href="/redmine-docs/data/external_retrieve/" class="dropdown-item">External Retrieve</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/data/report_retrieve/">Report Retrieve</a>
+<li>
+    <a href="/redmine-docs/data/report_retrieve/" class="dropdown-item">Report Retrieve</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/data/sra_upload/">SRA Upload</a>
+<li>
+    <a href="/redmine-docs/data/sra_upload/" class="dropdown-item">SRA Upload</a>
 </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Analysis <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Analysis <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-<li >
-    <a href="/redmine-docs/analysis/amrsummary/">AMRsummary</a>
+<li>
+    <a href="/redmine-docs/analysis/amrsummary/" class="dropdown-item">AMRsummary</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/autoclark/">AutoCLARK</a>
+<li>
+    <a href="/redmine-docs/analysis/autoclark/" class="dropdown-item">AutoCLARK</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/confindr/">ConFindr</a>
+<li>
+    <a href="/redmine-docs/analysis/confindr/" class="dropdown-item">ConFindr</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/cowsnphr/">COWSNPhR</a>
+<li>
+    <a href="/redmine-docs/analysis/cowsnphr/" class="dropdown-item">COWSNPhR</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/closerelatives/">CloseRelatives</a>
+<li>
+    <a href="/redmine-docs/analysis/closerelatives/" class="dropdown-item">CloseRelatives</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/eCGF/">eCGF</a>
+<li>
+    <a href="/redmine-docs/analysis/eCGF/" class="dropdown-item">eCGF</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/ectyper/">ECTyper</a>
+<li>
+    <a href="/redmine-docs/analysis/ectyper/" class="dropdown-item">ECTyper</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/diversitree/">DiversiTree</a>
+<li>
+    <a href="/redmine-docs/analysis/diversitree/" class="dropdown-item">DiversiTree</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/geneseekr/">GeneSeekr</a>
+<li>
+    <a href="/redmine-docs/analysis/geneseekr/" class="dropdown-item">GeneSeekr</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/intimintyper/">IntiminTyper</a>
+<li>
+    <a href="/redmine-docs/analysis/intimintyper/" class="dropdown-item">IntiminTyper</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/mobsuite/">MobSuite</a>
+<li>
+    <a href="/redmine-docs/analysis/mobsuite/" class="dropdown-item">MobSuite</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/neartree/">NearTree</a>
+<li>
+    <a href="/redmine-docs/analysis/neartree/" class="dropdown-item">NearTree</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/plasmidborneidentity/">PlasmidBorneIdentity</a>
+<li>
+    <a href="/redmine-docs/analysis/plasmidborneidentity/" class="dropdown-item">PlasmidBorneIdentity</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/pointfinder/">PointFinder</a>
+<li>
+    <a href="/redmine-docs/analysis/pointfinder/" class="dropdown-item">PointFinder</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/primerfinder/">PrimerFinder</a>
+<li>
+    <a href="/redmine-docs/analysis/primerfinder/" class="dropdown-item">PrimerFinder</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/prokka/">Prokka</a>
+<li>
+    <a href="/redmine-docs/analysis/prokka/" class="dropdown-item">Prokka</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/psortb/">PSORTb</a>
+<li>
+    <a href="/redmine-docs/analysis/psortb/" class="dropdown-item">PSORTb</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/resfinder/">ResFinder</a>
+<li>
+    <a href="/redmine-docs/analysis/resfinder/" class="dropdown-item">ResFinder</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/sipprverse/">sipprverse</a>
+<li>
+    <a href="/redmine-docs/analysis/sipprverse/" class="dropdown-item">sipprverse</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/snvphyl/">SNVPhyl</a>
+<li>
+    <a href="/redmine-docs/analysis/snvphyl/" class="dropdown-item">SNVPhyl</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/staramr/">staramr</a>
+<li>
+    <a href="/redmine-docs/analysis/staramr/" class="dropdown-item">staramr</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/strainmash/">StrainMash</a>
+<li>
+    <a href="/redmine-docs/analysis/strainmash/" class="dropdown-item">StrainMash</a>
 </li>
                                     
-<li >
-    <a href="/redmine-docs/analysis/wgsassembly/">WGS Assembly</a>
+<li>
+    <a href="/redmine-docs/analysis/wgsassembly/" class="dropdown-item">WGS Assembly</a>
 </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Internal Use <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Internal Use <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-<li >
-    <a href="/redmine-docs/internal_only/merge/">Merge</a>
+<li>
+    <a href="/redmine-docs/internal_only/merge/" class="dropdown-item">Merge</a>
 </li>
                                 </ul>
                             </li>
-                            <li >
-                                <a href="/redmine-docs/troubleshooting/">Troubleshooting</a>
+                            <li class="navitem">
+                                <a href="/redmine-docs/troubleshooting/" class="nav-link">Troubleshooting</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="/redmine-docs/tutorials/create_environment/" class="dropdown-item">Create Environment</a>
+</li>
+                                    
+<li>
+    <a href="/redmine-docs/tutorials/create_pages/" class="dropdown-item">Create Pages</a>
+</li>
+                                    
+<li>
+    <a href="/redmine-docs/tutorials/edit_pages/" class="dropdown-item">Edit Pages</a>
+</li>
+                                    
+<li>
+    <a href="/redmine-docs/tutorials/publish_changes/" class="dropdown-item">Publish Changes</a>
+</li>
+                                </ul>
                             </li>
                         </ul>
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -192,6 +200,7 @@
         </div>
 
         <div class="container">
+            <div class="row">
 
     <div class="row-fluid">
       <div id="main-content" class="span12">
@@ -201,6 +210,7 @@
     </div>
 
 
+            </div>
         </div>
 
         <footer class="col-md-12">
@@ -208,41 +218,38 @@
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = "/redmine-docs",
+            var base_url = "/redmine-docs/",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="/redmine-docs/js/base.js" defer></script>
         <script src="/redmine-docs/search/main.js" defer></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
             </div>
             <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results"></div>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
             </div>
             <div class="modal-footer">
             </div>
         </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
             </div>
             <div class="modal-body">
               <table class="table">

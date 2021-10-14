@@ -9,190 +9,198 @@
         <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/getting_started/">
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Getting Started - OLC Redmine Automator</title>
-        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/docco.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/docco.min.css">
 
         <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <!-- Expander button -->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="..">OLC Redmine Automator</a>
-                </div>
+                <a class="navbar-brand" href="..">OLC Redmine Automator</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                 <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
+                <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li >
-                                <a href="..">Home</a>
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
                             </li>
-                            <li class="active">
-                                <a href="./">Getting Started</a>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Getting Started</a>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-<li >
-    <a href="../data/external_retrieve/">External Retrieve</a>
+<li>
+    <a href="../data/external_retrieve/" class="dropdown-item">External Retrieve</a>
 </li>
                                     
-<li >
-    <a href="../data/report_retrieve/">Report Retrieve</a>
+<li>
+    <a href="../data/report_retrieve/" class="dropdown-item">Report Retrieve</a>
 </li>
                                     
-<li >
-    <a href="../data/sra_upload/">SRA Upload</a>
+<li>
+    <a href="../data/sra_upload/" class="dropdown-item">SRA Upload</a>
 </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Analysis <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Analysis <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-<li >
-    <a href="../analysis/amrsummary/">AMRsummary</a>
+<li>
+    <a href="../analysis/amrsummary/" class="dropdown-item">AMRsummary</a>
 </li>
                                     
-<li >
-    <a href="../analysis/autoclark/">AutoCLARK</a>
+<li>
+    <a href="../analysis/autoclark/" class="dropdown-item">AutoCLARK</a>
 </li>
                                     
-<li >
-    <a href="../analysis/confindr/">ConFindr</a>
+<li>
+    <a href="../analysis/confindr/" class="dropdown-item">ConFindr</a>
 </li>
                                     
-<li >
-    <a href="../analysis/cowsnphr/">COWSNPhR</a>
+<li>
+    <a href="../analysis/cowsnphr/" class="dropdown-item">COWSNPhR</a>
 </li>
                                     
-<li >
-    <a href="../analysis/closerelatives/">CloseRelatives</a>
+<li>
+    <a href="../analysis/closerelatives/" class="dropdown-item">CloseRelatives</a>
 </li>
                                     
-<li >
-    <a href="../analysis/eCGF/">eCGF</a>
+<li>
+    <a href="../analysis/eCGF/" class="dropdown-item">eCGF</a>
 </li>
                                     
-<li >
-    <a href="../analysis/ectyper/">ECTyper</a>
+<li>
+    <a href="../analysis/ectyper/" class="dropdown-item">ECTyper</a>
 </li>
                                     
-<li >
-    <a href="../analysis/diversitree/">DiversiTree</a>
+<li>
+    <a href="../analysis/diversitree/" class="dropdown-item">DiversiTree</a>
 </li>
                                     
-<li >
-    <a href="../analysis/geneseekr/">GeneSeekr</a>
+<li>
+    <a href="../analysis/geneseekr/" class="dropdown-item">GeneSeekr</a>
 </li>
                                     
-<li >
-    <a href="../analysis/intimintyper/">IntiminTyper</a>
+<li>
+    <a href="../analysis/intimintyper/" class="dropdown-item">IntiminTyper</a>
 </li>
                                     
-<li >
-    <a href="../analysis/mobsuite/">MobSuite</a>
+<li>
+    <a href="../analysis/mobsuite/" class="dropdown-item">MobSuite</a>
 </li>
                                     
-<li >
-    <a href="../analysis/neartree/">NearTree</a>
+<li>
+    <a href="../analysis/neartree/" class="dropdown-item">NearTree</a>
 </li>
                                     
-<li >
-    <a href="../analysis/plasmidborneidentity/">PlasmidBorneIdentity</a>
+<li>
+    <a href="../analysis/plasmidborneidentity/" class="dropdown-item">PlasmidBorneIdentity</a>
 </li>
                                     
-<li >
-    <a href="../analysis/pointfinder/">PointFinder</a>
+<li>
+    <a href="../analysis/pointfinder/" class="dropdown-item">PointFinder</a>
 </li>
                                     
-<li >
-    <a href="../analysis/primerfinder/">PrimerFinder</a>
+<li>
+    <a href="../analysis/primerfinder/" class="dropdown-item">PrimerFinder</a>
 </li>
                                     
-<li >
-    <a href="../analysis/prokka/">Prokka</a>
+<li>
+    <a href="../analysis/prokka/" class="dropdown-item">Prokka</a>
 </li>
                                     
-<li >
-    <a href="../analysis/psortb/">PSORTb</a>
+<li>
+    <a href="../analysis/psortb/" class="dropdown-item">PSORTb</a>
 </li>
                                     
-<li >
-    <a href="../analysis/resfinder/">ResFinder</a>
+<li>
+    <a href="../analysis/resfinder/" class="dropdown-item">ResFinder</a>
 </li>
                                     
-<li >
-    <a href="../analysis/sipprverse/">sipprverse</a>
+<li>
+    <a href="../analysis/sipprverse/" class="dropdown-item">sipprverse</a>
 </li>
                                     
-<li >
-    <a href="../analysis/snvphyl/">SNVPhyl</a>
+<li>
+    <a href="../analysis/snvphyl/" class="dropdown-item">SNVPhyl</a>
 </li>
                                     
-<li >
-    <a href="../analysis/staramr/">staramr</a>
+<li>
+    <a href="../analysis/staramr/" class="dropdown-item">staramr</a>
 </li>
                                     
-<li >
-    <a href="../analysis/strainmash/">StrainMash</a>
+<li>
+    <a href="../analysis/strainmash/" class="dropdown-item">StrainMash</a>
 </li>
                                     
-<li >
-    <a href="../analysis/wgsassembly/">WGS Assembly</a>
+<li>
+    <a href="../analysis/wgsassembly/" class="dropdown-item">WGS Assembly</a>
 </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Internal Use <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Internal Use <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-<li >
-    <a href="../internal_only/merge/">Merge</a>
+<li>
+    <a href="../internal_only/merge/" class="dropdown-item">Merge</a>
 </li>
                                 </ul>
                             </li>
-                            <li >
-                                <a href="../troubleshooting/">Troubleshooting</a>
+                            <li class="navitem">
+                                <a href="../troubleshooting/" class="nav-link">Troubleshooting</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../tutorials/create_environment/" class="dropdown-item">Create Environment</a>
+</li>
+                                    
+<li>
+    <a href="../tutorials/create_pages/" class="dropdown-item">Create Pages</a>
+</li>
+                                    
+<li>
+    <a href="../tutorials/edit_pages/" class="dropdown-item">Edit Pages</a>
+</li>
+                                    
+<li>
+    <a href="../tutorials/publish_changes/" class="dropdown-item">Publish Changes</a>
+</li>
+                                </ul>
                             </li>
                         </ul>
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li >
-                                <a rel="next" href="..">
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
-                            <li >
-                                <a rel="prev" href="../data/external_retrieve/">
+                            <li class="nav-item">
+                                <a rel="next" href="../data/external_retrieve/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -202,14 +210,26 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#what-is-redmine-and-what-can-i-use-it-for">What is Redmine, and what can I use it for?</a></li>
-            <li><a href="#accessing-redmine">Accessing Redmine</a></li>
-            <li><a href="#creating-issues">Creating Issues</a></li>
-    </ul>
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#what-is-redmine-and-what-can-i-use-it-for" class="nav-link">What is Redmine, and what can I use it for?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
 </div></div>
-                <div class="col-md-9" role="main">
+                    <div class="col-md-9" role="main">
 
 <h1 id="what-is-redmine-and-what-can-i-use-it-for">What is Redmine, and what can I use it for?</h1>
 <p>Redmine is a system for project management and issue tracking that OLC has configured to automate a number of
@@ -234,9 +254,12 @@ the <code>Save</code> button on the bottom left of the screen to make sure Redmi
 <h3 id="creating-issues">Creating Issues</h3>
 <p>Everything in Redmine is done by creating <code>Issues</code> - these are requests for an analysis to be done.</p>
 <p>To create a new issue, click on the <code>New Issue</code> button, as shown in the below screenshot.</p>
-<p><details><summary><code>Click to see screenshot</code></summary></p>
-<p><img alt="Screenshot" src="../img/Redmine_Overview.png" /></p>
-<p></details></p>
+<details><summary>`Click to see screenshot`</summary>
+
+![Screenshot](img/Redmine_Overview.png)
+
+</details>
+
 <p>The page for new issues can be seen in the next screenshot. To have your analyses done, specific keywords are put in the
 <code>Subject</code> header, with any necessary details put in the <code>Description</code> section. Details on what exactly needs to be put
 into each section are under the <code>Data</code> and <code>Analysis</code> tabs for specific tools. Once an issue has been filled out, click
@@ -244,9 +267,12 @@ on the <code>Create</code> button. Once that's done you can sit back and relax -
 submitted to our compute cluster (which should happen within a minute or two from the time you submitted your issue),
 and another once your job has completed (which, depending on the request, can be anywhere from a few minutes to a few
 hours).</p>
-<p><details><summary><code>Click to see screenshot</code></summary></p>
-<p><img alt="Screenshot" src="../img/New_Issue.png" /></p>
-<p></details></p></div>
+<details><summary>`Click to see screenshot`</summary>
+
+![Screenshot](img/New_Issue.png)
+
+</details></div>
+            </div>
         </div>
 
         <footer class="col-md-12">
@@ -260,35 +286,32 @@ hours).</p>
         <script src="../js/base.js" defer></script>
         <script src="../search/main.js" defer></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
             </div>
             <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results"></div>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
             </div>
             <div class="modal-footer">
             </div>
         </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
             </div>
             <div class="modal-body">
               <table class="table">
