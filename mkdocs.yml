@@ -30,7 +30,7 @@ nav:
     - 'Prokka': 'analysis/prokka.md'
     - 'PSORTb': 'analysis/psortb.md'
     - 'ResFinder': 'analysis/resfinder.md'
-    - 'Roary&Scoary': 'analysis/roary.md'
+    - 'RoaryScoary': 'analysis/roary.md'
     - 'sipprverse': 'analysis/sipprverse.md'
     - 'SNVPhyl': 'analysis/snvphyl.md'
     - 'staramr': 'analysis/staramr.md'
