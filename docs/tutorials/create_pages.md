@@ -1,6 +1,12 @@
 ## Create a new page
 
-Open `redmine-docs/mkdocs.yml` in the redmine-docs repository
+Ensure that the repository is up-to-date:
+
+- if you don't have a local copy of the repositoty, clone a fresh version using `git clone https://github.com/OLC-Bioinformatics/redmine-docs.git`
+
+- or update an existing copy with `git pull origin master` from within the repository
+
+Open `redmine-docs/mkdocs.yml` in the redmine-docs repository with your favourite text editor
 
 Decide where you wish to place the new page 
 
