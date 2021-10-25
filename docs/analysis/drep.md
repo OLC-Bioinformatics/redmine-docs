@@ -28,7 +28,7 @@ You must also include a list of SEQIDs one per line.
 
 **Optional Components**
 
-By default, dRep will run the compare command to compare the set of genomes. In order to customise your GeneSeekr analyses, several settings can be optionally modified
+By default, dRep will run the compare command to compare the set of genomes. In order to customise your dRep analyses, several settings can be optionally modified
 
 - MASH ANI cutoff - this value is important, as only sequences clustering within this 'relatedness' threshold will be analysed using the secondary ANI algorithm (which is what determines the ANI values)
     - default is `0.9` (90%) 
@@ -70,7 +70,7 @@ By default, dRep will run the compare command to compare the set of genomes. In 
 
 #### Interpreting Results
 
-dRep will upload a zip file to the ftp on completion. This will contain folders with data, figures, .
+dRep will upload a zip file to the ftp on completion. This will contain folders with data in the form of tables, figures, etc. ANI values will only be output for clusters of sequences that are related at or above the MASH ANI cutoff. dRep does not output a tree file, however you should be able to replicate the output MASH tree by hierarchical clustering of the MASH table in R. (Hierarchical clustering uses the cluster algorithm command described above)
 
 ### How long does it take?
 
