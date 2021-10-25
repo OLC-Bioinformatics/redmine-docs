@@ -14,6 +14,7 @@ nav:
 - Analysis:
     - 'AMRsummary': 'analysis/amrsummary.md'
     - 'AutoCLARK': 'analysis/autoclark.md'
+    - 'bcgTree': 'analysis/bcgtree.md'
     - 'ConFindr': 'analysis/confindr.md'
     - 'COWSNPhR': 'analysis/cowsnphr.md'
     - 'CloseRelatives': 'analysis/closerelatives.md'
