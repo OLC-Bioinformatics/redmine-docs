@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/mobsuite/">
+        <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/drep/">
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>MobSuite - OLC Redmine Automator</title>
+        <title>dRep-ANI - OLC Redmine Automator</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -97,7 +97,7 @@
 </li>
                                     
 <li>
-    <a href="../drep/" class="dropdown-item">dRep-ANI</a>
+    <a href="./" class="dropdown-item active">dRep-ANI</a>
 </li>
                                     
 <li>
@@ -109,7 +109,7 @@
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active">MobSuite</a>
+    <a href="../mobsuite/" class="dropdown-item">MobSuite</a>
 </li>
                                     
 <li>
@@ -207,12 +207,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../intimintyper/" class="nav-link">
+                                <a rel="prev" href="../diversitree/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../neartree/" class="nav-link">
+                                <a rel="next" href="../geneseekr/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -234,7 +234,7 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#mobsuite" class="nav-link">MobSuite</a>
+            <li class="nav-item" data-level="1"><a href="#drep" class="nav-link">dRep</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -243,34 +243,110 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="mobsuite">MobSuite</h1>
+<h1 id="drep">dRep</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>MobSuite is a set of tools developed by the Public Health Agency of Canada for detecting plasmids in draft genome
-assemblies. This tool runs the <code>mob_recon</code> part of the suite, which first detects plasmids in the assemblies, and then
-performs typing on the plasmids. More details on MobSuite, including fairly extensive details on the output files
-produced, can be found at the <a href="https://github.com/phac-nml/mob-suite">MobSuite GitHub repository</a>.</p>
+<p><a href="https://drep.readthedocs.io/en/latest/overview.html">dRep</a>, developed by Matt Olm, is used to compare genomes and determine relatedness in the form of average nucleotide identity (ANI).
+Optionally, it can be used to dreplicate genomes.</p>
+<p>For more information, see the <a href="https://www.nature.com/articles/ismej2017126">dRep publication</a>. If you publish data using this automator, don't forget to cite the authors of the tool <a href="https://www.nature.com/articles/ismej2017126">Olm et al., 2017</a></p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>MobSuite</code>. Spelling counts, but case sensitivity doesn't.</p>
+<p>In the <code>Subject</code> field, put <code>drep</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to look for plasmids in, one per line.</p>
+<p><strong>Required Components</strong></p>
+<p>The first line of the description should be the analysis you would like to run (e.g. <code>analysis=custom</code>). </p>
+<ul>
+<li>The following options are currently supported:<ul>
+<li><code>custom</code> - compare only the SEQIDs listed in the description</li>
+<li><code>enterobacterales</code> - compare the listed SEQIDs to a set of reference sequences for species from the order Enterobacterales</li>
+<li><code>listeriaceae</code> - compare the listed SEQIDs to a set of reference sequences for species from the family Listeriaceae</li>
+</ul>
+</li>
+</ul>
+<p>You must also include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components</strong></p>
+<p>By default, dRep will run the compare command to compare the set of genomes. In order to customise your GeneSeekr analyses, several settings can be optionally modified</p>
+<ul>
+<li>
+<p>MASH ANI cutoff - this value is important, as only sequences clustering within this 'relatedness' threshold will be analysed using the secondary ANI algorithm (which is what determines the ANI values)</p>
+<ul>
+<li>default is <code>0.9</code> (90%) </li>
+<li>If you want to use custom cutoffs for MASH clustering, add a line to your description:<ul>
+<li><code>mash_ANI_threshold=0.8</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Secondary clustering cutoff</p>
+<ul>
+<li>default is <code>0.99</code> (99%) </li>
+<li>modify as follows:<ul>
+<li><code>S_ANI=0.9</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>coverage threshold (minimum overlap between genomes when doing secondary comparisons)</p>
+<ul>
+<li>default is <code>0.1</code> (10%) </li>
+<li>modify as follows:<ul>
+<li><code>coverage_threshold=0.2</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>cluster algorithm </p>
+<ul>
+<li>default is <code>average</code> </li>
+<li>modify as follows:<ul>
+<li><code>clusteralgorithm=ward</code></li>
+</ul>
+</li>
+<li>available algorithms include:<ul>
+<li><code>median</code>, <code>weighted</code>, <code>single</code>, <code>complete</code>, <code>average</code>, <code>ward</code>, <code>centroid</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>comparison algorithm </p>
+<ul>
+<li>default is <code>ANImf</code> </li>
+<li>modify as follows:<ul>
+<li><code>comparisonalgorithm=fastANI</code></li>
+</ul>
+</li>
+<li>available algorithms include:<ul>
+<li><code>fastANI</code>, <code>ANImf</code>, <code>ANIn</code>, <code>gANI</code>, <code>goANI</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>command type (compare genomes for ANI values, or dereplicate, see <a href="https://drep.readthedocs.io/en/latest/overview.html">dRep</a>). <strong>NOTE:currently debugging this option</strong></p>
+<ul>
+<li>default is <code>compare</code> </li>
+<li>modify as follows:<ul>
+<li><code>command=dereplicate</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h4 id="example">Example</h4>
-<p>For an example MobSuite, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12823">issue 12823</a>.</p>
 <h4 id="interpreting-results">Interpreting Results</h4>
-<p>MobSuite outputs quite a few files. The zip file uploaded will have one folder for each SEQID requested.
-Within each folder, you will find a number of MobSuite output files. Of particular interest is the <code>contig_report.txt</code> file,
-which assigns each contig in your assembly as chromosomal or plasmid, and has typing info on plasmid-derived contigs.
-Full descriptions of all files can be found at the <a href="https://github.com/phac-nml/mob-suite">MobSuite GitHub repository</a>.</p>
+<p>dRep will upload a zip file to the ftp on completion. This will contain folders with data, figures, .</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>MobSuite works fairly quickly - it should take roughly one minute to analyze each SEQID that you have requested.</p>
+<p>This depends largely on the number of strains you want to compare and their relatedness. It can often be as quick as a few minutes
+if you have 10 or less strains, or take several hours for more strains. The primary clustering step uses Mash to determine whether sequences are likely related (based on provided cutoff or default 90%). </p>
+<p>The secondary analysis which calculates the ANI values is only completed on sets of genomes that have at least 90% Mash ANI (unless this cutoff is modified). These secondary comparisons are slower (more sensitive and accurate for ANI). Therefore, if you have a large number of closely related genomes your job may take longer to complete.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
 <p>A few things can go wrong with this process:</p>
 <p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
 message informing you of it.</p>
-<p>2) FTP timeout. Sometimes, particularly for larger requests, the upload of results to the FTP will run into problems and time out,
-in which case you will likely get an error message similar to this: <code>[Errno 104] Connection reset by peer</code>. If this occurs,
-you can either try again later, or, if you had a large request, try splitting it into a few smaller requests. If the
-problem persists, send us an email and we'll try to get it figured out.</p></div>
+<p>2) You did not provide an analysis type. Custom analysis only completes dRep compare for the SEQ-IDs listed, whereas enterobacterales will compare your listed sequences to reference sequences from the order Enterobacterales, and listeriaceae will compare your listed sequences to reference sequences from the family Listeriaceae.</p></div>
             </div>
         </div>
 
