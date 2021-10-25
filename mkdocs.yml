@@ -21,6 +21,7 @@ nav:
     - 'eCGF': 'analysis/eCGF.md'
     - 'ECTyper': 'analysis/ectyper.md'
     - 'DiversiTree': 'analysis/diversitree.md'
+    - 'dRep-ANI': 'analysis/drep.md'
     - 'GeneSeekr': 'analysis/geneseekr.md'
     - 'IntiminTyper': 'analysis/intimintyper.md'
     - 'MobSuite': 'analysis/mobsuite.md'
