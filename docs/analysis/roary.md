@@ -29,7 +29,7 @@ The Roary automator supports the following analyses which perform operations on 
 - intersection - reports the intersection of genes found in isolate sequences (core genes)
 - complement - reports the complement of genes found in isolates (accessory genes)
 - gene_multifasta - extracts the sequence of each gene listed and creates multi-fasta files for each gene listed (outputs protein multi-fastas). **NOTE**: you must provide an additional line: `genes=gene1,gene2,geneN` which is a comma-separated list of genes you would like multi-fasta files for (eg. `genes=fliC,gyrA`). **Case sensitivity counts for gene names**
-- difference - reports the gene differences between sets of isolates
+- difference - reports the gene differences between sets of isolates. You must differentiate between sequence sets by adding the line `set_two` above your second set of sequences in the description (sequences you want compared).
 
 You must also include a list of SEQIDs one per line.
 

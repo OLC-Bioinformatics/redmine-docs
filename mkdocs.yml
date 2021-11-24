@@ -23,6 +23,7 @@ nav:
     - 'DiversiTree': 'analysis/diversitree.md'
     - 'dRep-ANI': 'analysis/drep.md'
     - 'GeneSeekr': 'analysis/geneseekr.md'
+    - 'GWAS-pyseer': 'analysis/pyseer.md'
     - 'IntiminTyper': 'analysis/intimintyper.md'
     - 'MobSuite': 'analysis/mobsuite.md'
     - 'NearTree': 'analysis/neartree.md'
