@@ -25,6 +25,7 @@ nav:
     - 'GeneSeekr': 'analysis/geneseekr.md'
     - 'GWAS-pyseer': 'analysis/pyseer.md'
     - 'IntiminTyper': 'analysis/intimintyper.md'
+    - 'Mashtree': 'analysis/mashtree.md'
     - 'MobSuite': 'analysis/mobsuite.md'
     - 'NearTree': 'analysis/neartree.md'
     - 'PlasmidBorneIdentity': 'analysis/plasmidborneidentity.md'
