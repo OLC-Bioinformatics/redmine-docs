@@ -297,7 +297,7 @@ phylogenetic tree using Mash distances. See <a href="https://github.com/lskatz/m
 <p>kmerlength - <a href="https://mash.readthedocs.io/en/latest/sketches.html">Mash kmer size</a> "larger k-mers will provide more specificity while smaller k-mers will provide more sensitivity. (Larger genomes will also require larger k-mers to avoid k-mers that are shared by chance)."</p>
 <ul>
 <li>default is <code>21</code> </li>
-<li>If you want to use a minimum depth, add a line to your description:<ul>
+<li>If you want to change the k-mer size, add a line to your description:<ul>
 <li><code>kmerlength=30</code></li>
 </ul>
 </li>
@@ -307,7 +307,7 @@ phylogenetic tree using Mash distances. See <a href="https://github.com/lskatz/m
 <p>sketch-size - <a href="https://mash.readthedocs.io/en/latest/sketches.html">Mash sketch size</a> "corresponds to the number of (non-redundant) min-hashes that are kept. Larger sketches will better represent the sequence, but at the cost of larger sketch files and longer comparison times."</p>
 <ul>
 <li>default is <code>10000</code> </li>
-<li>If you want to use a minimum depth, add a line to your description:<ul>
+<li>If you want to change the mash sketch-size, add a line to your description:<ul>
 <li><code>sketch-size=1000</code></li>
 </ul>
 </li>
