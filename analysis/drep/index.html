@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/drep/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>dRep-ANI - OLC Redmine Automator</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/docco.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">OLC Redmine Automator</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../getting_started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../data/external_retrieve/" class="dropdown-item">External Retrieve</a>
+</li>
+                                    
+<li>
+    <a href="../../data/report_retrieve/" class="dropdown-item">Report Retrieve</a>
+</li>
+                                    
+<li>
+    <a href="../../data/sra_upload/" class="dropdown-item">SRA Upload</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Analysis <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../amrsummary/" class="dropdown-item">AMRsummary</a>
+</li>
+                                    
+<li>
+    <a href="../autoclark/" class="dropdown-item">AutoCLARK</a>
+</li>
+                                    
+<li>
+    <a href="../bcgtree/" class="dropdown-item">bcgTree</a>
+</li>
+                                    
+<li>
+    <a href="../confindr/" class="dropdown-item">ConFindr</a>
+</li>
+                                    
+<li>
+    <a href="../cowsnphr/" class="dropdown-item">COWSNPhR</a>
+</li>
+                                    
+<li>
+    <a href="../closerelatives/" class="dropdown-item">CloseRelatives</a>
+</li>
+                                    
+<li>
+    <a href="../eCGF/" class="dropdown-item">eCGF</a>
+</li>
+                                    
+<li>
+    <a href="../ectyper/" class="dropdown-item">ECTyper</a>
+</li>
+                                    
+<li>
+    <a href="../diversitree/" class="dropdown-item">DiversiTree</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">dRep-ANI</a>
+</li>
+                                    
+<li>
+    <a href="../geneseekr/" class="dropdown-item">GeneSeekr</a>
+</li>
+                                    
+<li>
+    <a href="../pyseer/" class="dropdown-item">GWAS-pyseer</a>
+</li>
+                                    
+<li>
+    <a href="../intimintyper/" class="dropdown-item">IntiminTyper</a>
+</li>
+                                    
+<li>
+    <a href="../mashtree/" class="dropdown-item">Mashtree</a>
+</li>
+                                    
+<li>
+    <a href="../mobsuite/" class="dropdown-item">MobSuite</a>
+</li>
+                                    
+<li>
+    <a href="../neartree/" class="dropdown-item">NearTree</a>
+</li>
+                                    
+<li>
+    <a href="../plasmidborneidentity/" class="dropdown-item">PlasmidBorneIdentity</a>
+</li>
+                                    
+<li>
+    <a href="../pointfinder/" class="dropdown-item">PointFinder</a>
+</li>
+                                    
+<li>
+    <a href="../primerfinder/" class="dropdown-item">PrimerFinder</a>
+</li>
+                                    
+<li>
+    <a href="../prokka/" class="dropdown-item">Prokka</a>
+</li>
+                                    
+<li>
+    <a href="../psortb/" class="dropdown-item">PSORTb</a>
+</li>
+                                    
+<li>
+    <a href="../resfinder/" class="dropdown-item">ResFinder</a>
+</li>
+                                    
+<li>
+    <a href="../roary/" class="dropdown-item">Roary</a>
+</li>
+                                    
+<li>
+    <a href="../sipprverse/" class="dropdown-item">sipprverse</a>
+</li>
+                                    
+<li>
+    <a href="../snvphyl/" class="dropdown-item">SNVPhyl</a>
+</li>
+                                    
+<li>
+    <a href="../staramr/" class="dropdown-item">staramr</a>
+</li>
+                                    
+<li>
+    <a href="../strainmash/" class="dropdown-item">StrainMash</a>
+</li>
+                                    
+<li>
+    <a href="../wgsassembly/" class="dropdown-item">WGS Assembly</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Internal Use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../internal_only/merge/" class="dropdown-item">Merge</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../troubleshooting/" class="nav-link">Troubleshooting</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../tutorials/create_environment/" class="dropdown-item">Create Environment</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/create_pages/" class="dropdown-item">Create Pages</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/edit_pages/" class="dropdown-item">Edit Pages</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/publish_changes/" class="dropdown-item">Publish Changes</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../diversitree/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../geneseekr/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#drep" class="nav-link">dRep</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="drep">dRep</h1>
+<h3 id="what-does-it-do">What does it do?</h3>
+<p><a href="https://drep.readthedocs.io/en/latest/overview.html">dRep</a>, developed by Matt Olm, is used to compare genomes and determine relatedness in the form of average nucleotide identity (ANI).
+Optionally, it can be used to dreplicate genomes.</p>
+<p>For more information, see the <a href="https://www.nature.com/articles/ismej2017126">dRep publication</a>. If you publish data using this automator, don't forget to cite the authors of the tool <a href="https://www.nature.com/articles/ismej2017126">Olm et al., 2017</a></p>
+<h3 id="how-do-i-use-it">How do I use it?</h3>
+<h4 id="subject">Subject</h4>
+<p>In the <code>Subject</code> field, put <code>drep</code>. Spelling counts, but case sensitivity doesn't.</p>
+<h4 id="description">Description</h4>
+<p><strong>Required Components</strong></p>
+<p>The first line of the description should be the analysis you would like to run (e.g. <code>analysis=custom</code>). </p>
+<ul>
+<li>The following options are currently supported:<ul>
+<li><code>custom</code> - compare only the SEQIDs listed in the description</li>
+<li><code>enterobacterales</code> - compare the listed SEQIDs to a set of reference sequences for species from the order Enterobacterales</li>
+<li><code>listeriaceae</code> - compare the listed SEQIDs to a set of reference sequences for species from the family Listeriaceae</li>
+</ul>
+</li>
+</ul>
+<p>You must also include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components</strong></p>
+<p>By default, dRep will run the compare command to compare the set of genomes. In order to customise your dRep analyses, several settings can be optionally modified</p>
+<ul>
+<li>
+<p>MASH ANI cutoff - this value is important, as only sequences clustering within this 'relatedness' threshold will be analysed using the secondary ANI algorithm (which is what determines the ANI values)</p>
+<ul>
+<li>default is <code>0.9</code> (90%) </li>
+<li>If you want to use custom cutoffs for MASH clustering, add a line to your description:<ul>
+<li><code>mash_ANI_threshold=0.8</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Secondary clustering cutoff</p>
+<ul>
+<li>default is <code>0.99</code> (99%) </li>
+<li>modify as follows:<ul>
+<li><code>S_ANI=0.9</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>coverage threshold (minimum overlap between genomes when doing secondary comparisons)</p>
+<ul>
+<li>default is <code>0.1</code> (10%) </li>
+<li>modify as follows:<ul>
+<li><code>coverage_threshold=0.2</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>cluster algorithm </p>
+<ul>
+<li>default is <code>average</code> </li>
+<li>modify as follows:<ul>
+<li><code>clusteralgorithm=ward</code></li>
+</ul>
+</li>
+<li>available algorithms include:<ul>
+<li><code>median</code>, <code>weighted</code>, <code>single</code>, <code>complete</code>, <code>average</code>, <code>ward</code>, <code>centroid</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>comparison algorithm </p>
+<ul>
+<li>default is <code>ANImf</code> </li>
+<li>modify as follows:<ul>
+<li><code>comparisonalgorithm=fastANI</code></li>
+</ul>
+</li>
+<li>available algorithms include:<ul>
+<li><code>fastANI</code>, <code>ANImf</code>, <code>ANIn</code>, <code>gANI</code>, <code>goANI</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>command type (compare genomes for ANI values, or dereplicate, see <a href="https://drep.readthedocs.io/en/latest/overview.html">dRep</a>). <strong>NOTE:currently debugging this option</strong></p>
+<ul>
+<li>default is <code>compare</code> </li>
+<li>modify as follows:<ul>
+<li><code>command=dereplicate</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="example">Example</h4>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>dRep will upload a zip file to the ftp on completion. This will contain folders with data in the form of tables, figures, etc. ANI values will only be output for clusters of sequences that are related at or above the MASH ANI cutoff. dRep does not output a tree file, however you should be able to replicate the output MASH tree by hierarchical clustering of the MASH table in R. (Hierarchical clustering uses the cluster algorithm command described above)</p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>This depends largely on the number of strains you want to compare and their relatedness. It can often be as quick as a few minutes
+if you have 10 or less strains, or take several hours for more strains. The primary clustering step uses Mash to determine whether sequences are likely related (based on provided cutoff or default 90%). </p>
+<p>The secondary analysis which calculates the ANI values is only completed on sets of genomes that have at least 90% Mash ANI (unless this cutoff is modified). These secondary comparisons are slower (more sensitive and accurate for ANI). Therefore, if you have a large number of closely related genomes your job may take longer to complete.</p>
+<h3 id="what-can-go-wrong">What can go wrong?</h3>
+<p>A few things can go wrong with this process:</p>
+<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
+message informing you of it.</p>
+<p>2) You did not provide an analysis type. Custom analysis only completes dRep compare for the SEQ-IDs listed, whereas enterobacterales will compare your listed sequences to reference sequences from the order Enterobacterales, and listeriaceae will compare your listed sequences to reference sequences from the family Listeriaceae.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

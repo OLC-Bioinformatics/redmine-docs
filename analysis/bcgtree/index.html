@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/bcgtree/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>bcgTree - OLC Redmine Automator</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/docco.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">OLC Redmine Automator</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../getting_started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../data/external_retrieve/" class="dropdown-item">External Retrieve</a>
+</li>
+                                    
+<li>
+    <a href="../../data/report_retrieve/" class="dropdown-item">Report Retrieve</a>
+</li>
+                                    
+<li>
+    <a href="../../data/sra_upload/" class="dropdown-item">SRA Upload</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Analysis <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../amrsummary/" class="dropdown-item">AMRsummary</a>
+</li>
+                                    
+<li>
+    <a href="../autoclark/" class="dropdown-item">AutoCLARK</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">bcgTree</a>
+</li>
+                                    
+<li>
+    <a href="../confindr/" class="dropdown-item">ConFindr</a>
+</li>
+                                    
+<li>
+    <a href="../cowsnphr/" class="dropdown-item">COWSNPhR</a>
+</li>
+                                    
+<li>
+    <a href="../closerelatives/" class="dropdown-item">CloseRelatives</a>
+</li>
+                                    
+<li>
+    <a href="../eCGF/" class="dropdown-item">eCGF</a>
+</li>
+                                    
+<li>
+    <a href="../ectyper/" class="dropdown-item">ECTyper</a>
+</li>
+                                    
+<li>
+    <a href="../diversitree/" class="dropdown-item">DiversiTree</a>
+</li>
+                                    
+<li>
+    <a href="../drep/" class="dropdown-item">dRep-ANI</a>
+</li>
+                                    
+<li>
+    <a href="../geneseekr/" class="dropdown-item">GeneSeekr</a>
+</li>
+                                    
+<li>
+    <a href="../pyseer/" class="dropdown-item">GWAS-pyseer</a>
+</li>
+                                    
+<li>
+    <a href="../intimintyper/" class="dropdown-item">IntiminTyper</a>
+</li>
+                                    
+<li>
+    <a href="../mashtree/" class="dropdown-item">Mashtree</a>
+</li>
+                                    
+<li>
+    <a href="../mobsuite/" class="dropdown-item">MobSuite</a>
+</li>
+                                    
+<li>
+    <a href="../neartree/" class="dropdown-item">NearTree</a>
+</li>
+                                    
+<li>
+    <a href="../plasmidborneidentity/" class="dropdown-item">PlasmidBorneIdentity</a>
+</li>
+                                    
+<li>
+    <a href="../pointfinder/" class="dropdown-item">PointFinder</a>
+</li>
+                                    
+<li>
+    <a href="../primerfinder/" class="dropdown-item">PrimerFinder</a>
+</li>
+                                    
+<li>
+    <a href="../prokka/" class="dropdown-item">Prokka</a>
+</li>
+                                    
+<li>
+    <a href="../psortb/" class="dropdown-item">PSORTb</a>
+</li>
+                                    
+<li>
+    <a href="../resfinder/" class="dropdown-item">ResFinder</a>
+</li>
+                                    
+<li>
+    <a href="../roary/" class="dropdown-item">Roary</a>
+</li>
+                                    
+<li>
+    <a href="../sipprverse/" class="dropdown-item">sipprverse</a>
+</li>
+                                    
+<li>
+    <a href="../snvphyl/" class="dropdown-item">SNVPhyl</a>
+</li>
+                                    
+<li>
+    <a href="../staramr/" class="dropdown-item">staramr</a>
+</li>
+                                    
+<li>
+    <a href="../strainmash/" class="dropdown-item">StrainMash</a>
+</li>
+                                    
+<li>
+    <a href="../wgsassembly/" class="dropdown-item">WGS Assembly</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Internal Use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../internal_only/merge/" class="dropdown-item">Merge</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../troubleshooting/" class="nav-link">Troubleshooting</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../tutorials/create_environment/" class="dropdown-item">Create Environment</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/create_pages/" class="dropdown-item">Create Pages</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/edit_pages/" class="dropdown-item">Edit Pages</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/publish_changes/" class="dropdown-item">Publish Changes</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../autoclark/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../confindr/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#bcgtree" class="nav-link">bcgTree</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="bcgtree">bcgTree</h1>
+<h3 id="what-does-it-do">What does it do?</h3>
+<p>bcgTree is a an automated phylogenetic tree building pipeline that builds trees from bacterial core genomes. The pipeline "automatically extracts 107 essential single-copy core genes, found in a majority of bacteria" (these genes were statistically determined, see <a href="https://cdnsciencepub.com/doi/10.1139/gen-2015-0175?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">bcgTree publication</a>). It then uses hidden Markov models and performs a partitioned maximum-likelihood analysis. If you want to 
+learn more about it, check out the <a href="https://cdnsciencepub.com/doi/10.1139/gen-2015-0175?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">bcgTree publication</a>. Dont forget to cite Ankenbrand and Keller, 2016!</p>
+<h3 id="how-do-i-use-it">How do I use it?</h3>
+<h4 id="subject">Subject</h4>
+<p>In the <code>Subject</code> field, put <code>bcgtree</code>. Spelling counts, but case sensitivity doesnt.</p>
+<h4 id="description">Description</h4>
+<p><strong>Required Components</strong></p>
+<p>In the <code>Description</code> field, you must include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components</strong></p>
+<p>In order to customise your bcgTree analysis, several settings can be optionally modified.</p>
+<ul>
+<li>If you would like to change the number of bootstraps performed, add the following line to the description before the list of SEQIDs:<ul>
+<li>default is <code>100</code></li>
+<li>modify as follows:<ul>
+<li><code>bootstraps=1000</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>If you would like to change the minimum number of proteomes in which a gene must occur in order to be kept:<ul>
+<li>default is <code>2</code></li>
+<li>modify as follows:<ul>
+<li><code>min_proteomes=5</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>If you would like to change the amino acid substitution model used for the partitions by RAxML:<ul>
+<li>default is <code>AUTO</code></li>
+<li>modify as follows:<ul>
+<li><code>aa_substitution_model=GTR</code></li>
+</ul>
+</li>
+<li>you can select one of the following amino acid substitution models to use:<ul>
+<li>AUTO, DAYHOFF, DCMUT, JTT, MTREV, WAG,RTREV, CPREV, VT, BLOSUM62, MTMAM, LG,
+  MTART, MTZOA, PMB, HIVB,HIVW, JTTDCMUT, FLU, STMTREV, DUMMY, DUMMY2,
+  LG4M, LG4X, PROT_FILE, GTR_UNLINKED, GTR</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="example">Example</h4>
+<p>For an example bcgtree issue see <a href="https://redmine.biodiversity.agr.gc.ca/issues/25083">issue 25083</a>. <strong>NOTE</strong>: the output files for these issues no longer exist on the ftp server.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>The bcgTree automator will upload links to the ftp for files called <code>prokka_output.zip</code> and <code>bcgtree_output.zip</code> once it has completed. </p>
+<p>The <code>prokka_output.zip</code> contains all of the outputs from prokka. Prokka will output a lot of files for each genome you give it - you can find a quick description of
+each file <a href="https://github.com/tseemann/prokka#output-files">here</a>. Of particular interest are the <code>.faa</code> files, which bcgTree uses for analysis.</p>
+<p>The <code>bcgtree_output.zip</code> file contains all of the outputs from bcgTree. The alignment files, and gene-id files output by bcgtree can be found in subfolders in the zip file. The most interesting outputs from bcgtree are the RAxML files. These files conaint the phylogenetic trees output by bcgTree: </p>
+<ul>
+<li>RAxML_bestTree.final</li>
+<li>RAxML_bipartitionsBranchLabels.final</li>
+<li>RAxML_bipartitions.final</li>
+<li>RAxML_bootstrap.final</li>
+</ul>
+<p>These files can be opened using a phylogenetic tree viewer of your choice.</p>
+<p>There will also be the <code>config.txt</code> file containing the command(s) passed to bcgTree, as well as a <code>bcgtree.log</code> file containing all of the executed commands and their output(s) (including the random seed values used by RAxML).</p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>Prokka isnt the quickest thing around - expect it to take 2 to 3 minutes for each genome you give it. After prokka is finished the bcgTree pipeline time will depend on the number of sequences and bootstraps requested. </p>
+<h3 id="what-can-go-wrong">What can go wrong?</h3>
+<ol>
+<li>Requested SEQIDs are not available. If we cant find some of the SEQIDs that you request, you will get a warning message informing you of it.</li>
+<li>There was an issue with the requested amino acid substitution model: there was a typo, or you requested a currently-unsupported substitution model. An error message detailing the problem will be added to the issue.</li>
+</ol></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
