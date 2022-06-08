@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/strainmash/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/roary/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>StrainMash - OLC Redmine Automator</title>
+    <title>Roary - OLC Redmine Automator</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "StrainMash";
-        var mkdocs_page_input_path = "analysis/strainmash.md";
-        var mkdocs_page_url = "/redmine-docs/analysis/strainmash/";
+        var mkdocs_page_name = "Roary";
+        var mkdocs_page_input_path = "analysis/roary.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/roary/";
       </script>
     
     <script src="../../js/jquery-3.6.0.min.js" defer></script>
@@ -95,17 +95,15 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../snvphyl/">SNVPhyl</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../staramr/">staramr</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">StrainMash</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Roary</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#roary">Roary</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scoary">Scoary</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
         <ul>
@@ -124,6 +122,14 @@
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
     </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snvphyl/">SNVPhyl</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../staramr/">staramr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
@@ -162,7 +168,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Analysis &raquo;</li><li>StrainMash</li>
+          <li>Analysis &raquo;</li><li>Roary</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -172,44 +178,99 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="strainmash">StrainMash</h1>
+                <h1 id="roaryscoary">RoaryScoary</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>StrainMash uses the MinHash algorithm (as implemented by <a href="https://github.com/marbl/mash">mash</a>) in order to very quickly
-find which RefSeq type strain an assembly is closest to. This can be very useful if you aren't entirely sure what species
-it is that you've actually sequnced.</p>
+<h4 id="roary">Roary</h4>
+<p>Roary is a pipeline for calculating pan genomes. Roary is not intended for metagenomics or for comparing extremely diverse sets of genomes. If you want to 
+learn more about it, check out the <a href="https://academic.oup.com/bioinformatics/article/31/22/3691/240757">Roary publication</a>.</p>
+<h4 id="scoary">Scoary</h4>
+<p>Scoary takes the <code>gene_presence_absence.csv</code> file output from Roary and a traits file created by the user, and calculates the associations between the given traits and all genes in the accessory genome. For more information, check out the <a href="https://github.com/AdmiralenOla/Scoary">Scoary github</a> or <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1108-8">Scoary publication</a>.</p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>StrainMash</code>. Spelling counts, but case sensitivity doesn't.</p>
+<p>In the <code>Subject</code> field, put <code>roary</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to analyze, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example StrainMash, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12860">issue 12860</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>StrainMash will upload a zip file once it finishes. This contains a folder called output, which will have a
-text file for each SEQID entered showing results.</p>
-<p>These text files have 6 columns:</p>
+<p><strong>Required Components</strong></p>
+<p>In the <code>Description</code> field, you must provide the requested analysis type as follows:</p>
+<p><code>analysistype=requested_analysis</code></p>
+<p>The Roary automator supports the following analyses which perform operations on the pan genome of isolate sequences (again, spelling counts, but case sensitivity doesn't):</p>
 <ul>
-<li>MashDistance: Represents roughly how close the query sequence is the the reference strain. 1 is a perfect match, 0 is no
-similarity. To say that something very closely matches a reference strain, this number should be <em><em>at least</em></em> 0.98</li>
-<li>NumMatchingHashes: Another measure of how close the query sequence is to the reference strain. 1000/1000 is a perfect match,
-0 is no similarity. Number needs to be fairly high (&gt;850) for close matches to reference.</li>
-<li>MedianMultiplicity: Can mostly be ignored. Should always be 1.</li>
-<li>Pvalue: An attempt to assign significance to the hit. Should be zero for anything that very closely matches a reference
-strain.</li>
-<li>ReferenceStrain: The NCBI Accession for the reference strain.</li>
-<li>Organism: The name of the organism that is the reference strain.</li>
+<li>union - reports the union of genes found in sequences</li>
+<li>intersection - reports the intersection of genes found in isolate sequences (core genes)</li>
+<li>complement - reports the complement of genes found in isolates (accessory genes)</li>
+<li>gene_multifasta - extracts the sequence of each gene listed and creates multi-fasta files for each gene listed (outputs protein multi-fastas). <strong>NOTE</strong>: you must provide an additional line: <code>genes=gene1,gene2,geneN</code> which is a comma-separated list of genes you would like multi-fasta files for (eg. <code>genes=fliC,gyrA</code>). <strong>Case sensitivity counts for gene names</strong></li>
+<li>difference - reports the gene differences between sets of isolates</li>
+</ul>
+<p>You must also include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components - Scoary</strong></p>
+<p>If you would like scoary analysis to be completed, calculating the associations between traits and all genes in the accessory genome <strong>you must attach a csv file of traits (traits.csv) to the issue</strong>. Attaching a <code>traits.csv</code> file will automatically result in scoary analysis being conducted.</p>
+<p><strong>This traits file must be formatted in a specific way</strong>.</p>
+<ul>
+<li>the rows should correspond to your isolate sequence IDs</li>
+<li>the top right cell should be left blank</li>
+<li>the trait(s) data must be binary (0 for trait absent, 1 for trait present)</li>
+<li>all SEQ-IDs and traits should be uniquely named and not contain any weird characters (e.g. %;,/&amp;[]@? etc) </li>
+</ul>
+<p>The below table is an example from the Scoary github:</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">Trait 1</th>
+<th align="center">Trait 2</th>
+<th align="center">...</th>
+<th align="center">Trait N</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">YYYY-SEQ-0001</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">...</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">YYYY-SEQ-0002</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">...</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">YYYY-SEQ-0003</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">...</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<p>For more information, check out the <a href="https://github.com/AdmiralenOla/Scoary">Scoary github</a></p>
+<h4 id="example">Example</h4>
+<p>For an example Roary/Scoary issue see <a href="https://redmine.biodiversity.agr.gc.ca/issues/24968">issue 24968</a>, for an example Roary <code>analysistype=gene_multifasta</code> issue see <a href="https://redmine.biodiversity.agr.gc.ca/issues/25013">issue 25013</a>. (<strong>NOTE</strong>: the output files for these issues no longer exist on the ftp server.)</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>The Roary automator will upload links to the ftp for files called <code>prokka_output.zip</code> and <code>roary_output.zip</code> once it has completed. </p>
+<p>The <code>prokka_output.zip</code> contains all of the outputs from prokka. Prokka will output a lot of files for each genome you give it - you can find a quick description of
+each file <a href="https://github.com/tseemann/prokka#output-files">here</a>. Of particular interest are the <code>.gff</code> files, which Roary uses for analysis.</p>
+<p>The <code>roary_output.zip</code> file contains all of the outputs from roary. Some additional files will be present depending on the analysis type chosen:</p>
+<ul>
+<li>gene_multifasta - the zip file will include <code>.fa</code> files that contain the aligned protein sequences for the requested gene(s) (one for file each gene included in the analysis, eg. <code>gene_multifasta_fliC.fa</code> and <code>gene_multifasta_gyrA.fa</code>). If you'd like, these sequences can be further analysed using NCBI protein blast.</li>
+<li>scoary - the zip file will include <code>.csv</code> file(s) for each of the traits (column headers) provided in the attached <code>traits.csv</code> file.</li>
 </ul>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>StrainMash should take about 30 seconds to 1 minute to analyze each sample you send to it.</p>
+<p>Prokka isn't the quickest thing around - expect it to take 2 to 3 minutes for each genome you give it. After prokka is finished the Roary pipeline time will depend on the analysis type, and the number of genes/traits requested (in the case of gene_multifasta and scoary). </p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
+<ol>
+<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</li>
+<li>There was an issue with the requested analysistype: either one was not supplied, the was a typo, or you requested a currently-unsupported analysis. An error message detailing the problem will be added to the issue.</li>
+<li><strong>Scoary</strong> You will not get an error if the traits.csv file is not attached or formatted correctly. Roary will complete, but no <code>.csv</code> files for each of the traits will be included in the zip file. Unfortunately, you will have to submit the analysis request again with the correct <code>traits.csv</code> formatting.</li>
+</ol>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../staramr/" class="btn btn-neutral float-left" title="staramr"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../wgsassembly/" class="btn btn-neutral float-right" title="WGS Assembly">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../resfinder/" class="btn btn-neutral float-left" title="ResFinder"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../sipprverse/" class="btn btn-neutral float-right" title="sipprverse">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -232,10 +293,10 @@ message informing you of it.</p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../staramr/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../resfinder/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../wgsassembly/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../sipprverse/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
