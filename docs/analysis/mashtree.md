@@ -41,12 +41,12 @@ You must also include a list of SEQIDs one per line.
 
 - kmerlength - [Mash kmer size](https://mash.readthedocs.io/en/latest/sketches.html) "larger k-mers will provide more specificity while smaller k-mers will provide more sensitivity. (Larger genomes will also require larger k-mers to avoid k-mers that are shared by chance)."
     - default is `21` 
-    - If you want to use a minimum depth, add a line to your description:
+    - If you want to change the k-mer size, add a line to your description:
         - `kmerlength=30`
 
 - sketch-size - [Mash sketch size](https://mash.readthedocs.io/en/latest/sketches.html) "corresponds to the number of (non-redundant) min-hashes that are kept. Larger sketches will better represent the sequence, but at the cost of larger sketch files and longer comparison times."
     - default is `10000` 
-    - If you want to use a minimum depth, add a line to your description:
+    - If you want to change the mash sketch-size, add a line to your description:
         - `sketch-size=1000`
 
 
