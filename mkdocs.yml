@@ -35,6 +35,7 @@ nav:
     - 'PSORTb': 'analysis/psortb.md'
     - 'ResFinder': 'analysis/resfinder.md'
     - 'Roary': 'analysis/roary.md'
+    - 'SequenceExtractor': 'analysis/sequence_extractor.md'
     - 'sipprverse': 'analysis/sipprverse.md'
     - 'SNVPhyl': 'analysis/snvphyl.md'
     - 'staramr': 'analysis/staramr.md'
