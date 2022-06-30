@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/confindr/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/mashtree/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>ConFindr - OLC Redmine Automator</title>
+    <title>Mashtree - OLC Redmine Automator</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "ConFindr";
-        var mkdocs_page_input_path = "analysis/confindr.md";
-        var mkdocs_page_url = "/redmine-docs/analysis/confindr/";
+        var mkdocs_page_name = "Mashtree";
+        var mkdocs_page_input_path = "analysis/mashtree.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/mashtree/";
       </script>
     
     <script src="../../js/jquery-3.6.0.min.js" defer></script>
@@ -65,7 +65,27 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">ConFindr</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pyseer/">GWAS-pyseer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Mashtree</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
     </li>
@@ -86,26 +106,6 @@
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
     </li>
     </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../pyseer/">GWAS-pyseer</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
@@ -172,9 +172,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Analysis &raquo;</li><li>ConFindr</li>
+          <li>Analysis &raquo;</li><li>Mashtree</li>
     <li class="wy-breadcrumbs-aside">
-        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/confindr.md"
+        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/mashtree.md"
           class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
@@ -184,42 +184,85 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="confindr">ConFindr</h1>
+                <h1 id="mashtree">MashTree</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>ConFindr looks for both intra-species and inter-species contamination in raw reads, which can cause misassemblies and
-erroneous downstream analysis. More details on ConFindr can be found <a href="https://lowandrew.github.io/ConFindr/">on GitHub</a>.</p>
+<p>MashTree will take a list of SEQIDs, and then create a
+phylogenetic tree using Mash distances. See <a href="https://github.com/lskatz/mashtree">mashtree github</a> and the <a href="https://github.com/lskatz/mashtree/blob/master/docs/ALGORITHM.md">mashtree docs</a> for more information. (The mashtree docs explains how mash is used to create the phylogeny).</p>
+<p>If you use mashtree, please remember to cite <a href="Mashtree: a rapid comparison of whole genome sequence files">Katz et al., 2019</a>, <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0997-x">Ondov et al., 2016</a> and <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1841-x">Ondov et al., 2019</a></p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>ConFindr</code>. Spelling counts, but case sensitivity doesn't.</p>
+<p>In the <code>Subject</code> field, put <code>mashtree</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to detect contamination in, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example ConFindr, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12881">issue 12881</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>When your request is complete, a file called <code>confindr_output.zip</code> will be uploaded. This contains two files: <code>confindr_log.txt</code>,
-and <code>confindr_report.csv</code>. The report file contains 5 columns:</p>
+<p><strong>Required Components</strong></p>
+<p>The first line of the description should be the analysis you would like to run (e.g. <code>analysis=custom</code>). </p>
 <ul>
-<li>Sample: The name of the sample</li>
-<li>Genus: What ConFindr thinks the genus of the sample is. If ConFindr finds more than one genus, both will be listed here.</li>
-<li>NumContamSNVs: How many times ConFindr found something that looked like a contaminating SNV. Anything 3 or over
-is enough to call a sample as contaminated.</li>
-<li>NumUniqueKmers: How many unique kmers were found for the rMLST genes. If this number is over 45000, a sample is called
-as contaminated.</li>
-<li>ContamStatus: Shown as <code>True</code> if ConFindr thinks a sample is contaminated, and <code>False</code> if the sample is thought to be
-clean.</li>
+<li>The following options are currently supported:<ul>
+<li><code>custom</code> - compare only the SEQIDs listed in the description</li>
+<li><code>enterobacterales</code> - compare the listed SEQIDs to a set of reference sequences for species from the order Enterobacterales</li>
+<li><code>listeriaceae</code> - compare the listed SEQIDs to a set of reference sequences for species from the family Listeriaceae</li>
 </ul>
-<p>The log file can mostly be ignored - if any unexpected errors come up, we may use it for debugging purposes.</p>
+</li>
+</ul>
+<p>You must also include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components</strong></p>
+<ul>
+<li>
+<p>genomesize: </p>
+<ul>
+<li>default is <code>5000000</code> </li>
+<li>If you want to use a genome size estimate, add a line to your description:<ul>
+<li><code>genomesize=3000000</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>mindepth - if mindepth is zero, then it will be chosen in a smart but slower method to discard lower-abundance kmers.</p>
+<ul>
+<li>default is <code>5</code> </li>
+<li>If you want to use a minimum depth, add a line to your description:<ul>
+<li><code>mindepth=10</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>kmerlength - <a href="https://mash.readthedocs.io/en/latest/sketches.html">Mash kmer size</a> "larger k-mers will provide more specificity while smaller k-mers will provide more sensitivity. (Larger genomes will also require larger k-mers to avoid k-mers that are shared by chance)."</p>
+<ul>
+<li>default is <code>21</code> </li>
+<li>If you want to change the k-mer size, add a line to your description:<ul>
+<li><code>kmerlength=30</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>sketch-size - <a href="https://mash.readthedocs.io/en/latest/sketches.html">Mash sketch size</a> "corresponds to the number of (non-redundant) min-hashes that are kept. Larger sketches will better represent the sequence, but at the cost of larger sketch files and longer comparison times."</p>
+<ul>
+<li>default is <code>10000</code> </li>
+<li>If you want to change the mash sketch-size, add a line to your description:<ul>
+<li><code>sketch-size=1000</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="example">Example</h4>
+<p>For an example MashTree, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/26206">issue 26206</a>.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>Upon completion, you'll be given a treefile.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>ConFindr will take between 1 and 2 minutes for each sample.</p>
+<p>This depends largely on the number of strains you want to use to create the tree. It can often be as quick as a few minutes. </p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
+<p>A few things can go wrong with this process:</p>
 <p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
 message informing you of it.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../bcgtree/" class="btn btn-neutral float-left" title="bcgTree"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../cowsnphr/" class="btn btn-neutral float-right" title="COWSNPhR">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../intimintyper/" class="btn btn-neutral float-left" title="IntiminTyper"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../mobsuite/" class="btn btn-neutral float-right" title="MobSuite">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -246,10 +289,10 @@ message informing you of it.</p>
         </span>
     
     
-      <span><a href="../bcgtree/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../intimintyper/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../cowsnphr/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../mobsuite/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

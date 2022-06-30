@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/confindr/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/bcgtree/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>ConFindr - OLC Redmine Automator</title>
+    <title>bcgTree - OLC Redmine Automator</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "ConFindr";
-        var mkdocs_page_input_path = "analysis/confindr.md";
-        var mkdocs_page_url = "/redmine-docs/analysis/confindr/";
+        var mkdocs_page_name = "bcgTree";
+        var mkdocs_page_input_path = "analysis/bcgtree.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/bcgtree/";
       </script>
     
     <script src="../../js/jquery-3.6.0.min.js" defer></script>
@@ -63,9 +63,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../autoclark/">AutoCLARK</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">ConFindr</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">bcgTree</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
     </li>
@@ -86,6 +84,8 @@
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
     </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
                   </li>
@@ -172,9 +172,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Analysis &raquo;</li><li>ConFindr</li>
+          <li>Analysis &raquo;</li><li>bcgTree</li>
     <li class="wy-breadcrumbs-aside">
-        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/confindr.md"
+        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/bcgtree.md"
           class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
@@ -184,42 +184,78 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="confindr">ConFindr</h1>
+                <h1 id="bcgtree">bcgTree</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>ConFindr looks for both intra-species and inter-species contamination in raw reads, which can cause misassemblies and
-erroneous downstream analysis. More details on ConFindr can be found <a href="https://lowandrew.github.io/ConFindr/">on GitHub</a>.</p>
+<p>bcgTree is a an automated phylogenetic tree building pipeline that builds trees from bacterial core genomes. The pipeline "automatically extracts 107 essential single-copy core genes, found in a majority of bacteria" (these genes were statistically determined, see <a href="https://cdnsciencepub.com/doi/10.1139/gen-2015-0175?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">bcgTree publication</a>). It then uses hidden Markov models and performs a partitioned maximum-likelihood analysis. If you want to 
+learn more about it, check out the <a href="https://cdnsciencepub.com/doi/10.1139/gen-2015-0175?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">bcgTree publication</a>. Dont forget to cite Ankenbrand and Keller, 2016!</p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>ConFindr</code>. Spelling counts, but case sensitivity doesn't.</p>
+<p>In the <code>Subject</code> field, put <code>bcgtree</code>. Spelling counts, but case sensitivity doesnt.</p>
 <h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to detect contamination in, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example ConFindr, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12881">issue 12881</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>When your request is complete, a file called <code>confindr_output.zip</code> will be uploaded. This contains two files: <code>confindr_log.txt</code>,
-and <code>confindr_report.csv</code>. The report file contains 5 columns:</p>
+<p><strong>Required Components</strong></p>
+<p>In the <code>Description</code> field, you must include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components</strong></p>
+<p>In order to customise your bcgTree analysis, several settings can be optionally modified.</p>
 <ul>
-<li>Sample: The name of the sample</li>
-<li>Genus: What ConFindr thinks the genus of the sample is. If ConFindr finds more than one genus, both will be listed here.</li>
-<li>NumContamSNVs: How many times ConFindr found something that looked like a contaminating SNV. Anything 3 or over
-is enough to call a sample as contaminated.</li>
-<li>NumUniqueKmers: How many unique kmers were found for the rMLST genes. If this number is over 45000, a sample is called
-as contaminated.</li>
-<li>ContamStatus: Shown as <code>True</code> if ConFindr thinks a sample is contaminated, and <code>False</code> if the sample is thought to be
-clean.</li>
+<li>If you would like to change the number of bootstraps performed, add the following line to the description before the list of SEQIDs:<ul>
+<li>default is <code>100</code></li>
+<li>modify as follows:<ul>
+<li><code>bootstraps=1000</code></li>
 </ul>
-<p>The log file can mostly be ignored - if any unexpected errors come up, we may use it for debugging purposes.</p>
+</li>
+</ul>
+</li>
+<li>If you would like to change the minimum number of proteomes in which a gene must occur in order to be kept:<ul>
+<li>default is <code>2</code></li>
+<li>modify as follows:<ul>
+<li><code>min_proteomes=5</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>If you would like to change the amino acid substitution model used for the partitions by RAxML:<ul>
+<li>default is <code>AUTO</code></li>
+<li>modify as follows:<ul>
+<li><code>aa_substitution_model=GTR</code></li>
+</ul>
+</li>
+<li>you can select one of the following amino acid substitution models to use:<ul>
+<li>AUTO, DAYHOFF, DCMUT, JTT, MTREV, WAG,RTREV, CPREV, VT, BLOSUM62, MTMAM, LG,
+  MTART, MTZOA, PMB, HIVB,HIVW, JTTDCMUT, FLU, STMTREV, DUMMY, DUMMY2,
+  LG4M, LG4X, PROT_FILE, GTR_UNLINKED, GTR</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="example">Example</h4>
+<p>For an example bcgtree issue see <a href="https://redmine.biodiversity.agr.gc.ca/issues/25083">issue 25083</a>. <strong>NOTE</strong>: the output files for these issues no longer exist on the ftp server.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>The bcgTree automator will upload links to the ftp for files called <code>prokka_output.zip</code> and <code>bcgtree_output.zip</code> once it has completed. </p>
+<p>The <code>prokka_output.zip</code> contains all of the outputs from prokka. Prokka will output a lot of files for each genome you give it - you can find a quick description of
+each file <a href="https://github.com/tseemann/prokka#output-files">here</a>. Of particular interest are the <code>.faa</code> files, which bcgTree uses for analysis.</p>
+<p>The <code>bcgtree_output.zip</code> file contains all of the outputs from bcgTree. The alignment files, and gene-id files output by bcgtree can be found in subfolders in the zip file. The most interesting outputs from bcgtree are the RAxML files. These files conaint the phylogenetic trees output by bcgTree: </p>
+<ul>
+<li>RAxML_bestTree.final</li>
+<li>RAxML_bipartitionsBranchLabels.final</li>
+<li>RAxML_bipartitions.final</li>
+<li>RAxML_bootstrap.final</li>
+</ul>
+<p>These files can be opened using a phylogenetic tree viewer of your choice.</p>
+<p>There will also be the <code>config.txt</code> file containing the command(s) passed to bcgTree, as well as a <code>bcgtree.log</code> file containing all of the executed commands and their output(s) (including the random seed values used by RAxML).</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>ConFindr will take between 1 and 2 minutes for each sample.</p>
+<p>Prokka isnt the quickest thing around - expect it to take 2 to 3 minutes for each genome you give it. After prokka is finished the bcgTree pipeline time will depend on the number of sequences and bootstraps requested. </p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
+<ol>
+<li>Requested SEQIDs are not available. If we cant find some of the SEQIDs that you request, you will get a warning message informing you of it.</li>
+<li>There was an issue with the requested amino acid substitution model: there was a typo, or you requested a currently-unsupported substitution model. An error message detailing the problem will be added to the issue.</li>
+</ol>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../bcgtree/" class="btn btn-neutral float-left" title="bcgTree"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../cowsnphr/" class="btn btn-neutral float-right" title="COWSNPhR">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../autoclark/" class="btn btn-neutral float-left" title="AutoCLARK"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../confindr/" class="btn btn-neutral float-right" title="ConFindr">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -246,10 +282,10 @@ message informing you of it.</p>
         </span>
     
     
-      <span><a href="../bcgtree/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../autoclark/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../cowsnphr/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../confindr/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

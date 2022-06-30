@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/confindr/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/sequence_extractor/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>ConFindr - OLC Redmine Automator</title>
+    <title>SequenceExtractor - OLC Redmine Automator</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "ConFindr";
-        var mkdocs_page_input_path = "analysis/confindr.md";
-        var mkdocs_page_url = "/redmine-docs/analysis/confindr/";
+        var mkdocs_page_name = "SequenceExtractor";
+        var mkdocs_page_input_path = "analysis/sequence_extractor.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/sequence_extractor/";
       </script>
     
     <script src="../../js/jquery-3.6.0.min.js" defer></script>
@@ -65,27 +65,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">ConFindr</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
                   </li>
@@ -125,7 +105,27 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../sequence_extractor/">SequenceExtractor</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">SequenceExtractor</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
                   </li>
@@ -172,9 +172,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Analysis &raquo;</li><li>ConFindr</li>
+          <li>Analysis &raquo;</li><li>SequenceExtractor</li>
     <li class="wy-breadcrumbs-aside">
-        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/confindr.md"
+        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/sequence_extractor.md"
           class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
@@ -184,42 +184,73 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="confindr">ConFindr</h1>
+                <h1 id="sequenceextractor">SequenceExtractor</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>ConFindr looks for both intra-species and inter-species contamination in raw reads, which can cause misassemblies and
-erroneous downstream analysis. More details on ConFindr can be found <a href="https://lowandrew.github.io/ConFindr/">on GitHub</a>.</p>
+<p>SequenceExtractor extracts the sequence data from a supplied contig at designated start and stop positions</p>
+<p>Check out the source code: <a href="https://github.com/OLC-LOC-Bioinformatics/genemethods/tree/main/genemethods/SequenceExtractor">github</a></p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>ConFindr</code>. Spelling counts, but case sensitivity doesn't.</p>
+<p>In the <code>Subject</code> field, put <code>sequence_extractor</code>. Spelling counts, but case sensitivity does not.</p>
 <h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to detect contamination in, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example ConFindr, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12881">issue 12881</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>When your request is complete, a file called <code>confindr_output.zip</code> will be uploaded. This contains two files: <code>confindr_log.txt</code>,
-and <code>confindr_report.csv</code>. The report file contains 5 columns:</p>
+<p>There are two ways to use SequenceExtractor</p>
+<p>You must provide a list of (one per line):</p>
+<p><code>SEQID;contig name;start coordinates; stop coordinates</code></p>
+<p>e.g. </p>
+<pre><code>2019-SEQ-0848;Contig_1_149.079_Circ;1;50
+2019-SEQ-1019;Contig_1_388.862_Circ;14;77
+2019-SEQ-0848;Contig_2_392.879_Circ;2;39
+2019-SEQ-1019;Contig_3_52.4575;5;22
+</code></pre>
+
+<p>Notes: </p>
 <ul>
-<li>Sample: The name of the sample</li>
-<li>Genus: What ConFindr thinks the genus of the sample is. If ConFindr finds more than one genus, both will be listed here.</li>
-<li>NumContamSNVs: How many times ConFindr found something that looked like a contaminating SNV. Anything 3 or over
-is enough to call a sample as contaminated.</li>
-<li>NumUniqueKmers: How many unique kmers were found for the rMLST genes. If this number is over 45000, a sample is called
-as contaminated.</li>
-<li>ContamStatus: Shown as <code>True</code> if ConFindr thinks a sample is contaminated, and <code>False</code> if the sample is thought to be
-clean.</li>
+<li>If you want an entire contig, supply the start and stop positions as 0</li>
+<li>The stop base can be lower than the start base. The script will change them, so that the start base is always lower</li>
 </ul>
-<p>The log file can mostly be ignored - if any unexpected errors come up, we may use it for debugging purposes.</p>
+<p>The above example performs four extractions:</p>
+<ol>
+<li>bases <code>1-50</code> from <code>Contig_1_149.079_Circ</code> in the assembly for SEQID <code>2019-SEQ-0848</code></li>
+<li>bases <code>14-77</code> from <code>Contig_1_388.862_Circ</code> in the assembly for SEQID <code>2019-SEQ-1019</code></li>
+<li>bases <code>2-39</code> from <code>Contig_2_392.879_Circ</code> in the assembly for SEQID <code>2019-SEQ-0848</code></li>
+<li>bases <code>5-22</code> from <code>Contig_3_52.4575</code> in the assembly for SEQID <code>2019-SEQ-1019</code></li>
+</ol>
+<p>This list can be supplied in two possible ways:</p>
+<ol>
+<li>In the Description</li>
+<li>In an attached file (the name of the file doesn't matter, but please try to avoid empty lines)</li>
+</ol>
+<p>You cannot supply the list both ways; if you provide an attachment, any entries in the Description will be ignored.</p>
+<h4 id="example">Example</h4>
+<p>For an example SequenceExtractor analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/28104">issue 28104</a>.</p>
+<p>This example has SEQIDs in the Description, but it's not necessary.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>SequenceExtractor will output a FASTA-formatted file, <code>extracted_sequences.fasta</code> ,that should look like the following if you used the example list above:</p>
+<pre><code>&gt;2019-SEQ-0848_Contig_1_149.079_Circ_1_50
+AAAAAAAACAAATATATACTTTGATGATAACTTTCTAAATATCTACAAAA
+&gt;2019-SEQ-0848_Contig_2_392.879_Circ_2_39
+AAAAAAACAATAAAAAACACCGCAAAAATGGATTGTTA
+&gt;2019-SEQ-1019_Contig_1_388.862_Circ_14_77
+CAATAGTCTTATTTCCATTCAGGTATTCAATATTAATATTCATACGTTAATCCGATTTAT
+CCTT
+&gt;2019-SEQ-1019_Contig_3_52.4575_5_22
+ATATCATCAGATGGCTGC
+</code></pre>
+
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>ConFindr will take between 1 and 2 minutes for each sample.</p>
+<p>SequenceExtractor is pretty fast - expect it to take a few seconds per entry you give it.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
+<ol>
+<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, 
+you will get a warning message informing you of it.</li>
+<li>The contig name must be provided exactly as it is written in the assembly.</li>
+<li>The start or stop position provided is invalid e.g. if you ask for positions 789-882 in a contig that is only 500bp long, nothing will be returned.</li>
+</ol>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../bcgtree/" class="btn btn-neutral float-left" title="bcgTree"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../cowsnphr/" class="btn btn-neutral float-right" title="COWSNPhR">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../roary/" class="btn btn-neutral float-left" title="Roary"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../sipprverse/" class="btn btn-neutral float-right" title="sipprverse">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -246,10 +277,10 @@ message informing you of it.</p>
         </span>
     
     
-      <span><a href="../bcgtree/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../roary/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../cowsnphr/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../sipprverse/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
