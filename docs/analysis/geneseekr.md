@@ -23,6 +23,7 @@ The GeneSeekr pipeline supports the following analyses (again, spelling counts, 
 - gdcs - determines the presence of genomically-dispersed conserved sequences in the following genera: *Escherichia, Listeria, Salmonella, Vibrio*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
 - genesippr - custom suite of genes derived from the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
 - mlst - determines multi-locus sequence type for the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
+- cgmlst - determines core genome multi-locus sequence type for the following genera: *Escherichia, Yersinia*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
 - resfinder - identifies acquired antimicrobial resistance genes
 - rmlst - determines ribosomal multi-locus sequence type
 - serosippr - calculates the serotype for *Escherichia*
@@ -70,7 +71,7 @@ In order to customise your GeneSeekr analyses, several settings can be optionall
 
 #### Example
 
-For an example GeneSeekr issue, see [issue 14470](https://redmine.biodiversity.agr.gc.ca/issues/14470) or [issue 14471](https://redmine.biodiversity.agr.gc.ca/issues/14471).
+For example GeneSeekr issues, see [issue 14470 (ResFindr)](https://redmine.biodiversity.agr.gc.ca/issues/14470), [issue 14471 (custom)](https://redmine.biodiversity.agr.gc.ca/issues/14471), or [issue 27867 (cgMLST)](https://redmine.biodiversity.agr.gc.ca/issues/27867).
 
 #### Interpreting Results
 
