@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/pyseer/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>GWAS-pyseer - OLC Redmine Automator</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/docco.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">OLC Redmine Automator</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../getting_started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../data/external_retrieve/" class="dropdown-item">External Retrieve</a>
+</li>
+                                    
+<li>
+    <a href="../../data/report_retrieve/" class="dropdown-item">Report Retrieve</a>
+</li>
+                                    
+<li>
+    <a href="../../data/sra_upload/" class="dropdown-item">SRA Upload</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Analysis <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../amrsummary/" class="dropdown-item">AMRsummary</a>
+</li>
+                                    
+<li>
+    <a href="../autoclark/" class="dropdown-item">AutoCLARK</a>
+</li>
+                                    
+<li>
+    <a href="../bcgtree/" class="dropdown-item">bcgTree</a>
+</li>
+                                    
+<li>
+    <a href="../confindr/" class="dropdown-item">ConFindr</a>
+</li>
+                                    
+<li>
+    <a href="../cowsnphr/" class="dropdown-item">COWSNPhR</a>
+</li>
+                                    
+<li>
+    <a href="../closerelatives/" class="dropdown-item">CloseRelatives</a>
+</li>
+                                    
+<li>
+    <a href="../eCGF/" class="dropdown-item">eCGF</a>
+</li>
+                                    
+<li>
+    <a href="../ectyper/" class="dropdown-item">ECTyper</a>
+</li>
+                                    
+<li>
+    <a href="../diversitree/" class="dropdown-item">DiversiTree</a>
+</li>
+                                    
+<li>
+    <a href="../drep/" class="dropdown-item">dRep-ANI</a>
+</li>
+                                    
+<li>
+    <a href="../geneseekr/" class="dropdown-item">GeneSeekr</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">GWAS-pyseer</a>
+</li>
+                                    
+<li>
+    <a href="../intimintyper/" class="dropdown-item">IntiminTyper</a>
+</li>
+                                    
+<li>
+    <a href="../mashtree/" class="dropdown-item">Mashtree</a>
+</li>
+                                    
+<li>
+    <a href="../mobsuite/" class="dropdown-item">MobSuite</a>
+</li>
+                                    
+<li>
+    <a href="../neartree/" class="dropdown-item">NearTree</a>
+</li>
+                                    
+<li>
+    <a href="../plasmidborneidentity/" class="dropdown-item">PlasmidBorneIdentity</a>
+</li>
+                                    
+<li>
+    <a href="../pointfinder/" class="dropdown-item">PointFinder</a>
+</li>
+                                    
+<li>
+    <a href="../primerfinder/" class="dropdown-item">PrimerFinder</a>
+</li>
+                                    
+<li>
+    <a href="../prokka/" class="dropdown-item">Prokka</a>
+</li>
+                                    
+<li>
+    <a href="../psortb/" class="dropdown-item">PSORTb</a>
+</li>
+                                    
+<li>
+    <a href="../resfinder/" class="dropdown-item">ResFinder</a>
+</li>
+                                    
+<li>
+    <a href="../roary/" class="dropdown-item">Roary</a>
+</li>
+                                    
+<li>
+    <a href="../sipprverse/" class="dropdown-item">sipprverse</a>
+</li>
+                                    
+<li>
+    <a href="../snvphyl/" class="dropdown-item">SNVPhyl</a>
+</li>
+                                    
+<li>
+    <a href="../staramr/" class="dropdown-item">staramr</a>
+</li>
+                                    
+<li>
+    <a href="../strainmash/" class="dropdown-item">StrainMash</a>
+</li>
+                                    
+<li>
+    <a href="../wgsassembly/" class="dropdown-item">WGS Assembly</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Internal Use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../internal_only/merge/" class="dropdown-item">Merge</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../troubleshooting/" class="nav-link">Troubleshooting</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../tutorials/create_environment/" class="dropdown-item">Create Environment</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/create_pages/" class="dropdown-item">Create Pages</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/edit_pages/" class="dropdown-item">Edit Pages</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/publish_changes/" class="dropdown-item">Publish Changes</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../geneseekr/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../intimintyper/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#gwas-pyseer" class="nav-link">GWAS-pyseer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="gwas-pyseer">GWAS-pyseer</h1>
+<h3 id="what-does-it-do">What does it do?</h3>
+<p>pyseer is a tool for microbial-pangenome wide association studies (mGWAS). It is the reimplementation of <a href="https://github.com/johnlees/seer">seer</a>. pyseer allows one to analyse a set of genomes for genetic variation associated with bacterial phenotypes (such as antibiotic resistance, virulence, and host specificity). It is strongly suggested that you check out the <a href="https://academic.oup.com/bioinformatics/article/34/24/4310/5047751">pyseer publication</a> and <a href="https://pyseer.readthedocs.io/en/master/index.html">pyseer documentation</a> before use to determine which analysis is appropriate for your dataset. If used for publication, dont forget to cite Lees et al., 2018!</p>
+<p>This redmine-automator will allow you to conduct a mGWAS using sequence data stored on the OLC-CFIA cluster. There are a few different options available, but if you would like another customisable option added to the automator (see <a href="https://pyseer.readthedocs.io/en/master/index.html">pyseer documentation</a>) please contact an OLC-bioinformatician.</p>
+<h3 id="how-do-i-use-it">How do I use it?</h3>
+<h4 id="subject">Subject</h4>
+<p>In the <code>Subject</code> field, put <code>pyseer</code>. Spelling counts, but case sensitivity doesnt.</p>
+<p>&nbsp;</p>
+
+<h3 id="description">Description</h3>
+<h4 id="required-components"><strong>Required Components</strong></h4>
+<p>In the <code>Description</code> field, you must include an analysistype as follows:
+<code>analysistype=requested_analysis</code>:</p>
+<ul>
+<li><code>kmer</code>:<ul>
+<li>Will detect and count k-mers in selected dataset, then use k-mers as a variant to test both short variation and gene presence/absence.</li>
+<li>The k-mers will be annotated by the redmine automator using <a href="https://github.com/tseemann/prokka#output-files">prokka</a></li>
+<li>If kmer analysis is selected, it is also suggested that you upload a references.txt file (see description below). </li>
+</ul>
+</li>
+<li><code>Roary</code>:<ul>
+<li>Roary will use the gene_presence_absence.Rtab file from a previous Roary analysis.</li>
+<li>To use this analysis type, you must first run a roary analysis using the OLC Redmine Automator. See the <a href="https://olc-bioinformatics.github.io/redmine-docs/analysis/roary/">roary docs</a> for details.</li>
+<li>You must then include <code>roaryissue=redmine_issue_id</code>, where redmine_issue_id is the biorequest number from the roary analysis previously run (this will copy the gene_presence_absence.Rtab file from the previous issue to the current pyseer biorequest). <strong>Please note:</strong> the gene_presence_absence.Rtab files are only retained by the OLC system for requests made after 24-11-2021.</li>
+</ul>
+</li>
+<li><code>snv</code> (currently under development):<ul>
+<li>Will test the association of SNPs mapped to a reference.</li>
+</ul>
+</li>
+</ul>
+<p>You <strong>must</strong> attach a traits.tsv file. It must be named <strong>traits.tsv</strong> for the automator to work. This file must contain the SEQ-IDs in the first column, and trait (numerical) in the second column. The automator defaults to <code>binary</code> for traits (1,0 - for presence,absence). However, it is possible to use continuous data if you also include <code>continuous=True</code> in the description (default is <code>continuous=False</code>). You may also include <code>NA</code> if trait was not determined for that sequence.</p>
+<p>You must also include a list of SEQIDs one per line.  </p>
+<p>&nbsp;</p>
+
+<h4 id="optional-components"><strong>Optional Components</strong></h4>
+<p>In order to customise your pyseer analysis, several settings can be modified. These settings will depend on which options were selected.</p>
+<h5 id="population-structure"><strong>Population structure</strong></h5>
+<p>The first step of pyseer is to estimate the population structure. This can be done a number of ways. </p>
+<ul>
+<li><code>mash</code> (default):<ul>
+<li><a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0997-x">mash</a> is the default distance/phylogeny used by the pyseer automator.</li>
+<li>uses mash sketch to produce pairwise distance matrix, then calculate distances between all pairs of samples using mash dist.</li>
+<li>a mash tree is also produced, and this phylogeny will be used to create the kinship matrix if the linearmixed association model is chosen</li>
+</ul>
+</li>
+<li><code>bcgtree</code>: <ul>
+<li>if <a href="https://pubmed.ncbi.nlm.nih.gov/27603265/">bcgtree</a> is selected, you can change a number of parameters. Please see the OLC Redmine Automator documentation for <a href="https://olc-bioinformatics.github.io/redmine-docs/analysis/bcgtree/">bcgtree docs</a> for a list of options.</li>
+<li>bcgtree phylogeny creation will take a while, and required time will increased with larger datasets. It is suggested you run a bcgtree biorequest separately for large datasets.</li>
+<li>a phylogeny is output by bcgtree (RAxML_bestTree.final), which is then used to calculate distances between samples, and/or kinship matrix creation.</li>
+</ul>
+</li>
+<li><code>custom</code>:<ul>
+<li>if <code>distance=custom</code> is selected, a phylogeny tree file in newick format named <code>tree.newick</code> must also be attached to the request. </li>
+<li>This tree can be created however you'd like, but must be named <code>tree.newick</code> and the tree tip-labels must be the same as the SEQIDs in the pyseer request</li>
+<li>the uploaded phylogeny will then be used for distance calculations between pairs of samples, and/or kinship matrix creation.</li>
+</ul>
+</li>
+</ul>
+<h5 id="association-models"><strong>Association models</strong></h5>
+<p>Please review the <a href="https://pyseer.readthedocs.io/en/master/usage.html#population-structure">pyseer documentation</a> for a description of models. The current association models available for the pyseer automator include:</p>
+<ul>
+<li><code>fixed</code>:<ul>
+<li>The patristic distances between all samples are used</li>
+<li>A GLM is run on each variant</li>
+</ul>
+</li>
+<li><code>linearmixed</code>:<ul>
+<li>A linear mixed model (LMM) of fixed and random effects is fitted to the data</li>
+<li>The selected phylogeny will be used to calculate pairwise distances (<strong>note</strong>:mash may be less accurate than other phylogenies).</li>
+<li>Calculates the similarities between sequences based on the shared branch length between each pair's most recent common ancestor and the root.</li>
+</ul>
+</li>
+</ul>
+<h5 id="references-file-for-k-mer-analysis"><strong>References file for k-mer analysis</strong></h5>
+<p>If a references file (<code>references.txt</code>) is not uploaded to the redmine request, one will be automatically generated. The benefit of uploading the references file is that you can select a few trusted reference sequences for the annotations. Otherwise, all sequences in the request will be included as "reference" quality.</p>
+<p>The references are used first, and allow a close match of a k-mer. The drafts are used second, and require an exact match of the k-mer.</p>
+<p>This <code>references.txt</code> is a tab-separated file containing the sequence filename, annotation filename, and type of the references to be used (there are no headers required):</p>
+<table>
+<thead>
+<tr>
+<th align="center">XXXX-SEQ-0001.fasta</th>
+<th align="center">XXXX-SEQ-0001.gff</th>
+<th align="center">ref</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">XXXX-MIN-0001.fasta</td>
+<td align="center">XXXX-MIN-0001.gff</td>
+<td align="center">ref</td>
+</tr>
+<tr>
+<td align="center">XXXX-SEQ-0002.fasta</td>
+<td align="center">XXXX-SEQ-0002.gff</td>
+<td align="center">draft</td>
+</tr>
+<tr>
+<td align="center">XXXX-SEQ-0340.fasta</td>
+<td align="center">XXXX-SEQ-0340.gff</td>
+<td align="center">draft</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example">Example</h4>
+<p>For an example pyseer issue see <a href="https://redmine.biodiversity.agr.gc.ca/issues/25083">issue 25083</a>. <strong>NOTE</strong>: the output files for these issues no longer exist on the ftp server.</p>
+<h3 id="interpreting-results">Interpreting Results</h3>
+<p>The pyseer automator will upload links to the ftp for files called <code>pyseer_output.zip</code>, and possibly <code>prokka_output.zip</code> and <code>bcgtree_output.zip</code> depending on selected options.</p>
+<p>The <code>pyseer_output.zip</code> will contain all of the pyseer outputs including the tree files and distance matrices. See <a href="https://pyseer.readthedocs.io/en/master/tutorial.html">pyseer tutorial</a></p>
+<ul>
+<li><code>kmer</code> analysis will output <code>pyseer_kmers.txt</code>, the significant kmers (<code>significant_kmers.txt</code>), <code>annotated_kmers.txt</code>, and <code>gene_hits.txt</code> which is a summary file of the annotated k-mers found by pyseer.<ul>
+<li>the summarised annotated <code>gene_hits.txt</code> file can be graphed using R. See the <a href="https://pyseer.readthedocs.io/en/master/tutorial.html">pyseer tutorial</a></li>
+</ul>
+</li>
+<li><code>roary</code> analysis will output a <code>pyseer_COGs.txt</code> (COG = clusters of orthologous groups) file which contains the COGs not filtered out by pyseer. <ul>
+<li>The first column in this file will contain the gene name (from the roary output gene_presence_absence.Rtab file)</li>
+<li>If <code>high-bse</code> or <code>bad-chisq</code> are listed in the last column, there may be a high effect size/low frequency result (<code>high-bse</code>) or MAF filter may not be stringent enough (<code>bad-chisq</code>).</li>
+</ul>
+</li>
+</ul>
+<p>If <code>analysistype=kmer</code>, and/or <code>distance=bcgtree</code> were selected, the automator will upload a link to the ftp <code>prokka_output.zip</code>. This contains all of the outputs from prokka. Prokka will output a lot of files for each genome you give it - you can find a quick description of
+each file <a href="https://github.com/tseemann/prokka#output-files">here</a>. Of particular interest are the <code>.gff</code> files, which pyseer uses for annotations.</p>
+<p>If <code>distance=bcgtree</code> was used for distance/phylogeny, the <code>bcgtree_output.zip</code> file contains all of the outputs from bcgTree. The alignment files, and gene-id files output by bcgtree can be found in subfolders in the zip file. The most interesting outputs from bcgtree are the RAxML files. These files conaint the phylogenetic trees output by bcgTree: </p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>This will depend on the number of sequences requested, and the analysis type.</p>
+<p>K-mer analysis will take hours in order to count the number of k-mers in a large number of sequences.</p>
+<p>Prokka isnt the quickest thing around - expect it to take 2 to 3 minutes for each genome you give it. </p>
+<p>The bcgTree pipeline time will depend on the number of sequences and bootstraps requested. If a large number of sequences is being analysed, it is suggested you create a separate issue for phylogeny generation with bcgtree (however this is yet to be tested).</p>
+<h3 id="what-can-go-wrong">What can go wrong?</h3>
+<ol>
+<li>Requested SEQIDs are not available. If we cant find some of the SEQIDs that you request, you will get a warning message informing you of it.</li>
+<li>A traits.tsv file was not uploaded to redmine. You will get a warning message informing you to re-submit the request.</li>
+</ol></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
