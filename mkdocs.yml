@@ -1,7 +1,7 @@
 site_name: OLC Redmine Automator
 site_url: https://olc-bioinformatics.github.io/redmine-docs
 site_description: Instructions for OLC Redmine Usage
-#repo_url: https://github.com/forestdussault/OLCRedmineAutomator
+repo_url: https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator
 theme: readthedocs
 
 nav:

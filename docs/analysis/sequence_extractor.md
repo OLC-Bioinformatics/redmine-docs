@@ -78,6 +78,6 @@ SequenceExtractor is pretty fast - expect it to take a few seconds per entry you
 
 1. Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, 
 you will get a warning message informing you of it.
-2. The contig name must be provided exactly as it is written in the assembly
-3. The start or stop position provided is invalid e.g. if you ask for positions 789-882 in a contig that is only 500bp long, nothing will be returned
+2. The contig name must be provided exactly as it is written in the assembly.
+3. The start or stop position provided is invalid e.g. if you ask for positions 789-882 in a contig that is only 500bp long, nothing will be returned.
 
