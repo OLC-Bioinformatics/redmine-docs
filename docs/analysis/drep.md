@@ -59,7 +59,7 @@ By default, dRep will run the compare command to compare the set of genomes. In 
     - available algorithms include:
         - `fastANI`, `ANImf`, `ANIn`, `gANI`, `goANI`
 
-- command type (compare genomes for ANI values, or dereplicate, see [dRep](https://drep.readthedocs.io/en/latest/overview.html)). **NOTE:currently debugging this option**
+- command type (compare genomes for ANI values, or dereplicate, see [dRep](https://drep.readthedocs.io/en/latest/overview.html)).
     - default is `compare` 
     - modify as follows:
         - `command=dereplicate`
