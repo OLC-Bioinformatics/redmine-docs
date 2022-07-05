@@ -35,10 +35,10 @@ By default, KMA will run the analysis for isolate assemblies. In order to custom
 
 - seqtype - the default analysis will use genome assemblies.
     - default is `fasta` 
-    - If you want to analyse raw-read data, add the following line: **UNDER DEVELOPMENT**
+    - If you want to analyse raw-read data, add the following line:
         - `seqtype=fastq`
 
-- nanopore - the default analysis will be for short-read Illumina data.
+- nanopore - the default analysis will be for short-read Illumina data. **This function is for assemblies**
     - default is `False` 
     - If you want to analyse long-read Nanopore data, add a line to your description:
         - `nanopore=TRUE`
