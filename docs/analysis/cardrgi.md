@@ -3,7 +3,7 @@
 ### What does it do?
 
 CARD-RGI (Comprehensive Antibiotic Resistance Database - Resistance Gene Identifier) is a program developed by the McMaster University to predict resistomes
-in draft genome assemblies. [CARD](https://card.mcmaster.ca/analyze/rgi)
+in draft genome assemblies. [CARD website](https://card.mcmaster.ca/analyze/rgi)
 
 For more information, see the [CARD publication](https://pubmed.ncbi.nlm.nih.gov/31665441/). If you publish data using this automator, don't forget to cite the authors of the tool [Alcock et al., 2020](https://pubmed.ncbi.nlm.nih.gov/31665441/)
 
@@ -21,7 +21,7 @@ The first line of the description should be the analysis you would like to run (
 
 - The following options are currently supported:
     - `isolate` - used for resistome analysis of bacterial isolate sequence assemblies
-    - `metagenome` - used for resistome analysis of metagenome fastq-files. (This option can also be used to 'force' the tool to complete resistome analysis of isolate fastq-files). Currently, the metagenome automator uses KMA for alignment of gene targets to the raw-read data. If you would like to try the other options (BWA or bowtie2), you can download the stand-alone tool from [CARD github](https://github.com/arpcard/rgi#rgi-usage-documentation).
+    - `metagenome` - used for resistome analysis of metagenome fastq-files. (This option can also be used to 'force' the tool to complete resistome analysis of isolate fastq-files). Currently, this metagenome redmine automator uses [KMA](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2336-6) for alignment of gene targets to the raw-read data. If you would like to try the other options (BWA or bowtie2), you can download the stand-alone tool from the [CARD github](https://github.com/arpcard/rgi#rgi-usage-documentation).
 
 
 You must also include a list of SEQIDs one per line.
@@ -42,7 +42,7 @@ By default, CARD-RGI will run the analysis for isolate assemblies. In order to c
 
 #### Example
 
-For an example CARDRGI, see [issue 28111](https://redmine.biodiversity.agr.gc.ca/issues/28111). The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks). Please note that 2017-SEQ-0054 is an isolate sequence, not actually a metagenome.
+For an example using CARDRGI, see [issue 28111](https://redmine.biodiversity.agr.gc.ca/issues/28111). The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks). Please note that 2017-SEQ-0054 is an isolate sequence, not actually a metagenome.
 
 #### Interpreting Results
 
@@ -55,13 +55,13 @@ sample-sequence. Just because a gene/resistance is listed here does not necessar
 to look at the __Best_Identities__ column, which contains the percent identity of the gene/target match to the top hit in CARD. You can be pretty sure that anything with 100
 is actually there, but anything else requires further analysis to be sure. 
 
-Also, some efflux and point-mutations may confer resistance in specific genera/species but not others, so it is important to consider this before coming to any conclusions even if they are 100% identical. Information about the output table can be found on the [CARD-RGI github page](https://github.com/arpcard/rgi#rgi-usage-documentation) under `RGI main Tab-Delimited Output Details`.
+Also, some efflux and point-mutations may confer resistance in specific genera/species but not others, so it is important to consider this before coming to any conclusions even if they are a 100% match. Information about the output table can be found on the [CARD-RGI github page](https://github.com/arpcard/rgi#rgi-usage-documentation) under `RGI main Tab-Delimited Output Details`.
 
 The isolate analysis will also output individual results files for each sequence, and a RGI-heatmap file including information about all of the isolate sequences in your analysis.
 
 **Metagenome Analysis**
 
-The zip folder will contain individual output files for each sequence analysed. It will also include `CARDRGI_gene_mapping_output.csv` and `CARDRGI_allele_mapping_output.csv` files. These contain the CARD-results of all resistance genes found in each sample-sequence. The `CARDRGI_allele_mapping_output.csv` allele file will include the data for the top allele hits for each sequence.
+The zip folder will contain individual output files for each sequence analysed. It will also include `CARDRGI_gene_mapping_output.csv` and `CARDRGI_allele_mapping_output.csv` files. These contain the CARD-results of all resistance genes found in the raw fastq data for each sample-sequence. The `CARDRGI_allele_mapping_output.csv` allele file will include the data for the top allele hits for each sequence.
 
 ### How long does it take?
 

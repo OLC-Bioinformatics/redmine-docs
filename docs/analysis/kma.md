@@ -2,7 +2,7 @@
 
 ### What does it do?
 
-KMA (k-mer alignment) is a program developed by the Center for Genomic Epidemiology (CGE) to align gene targets to sequence assemblies or raw-reads. [CARD](https://card.mcmaster.ca/analyze/rgi). This redmine automator tool currently allows analysis for antimicrobial, biocide, or metal resistance in sequence data.
+KMA (k-mer alignment) is a program developed by the Center for Genomic Epidemiology (CGE) to align gene targets to sequence assemblies or raw-reads. This redmine automator tool currently allows analysis for antimicrobial, biocide, and metal resistance, or a custom set of user targets in sequence data.
 
 For more information, see the [KMA publication](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2336-6), and/or the [CGE website](https://cge.food.dtu.dk/services/KmerResistance/).
 
@@ -24,7 +24,7 @@ The first line of the description should be the analysis you would like to run (
     - `amr` - used for antimicrobial resistance gene detection
     - `biocide` - used for biocide resistance gene detection
     - `metal` - used for metal resistance gene detection
-    - `custom` - gene detection using a custom target database uploaded by the user. The attached file **MUST** be named `targets.fasta`
+    - `custom` - gene detection using a custom target database uploaded by the user. The attached file **MUST** be named `targets.fasta`. The output csv file will use your fasta-file gene headers as names.
 
 
 You must also include a list of SEQIDs one per line.
@@ -50,7 +50,7 @@ For an example KMA analysis, see [issue 28117](https://redmine.biodiversity.agr.
 #### Interpreting Results
 
 KMA will upload a zipped folder called `kma_output_redmineID.zip` to the ftp once it has completed. This will contain a  kma_output.csv file with the target-hits/results for all of the sequences requested in the analysis. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
-to look at the __Teplate_Identity__ and __Template_Coverage__ columns. You can be pretty sure that anything with 100 for both
+to look at the __Template_Identity__ and __Template_Coverage__ columns. You can be pretty sure that anything with 100 for both
 is actually there, but anything else requires further analysis to be sure.
 
 ### How long does it take?
