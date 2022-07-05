@@ -55,7 +55,7 @@ is actually there, but anything else requires further analysis to be sure.
 
 #### Databases Provided with the Automator
 
-The databases for AMR, biocide, and metal resistance were derived from the NCBI [AMRFinderPlus database](https://www.ncbi.nlm.nih.gov/pathogens/antimicrobial-resistance/AMRFinder/), version 3.10 downloaded on 2021-05-06. This database was then manually curated and split into seqparate AMR, biocide, and metal resistance databases. The following genes were added to the biocide resistance database, as they were of interest for some research projects:
+The databases for AMR, biocide, and metal resistance were derived from the NCBI [AMRFinderPlus database](https://www.ncbi.nlm.nih.gov/pathogens/antimicrobial-resistance/AMRFinder/), version 3.10 downloaded on 2021-05-06. This database was then manually curated and split into separate AMR, biocide, and metal resistance databases. The following genes were added to the biocide resistance database, as they were of interest for some research projects:
 
     -sugE_sugE_quaternary_ammonium_compound_efflux_NC_011514.1:c6661-6344
     -sugE_sugE_quaternary_ammonium_compound_efflux_NC_003197.2:4581504-4581833
