@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/eCGF/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/cardrgi/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>eCGF - OLC Redmine Automator</title>
+    <title>CARD-RGI (AMR) - OLC Redmine Automator</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "eCGF";
-        var mkdocs_page_input_path = "analysis/eCGF.md";
-        var mkdocs_page_url = "/redmine-docs/analysis/eCGF/";
+        var mkdocs_page_name = "CARD-RGI (AMR)";
+        var mkdocs_page_input_path = "analysis/cardrgi.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/cardrgi/";
       </script>
     
     <script src="../../js/jquery-3.6.0.min.js" defer></script>
@@ -65,15 +65,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cardrgi/">CARD-RGI (AMR)</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">eCGF</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">CARD-RGI (AMR)</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
     </li>
@@ -94,6 +86,14 @@
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
     </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
                   </li>
@@ -176,9 +176,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Analysis &raquo;</li><li>eCGF</li>
+          <li>Analysis &raquo;</li><li>CARD-RGI (AMR)</li>
     <li class="wy-breadcrumbs-aside">
-        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/eCGF.md"
+        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/cardrgi.md"
           class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
@@ -188,70 +188,73 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="ecgf">eCGF</h1>
+                <h1 id="card-rgi">CARD-RGI</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>The eCGF automator performs <em>in silico</em> CGF subtyping of <em>Campylobacter</em> using whole-genome sequence data in FASTA format </p>
-<p>Check out the source code: <a href="https://github.com/dorbarker/cgfprediction">github</a></p>
+<p>CARD-RGI (Comprehensive Antibiotic Resistance Database - Resistance Gene Identifier) is a program developed by the McMaster University to predict resistomes
+in draft genome assemblies. <a href="https://card.mcmaster.ca/analyze/rgi">CARD website</a></p>
+<p>For more information, see the <a href="https://pubmed.ncbi.nlm.nih.gov/31665441/">CARD publication</a>. If you publish data using this automator, don't forget to cite the authors of the tool <a href="https://pubmed.ncbi.nlm.nih.gov/31665441/">Alcock et al., 2020</a></p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>eCGF</code>. Spelling counts, but case sensitivity does not.</p>
+<p>In the <code>Subject</code> field, put <code>CARDRGI</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to process, one per line.</p>
+<p><strong>Required Components</strong></p>
+<p>The first line of the description should be the analysis you would like to run (e.g. <code>analysis=isolate</code>). This will depend on the type of sequence data your are investigating.</p>
+<ul>
+<li>The following options are currently supported:<ul>
+<li><code>isolate</code> - used for resistome analysis of bacterial isolate sequence assemblies</li>
+<li><code>metagenome</code> - used for resistome analysis of metagenome fastq-files. (This option can also be used to 'force' the tool to complete resistome analysis of isolate fastq-files). Currently, this metagenome redmine automator uses <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2336-6">KMA</a> for alignment of gene targets to the raw-read data. If you would like to try the other options (BWA or bowtie2), you can download the stand-alone tool from the <a href="https://github.com/arpcard/rgi#rgi-usage-documentation">CARD github</a>.</li>
+</ul>
+</li>
+</ul>
+<p>You must also include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components</strong></p>
+<p>By default, CARD-RGI will run the analysis for isolate assemblies. In order to customise your CARD-RGI analyses, two additional settings can be optionally modified:</p>
+<ul>
+<li>
+<p>loosehits - the default analysis will only include strict and perfect resistance gene matches. Setting this to true will also include 'loose' hits, which may or may not be contributing to resistance.</p>
+<ul>
+<li>default is <code>False</code> </li>
+<li>If you want to include loose hits, add a line to your description:<ul>
+<li><code>loosehits=TRUE</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>partialgenes - the default analysis will only include full gene matches.</p>
+<ul>
+<li>default is <code>False</code> </li>
+<li>If you want to include partial gene hits, add a line to your description:<ul>
+<li><code>partialgenes=TRUE</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h4 id="example">Example</h4>
-<p>For an example eCGF analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/16196">issue 16196</a>.</p>
+<p>For an example using CARDRGI, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/28111">issue 28111</a>. The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks). Please note that 2017-SEQ-0054 is an isolate sequence, not actually a metagenome.</p>
 <h4 id="interpreting-results">Interpreting Results</h4>
-<p>ECTyper will output a summary report, <code>ISSUE_NUMBER_summary_report.csv</code> that should look something like 
-the following excerpt:</p>
-<table>
-<thead>
-<tr>
-<th>Genes</th>
-<th>11168_cj0008</th>
-<th>11168_cj0033</th>
-<th>11168_cj0035</th>
-<th>...</th>
-<th>Nearest Match</th>
-<th>Number of Similarities (/40)</th>
-<th>...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2018-LET-0106</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>...</td>
-<td>27_3_4</td>
-<td>40</td>
-<td>...</td>
-</tr>
-<tr>
-<td>2018-LET-0012</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>...</td>
-<td>926_2_1</td>
-<td>40</td>
-<td>...</td>
-</tr>
-</tbody>
-</table>
+<p>CARD-RGI will upload a zipped folder called <code>card-rgi_output_redmineID.zip</code> to the ftp once it has completed. </p>
+<p><strong>Isolate Analysis</strong></p>
+<p>This folder will contain a <code>CARDRGI_output.csv</code> csv file which shows every AMR gene found in each
+sample-sequence. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
+to look at the <strong>Best_Identities</strong> column, which contains the percent identity of the gene/target match to the top hit in CARD. You can be pretty sure that anything with 100
+is actually there, but anything else requires further analysis to be sure. </p>
+<p>Also, some efflux and point-mutations may confer resistance in specific genera/species but not others, so it is important to consider this before coming to any conclusions even if they are a 100% match. Information about the output table can be found on the <a href="https://github.com/arpcard/rgi#rgi-usage-documentation">CARD-RGI github page</a> under <code>RGI main Tab-Delimited Output Details</code>.</p>
+<p>The isolate analysis will also output individual results files for each sequence, and a RGI-heatmap file including information about all of the isolate sequences in your analysis.</p>
+<p><strong>Metagenome Analysis</strong></p>
+<p>The zip folder will contain individual output files for each sequence analysed. It will also include <code>CARDRGI_gene_mapping_output.csv</code> and <code>CARDRGI_allele_mapping_output.csv</code> files. These contain the CARD-results of all resistance genes found in the raw fastq data for each sample-sequence. The <code>CARDRGI_allele_mapping_output.csv</code> allele file will include the data for the top allele hits for each sequence.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>eCGF is pretty fast - expect it to take a few seconds per genome you give it.</p>
+<p>CARD-RGI is pretty fast, however the time required for analysis will depend on the analysis type and number of sequences requested. Expect approximately 2-5 minutes per sequence.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, 
-you will get a warning message informing you of it.</li>
-<li>?</li>
-</ol>
+<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
+message informing you of it.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../closerelatives/" class="btn btn-neutral float-left" title="CloseRelatives"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../ectyper/" class="btn btn-neutral float-right" title="ECTyper">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../bcgtree/" class="btn btn-neutral float-left" title="bcgTree"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../confindr/" class="btn btn-neutral float-right" title="ConFindr">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -278,10 +281,10 @@ you will get a warning message informing you of it.</li>
         </span>
     
     
-      <span><a href="../closerelatives/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../bcgtree/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../ectyper/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../confindr/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

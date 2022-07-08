@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/eCGF/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/kma/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>eCGF - OLC Redmine Automator</title>
+    <title>KMA - Resistance Detection - OLC Redmine Automator</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "eCGF";
-        var mkdocs_page_input_path = "analysis/eCGF.md";
-        var mkdocs_page_url = "/redmine-docs/analysis/eCGF/";
+        var mkdocs_page_name = "KMA - Resistance Detection";
+        var mkdocs_page_input_path = "analysis/kma.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/kma/";
       </script>
     
     <script src="../../js/jquery-3.6.0.min.js" defer></script>
@@ -73,27 +73,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">eCGF</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
                   </li>
@@ -107,7 +87,29 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../kma/">KMA - Resistance Detection</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">KMA - Resistance Detection</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#databases-provided-with-the-automator">Databases Provided with the Automator</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
                   </li>
@@ -176,9 +178,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Analysis &raquo;</li><li>eCGF</li>
+          <li>Analysis &raquo;</li><li>KMA - Resistance Detection</li>
     <li class="wy-breadcrumbs-aside">
-        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/eCGF.md"
+        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/kma.md"
           class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
@@ -188,70 +190,89 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="ecgf">eCGF</h1>
+                <h1 id="kma-resistance-detection">KMA - Resistance Detection</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>The eCGF automator performs <em>in silico</em> CGF subtyping of <em>Campylobacter</em> using whole-genome sequence data in FASTA format </p>
-<p>Check out the source code: <a href="https://github.com/dorbarker/cgfprediction">github</a></p>
+<p>KMA (k-mer alignment) is a program developed by the Center for Genomic Epidemiology (CGE) to align gene targets to sequence assemblies or raw-reads. This redmine automator tool currently allows analysis for antimicrobial, biocide, and metal resistance, or a custom set of user targets in sequence data.</p>
+<p>For more information, see the <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2336-6">KMA publication</a>, and/or the <a href="https://cge.food.dtu.dk/services/KmerResistance/">CGE website</a>.</p>
+<p>If you publish data using this automator, don't forget to cite the authors of the tool <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2336-6">Clausen et al., 2018</a></p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>eCGF</code>. Spelling counts, but case sensitivity does not.</p>
+<p>In the <code>Subject</code> field, put <code>kma</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to process, one per line.</p>
+<p><strong>Required Components</strong></p>
+<p>The first line of the description should be the analysis you would like to run (e.g. <code>analysis=amr</code>). This will depend on the type of sequence data your are investigating.</p>
+<ul>
+<li>The following options are currently supported:<ul>
+<li><code>amr</code> - used for antimicrobial resistance gene detection</li>
+<li><code>biocide</code> - used for biocide resistance gene detection</li>
+<li><code>metal</code> - used for metal resistance gene detection</li>
+<li><code>custom</code> - gene detection using a custom target database uploaded by the user. The attached file <strong>MUST</strong> be named <code>targets.fasta</code>. The output csv file will use your fasta-file gene headers as names.</li>
+</ul>
+</li>
+</ul>
+<p>You must also include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components</strong></p>
+<p>By default, KMA will run the analysis for isolate assemblies. In order to customise your CARD-RGI analyses, additional settings can be optionally modified:</p>
+<ul>
+<li>
+<p>seqtype - the default analysis will use genome assemblies.</p>
+<ul>
+<li>default is <code>fasta</code> </li>
+<li>If you want to analyse raw-read data, add the following line:<ul>
+<li><code>seqtype=fastq</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>nanopore - the default analysis will be for short-read Illumina data. <strong>This function is for assemblies</strong></p>
+<ul>
+<li>default is <code>False</code> </li>
+<li>If you want to analyse long-read Nanopore data, add a line to your description:<ul>
+<li><code>nanopore=TRUE</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h4 id="example">Example</h4>
-<p>For an example eCGF analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/16196">issue 16196</a>.</p>
+<p>For an example KMA analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/28117">issue 28117</a>. The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks).</p>
 <h4 id="interpreting-results">Interpreting Results</h4>
-<p>ECTyper will output a summary report, <code>ISSUE_NUMBER_summary_report.csv</code> that should look something like 
-the following excerpt:</p>
-<table>
-<thead>
-<tr>
-<th>Genes</th>
-<th>11168_cj0008</th>
-<th>11168_cj0033</th>
-<th>11168_cj0035</th>
-<th>...</th>
-<th>Nearest Match</th>
-<th>Number of Similarities (/40)</th>
-<th>...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2018-LET-0106</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>...</td>
-<td>27_3_4</td>
-<td>40</td>
-<td>...</td>
-</tr>
-<tr>
-<td>2018-LET-0012</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>...</td>
-<td>926_2_1</td>
-<td>40</td>
-<td>...</td>
-</tr>
-</tbody>
-</table>
+<p>KMA will upload a zipped folder called <code>kma_output_redmineID.zip</code> to the ftp once it has completed. This will contain a  kma_output.csv file with the target-hits/results for all of the sequences requested in the analysis. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
+to look at the <strong>Template_Identity</strong> and <strong>Template_Coverage</strong> columns. You can be pretty sure that anything with 100 for both
+is actually there, but anything else requires further analysis to be sure.</p>
+<h4 id="databases-provided-with-the-automator">Databases Provided with the Automator</h4>
+<p>The databases for AMR, biocide, and metal resistance were derived from the NCBI <a href="https://www.ncbi.nlm.nih.gov/pathogens/antimicrobial-resistance/AMRFinder/">AMRFinderPlus database</a>, version 3.10 downloaded on 2021-05-06. This database was then manually curated and split into separate AMR, biocide, and metal resistance databases. The following genes were added to the biocide resistance database, as they were of interest for some research projects:</p>
+<pre><code>-sugE_sugE_quaternary_ammonium_compound_efflux_NC_011514.1:c6661-6344
+-sugE_sugE_quaternary_ammonium_compound_efflux_NC_003197.2:4581504-4581833
+-sugE_sugE_quaternary_ammonium_compound_efflux_NC_017731.1:2886005-2886319
+-sugE_sugE_quaternary_ammonium_compound_efflux_NC_020418.1:c2409693-2409373
+-sugE_sugE_quaternary_ammonium_compound_efflux_NC_016830.1:5098537-5098851
+-sugE(p)_sugESalmonella_quaternary_ammonium_compound_efflux_NC_010259.1:c4461-4144
+-sugE(c)_sugESalmonella_quaternary_ammonium_compound_efflux_NC_003198.1:4557993-4558310
+-sugE(p)_sugEEcoli_quaternary_ammonium_compound_efflux_NC_019069.1:c60194-59877
+-sugE(p)_sugEEcoli_quaternary_ammonium_compound_efflux_KC285365.1
+-sugE(c)_sugEEcoli_quaternary_ammonium_compound_efflux_LT903847.1:c240852-240535
+-bcrA_bcrABC_Listeria_benzalkonium_chloride_efflux_JX023276.1:106-645
+-bcrB_bcrABC_Listeria_benzalkonium_chloride_efflux_JX023276.1:657-974
+-bcrC_bcrABC_Listeria_benzalkonium_chloride_efflux_JX023276.1:992-1336
+-qacH_qacH_Listeria_quaternary_ammonium_compound_efflux_HG329628.1:983-1354
+-emrE_emrE_Listeria_Listeria_quaternary_ammonium_compound_resistance_NC_013768.1:1817073-1817396
+-qacA_qacA_Listeria_quaternary_ammonium_compound_efflux_KC980922.1
+-qacC_qacC_Listeria_quaternary_ammonium_compound_efflux_RJZ34303
+-qacED1_qacED1_Acinetobacter_quaternary_ammonium_compound_efflux_KM972592.1
+</code></pre>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>eCGF is pretty fast - expect it to take a few seconds per genome you give it.</p>
+<p>KMA is very fast, however the time required for analysis will depend on the analysis type and number of sequences requested.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, 
-you will get a warning message informing you of it.</li>
-<li>?</li>
-</ol>
+<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</p>
+<p>2) A custom analysis was requested but <code>targets.fasta</code> file was not attached. You will get a warning message informing you of it.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../closerelatives/" class="btn btn-neutral float-left" title="CloseRelatives"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../ectyper/" class="btn btn-neutral float-right" title="ECTyper">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../intimintyper/" class="btn btn-neutral float-left" title="IntiminTyper"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../mashtree/" class="btn btn-neutral float-right" title="Mashtree">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -278,10 +299,10 @@ you will get a warning message informing you of it.</li>
         </span>
     
     
-      <span><a href="../closerelatives/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../intimintyper/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../ectyper/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../mashtree/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
