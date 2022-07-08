@@ -50,9 +50,11 @@ You cannot supply the list both ways; if you provide an attachment, any entries 
 
 #### Example
 
-For an example SequenceExtractor analysis, see [issue 28104](https://redmine.biodiversity.agr.gc.ca/issues/28104).
+For an example SequenceExtractor analysis with the fasta details provided as an attachment, see [issue 28104](https://redmine.biodiversity.agr.gc.ca/issues/28104).
 
 This example has SEQIDs in the Description, but it's not necessary.
+
+For an example SequenceExtractor analysis with the fasta details provided in the description, see [issue 28181](https://redmine.biodiversity.agr.gc.ca/issues/28181).
 
 #### Interpreting Results
 
