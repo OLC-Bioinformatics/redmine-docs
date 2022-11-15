@@ -1,93 +1,99 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/kma/" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>KMA - Resistance Detection - OLC Redmine Automator</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
-    
-      <script>
-        // Current page data
-        var mkdocs_page_name = "KMA - Resistance Detection";
-        var mkdocs_page_input_path = "analysis/kma.md";
-        var mkdocs_page_url = "/redmine-docs/analysis/kma/";
-      </script>
-    
-    <script src="../../js/jquery-3.6.0.min.js" defer></script>
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/kma/">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>KMA - Resistance Detection - OLC Redmine Automator</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "KMA - Resistance Detection";
+    var mkdocs_page_input_path = "analysis/kma.md";
+    var mkdocs_page_url = "/redmine-docs/analysis/kma/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
   <div class="wy-grid-for-nav">
+
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> OLC Redmine Automator
-        </a><div role="search">
+        <a href="../.." class="icon icon-home"> OLC Redmine Automator</a>
+        <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../getting_started/">Getting Started</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Data</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../data/external_retrieve/">External Retrieve</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../data/report_retrieve/">Report Retrieve</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_upload/">SRA Upload</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Analysis</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../amrsummary/">AMRsummary</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../autoclark/">AutoCLARK</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cardrgi/">CARD-RGI (AMR)</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../pyseer/">GWAS-pyseer</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">KMA - Resistance Detection</a>
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../getting_started/">Getting Started</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../data/external_retrieve/">External Retrieve</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../data/report_retrieve/">Report Retrieve</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../data/sra_upload/">SRA Upload</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Analysis</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../amrsummary/">AMRsummary</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../autoclark/">AutoCLARK</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../cardrgi/">CARD-RGI (AMR)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../pyseer/">GWAS-pyseer</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">KMA - Resistance Detection</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
     </li>
@@ -110,87 +116,103 @@
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
     </li>
     </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../pointfinder/">PointFinder</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../primerfinder/">PrimerFinder</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../sequence_extractor/">SequenceExtractor</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../snvphyl/">SNVPhyl</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../staramr/">staramr</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Internal Use</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/merge/">Merge</a>
-                  </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/">Troubleshooting</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Tutorials</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_pages/">Create Pages</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/edit_pages/">Edit Pages</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/publish_changes/">Publish Changes</a>
-                  </li>
-              </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../kraken2.md">Kraken2</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../pointfinder/">PointFinder</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../primerfinder/">PrimerFinder</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../sequence_extractor/">SequenceExtractor</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../snvphyl/">SNVPhyl</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../staramr/">staramr</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Internal Use</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../internal_only/merge/">Merge</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/">Troubleshooting</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_pages/">Create Pages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../tutorials/edit_pages/">Edit Pages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../tutorials/publish_changes/">Publish Changes</a>
+                    </li>
+                </ul>
       </div>
     </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">OLC Redmine Automator</a>
-        
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OLC Redmine Automator</a>
       </nav>
+
+      
       <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Analysis &raquo;</li><li>KMA - Resistance Detection</li>
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Analysis &raquo;</li>
+        
+      
+    
+    <li>KMA - Resistance Detection</li>
     <li class="wy-breadcrumbs-aside">
+      
         <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/kma.md"
           class="icon icon-github"> Edit on GitHub</a>
+      
     </li>
   </ul>
+  
   <hr/>
 </div>
 
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
+          <div role="main">
+            <div class="section">
               
-                <h1 id="kma-resistance-detection">KMA - Resistance Detection</h1>
+                <h1 id="kma-gene-detection">KMA - Gene Detection</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
 <p>KMA (k-mer alignment) is a program developed by the Center for Genomic Epidemiology (CGE) to align gene targets to sequence assemblies or raw-reads. This redmine automator tool currently allows analysis for antimicrobial, biocide, and metal resistance, or a custom set of user targets in sequence data.</p>
 <p>For more information, see the <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2336-6">KMA publication</a>, and/or the <a href="https://cge.food.dtu.dk/services/KmerResistance/">CGE website</a>.</p>
@@ -206,6 +228,7 @@
 <li><code>amr</code> - used for antimicrobial resistance gene detection</li>
 <li><code>biocide</code> - used for biocide resistance gene detection</li>
 <li><code>metal</code> - used for metal resistance gene detection</li>
+<li><code>bacmet</code> - used for metal resistance gene detection using the <a href="http://bacmet.biomedicine.gu.se/">BacMet database</a>, which was converted to nucleotide format by James Robertson (reference to follow)</li>
 <li><code>custom</code> - gene detection using a custom target database uploaded by the user. The attached file <strong>MUST</strong> be named <code>targets.fasta</code>. The output csv file will use your fasta-file gene headers as names.</li>
 </ul>
 </li>
@@ -215,21 +238,33 @@
 <p>By default, KMA will run the analysis for isolate assemblies. In order to customise your CARD-RGI analyses, additional settings can be optionally modified:</p>
 <ul>
 <li>
-<p>seqtype - the default analysis will use genome assemblies.</p>
+<p><strong>seqtype</strong> - the default analysis will use genome assemblies.</p>
 <ul>
 <li>default is <code>fasta</code> </li>
 <li>If you want to analyse raw-read data, add the following line:<ul>
 <li><code>seqtype=fastq</code></li>
+<li><code>seqtype=minionfastq</code></li>
+</ul>
+</li>
+<li>Note: seqtype for minion raw-reads is slightly different, as KMA uses different commands for paired-end (illumina) and single-end (nanopore) data</li>
+</ul>
+</li>
+<li>
+<p><strong>nanopore</strong> - the default analysis will be for short-read Illumina data. <strong>This function is for assemblies</strong></p>
+<ul>
+<li>default is <code>False</code> </li>
+<li>If you want to analyse long-read Nanopore data, add a line to your description:<ul>
+<li><code>nanopore=TRUE</code></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p>nanopore - the default analysis will be for short-read Illumina data. <strong>This function is for assemblies</strong></p>
+<p><strong>readcount</strong> - the default analysis will only output a csv file containing information on matching target gene(s) presence including template identity, coverage, depth, etc. This flag will output read-mapping data for your targets. <strong>This function is best used with raw-reads - Assembly analysis will likely only report 1 read mapping to each gene-target</strong></p>
 <ul>
 <li>default is <code>False</code> </li>
-<li>If you want to analyse long-read Nanopore data, add a line to your description:<ul>
-<li><code>nanopore=TRUE</code></li>
+<li>If you want the analysis to output a file including information on the number of reads in your sequence mapping to each database-target, add a line to your description:<ul>
+<li><code>readcount=TRUE</code></li>
 </ul>
 </li>
 </ul>
@@ -269,21 +304,29 @@ is actually there, but anything else requires further analysis to be sure.</p>
 <p>2) A custom analysis was requested but <code>targets.fasta</code> file was not attached. You will get a warning message informing you of it.</p>
               
             </div>
-          </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../intimintyper/" class="btn btn-neutral float-left" title="IntiminTyper"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
         <a href="../mashtree/" class="btn btn-neutral float-right" title="Mashtree">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../intimintyper/" class="btn btn-neutral" title="IntiminTyper"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <!-- Copyright etc -->
+    
   </div>
 
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-          
+      
         </div>
       </div>
 
@@ -291,11 +334,11 @@ is actually there, but anything else requires further analysis to be sure.</p>
 
   </div>
 
-  <div class="rst-versions" role="note" aria-label="Versions">
+  <div class="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
         <span>
-          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
         </span>
     
     
