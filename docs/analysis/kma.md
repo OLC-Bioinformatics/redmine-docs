@@ -1,4 +1,4 @@
-# KMA - Resistance Detection
+# KMA - Gene Detection
 
 ### What does it do?
 
@@ -24,6 +24,7 @@ The first line of the description should be the analysis you would like to run (
     - `amr` - used for antimicrobial resistance gene detection
     - `biocide` - used for biocide resistance gene detection
     - `metal` - used for metal resistance gene detection
+    - `bacmet` - used for metal resistance gene detection using the [BacMet database](http://bacmet.biomedicine.gu.se/), which was converted to nucleotide format by James Robertson (reference to follow)
     - `custom` - gene detection using a custom target database uploaded by the user. The attached file **MUST** be named `targets.fasta`. The output csv file will use your fasta-file gene headers as names.
 
 
@@ -33,15 +34,22 @@ You must also include a list of SEQIDs one per line.
 
 By default, KMA will run the analysis for isolate assemblies. In order to customise your CARD-RGI analyses, additional settings can be optionally modified:
 
-- seqtype - the default analysis will use genome assemblies.
+- **seqtype** - the default analysis will use genome assemblies.
     - default is `fasta` 
     - If you want to analyse raw-read data, add the following line:
         - `seqtype=fastq`
+        - `seqtype=minionfastq`
+    - Note: seqtype for minion raw-reads is slightly different, as KMA uses different commands for paired-end (illumina) and single-end (nanopore) data
 
-- nanopore - the default analysis will be for short-read Illumina data. **This function is for assemblies**
+- **nanopore** - the default analysis will be for short-read Illumina data. **This function is for assemblies**
     - default is `False` 
     - If you want to analyse long-read Nanopore data, add a line to your description:
         - `nanopore=TRUE`
+
+- **readcount** - the default analysis will only output a csv file containing information on matching target gene(s) presence including template identity, coverage, depth, etc. This flag will output read-mapping data for your targets. **This function is best used with raw-reads - Assembly analysis will likely only report 1 read mapping to each gene-target**
+    - default is `False` 
+    - If you want the analysis to output a file including information on the number of reads in your sequence mapping to each database-target, add a line to your description:
+        - `readcount=TRUE`
 
 #### Example
 
