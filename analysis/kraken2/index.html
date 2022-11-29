@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
-  <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/confindr/">
+  <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/kraken2/">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>ConFindr - OLC Redmine Automator</title>
+  <title>Kraken2 - OLC Redmine Automator</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "ConFindr";
-    var mkdocs_page_input_path = "analysis/confindr.md";
-    var mkdocs_page_url = "/redmine-docs/analysis/confindr/";
+    var mkdocs_page_name = "Kraken2";
+    var mkdocs_page_input_path = "analysis/kraken2.md";
+    var mkdocs_page_url = "/redmine-docs/analysis/kraken2/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
@@ -73,27 +73,7 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../cardrgi/">CARD-RGI (AMR)</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">ConFindr</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
-    </li>
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
                     </li>
@@ -115,7 +95,27 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../kma/">KMA - Gene Detection</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../kraken2/">Kraken2</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Kraken2</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+    </li>
+    </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
                     </li>
@@ -195,10 +195,10 @@
         
       
     
-    <li>ConFindr</li>
+    <li>Kraken2</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/confindr.md"
+        <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/kraken2.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -210,36 +210,54 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="confindr">ConFindr</h1>
+                <h1 id="kraken2">Kraken2</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>ConFindr looks for both intra-species and inter-species contamination in raw reads, which can cause misassemblies and
-erroneous downstream analysis. More details on ConFindr can be found <a href="https://lowandrew.github.io/ConFindr/">on GitHub</a>.</p>
+<p>Kraken2 is a program for taxonomic sequence classification.</p>
+<p>For more information, see the <a href="https://github.com/DerrickWood/kraken2">Kraken2 github</a>, and/or the protocol paper describing use of <a href="https://www.nature.com/articles/s41596-022-00738-y">Kraken2</a>.</p>
+<p>If you publish data using this automator, don't forget to cite the authors of the tool <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2014-15-3-r46">Wood and Salzberg, 2014</a> and the Kraken2 paper <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0">Wood et al., 2019</a></p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>ConFindr</code>. Spelling counts, but case sensitivity doesn't.</p>
+<p>In the <code>Subject</code> field, put <code>kraken2</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to detect contamination in, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example ConFindr, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12881">issue 12881</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>When your request is complete, a file called <code>confindr_output.zip</code> will be uploaded. This contains two files: <code>confindr_log.txt</code>,
-and <code>confindr_report.csv</code>. The report file contains 5 columns:</p>
+<p><strong>Required Components</strong></p>
+<p>You must include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components</strong></p>
+<p>In order to customise your analyses, additional settings can be optionally modified:</p>
 <ul>
-<li>Sample: The name of the sample</li>
-<li>Genus: What ConFindr thinks the genus of the sample is. If ConFindr finds more than one genus, both will be listed here.</li>
-<li>NumContamSNVs: How many times ConFindr found something that looked like a contaminating SNV. Anything 3 or over
-is enough to call a sample as contaminated.</li>
-<li>NumUniqueKmers: How many unique kmers were found for the rMLST genes. If this number is over 45000, a sample is called
-as contaminated.</li>
-<li>ContamStatus: Shown as <code>True</code> if ConFindr thinks a sample is contaminated, and <code>False</code> if the sample is thought to be
-clean.</li>
+<li>
+<p><strong>seqtype</strong> - By default, the Kraken2 will assume you are running an analysis on paired-end raw sequence data.</p>
+<ul>
+<li>default is <code>paired</code> </li>
+<li>If you want to analyse long-read nanopore or assembly data, add the following line:<ul>
+<li><code>seqtype=nanopore</code></li>
+<li><code>seqtype=assembly</code></li>
 </ul>
-<p>The log file can mostly be ignored - if any unexpected errors come up, we may use it for debugging purposes.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>database</strong> - the default analysis will utilize the Kraken2 standard database (9/26/2022) from <a href="https://benlangmead.github.io/aws-indexes/k2">Kraken2 index zone</a>.</p>
+<ul>
+<li>default is <code>kraken2</code> </li>
+<li>If you want to analyse using a different database, the following options are currently supported:<ul>
+<li><code>database=greengenes</code></li>
+<li><code>database=plusPF</code></li>
+<li><code>database=rdp</code></li>
+<li><code>database=silva</code></li>
+</ul>
+</li>
+</ul>
+<p>-<strong>The kraken2 and plusPF databases are meant for metagenomes, all others are 16S based databases</strong></p>
+</li>
+</ul>
+<h4 id="example">Example</h4>
+<p>For an example kraken2 analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/29355">issue 29355</a>. The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks).</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>Kraken2 will upload a zipped folder called <code>kraken2_output_redmineID.zip</code> to the ftp once it has completed. This will contain report files for kraken2 and bracken analyses.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>ConFindr will take between 1 and 2 minutes for each sample.</p>
+<p>Kraken2 is much faster than the original kraken, however the time required for analysis will depend on the analysis type and number of sequences requested. If too many sequences are requested at once, the automator may run out of memory and fail. Please try to keep it to 10 metagenomes maximum.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
+<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</p>
               
             </div>
           </div>
@@ -247,10 +265,10 @@ message informing you of it.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../cowsnphr/" class="btn btn-neutral float-right" title="COWSNPhR">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../mashtree/" class="btn btn-neutral float-right" title="Mashtree">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../cardrgi/" class="btn btn-neutral" title="CARD-RGI (AMR)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../kma/" class="btn btn-neutral" title="KMA - Gene Detection"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -280,10 +298,10 @@ message informing you of it.</p>
         </span>
     
     
-      <span><a href="../cardrgi/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../kma/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../cowsnphr/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../mashtree/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
