@@ -29,6 +29,7 @@ nav:
     - 'KMA - Gene Detection': 'analysis/kma.md'
     - 'Kraken2': 'analysis/kraken2.md'
     - 'Mashtree': 'analysis/mashtree.md'
+    - 'Metaphlan4': 'analysis/metaphlan.md'
     - 'MobSuite': 'analysis/mobsuite.md'
     - 'NearTree': 'analysis/neartree.md'
     - 'PlasmidBorneIdentity': 'analysis/plasmidborneidentity.md'
