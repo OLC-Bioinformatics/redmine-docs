@@ -124,6 +124,12 @@
     </url>
         
     <url>
+     <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/metaphlan/</loc>
+     <lastmod>2023-03-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://olc-bioinformatics.github.io/redmine-docs/analysis/mobsuite/</loc>
      <lastmod>2023-03-16</lastmod>
      <changefreq>daily</changefreq>
