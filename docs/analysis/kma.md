@@ -26,6 +26,13 @@ The first line of the description should be the analysis you would like to run (
     - `metal` - used for metal resistance gene detection
     - `bacmet` - used for metal resistance gene detection using the [BacMet database](http://bacmet.biomedicine.gu.se/), which was converted to nucleotide format by James Robertson (reference to follow)
     - `custom` - gene detection using a custom target database uploaded by the user. The attached file **MUST** be named `targets.fasta`. The output csv file will use your fasta-file gene headers as names.
+<br>
+- Bacterial Integrative and Conjugative Elements (ICEs) [ICEberg databases](https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html) from the [ICEfinder publication](https://academic.oup.com/nar/article/47/D1/D660/5165266):
+    - `all_ices` - used for all ICE gene detection
+    - `aice` - used for actinomycete (AICEs) type ICE gene detection
+    - `cime` - used for cis-mobilizable elements (CIMEs) ICE gene detection
+    - `ime` - used for Integrative and Mobilizable Elements (IME) type ICE gene detection
+    - `t4ss` - used for Type IV Secretion System (T4SS) type ICE gene detection
 
 
 You must also include a list of SEQIDs one per line.

@@ -20,16 +20,23 @@ In the `Description` field, you must provide the requested analysis type as foll
 
 The GeneSeekr pipeline supports the following analyses (again, spelling counts, but case sensitivity doesn't):
 
-- gdcs - determines the presence of genomically-dispersed conserved sequences in the following genera: *Escherichia, Listeria, Salmonella, Vibrio*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
-- genesippr - custom suite of genes derived from the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
-- mlst - determines multi-locus sequence type for the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
-- cgmlst - determines core genome multi-locus sequence type for the following genera: *Escherichia, Yersinia*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
-- resfinder - identifies acquired antimicrobial resistance genes
-- rmlst - determines ribosomal multi-locus sequence type
-- serosippr - calculates the serotype for *Escherichia*
-- sixteens - determines closest 16S match
-- virulence - finds virulence genes
-- custom (**you must attach a FASTA-formatted file of target(s) to the issue**)
+- `gdcs` - determines the presence of genomically-dispersed conserved sequences in the following genera: *Escherichia, Listeria, Salmonella, Vibrio*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
+- `genesippr` - custom suite of genes derived from the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
+- `mlst` - determines multi-locus sequence type for the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
+- `cgmlst` - determines core genome multi-locus sequence type for the following genera: *Escherichia, Yersinia*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
+- `resfinder` - identifies acquired antimicrobial resistance genes
+- `rmlst` - determines ribosomal multi-locus sequence type
+- `serosippr` - calculates the serotype for *Escherichia*
+- `sixteens` - determines closest 16S match
+- `virulence` - finds virulence genes
+- `custom` (**you must attach a FASTA-formatted file of target(s) to the issue**)
+<br>
+- Bacterial Integrative and Conjugative Elements (ICEs) [ICEberg databases](https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html) from the [ICEfinder publication](https://academic.oup.com/nar/article/47/D1/D660/5165266):
+    - `all_ices` - used for all ICE gene detection
+    - `aice` - used for actinomycete (AICEs) type ICE gene detection
+    - `cime` - used for cis-mobilizable elements (CIMEs) ICE gene detection
+    - `ime` - used for Integrative and Mobilizable Elements (IME) type ICE gene detection
+    - `t4ss` - used for Type IV Secretion System (T4SS) type ICE gene detection
 
 You must also include a list of SEQIDs one per line.
 
