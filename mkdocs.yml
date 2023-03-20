@@ -23,6 +23,7 @@ nav:
     - 'ECTyper': 'analysis/ectyper.md'
     - 'DiversiTree': 'analysis/diversitree.md'
     - 'dRep-ANI': 'analysis/drep.md'
+    - 'Fastqc': 'analysis/fastqc.md'
     - 'GeneSeekr': 'analysis/geneseekr.md'
     - 'GWAS-pyseer': 'analysis/pyseer.md'
     - 'IntiminTyper': 'analysis/intimintyper.md'
