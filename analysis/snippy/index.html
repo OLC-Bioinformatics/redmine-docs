@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Cowsnphr - OLC Redmine Automator</title>
+  <title>Snippy - OLC Redmine Automator</title>
   
 
   <link rel="shortcut icon" href="../../img/favicon.ico">
@@ -20,7 +20,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Cowsnphr";
+    var mkdocs_page_name = "Snippy";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -118,23 +118,8 @@
 
         
             
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Cowsnphr</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#cowsnphr">COWSNPhR</a></li>
-                
-                    <li><a class="toctree-l4" href="#what-does-it-do">What does it do?</a></li>
-                
-                    <li><a class="toctree-l4" href="#how-do-i-use-it">How do I use it?</a></li>
-                
-                    <li><a class="toctree-l4" href="#how-long-does-it-take">How long does it take?</a></li>
-                
-                    <li><a class="toctree-l4" href="#what-can-go-wrong">What can go wrong?</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../cowsnphr/">Cowsnphr</a>
         
     </li>
 
@@ -301,8 +286,25 @@
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../snippy/">Snippy</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Snippy</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#snippy">Snippy</a></li>
+                
+                    <li><a class="toctree-l4" href="#what-does-it-do">What does it do?</a></li>
+                
+                    <li><a class="toctree-l4" href="#how-do-i-use-it">How do I use it?</a></li>
+                
+                    <li><a class="toctree-l4" href="#how-long-does-it-take">How long does it take?</a></li>
+                
+                    <li><a class="toctree-l4" href="#what-can-go-wrong">What can go wrong?</a></li>
+                
+                    <li><a class="toctree-l4" href="#should-i-use-snippy-or-snvphyl">Should I use Snippy or SNVPhyl?</a></li>
+                
+            
+            </ul>
         
     </li>
 
@@ -444,7 +446,7 @@
         
       
     
-    <li>Cowsnphr</li>
+    <li>Snippy</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -458,49 +460,57 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="cowsnphr">COWSNPhR</h1>
+                <h1 id="snippy">Snippy</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>COWSNPhR (CFIA OLC Workflow for Single Nucleotide PHylogeny Reporting) is a pipeline developed in conjunction with the 
-USDA APHIS Veterinary Services that determines the presence of high quality Single Nucleotide Variants between a 
-reference strain and other closely related strains. Following annotation of the reference strain, using 
-<a href="https://github.com/tseemann/prokka">Prokka</a>, the pipeline maps the raw reads of the query strains to the reference 
-genome using <a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">bowtie2</a>, finds genetic variants with 
-<a href="https://github.com/google/deepvariant">DeepVariant</a>, extracts variants, creates multiple sequence alignments, and
-calculates a phylogenetic tree using <a href="http://www.microbesonline.org/fasttree/">FastTree</a> to show the relatedness of 
-these strains. The location of each variant is mapped to the annotation of the reference strain, and all variants are 
-entered in a summary table.</p>
+<p>Snippy is a tool for rapid haploid variant calling and core genome alignment of closely related genomes. This automator can also be used to build a phylogenetic tree to attempt to show the
+relatedness of these strains. Lots more info can be found at the <a href="https://github.com/tseemann/snippy">Snippy github site</a>.</p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>cowsnphr</code>. Spelling counts, but case sensitivity does not.</p>
+<p>In the <code>Subject</code> field, put <code>snippy</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
-<p>The first line of your description needs to be <code>reference</code>, and the second line the SEQID of the strain you want to act
+<p><strong>Required Components</strong></p>
+<p>The first line of your description needs to be <code>reference=</code>, the SEQID of the strain you want to act
 as your reference strain. Ideally, you'll want to pick a high-quality assembly for your reference.</p>
-<p>If you wish to attach a reference file instead of providing a SEQID, the second line must be <code>attached</code></p>
-<p>The third line of your description should be <code>compare</code>, and lines after that the SEQIDs for strains to which you want to 
-compare your reference.</p>
-<h4 id="example">Example</h4>
-<p>For example COWSNPhR analyses, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/15681">issue 15681</a> and 
-<a href="https://redmine.biodiversity.agr.gc.ca/issues/15682">issue 15682 (uploaded reference file)</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>The zip file uploaded on COWSNPhR completion should contain four folders: </p>
+<p>eg. <code>reference=YYYY-MIN-NNNN</code></p>
+<p>If you wish to attach a reference file instead of providing a SEQID, the line must be <code>reference=attached</code></p>
+<p>You must also include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components</strong></p>
+<p>We have also included the ability to 'cleanup' a multiple sequence alignment, and generate a tree using <a href="http://nickjcroucher.github.io/gubbins/">Gubbins</a> and <a href="http://www.iqtree.org/">IQ-tree</a>. If you call SNPs for multiple isolates from the same reference, you are able to produce an alignment of "core SNPs" to build a phylogeny. To use this function, add the following line in the description:</p>
 <ul>
-<li><code>vcf_files</code>: compressed global VCF files </li>
-<li><code>summary_tables</code>: table summarizing the location, prevalence, and annotation of variants</li>
-<li><code>alignments</code>: multiple sequence alignment of variants</li>
-<li><code>tree_files</code>: phylogenetic tree of alignment. If you want to view this tree, you can use a program such as
-<a href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> or a web-based viewer like <a href="http://phylo.io">phylo.io</a>.</li>
+<li><code>cleanup_&amp;_tree=True</code></li>
 </ul>
+<p>This automator currently uses IQtree and default settings for gubbins, but other options are available. If you would like additional functions, please contact a bioinformatician and we will do our best to add them.</p>
+<h4 id="example">Example</h4>
+<p>For an example snippy, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/30370">issue 30370</a>.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>The zip file uploaded on snippy completion will contain folders for each of the comparator sequences, as well as core alignment files. Some of the files will also be uploaded/attached directly to the redmine request. Important files are:</p>
+<ul>
+<li><code>core.txt</code>: A summary file. Tab-separated columnar list of alignment/core-size statistics of the number of: aligned, unaligned, variants, and low coverage bases between every strain submitted and the reference.</li>
+<li><code>core.tab</code>: Tab-separated columnar list of core SNP sites with alleles but NO annotations</li>
+<li><code>core.vcf</code>: Multi-sample VCF file with genotype GT tags for all discovered alleles</li>
+</ul>
+<p>If cleanup_&amp;_tree was included, then tree files will also be included in the output:</p>
+<ul>
+<li><code>{issue.id}.snippy.gubbins.iqtree.tree</code>: An intermediate phylogenetic tree created by gubbins + iqtree. </li>
+<li><code>{issue.id}.snippy_final.clean.core.snp.aln.tree</code>: The <strong>final</strong> phylogeny created from the core snp alignment.</li>
+</ul>
+<p>If you want to view these tree files, you can use a program such as
+<a href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> or a web-based viewer like <a href="http://phylo.io">phylo.io</a>.</p>
+<p>Other files can also be important - see the <a href="https://github.com/tseemann/snippy">docs on Snippy Output files</a>
+for more information.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>Most COWSNPhR requests take ~1 hour to complete. If you submit a request for a larger COWSNPhR analysis (&gt;30 strains), 
-it may take substantially longer.</p>
+<p>It depends on the number of sequences and coverage/size of sequence files. Small snippy requests take ~15 minutes to complete (see the example request). If you submit a request for a larger snippy (&gt;30 strains), or include larger long-read sequences, it may take
+substantially longer.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
 <p>A few things can go wrong with this process:</p>
 <p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
 message informing you of it.</p>
-<p>2) Strains too far apart. COWSNPhR requires that the strains you want to compare to the reference be closely related to
-the reference. If you ask for an analysis with strains that are not very related, you will get a warning telling you so.</p>
-<p>3) Other errors. This software is still in active development, so there may be unforeseen issues arising for novel 
-reference: query combinations. </p>
+<p>2) Strains too far apart. Snippy requires that the strains you want to compare to the reference be closely related to
+the reference. If you ask for a snippy-analysis with things that are not very related, the analysis will fail. In this case, look at the <code>core.txt</code> file that is uploaded to the redmine request. If there are sequences with 0 under "Aligned", remove those sequences from the request and re-submit.</p>
+<h3 id="should-i-use-snippy-or-snvphyl">Should I use Snippy or SNVPhyl?</h3>
+<p>...This depends on your goal...</p>
+<p>Snippy appears to be faster than SNVPhyl. It also allows use of both paired-end and single-end raw data files in the same analysis (whereas SNVPhyl currently <strong>does not</strong>).</p>
+<p>A comparison of snippy vs SNVPhyl has not been conducted by our lab. The <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5628696/">SNVPhyl publication</a> does briefly discuss snippy. </p>
               
             </div>
           </div>
@@ -508,10 +518,10 @@ reference: query combinations. </p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../diversitree/" class="btn btn-neutral float-right" title="Diversitree"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../snvphyl/" class="btn btn-neutral float-right" title="Snvphyl"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../confindr/" class="btn btn-neutral" title="Confindr"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../sipprverse/" class="btn btn-neutral" title="Sipprverse"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -539,10 +549,10 @@ reference: query combinations. </p>
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../confindr/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../sipprverse/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../diversitree/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../snvphyl/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
