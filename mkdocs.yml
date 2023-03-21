@@ -43,6 +43,7 @@ nav:
     - 'SequenceExtractor': 'analysis/sequence_extractor.md'
     - 'sipprverse': 'analysis/sipprverse.md'
     - 'SNVPhyl': 'analysis/snvphyl.md'
+    - 'Snippy': 'analysis/snippy.md'
     - 'staramr': 'analysis/staramr.md'
     - 'StrainMash': 'analysis/strainmash.md'
     - 'WGS Assembly': 'analysis/wgsassembly.md'
