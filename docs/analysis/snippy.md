@@ -35,7 +35,7 @@ This automator currently uses IQtree and default settings for gubbins, but other
 
 #### Example
 
-For an example snippy, see [issue 30370](https://redmine.biodiversity.agr.gc.ca/issues/30370).
+For an example snippy, see [issue 30388](https://redmine.biodiversity.agr.gc.ca/issues/30388).
 
 #### Interpreting Results
 
@@ -44,11 +44,12 @@ The zip file uploaded on snippy completion will contain folders for each of the 
 * `core.txt`: A summary file. Tab-separated columnar list of alignment/core-size statistics of the number of: aligned, unaligned, variants, and low coverage bases between every strain submitted and the reference.
 * `core.tab`: Tab-separated columnar list of core SNP sites with alleles but NO annotations
 * `core.vcf`: Multi-sample VCF file with genotype GT tags for all discovered alleles
+* Within each sequence folder there will also be files, including a tab separated summary for that particular sequence in comparison to the reference.
 
 If cleanup_&_tree was included, then tree files will also be included in the output:
 
 * `{issue.id}.snippy.gubbins.iqtree.tree`: An intermediate phylogenetic tree created by gubbins + iqtree. 
-* `{issue.id}.snippy_final.clean.core.snp.aln.tree`: The **final** phylogeny created from the core snp alignment.
+* `{issue.id}.snippy_final.clean.core.snp.aln.tree`: The **final** phylogeny created from the core snp alignment (created using IQtree and the GTR substitution method).
 
 
 If you want to view these tree files, you can use a program such as
@@ -58,10 +59,21 @@ If you want to view these tree files, you can use a program such as
 Other files can also be important - see the [docs on Snippy Output files](https://github.com/tseemann/snippy)
 for more information.
 
+### Variant types
+
+For more information, see the [docs on Snippy Output files](https://github.com/tseemann/snippy):
+
+| Type | Name |  Example  |
+|:----------:|:-----------------:|:-----------:|
+| snp | Single Nucleotide Polymorphism |  A => T  |
+| mnp | Multiple Nuclotide Polymorphism | GC => AT |
+| ins | Insertion | ATT => AGTT |
+| del | Deletion | ACGG => ACG |
+| complex | Combination of snp/mnp | ATTC => GTTA |
+
 ### How long does it take?
 
-It depends on the number of sequences and coverage/size of sequence files. Small snippy requests take ~15 minutes to complete (see the example request). If you submit a request for a larger snippy (>30 strains), or include larger long-read sequences, it may take
-substantially longer.
+It depends on the number of sequences and coverage/size of sequence files. Small snippy requests take ~15 minutes to complete (see the example request). If you submit a request for a larger snippy (>30 strains), or include larger long-read sequences, it may take substantially longer.
 
 ### What can go wrong?
 
@@ -73,11 +85,13 @@ message informing you of it.
 2) Strains too far apart. Snippy requires that the strains you want to compare to the reference be closely related to
 the reference. If you ask for a snippy-analysis with things that are not very related, the analysis will fail. In this case, look at the `core.txt` file that is uploaded to the redmine request. If there are sequences with 0 under "Aligned", remove those sequences from the request and re-submit.
 
+3) Why is the cleaned snp tree not showing my single-end sequences? - I'm not sure... the cleaning step(s) using gubbins appears to remove the minion (single-end) sequence data from the cleaned alignment when a multi-analysis is performed using both illumina and minion sequences. The `{}.snippy_core_alignment.iqtree.treefile`, which is generated before the cleaning steps, will contain all SEQIDS.
+
 ### Should I use Snippy or SNVPhyl?
 
 ...This depends on your goal...
  
-Snippy appears to be faster than SNVPhyl. It also allows use of both paired-end and single-end raw data files in the same analysis (whereas SNVPhyl currently **does not**).
+Snippy appears to be faster than SNVPhyl. It also allows use of both paired-end and single-end raw data files in the same analysis (whereas SNVPhyl **currently does not**).
 
 A comparison of snippy vs SNVPhyl has not been conducted by our lab. The [SNVPhyl publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5628696/) does briefly discuss snippy. 
 
