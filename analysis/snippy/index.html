@@ -481,7 +481,7 @@ as your reference strain. Ideally, you'll want to pick a high-quality assembly f
 </ul>
 <p>This automator currently uses IQtree and default settings for gubbins, but other options are available. If you would like additional functions, please contact a bioinformatician and we will do our best to add them.</p>
 <h4 id="example">Example</h4>
-<p>For an example snippy, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/30370">issue 30370</a>.</p>
+<p>For an example snippy, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/30388">issue 30388</a>.</p>
 <h4 id="interpreting-results">Interpreting Results</h4>
 <p>The zip file uploaded on snippy completion will contain folders for each of the comparator sequences, as well as core alignment files. Some of the files will also be uploaded/attached directly to the redmine request. Important files are:</p>
 <ul>
@@ -492,15 +492,14 @@ as your reference strain. Ideally, you'll want to pick a high-quality assembly f
 <p>If cleanup_&amp;_tree was included, then tree files will also be included in the output:</p>
 <ul>
 <li><code>{issue.id}.snippy.gubbins.iqtree.tree</code>: An intermediate phylogenetic tree created by gubbins + iqtree. </li>
-<li><code>{issue.id}.snippy_final.clean.core.snp.aln.tree</code>: The <strong>final</strong> phylogeny created from the core snp alignment.</li>
+<li><code>{issue.id}.snippy_final.clean.core.snp.aln.tree</code>: The <strong>final</strong> phylogeny created from the core snp alignment (created using IQtree and the GTR substitution method).</li>
 </ul>
 <p>If you want to view these tree files, you can use a program such as
 <a href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> or a web-based viewer like <a href="http://phylo.io">phylo.io</a>.</p>
 <p>Other files can also be important - see the <a href="https://github.com/tseemann/snippy">docs on Snippy Output files</a>
 for more information.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>It depends on the number of sequences and coverage/size of sequence files. Small snippy requests take ~15 minutes to complete (see the example request). If you submit a request for a larger snippy (&gt;30 strains), or include larger long-read sequences, it may take
-substantially longer.</p>
+<p>It depends on the number of sequences and coverage/size of sequence files. Small snippy requests take ~15 minutes to complete (see the example request). If you submit a request for a larger snippy (&gt;30 strains), or include larger long-read sequences, it may take substantially longer.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
 <p>A few things can go wrong with this process:</p>
 <p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
@@ -509,7 +508,7 @@ message informing you of it.</p>
 the reference. If you ask for a snippy-analysis with things that are not very related, the analysis will fail. In this case, look at the <code>core.txt</code> file that is uploaded to the redmine request. If there are sequences with 0 under "Aligned", remove those sequences from the request and re-submit.</p>
 <h3 id="should-i-use-snippy-or-snvphyl">Should I use Snippy or SNVPhyl?</h3>
 <p>...This depends on your goal...</p>
-<p>Snippy appears to be faster than SNVPhyl. It also allows use of both paired-end and single-end raw data files in the same analysis (whereas SNVPhyl currently <strong>does not</strong>).</p>
+<p>Snippy appears to be faster than SNVPhyl. It also allows use of both paired-end and single-end raw data files in the same analysis (whereas SNVPhyl <strong>currently does not</strong>).</p>
 <p>A comparison of snippy vs SNVPhyl has not been conducted by our lab. The <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5628696/">SNVPhyl publication</a> does briefly discuss snippy. </p>
               
             </div>
