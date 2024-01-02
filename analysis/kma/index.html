@@ -528,11 +528,31 @@
 </ul>
 </li>
 <li>
-<p><strong>pairedmethod</strong> - Paired end method, p: Reward if pairing the reads, u: unite best template matches in each read if possible, f force paired reads to pair. <strong>This function is for paired-end data</strong></p>
+<p><strong>vcf</strong> - Produce vcf-files, including any positions different from the template. This will use "-vcf 2" which applies the filter used for basecalling. <strong>This function will make KMA run longer</strong></p>
 <ul>
 <li>default is <code>False</code></li>
 <li>If you want the analysis to use the paired end method, add a line to your description:<ul>
-<li><code>pairedmethod=TRUE</code></li>
+<li><code>vcf=TRUE</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>align</strong> - Create consensus alignment files <em>.fsa and </em>.aln.</p>
+<ul>
+<li>default is <code>False</code></li>
+<li>If you want the analysis to use the paired end method, add a line to your description:<ul>
+<li><code>align=TRUE</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>hmm</strong> - Use a HMM (Hidden Markov Model) to identify high scoring subsequences within the query.</p>
+<ul>
+<li>default is <code>False</code></li>
+<li>If you want the analysis to use the paired end method, add a line to your description:<ul>
+<li><code>hmm=TRUE</code></li>
 </ul>
 </li>
 </ul>
