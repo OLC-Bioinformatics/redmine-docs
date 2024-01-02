@@ -72,6 +72,57 @@
           
             <li>
     <ul class="subnav">
+    <li><span>Tutorials</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../tutorials/create_environment/">Create environment</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../tutorials/create_pages/">Create pages</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../tutorials/edit_pages/">Edit pages</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../tutorials/publish_changes/">Publish changes</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Internal only</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../internal_only/merge/">Merge</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
     <li><span>Analysis</span></li>
 
         
@@ -188,6 +239,8 @@
                     <li><a class="toctree-l4" href="#how-long-does-it-take">How long does it take?</a></li>
                 
                     <li><a class="toctree-l4" href="#what-can-go-wrong">What can go wrong?</a></li>
+                
+                    <li><a class="toctree-l4" href="#version-as-of-2023-12-20">Version (as of 2023-12-20)</a></li>
                 
             
             </ul>
@@ -367,57 +420,6 @@
     </ul>
 <li>
           
-            <li>
-    <ul class="subnav">
-    <li><span>Tutorials</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/create_environment/">Create environment</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/create_pages/">Create pages</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/edit_pages/">Edit pages</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/publish_changes/">Publish changes</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Internal only</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../internal_only/merge/">Merge</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
         </ul>
       </div>
       &nbsp;
@@ -480,7 +482,7 @@
 </ul>
 </li>
 <li>Bacterial Integrative and Conjugative Elements (ICEs) <a href="https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html">ICEberg databases</a> from the <a href="https://academic.oup.com/nar/article/47/D1/D660/5165266">ICEfinder publication</a>:
-<em>the ICEfinder webtool seems to work differently than KMA, and may detect ICEs where KMA does not</em><ul>
+<em>CAUTION: the ICEfinder webtool seems to work differently than KMA, and may detect ICEs where KMA does not</em><ul>
 <li><code>all_ices</code> - used for all ICE gene detection</li>
 <li><code>aice</code> - used for actinomycete (AICEs) type ICE gene detection</li>
 <li><code>cime</code> - used for cis-mobilizable elements (CIMEs) ICE gene detection</li>
@@ -525,6 +527,16 @@
 </li>
 </ul>
 </li>
+<li>
+<p><strong>pairedmethod</strong> - Paired end method, p: Reward if pairing the reads, u: unite best template matches in each read if possible, f force paired reads to pair. <strong>This function is for paired-end data</strong></p>
+<ul>
+<li>default is <code>False</code></li>
+<li>If you want the analysis to use the paired end method, add a line to your description:<ul>
+<li><code>pairedmethod=TRUE</code></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h4 id="example">Example</h4>
 <p>For an example KMA analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/28117">issue 28117</a>. The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks).</p>
@@ -533,7 +545,7 @@
 to look at the <strong>Template_Identity</strong> and <strong>Template_Coverage</strong> columns. You can be pretty sure that anything with 100 for both
 is actually there, but anything else requires further analysis to be sure.</p>
 <h4 id="databases-provided-with-the-automator">Databases Provided with the Automator</h4>
-<p>The databases for AMR, biocide, and metal resistance were derived from the NCBI <a href="https://www.ncbi.nlm.nih.gov/pathogens/antimicrobial-resistance/AMRFinder/">AMRFinderPlus database</a>, version 3.10 downloaded on 2021-05-06. This database was then manually curated and split into separate AMR, biocide, and metal resistance databases. The following genes were added to the biocide resistance database, as they were of interest for some research projects:</p>
+<p>The databases for AMR, biocide, and metal resistance were derived from the NCBI <a href="https://www.ncbi.nlm.nih.gov/pathogens/antimicrobial-resistance/AMRFinder/">AMRFinderPlus database</a>, version 3.11 downloaded on 2023-10-27. This database was then manually curated and split into separate AMR, biocide, and metal resistance databases. The following genes were added to the biocide resistance database, as they were of interest for some research projects:</p>
 <pre><code>-sugE_sugE_quaternary_ammonium_compound_efflux_NC_011514.1:c6661-6344
 -sugE_sugE_quaternary_ammonium_compound_efflux_NC_003197.2:4581504-4581833
 -sugE_sugE_quaternary_ammonium_compound_efflux_NC_017731.1:2886005-2886319
@@ -552,12 +564,16 @@ is actually there, but anything else requires further analysis to be sure.</p>
 -qacA_qacA_Listeria_quaternary_ammonium_compound_efflux_KC980922.1
 -qacC_qacC_Listeria_quaternary_ammonium_compound_efflux_RJZ34303
 -qacED1_qacED1_Acinetobacter_quaternary_ammonium_compound_efflux_KM972592.1
+-mdfA_multidrug_efflux_pump_NC_00913.3:883673-884905
 </code></pre>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
 <p>KMA is very fast, however the time required for analysis will depend on the analysis type and number of sequences requested.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
 <p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</p>
 <p>2) A custom analysis was requested but <code>targets.fasta</code> file was not attached. You will get a warning message informing you of it.</p>
+<h3 id="version-as-of-2023-12-20">Version (as of 2023-12-20)</h3>
+<p>KMA version = 1.4.9</p>
+<p>NCBI AMRFinderPlus database (used for amr, biocide, and metal detection) = 3.11</p>
               
             </div>
           </div>
