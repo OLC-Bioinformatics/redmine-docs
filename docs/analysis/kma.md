@@ -28,6 +28,7 @@ The first line of the description should be the analysis you would like to run (
     - `custom` - gene detection using a custom target database uploaded by the user. The attached file **MUST** be named `targets.fasta`. The output csv file will use your fasta-file gene headers as names.
 <br>
 - Bacterial Integrative and Conjugative Elements (ICEs) [ICEberg databases](https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html) from the [ICEfinder publication](https://academic.oup.com/nar/article/47/D1/D660/5165266):
+*CAUTION: the ICEfinder webtool seems to work differently than KMA, and may detect ICEs where KMA does not*
     - `all_ices` - used for all ICE gene detection
     - `aice` - used for actinomycete (AICEs) type ICE gene detection
     - `cime` - used for cis-mobilizable elements (CIMEs) ICE gene detection
@@ -58,6 +59,16 @@ By default, KMA will run the analysis for isolate assemblies. In order to custom
     - If you want the analysis to output a file including information on the number of reads in your sequence mapping to each database-target, add a line to your description:
         - `readcount=TRUE`
 
+- **onematch** - KMA selects the best match for each k-mer, however in some cases the default analysis will allow some additional matches. Adding this flag will force KMA to "Match to only one template in the database".
+    - default is `False`
+    - If you want the analysis to only output a single match from your database, add a line to your description:
+        - `onematch=TRUE`
+
+- **pairedmethod** - Paired end method, p: Reward if pairing the reads, u: unite best template matches in each read if possible, f force paired reads to pair. **This function is for paired-end data**
+    - default is `False`
+    - If you want the analysis to use the paired end method, add a line to your description:
+        - `pairedmethod=TRUE`
+
 #### Example
 
 For an example KMA analysis, see [issue 28117](https://redmine.biodiversity.agr.gc.ca/issues/28117). The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks).
@@ -70,7 +81,7 @@ is actually there, but anything else requires further analysis to be sure.
 
 #### Databases Provided with the Automator
 
-The databases for AMR, biocide, and metal resistance were derived from the NCBI [AMRFinderPlus database](https://www.ncbi.nlm.nih.gov/pathogens/antimicrobial-resistance/AMRFinder/), version 3.10 downloaded on 2021-05-06. This database was then manually curated and split into separate AMR, biocide, and metal resistance databases. The following genes were added to the biocide resistance database, as they were of interest for some research projects:
+The databases for AMR, biocide, and metal resistance were derived from the NCBI [AMRFinderPlus database](https://www.ncbi.nlm.nih.gov/pathogens/antimicrobial-resistance/AMRFinder/), version 3.11 downloaded on 2023-10-27. This database was then manually curated and split into separate AMR, biocide, and metal resistance databases. The following genes were added to the biocide resistance database, as they were of interest for some research projects:
 
     -sugE_sugE_quaternary_ammonium_compound_efflux_NC_011514.1:c6661-6344
     -sugE_sugE_quaternary_ammonium_compound_efflux_NC_003197.2:4581504-4581833
@@ -90,6 +101,7 @@ The databases for AMR, biocide, and metal resistance were derived from the NCBI 
     -qacA_qacA_Listeria_quaternary_ammonium_compound_efflux_KC980922.1
     -qacC_qacC_Listeria_quaternary_ammonium_compound_efflux_RJZ34303
     -qacED1_qacED1_Acinetobacter_quaternary_ammonium_compound_efflux_KM972592.1
+    -mdfA_multidrug_efflux_pump_NC_00913.3:883673-884905
 
 
 ### How long does it take?
@@ -101,4 +113,9 @@ KMA is very fast, however the time required for analysis will depend on the anal
 1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.
 
 2) A custom analysis was requested but `targets.fasta` file was not attached. You will get a warning message informing you of it.
+
+### Version (as of 2023-12-20)
+KMA version = 1.4.9
+
+NCBI AMRFinderPlus database (used for amr, biocide, and metal detection) = 3.11
 

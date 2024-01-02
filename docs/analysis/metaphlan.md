@@ -52,4 +52,9 @@ The time required for analysis will depend on the analysis type and number of se
 
 1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.
 
+### Version
+
+[MetaPhlAn version 4.0](https://huttenhower.sph.harvard.edu/metaphlan/)
+
+
 
