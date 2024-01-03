@@ -54,20 +54,30 @@ By default, KMA will run the analysis for isolate assemblies. In order to custom
     - If you want to analyse long-read Nanopore data, add a line to your description:
         - `nanopore=TRUE`
 
+- **min_ID** - Use this option to specify the minimum template identity (i.e. relatedness to gene(s) in your database), in percent, needed in order to report a template as a hit.
+    - default is `False` 
+    - If you want to analyse long-read Nanopore data, add a line to your description (example is for matches greater than 90%):
+        - `min_ID=90`
+
 - **readcount** - the default analysis will only output a csv file containing information on matching target gene(s) presence including template identity, coverage, depth, etc. This flag will output read-mapping data for your targets. **This function is best used with raw-reads - Assembly analysis will likely only report 1 read mapping to each gene-target**
     - default is `False` 
     - If you want the analysis to output a file including information on the number of reads in your sequence mapping to each database-target, add a line to your description:
         - `readcount=TRUE`
 
-- **onematch** - KMA selects the best match for each k-mer, however in some cases the default analysis will allow some additional matches. Adding this flag will force KMA to "Match to only one template in the database".
+- **align** - Create consensus alignment files *.fsa and *.aln.
     - default is `False`
-    - If you want the analysis to only output a single match from your database, add a line to your description:
-        - `onematch=TRUE`
+    - If you want the analysis to create additional alignment files, add a line to your description:
+        - `align=TRUE`
 
-- **pairedmethod** - Paired end method, p: Reward if pairing the reads, u: unite best template matches in each read if possible, f force paired reads to pair. **This function is for paired-end data**
+- **vcf** - Produce vcf-files, including any positions different from the template. This will use "-vcf 2" which applies the filter used for basecalling. **This function will make KMA run longer**
     - default is `False`
-    - If you want the analysis to use the paired end method, add a line to your description:
-        - `pairedmethod=TRUE`
+    - If you want the analysis to output a vcf file for each sequence, add a line to your description:
+        - `vcf=TRUE`
+
+- **hmm** - Use a HMM (Hidden Markov Model) to identify high scoring subsequences within the query.
+    - default is `False`
+    - If you want the analysis to use HMM, add a line to your description:
+        - `hmm=TRUE`
 
 #### Example
 
@@ -103,6 +113,8 @@ The databases for AMR, biocide, and metal resistance were derived from the NCBI 
     -qacED1_qacED1_Acinetobacter_quaternary_ammonium_compound_efflux_KM972592.1
     -mdfA_multidrug_efflux_pump_NC_00913.3:883673-884905
 
+
+A verotoxin gene database has also been provided, which has been curated by our lab. Please contact Catherine Carrillo for more information.
 
 ### How long does it take?
 
