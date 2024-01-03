@@ -518,6 +518,16 @@
 </ul>
 </li>
 <li>
+<p><strong>min_ID</strong> - Use this option to specify the minimum template identity (i.e. relatedness to gene(s) in your database), in percent, needed in order to report a template as a hit.</p>
+<ul>
+<li>default is <code>False</code> </li>
+<li>If you want to analyse long-read Nanopore data, add a line to your description (example is for matches greater than 90%):<ul>
+<li><code>min_ID=90</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
 <p><strong>readcount</strong> - the default analysis will only output a csv file containing information on matching target gene(s) presence including template identity, coverage, depth, etc. This flag will output read-mapping data for your targets. <strong>This function is best used with raw-reads - Assembly analysis will likely only report 1 read mapping to each gene-target</strong></p>
 <ul>
 <li>default is <code>False</code> </li>
@@ -528,21 +538,21 @@
 </ul>
 </li>
 <li>
-<p><strong>vcf</strong> - Produce vcf-files, including any positions different from the template. This will use "-vcf 2" which applies the filter used for basecalling. <strong>This function will make KMA run longer</strong></p>
+<p><strong>align</strong> - Create consensus alignment files <em>.fsa and </em>.aln.</p>
 <ul>
 <li>default is <code>False</code></li>
-<li>If you want the analysis to use the paired end method, add a line to your description:<ul>
-<li><code>vcf=TRUE</code></li>
+<li>If you want the analysis to create additional alignment files, add a line to your description:<ul>
+<li><code>align=TRUE</code></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>align</strong> - Create consensus alignment files <em>.fsa and </em>.aln.</p>
+<p><strong>vcf</strong> - Produce vcf-files, including any positions different from the template. This will use "-vcf 2" which applies the filter used for basecalling. <strong>This function will make KMA run longer</strong></p>
 <ul>
 <li>default is <code>False</code></li>
-<li>If you want the analysis to use the paired end method, add a line to your description:<ul>
-<li><code>align=TRUE</code></li>
+<li>If you want the analysis to output a vcf file for each sequence, add a line to your description:<ul>
+<li><code>vcf=TRUE</code></li>
 </ul>
 </li>
 </ul>
@@ -551,7 +561,7 @@
 <p><strong>hmm</strong> - Use a HMM (Hidden Markov Model) to identify high scoring subsequences within the query.</p>
 <ul>
 <li>default is <code>False</code></li>
-<li>If you want the analysis to use the paired end method, add a line to your description:<ul>
+<li>If you want the analysis to use HMM, add a line to your description:<ul>
 <li><code>hmm=TRUE</code></li>
 </ul>
 </li>
@@ -586,6 +596,7 @@ is actually there, but anything else requires further analysis to be sure.</p>
 -qacED1_qacED1_Acinetobacter_quaternary_ammonium_compound_efflux_KM972592.1
 -mdfA_multidrug_efflux_pump_NC_00913.3:883673-884905
 </code></pre>
+<p>A verotoxin gene database has also been provided, which has been curated by our lab. Please contact Catherine Carrillo for more information.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
 <p>KMA is very fast, however the time required for analysis will depend on the analysis type and number of sequences requested.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
