@@ -476,8 +476,9 @@
 <li><code>amr</code> - used for antimicrobial resistance gene detection</li>
 <li><code>biocide</code> - used for biocide resistance gene detection</li>
 <li><code>metal</code> - used for metal resistance gene detection</li>
+<li><code>verotoxin</code> - used for toxin gene detection in Shiga toxin-producing E. coli (curated by Catherine Carrillo for poresippr)</li>
 <li><code>bacmet</code> - used for metal resistance gene detection using the <a href="http://bacmet.biomedicine.gu.se/">BacMet database</a>, which was converted to nucleotide format by James Robertson (reference to follow)</li>
-<li><code>custom</code> - gene detection using a custom target database uploaded by the user. The attached file <strong>MUST</strong> be named <code>targets.fasta</code>. The output csv file will use your fasta-file gene headers as names.
+<li><code>custom</code> - gene detection using a custom target database uploaded by the user. The user <strong>MUST</strong> also add the flag <code>targetsfile=</code> and the name of their database file including the suffix, for example <code>targets.fasta</code> or <code>genes.fasta</code>. The output csv file will use your fasta-file gene headers as names.
 <br></li>
 </ul>
 </li>
@@ -505,6 +506,17 @@
 </ul>
 </li>
 <li>Note: seqtype for minion raw-reads is slightly different, as KMA uses different commands for paired-end (illumina) and single-end (nanopore) data</li>
+</ul>
+</li>
+<li>
+<p><strong>targetsfile</strong> - the default analysis will use genome assemblies.</p>
+<ul>
+<li>default is <code>False</code> </li>
+<li>If you want to selected <code>analysis=custom</code>, add the following line:<ul>
+<li><code>targetsfile=filename.fasta</code></li>
+</ul>
+</li>
+<li>Note: the filename can be whatever you would like. You must also include the suffix for your fasta file (e.g. genes.fasta, targets.fasta, vtxgenes.fasta, etc)</li>
 </ul>
 </li>
 <li>
@@ -601,7 +613,7 @@ is actually there, but anything else requires further analysis to be sure.</p>
 <p>KMA is very fast, however the time required for analysis will depend on the analysis type and number of sequences requested.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
 <p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</p>
-<p>2) A custom analysis was requested but <code>targets.fasta</code> file was not attached. You will get a warning message informing you of it.</p>
+<p>2) A custom analysis was requested but targets file was not attached. You will get a warning message informing you of it. You must also add the flag <code>targetsfile=name.fasta</code> for the automator to recognize your attached multifasta file.</p>
 <h3 id="version-as-of-2023-12-20">Version (as of 2023-12-20)</h3>
 <p>KMA version = 1.4.9</p>
 <p>NCBI AMRFinderPlus database (used for amr, biocide, and metal detection) = 3.11</p>
