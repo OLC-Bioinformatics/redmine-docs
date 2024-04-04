@@ -56,5 +56,7 @@ The time required for analysis will depend on the analysis type and number of se
 
 [MetaPhlAn version 4.0](https://huttenhower.sph.harvard.edu/metaphlan/)
 
+Default database version is currently mpa_vOct22_CHOCOPhlAnSGB_202212
+
 
 

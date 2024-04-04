@@ -13,7 +13,7 @@ If a tool you need is not currently available, we are generally able to add tool
 To access Redmine, go to [https://redmine.biodiversity.agr.gc.ca](https://redmine.biodiversity.agr.gc.ca) (note that you
 must be on the CFIA/Agriculture Canada network). Once there, login with your corporate username and password. If this is
 your first time using Redmine, you will need to be added to the CFIA Genomics project. To get access, send an email
-to `andrew.low@canada.ca`, with `adam.koziol@canada.ca` CC'd and say you need access to the OLC Genomics project. Once you have been added to the project,
+to `ashley.cooper@inspection.gc.ca`, with `adam.koziol@inspection.gc.ca` CC'd and say you need access to the OLC Genomics project. Once you have been added to the project,
 head to [the project page](https://redmine.biodiversity.agr.gc.ca/projects/cfia/issues). This is where you will
 be able to create requests.
 
@@ -50,3 +50,79 @@ hours).
 ![Screenshot](img/New_Issue.png)
 
 </details>
+ 
+&nbsp;
+## Possible Analyses
+###I want to:
+<details>
+  <summary><b>Download sequence data, or share sequence data with a collaborator</b></summary>  
+  To retrieve a zip file of your sequence data (which can also be shared with external collaborators) use automators:  
+
+   * **External retrieve** - exports a list of sequences in a zipped file
+
+</details>
+<br>
+<details>
+  <summary><b>Detect gene(s) in my sequences</b></summary>  
+  Automators that allow you to screen sequence(s) for gene targets:  
+
+   * **GeneSeekr** - assemblies only  
+   * **KMA** - allows you to screen raw reads and assemblies
+
+</details>
+<br>
+<details>
+  <summary><b>Determine the genus/species of a whole genome sequence assembly</b></summary>  
+  If you are unsure of the genus/species of your isolate, you can use the automator:  
+
+   * **Unknownisolate** - compares WGS assembly to ATCC and RefSeq genomes, and determines rMLST type
+
+</details>
+<br>
+<details>
+  <summary><b>Determine taxonomy in metagenomes</b></summary>  
+  If you want to detect the different organisms in your metagenomic sequence, you can use the automators:  
+
+   * **Metaphlan** - more specific than Kraken2, but less sensitive
+   * **Kraken2/Bracken** - more sensitive than metaphlan, but likely to give false positives to closely related genera/species. Bracken is more accurate than Kraken2.
+
+</details>
+<br>
+<details>
+  <summary><b>Find SNPs in my sequences</b></summary>  
+  To detect single nucleotide polymorphisms (SNPs) in your sequences, you can use the automators:  
+
+   * **SNVPhyl** - 
+   * **Snippy** - 
+
+</details>
+<br>
+<details>
+  <summary><b>Annotate my sequence assemblies</b></summary>  
+  To annotate your sequence assemblies, you can use the automators:  
+
+   * **Prokka** - 
+   * **Bakta** - 
+
+</details>
+<br>
+<details>
+  <summary><b>Create a phylogeny</b></summary>  
+  You can use the automators:  
+
+   * **MASHtree** - 
+   * **bcgtree** - 
+   * **iqtree** - 
+
+</details>
+<br>
+<details>
+  <summary><b>Run a genome wide association study (GWAS)</b></summary>  
+  You can use the automators:  
+
+   * **Roary/Scoary** - 
+   * **Pyseer** - 
+
+</details>
+<br>
+

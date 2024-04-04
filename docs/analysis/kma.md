@@ -24,8 +24,9 @@ The first line of the description should be the analysis you would like to run (
     - `amr` - used for antimicrobial resistance gene detection
     - `biocide` - used for biocide resistance gene detection
     - `metal` - used for metal resistance gene detection
+    - `verotoxin` - used for toxin gene detection in Shiga toxin-producing E. coli (curated by Catherine Carrillo for poresippr)
     - `bacmet` - used for metal resistance gene detection using the [BacMet database](http://bacmet.biomedicine.gu.se/), which was converted to nucleotide format by James Robertson (reference to follow)
-    - `custom` - gene detection using a custom target database uploaded by the user. The attached file **MUST** be named `targets.fasta`. The output csv file will use your fasta-file gene headers as names.
+    - `custom` - gene detection using a custom target database uploaded by the user. The user **MUST** also add the flag `targetsfile=` and the name of their database file including the suffix, for example `targets.fasta` or `genes.fasta`. The output csv file will use your fasta-file gene headers as names.
 <br>
 - Bacterial Integrative and Conjugative Elements (ICEs) [ICEberg databases](https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html) from the [ICEfinder publication](https://academic.oup.com/nar/article/47/D1/D660/5165266):
 *CAUTION: the ICEfinder webtool seems to work differently than KMA, and may detect ICEs where KMA does not*
@@ -48,6 +49,12 @@ By default, KMA will run the analysis for isolate assemblies. In order to custom
         - `seqtype=fastq`
         - `seqtype=minionfastq`
     - Note: seqtype for minion raw-reads is slightly different, as KMA uses different commands for paired-end (illumina) and single-end (nanopore) data
+
+- **targetsfile** - the default analysis will use genome assemblies.
+    - default is `False` 
+    - If you want to selected `analysis=custom`, add the following line:
+        - `targetsfile=filename.fasta`
+    - Note: the filename can be whatever you would like. You must also include the suffix for your fasta file (e.g. genes.fasta, targets.fasta, vtxgenes.fasta, etc)
 
 - **nanopore** - the default analysis will be for short-read Illumina data. **This function is for assemblies**
     - default is `False` 
@@ -124,7 +131,7 @@ KMA is very fast, however the time required for analysis will depend on the anal
 
 1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.
 
-2) A custom analysis was requested but `targets.fasta` file was not attached. You will get a warning message informing you of it.
+2) A custom analysis was requested but targets file was not attached. You will get a warning message informing you of it. You must also add the flag `targetsfile=name.fasta` for the automator to recognize your attached multifasta file.
 
 ### Version (as of 2023-12-20)
 KMA version = 1.4.9
