@@ -57,6 +57,8 @@
             
                 <li class="toctree-l3"><a href="#olc-redmine-automator">OLC Redmine Automator</a></li>
                 
+                    <li><a class="toctree-l4" href="#possible-analyses">Possible Analyses</a></li>
+                
             
             </ul>
         
@@ -373,6 +375,13 @@
         
             
     <li class="toctree-l1 ">
+        <a class="" href="analysis/unknownisolate/">Unknownisolate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
         <a class="" href="analysis/wgsassembly/">Wgsassembly</a>
         
     </li>
@@ -454,6 +463,105 @@ the CFIA network in order to access Redmine).</p>
 take a look at our <a href="getting_started/">Getting Started</a> page for instructions on how to start using Redmine and a
 brief overview of what Redmine can do.</p>
 <p>For any issues or general help with Redmine, see the <a href="troubleshooting/">Troubleshooting</a> page.</p>
+<p><br></p>
+<h2 id="possible-analyses">Possible Analyses</h2>
+<h3 id="i-want-to">I want to:</h3>
+<p><details>
+  <summary><b>Download sequence data, or share sequence data with a collaborator</b></summary><br />
+  To retrieve a zip file of your sequence data (which can also be shared with external collaborators) use automators:  </p>
+<ul>
+<li><a href="data/external_retrieve/"><strong>External retrieve</strong></a> - exports a list of sequences in a zipped file</li>
+</ul>
+<p></details>
+<br>
+<details>
+  <summary><b>Download COWBAT reports for a list of sequence assemblies</b></summary><br />
+  To retrieve a zip file of the COWBAT assembly pipeline reports for your list of SeqIDs:  </p>
+<ul>
+<li><a href="data/report_retrieve/"><strong>Report retrieve</strong></a> - exports a csv file of the legacy_combinedMetadata for your sequences, as well as a zip file containing all reports for those sequences.</li>
+</ul>
+<p></details>
+<br>
+<details>
+  <summary><b>Detect gene(s) in my sequences</b></summary><br />
+  Automators that allow you to screen sequence(s) for gene targets:  </p>
+<ul>
+<li><a href="analysis/geneseekr/"><strong>GeneSeekr</strong></a> - assemblies only  </li>
+<li><a href="analysis/kma/"><strong>KMA</strong></a> - allows you to screen raw reads and assemblies</li>
+<li><a href="analysis/cardrgi/"><strong>CARDRGI</strong></a> - <em>specific to AMR detection</em></li>
+</ul>
+<p></details>
+<br>
+<details>
+  <summary><b>Determine the genus/species of a whole genome sequence assembly</b></summary><br />
+  If you are unsure of the genus/species of your isolate, you can use the automator:  </p>
+<ul>
+<li><a href="analysis/unknownisolate/"><strong>Unknownisolate</strong></a> - compares WGS assembly to ATCC and RefSeq genomes, and determines rMLST type. Outputs a GROBI report for probably identity.</li>
+</ul>
+<p></details>
+<br>
+<details>
+  <summary><b>Find the <i>X</i> most diverse sequences in a set of sequences</b></summary><br />
+  If you want to find a number of diverse (e.g. distantly related) sequences from a set of sequences :  </p>
+<ul>
+<li><a href="analysis/diversitree/"><strong>diversitree</strong></a> - will output a list based on user's requested number of sequences.</li>
+</ul>
+<p></details>
+<br>
+<details>
+  <summary><b>Find sequences closely related to a query sequence</b></summary><br />
+  If you want to find <i>X</i> number of closest strains in a list to a query SeqID:  </p>
+<ul>
+<li><a href="analysis/neartree/"><strong>NearTree</strong></a> - calculates the most closely related strains to your query SeqID based on MASH distance</li>
+</ul>
+<p></details>
+<br>
+<details>
+  <summary><b>Determine taxonomy in metagenomes</b></summary><br />
+  If you want to detect the different organisms in your metagenomic sequence, you can use the automators:  </p>
+<ul>
+<li><a href="analysis/metaphlan/"><strong>Metaphlan</strong></a> - more specific than Kraken2, but less sensitive.</li>
+<li><a href="analysis/kraken2/"><strong>Kraken2/Bracken</strong></a> - more sensitive than metaphlan, but likely to give false positives to closely related genera/species. Bracken is more accurate than Kraken2 and Metaphlan4 (according to our publication <a href="https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-023-03148-6">Cooper et al, 2023</a>).</li>
+</ul>
+<p></details>
+<br>
+<details>
+  <summary><b>Find SNPs in my sequences</b></summary><br />
+  To detect single nucleotide polymorphisms (SNPs) in your sequences, you can use the automators:  </p>
+<ul>
+<li><a href="analysis/snvphyl/"><strong>SNVPhyl</strong></a> - </li>
+<li><a href="analysis/snippy/"><strong>Snippy</strong></a> - </li>
+</ul>
+<p></details>
+<br>
+<details>
+  <summary><b>Annotate my sequence assemblies</b></summary><br />
+  To annotate your sequence assemblies, you can use the automators:  </p>
+<ul>
+<li><a href="analysis/prokka/"><strong>Prokka</strong></a> - whole genome annotation to identify features in gDNA (bacterial, archaeal, and viral)</li>
+<li><strong>Bakta</strong> - automator currently under development</li>
+</ul>
+<p></details>
+<br>
+<details>
+  <summary><b>Create a phylogeny</b></summary><br />
+  To create a phylogenetic tree from a list of sequences, you can use the automators:  </p>
+<ul>
+<li><a href="analysis/mashtree/"><strong>MASHtree</strong></a> - creates a phylogeny using MASH distances</li>
+<li><a href="analysis/bcgtree/"><strong>bcgtree</strong></a> - builds a phylogeny using bacterial core genes ("107 essential single-copy core genes")</li>
+<li><strong>iqtree</strong> - automator currently under development</li>
+</ul>
+<p></details>
+<br>
+<details>
+  <summary><b>Run a genome wide association study (GWAS)</b></summary><br />
+  You can use the automators:  </p>
+<ul>
+<li><a href="analysis/roary/"><strong>Roary/Scoary</strong></a> - </li>
+<li><a href="analysis/pyseer/"><strong>Pyseer</strong></a> - </li>
+</ul>
+<p></details>
+<br></p>
               
             </div>
           </div>
@@ -501,5 +609,5 @@ brief overview of what Redmine can do.</p>
 
 <!--
 MkDocs version : 0.14.0
-Build Date UTC : 2024-04-04 19:51:04.708179
+Build Date UTC : 2024-04-05 14:17:03.576907
 -->
