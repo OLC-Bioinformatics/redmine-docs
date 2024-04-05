@@ -3,7 +3,7 @@
 ### What does it do?
 
 Snippy is a tool for rapid haploid variant calling and core genome alignment of closely related genomes. This automator can also be used to build a phylogenetic tree to attempt to show the
-relatedness of these strains. Lots more info can be found at the [Snippy github site](https://github.com/tseemann/snippy).
+relatedness of these strains. More info can be found at the [Snippy github site](https://github.com/tseemann/snippy).
 
 ### How do I use it?
 
@@ -93,5 +93,9 @@ the reference. If you ask for a snippy-analysis with things that are not very re
  
 Snippy appears to be faster than SNVPhyl. It also allows use of both paired-end and single-end raw data files in the same analysis (whereas SNVPhyl **currently does not**).
 
-A comparison of snippy vs SNVPhyl has not been conducted by our lab. The [SNVPhyl publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5628696/) does briefly discuss snippy. 
+A comparison of snippy vs SNVPhyl has not been conducted by our lab. The [SNVPhyl publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5628696/) does briefly discuss snippy.
+
+### Version
+Snippy version 4.6.0 (as of 2024-04-05)
+
 

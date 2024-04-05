@@ -59,3 +59,6 @@ the reference. If you ask for a SNVPhyl with things that are not very related, y
 is either because _a)_ there are no SNVs between the two strains, and so SNVPhyl crashes or _b)_ SNVPhyl crashed for an
 unknown reason, which does happen occasionally. If this happens, your best bet is to try running the SNVPhyl again. If
 SNVPhyl keeps crashing even after subsequent attempts, let us know and we'll do our best to fix things.
+
+### Version
+SNVPhyl on redmine is version 1.0.1 with snvphyl_cli_version=1.3 (as of 2024-04-05)
