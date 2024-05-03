@@ -25,6 +25,7 @@ nav:
     - 'dRep-ANI': 'analysis/drep.md'
     - 'Fastqc': 'analysis/fastqc.md'
     - 'GeneSeekr': 'analysis/geneseekr.md'
+    - 'GFA Retrieve': 'analysis/gfa_retrieve.md'
     - 'GWAS-pyseer': 'analysis/pyseer.md'
     - 'IntiminTyper': 'analysis/intimintyper.md'
     - 'KMA - Gene Detection': 'analysis/kma.md'
