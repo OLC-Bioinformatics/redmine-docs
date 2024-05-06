@@ -21,7 +21,7 @@ The first line of the description should be the analysis you would like to run (
     - `bacillus` - to compare to genus <i>Bacillus</i>
     - `custom` - to compare to a custom list of SeqIDs - **only recommended if you would like to compare specific sequences... will only include the SeqIDs listed by user, and by excluding reference sequences you are likely to miss something that may be closely related**
     - `enterobacter` - to compare to genus <i>Enterobacter</i>
-    - `enterobacterales` - to compare to family Enterobacterales
+    - `enterobacterales` - to compare to order Enterobacterales
     - `genus` - to compare to a specific genus  
        The user must also include the line:
         - `genus=QUERY` where QUERY is the genus (e.g. `genus=Acinetobacter`)

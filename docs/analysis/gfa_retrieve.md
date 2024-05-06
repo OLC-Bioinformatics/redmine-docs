@@ -26,7 +26,7 @@ For an example gfa retrieve, see [issue 33691](https://redmine.biodiversity.agr.
 
 ### How do I download Bandage and view the assembly?
 
-Bandage can (currently) be downloaded and used on windows corporate laptops. However, additional tools like BLAST are unfortunately not currently usable with the program (at the moment). To download, navigate to the [Bandage website](https://rrwick.github.io/Bandage/) and click "Download Windows". Extract the zip file to a location of your choosing. Within the unzipped folder, you will find a folder titled "Bandage", within this is "Bandage.exe". If you double-click "Bandage.exe" it should open the Bandage GUI for you:
+Bandage can (currently) be downloaded and used on windows corporate laptops. However, additional tools like BLAST are unfortunately not currently usable with the program on corporate Windows laptops/tablets (at the moment). To download, navigate to the [Bandage website](https://rrwick.github.io/Bandage/) and click "Download Windows". Extract the zip file to a location of your choosing. Within the unzipped folder, you will find a folder titled "Bandage", within this is "Bandage.exe". If you double-click "Bandage.exe" it should open the Bandage GUI for you:
 
 ![Bandage GUI](../img/bandage_gui.jpg)
 
@@ -49,6 +49,10 @@ Bandage can (currently) be downloaded and used on windows corporate laptops. How
 
 - the below diagram is for a hybrid assembly in which incorrect Illumina reads were used. Illumina reads for an *Acinetobacter* isolate sequence were mapped to nanopore reads from a *Klebsiella* isolate sequence, which resulted in 93 contigs (instead of 3). You can see that the assembly is messy and very difficult to visualize/interpret. If your hybrid assembly looks like this, you should re-evaluate what sequences were used and/or speak with a bioinformatician.
 ![Bad Bandage](../img/bad_hybrid_assembly.jpg)
+
+### Bandage Tutorial
+
+The [Bandage wiki](https://github.com/rrwick/Bandage/wiki/Getting-started) has a great tutorial of how to load data, as well as descriptions on how to visualize and manipulate data.
 
 ### How long does it take?
 
