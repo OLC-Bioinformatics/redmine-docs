@@ -231,6 +231,8 @@
                 
                     <li><a class="toctree-l4" href="#how-do-i-download-bandage-and-view-the-assembly">How do I download Bandage and view the assembly?</a></li>
                 
+                    <li><a class="toctree-l4" href="#bandage-tutorial">Bandage Tutorial</a></li>
+                
                     <li><a class="toctree-l4" href="#how-long-does-it-take">How long does it take?</a></li>
                 
                     <li><a class="toctree-l4" href="#what-can-go-wrong">What can go wrong?</a></li>
@@ -488,7 +490,7 @@
 <h4 id="example">Example</h4>
 <p>For an example gfa retrieve, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/33691">issue 33691</a>.</p>
 <h3 id="how-do-i-download-bandage-and-view-the-assembly">How do I download Bandage and view the assembly?</h3>
-<p>Bandage can (currently) be downloaded and used on windows corporate laptops. However, additional tools like BLAST are unfortunately not currently usable with the program (at the moment). To download, navigate to the <a href="https://rrwick.github.io/Bandage/">Bandage website</a> and click "Download Windows". Extract the zip file to a location of your choosing. Within the unzipped folder, you will find a folder titled "Bandage", within this is "Bandage.exe". If you double-click "Bandage.exe" it should open the Bandage GUI for you:</p>
+<p>Bandage can (currently) be downloaded and used on windows corporate laptops. However, additional tools like BLAST are unfortunately not currently usable with the program on corporate Windows laptops/tablets (at the moment). To download, navigate to the <a href="https://rrwick.github.io/Bandage/">Bandage website</a> and click "Download Windows". Extract the zip file to a location of your choosing. Within the unzipped folder, you will find a folder titled "Bandage", within this is "Bandage.exe". If you double-click "Bandage.exe" it should open the Bandage GUI for you:</p>
 <p><img alt="Bandage GUI" src="../../img/bandage_gui.jpg" /></p>
 <ul>
 <li>You can then open your .gfa files in the GUI, by clicking File &gt; Load graph<ul>
@@ -510,6 +512,8 @@
 <li>the below diagram is for a hybrid assembly in which incorrect Illumina reads were used. Illumina reads for an <em>Acinetobacter</em> isolate sequence were mapped to nanopore reads from a <em>Klebsiella</em> isolate sequence, which resulted in 93 contigs (instead of 3). You can see that the assembly is messy and very difficult to visualize/interpret. If your hybrid assembly looks like this, you should re-evaluate what sequences were used and/or speak with a bioinformatician.
 <img alt="Bad Bandage" src="../../img/bad_hybrid_assembly.jpg" /></li>
 </ul>
+<h3 id="bandage-tutorial">Bandage Tutorial</h3>
+<p>The <a href="https://github.com/rrwick/Bandage/wiki/Getting-started">Bandage wiki</a> has a great tutorial of how to load data, as well as descriptions on how to visualize and manipulate data.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
 <p>The time required for gfa file retrieval will depend on the number of SEQIDs in your request.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
