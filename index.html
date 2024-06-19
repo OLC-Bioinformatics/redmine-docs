@@ -1,466 +1,189 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>OLC Redmine Automator</title>
-  
-
-  <link rel="shortcut icon" href="./img/favicon.ico">
-
-  
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="./css/highlight.css">
-
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "None";
-  </script>
-  
-  <script src="./js/jquery-2.1.1.min.js"></script>
-  <script src="./js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script>
-  <script src="./js/theme.js"></script> 
-
-  
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Instructions for OLC Redmine Usage" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>OLC Redmine Automator</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Home";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/redmine-docs/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
   <div class="wy-grid-for-nav">
-
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> OLC Redmine Automator</a>
-        <div role="search">
+          <a href="." class="icon icon-home"> OLC Redmine Automator
+        </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
-          
-            <li>
-    <li class="toctree-l1 current">
-        <a class="current" href=".">Home</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#olc-redmine-automator">OLC Redmine Automator</a></li>
-                
-                    <li><a class="toctree-l4" href="#possible-analyses">Possible Analyses</a></li>
-                
-            
-            </ul>
-        
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#possible-analyses">Possible Analyses</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#i-want-to">I want to:</a>
     </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="getting_started/">Getting started</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="troubleshooting/">Troubleshooting</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Tutorials</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="tutorials/create_environment/">Create environment</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="tutorials/create_pages/">Create pages</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="tutorials/edit_pages/">Edit pages</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="tutorials/publish_changes/">Publish changes</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Internal only</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="internal_only/merge/">Merge</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Analysis</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/amrsummary/">Amrsummary</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/autoclark/">Autoclark</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/bcgtree/">Bcgtree</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/cardrgi/">Cardrgi</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/closerelatives/">Closerelatives</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/confindr/">Confindr</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/cowsnphr/">Cowsnphr</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/diversitree/">Diversitree</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/drep/">Drep</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/eCGF/">eCGF</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/ectyper/">Ectyper</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/fastqc/">Fastqc</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/geneseekr/">Geneseekr</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/gfa_retrieve/">Gfa retrieve</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/intimintyper/">Intimintyper</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/kma/">Kma</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/kraken2/">Kraken2</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/mashtree/">Mashtree</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/metaphlan/">Metaphlan</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/mobsuite/">Mobsuite</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/neartree/">Neartree</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/plasmidborneidentity/">Plasmidborneidentity</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/pointfinder/">Pointfinder</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/primerfinder/">Primerfinder</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/prokka/">Prokka</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/psortb/">Psortb</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/pyseer/">Pyseer</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/resfinder/">Resfinder</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/roary/">Roary</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/sequence_extractor/">Sequence extractor</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/sipprverse/">Sipprverse</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/snippy/">Snippy</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/snvphyl/">Snvphyl</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/staramr/">Staramr</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/strainmash/">Strainmash</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/unknownisolate/">Unknownisolate</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="analysis/wgsassembly/">Wgsassembly</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Data</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="data/external_retrieve/">External retrieve</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="data/report_retrieve/">Report retrieve</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="data/sra_upload/">Sra upload</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
         </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="data/external_retrieve/">External Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data/report_retrieve/">Report Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="data/sra_upload/">SRA Upload</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Analysis</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/amrsummary/">AMRsummary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/autoclark/">AutoCLARK</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/bcgtree/">bcgTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/cardrgi/">CARD-RGI (AMR)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/confindr/">ConFindr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/cowsnphr/">COWSNPhR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/closerelatives/">CloseRelatives</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/eCGF/">eCGF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/ectyper/">ECTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/diversitree/">DiversiTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/drep/">dRep-ANI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/geneseekr/">GeneSeekr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/gfa_retrieve/">GFA Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/pyseer/">GWAS-pyseer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/intimintyper/">IntiminTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/kma/">KMA - Gene Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/kraken2/">Kraken2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/mashtree/">Mashtree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/mobsuite/">MobSuite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/plasmidborneidentity/">PlasmidBorneIdentity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/pointfinder/">PointFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/primerfinder/">PrimerFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/prokka/">Prokka</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/resfinder/">ResFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/roary/">Roary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/sequence_extractor/">SequenceExtractor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/sipprverse/">sipprverse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/snvphyl/">SNVPhyl</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/snippy/">Snippy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/staramr/">staramr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/strainmash/">StrainMash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/unknownisolate/">Unknownisolate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/wgsassembly/">WGS Assembly</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Internal Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="internal_only/merge/">Merge</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="troubleshooting/">Troubleshooting</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="tutorials/create_environment/">Create Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="tutorials/create_pages/">Create Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="tutorials/edit_pages/">Edit Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="tutorials/publish_changes/">Publish Changes</a>
+                  </li>
+              </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">OLC Redmine Automator</a>
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">OLC Redmine Automator</a>
+        
       </nav>
-
-      
       <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
-    
-      
-    
-    <li>Home</li>
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Home</li>
     <li class="wy-breadcrumbs-aside">
-      
-        
-          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="icon icon-github"> Edit on GitHub</a>
-        
-      
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/index.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
-            <div class="section">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
               
                 <h1 id="olc-redmine-automator">OLC Redmine Automator</h1>
 <p>To facilitate the sharing of the CFIA's genomic data and tools to analyze this data, we make use of the Redmine
@@ -473,133 +196,127 @@ brief overview of what Redmine can do.</p>
 <p><br></p>
 <h2 id="possible-analyses">Possible Analyses</h2>
 <h3 id="i-want-to">I want to:</h3>
-<p><details>
-  <summary><b>Download sequence data, or share sequence data with a collaborator</b></summary><br />
-  To retrieve a zip file of your sequence data (which can also be shared with external collaborators) use automators:  </p>
-<ul>
-<li><a href="data/external_retrieve/"><strong>External retrieve</strong></a> - exports a list of sequences in a zipped file</li>
-</ul>
-<p></details>
-<br>
 <details>
-  <summary><b>Download COWBAT reports for a list of sequence assemblies</b></summary><br />
-  To retrieve a zip file of the COWBAT assembly pipeline reports for your list of SeqIDs:  </p>
-<ul>
-<li><a href="data/report_retrieve/"><strong>Report retrieve</strong></a> - exports a csv file of the legacy_combinedMetadata for your sequences, as well as a zip file containing all reports for those sequences.</li>
-</ul>
-<p></details>
-<br>
+  <summary><b>Download sequence data, or share sequence data with a collaborator</b></summary>  
+  To retrieve a zip file of your sequence data (which can also be shared with external collaborators) use automators:  
+
+   * [**External retrieve**](data/external_retrieve.md) - exports a list of sequences in a zipped file
+
+</details>
+<p><br></p>
 <details>
-  <summary><b>Detect gene(s) in my sequences</b></summary><br />
-  Automators that allow you to screen sequence(s) for gene targets:  </p>
-<ul>
-<li><a href="analysis/geneseekr/"><strong>GeneSeekr</strong></a> - assemblies only  </li>
-<li><a href="analysis/kma/"><strong>KMA</strong></a> - allows you to screen raw reads and assemblies</li>
-<li><a href="analysis/cardrgi/"><strong>CARDRGI</strong></a> - <em>specific to AMR detection</em></li>
-</ul>
-<p></details>
-<br>
+  <summary><b>Download COWBAT reports for a list of sequence assemblies</b></summary>  
+  To retrieve a zip file of the COWBAT assembly pipeline reports for your list of SeqIDs:  
+
+   * [**Report retrieve**](data/report_retrieve.md) - exports a csv file of the legacy_combinedMetadata for your sequences, as well as a zip file containing all reports for those sequences.
+
+</details>
+<p><br></p>
 <details>
-  <summary><b>Inspect the contigs of my Hybrid Assembly</b></summary><br />
-  Automators that allow you to retrieve gfa (graph files) for your hybrid assemblies:  </p>
-<ul>
-<li><a href="analysis/gfa_retrieve/"><strong>gfaretrieve</strong></a> - hybrid assemblies only (MIN sequences)  </li>
-</ul>
-<p></details>
-<br>
+  <summary><b>Detect gene(s) in my sequences</b></summary>  
+  Automators that allow you to screen sequence(s) for gene targets:  
+
+   * [**GeneSeekr**](analysis/geneseekr.md) - assemblies only  
+   * [**KMA**](analysis/kma.md) - allows you to screen raw reads and assemblies
+   * [**CARDRGI**](analysis/cardrgi.md) - *specific to AMR detection*
+
+</details>
+<p><br></p>
 <details>
-  <summary><b>Determine the genus/species of a whole genome sequence assembly</b></summary><br />
-  If you are unsure of the genus/species of your isolate, you can use the automator:  </p>
-<ul>
-<li><a href="analysis/unknownisolate/"><strong>Unknownisolate</strong></a> - compares WGS assembly to ATCC and RefSeq genomes, and determines rMLST type. Outputs a GROBI report for probably identity.</li>
-</ul>
-<p></details>
-<br>
+  <summary><b>Inspect the contigs of my Hybrid Assembly</b></summary>  
+  Automators that allow you to retrieve gfa (graph files) for your hybrid assemblies:  
+
+   * [**gfaretrieve**](analysis/gfa_retrieve.md) - hybrid assemblies only (MIN sequences)  
+
+
+</details>
+<p><br></p>
 <details>
-  <summary><b>Find the <i>X</i> most diverse sequences in a set of sequences</b></summary><br />
-  If you want to find a number of diverse (e.g. distantly related) sequences from a set of sequences :  </p>
-<ul>
-<li><a href="analysis/diversitree/"><strong>diversitree</strong></a> - will output a list based on user's requested number of sequences.</li>
-</ul>
-<p></details>
-<br>
+  <summary><b>Determine the genus/species of a whole genome sequence assembly</b></summary>  
+  If you are unsure of the genus/species of your isolate, you can use the automator:  
+
+   * [**Unknownisolate**](analysis/unknownisolate.md) - compares WGS assembly to ATCC and RefSeq genomes, and determines rMLST type. Outputs a GROBI report for probably identity.
+
+</details>
+<p><br></p>
 <details>
-  <summary><b>Find sequences closely related to a query sequence</b></summary><br />
-  If you want to find <i>X</i> number of closest strains in a list to a query SeqID:  </p>
-<ul>
-<li><a href="analysis/neartree/"><strong>NearTree</strong></a> - calculates the most closely related strains to your query SeqID based on MASH distance</li>
-</ul>
-<p></details>
-<br>
+  <summary><b>Find the <i>X</i> most diverse sequences in a set of sequences</b></summary>  
+  If you want to find a number of diverse (e.g. distantly related) sequences from a set of sequences :  
+
+   * [**diversitree**](analysis/diversitree.md) - will output a list based on user's requested number of sequences.
+
+</details>
+<p><br></p>
 <details>
-  <summary><b>Determine taxonomy in metagenomes</b></summary><br />
-  If you want to detect the different organisms in your metagenomic sequence, you can use the automators:  </p>
-<ul>
-<li><a href="analysis/metaphlan/"><strong>Metaphlan</strong></a> - more specific than Kraken2, but less sensitive.</li>
-<li><a href="analysis/kraken2/"><strong>Kraken2/Bracken</strong></a> - more sensitive than metaphlan, but likely to give false positives to closely related genera/species. Bracken is more accurate than Kraken2 and Metaphlan4 (according to our publication <a href="https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-023-03148-6">Cooper et al, 2023</a>).</li>
-</ul>
-<p></details>
-<br>
+  <summary><b>Find sequences closely related to a query sequence</b></summary>  
+  If you want to find <i>X</i> number of closest strains in a list to a query SeqID:  
+
+   * [**NearTree**](analysis/neartree.md) - calculates the most closely related strains to your query SeqID based on MASH distance
+
+</details>
+<p><br></p>
 <details>
-  <summary><b>Find SNPs in my sequences</b></summary><br />
-  To detect single nucleotide polymorphisms (SNPs) in your sequences, you can use the automators:  </p>
-<ul>
-<li><a href="analysis/snvphyl/"><strong>SNVPhyl</strong></a> - </li>
-<li><a href="analysis/snippy/"><strong>Snippy</strong></a> - </li>
-</ul>
-<p></details>
-<br>
+  <summary><b>Determine taxonomy in metagenomes</b></summary>  
+  If you want to detect the different organisms in your metagenomic sequence, you can use the automators:  
+
+   * [**Metaphlan**](analysis/metaphlan.md) - more specific than Kraken2, but less sensitive.
+   * [**Kraken2/Bracken**](analysis/kraken2.md) - more sensitive than metaphlan, but likely to give false positives to closely related genera/species. Bracken is more accurate than Kraken2 and Metaphlan4 (according to our publication [Cooper et al, 2023](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-023-03148-6)).
+
+</details>
+<p><br></p>
 <details>
-  <summary><b>Annotate my sequence assemblies</b></summary><br />
-  To annotate your sequence assemblies, you can use the automators:  </p>
-<ul>
-<li><a href="analysis/prokka/"><strong>Prokka</strong></a> - whole genome annotation to identify features in gDNA (bacterial, archaeal, and viral)</li>
-<li><strong>Bakta</strong> - automator currently under development</li>
-</ul>
-<p></details>
-<br>
+  <summary><b>Find SNPs in my sequences</b></summary>  
+  To detect single nucleotide polymorphisms (SNPs) in your sequences, you can use the automators:  
+
+   * [**SNVPhyl**](analysis/snvphyl.md) - 
+   * [**Snippy**](analysis/snippy.md) - 
+
+</details>
+<p><br></p>
 <details>
-  <summary><b>Create a phylogeny</b></summary><br />
-  To create a phylogenetic tree from a list of sequences, you can use the automators:  </p>
-<ul>
-<li><a href="analysis/mashtree/"><strong>MASHtree</strong></a> - creates a phylogeny using MASH distances</li>
-<li><a href="analysis/bcgtree/"><strong>bcgtree</strong></a> - builds a phylogeny using bacterial core genes ("107 essential single-copy core genes")</li>
-<li><strong>iqtree</strong> - automator currently under development</li>
-</ul>
-<p></details>
-<br>
+  <summary><b>Annotate my sequence assemblies</b></summary>  
+  To annotate your sequence assemblies, you can use the automators:  
+
+   * [**Prokka**](analysis/prokka.md) - whole genome annotation to identify features in gDNA (bacterial, archaeal, and viral)
+   * **Bakta** - automator currently under development
+
+</details>
+<p><br></p>
 <details>
-  <summary><b>Run a genome wide association study (GWAS)</b></summary><br />
-  You can use the automators:  </p>
-<ul>
-<li><a href="analysis/roary/"><strong>Roary/Scoary</strong></a> - </li>
-<li><a href="analysis/pyseer/"><strong>Pyseer</strong></a> - </li>
-</ul>
-<p></details>
-<br></p>
+  <summary><b>Create a phylogeny</b></summary>  
+  To create a phylogenetic tree from a list of sequences, you can use the automators:  
+
+   * [**MASHtree**](analysis/mashtree.md) - creates a phylogeny using MASH distances
+   * [**bcgtree**](analysis/bcgtree.md) - builds a phylogeny using bacterial core genes ("107 essential single-copy core genes")
+   * **iqtree** - automator currently under development
+
+</details>
+<p><br></p>
+<details>
+  <summary><b>Run a genome wide association study (GWAS)</b></summary>  
+  You can use the automators:  
+
+   * [**Roary/Scoary**](analysis/roary.md) - 
+   * [**Pyseer**](analysis/pyseer.md) - 
+
+</details>
+<p><br></p>
               
             </div>
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="getting_started/" class="btn btn-neutral float-right" title="Getting started"/>Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="getting_started/" class="btn btn-neutral float-right" title="Getting Started">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <!-- Copyright etc -->
-    
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-	  
+          
         </div>
       </div>
 
@@ -607,22 +324,34 @@ brief overview of what Redmine can do.</p>
 
   </div>
 
-<div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
-      
-      
-      
-        <span style="margin-left: 15px"><a href="getting_started/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+      <span><a href="getting_started/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
 
 </body>
 </html>
 
 <!--
-MkDocs version : 0.14.0
-Build Date UTC : 2024-05-06 15:14:41.798723
+MkDocs version : 1.6.0
+Build Date UTC : 2024-06-19 16:25:13.365523+00:00
 -->

@@ -1,482 +1,208 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Snippy - OLC Redmine Automator</title>
-  
-
-  <link rel="shortcut icon" href="../../img/favicon.ico">
-
-  
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/highlight.css">
-
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "Snippy";
-  </script>
-  
-  <script src="../../js/jquery-2.1.1.min.js"></script>
-  <script src="../../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
-  <script src="../../js/theme.js"></script> 
-
-  
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/snippy/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Snippy - OLC Redmine Automator</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Snippy";
+        var mkdocs_page_input_path = "analysis/snippy.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/snippy/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
   <div class="wy-grid-for-nav">
-
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> OLC Redmine Automator</a>
-        <div role="search">
+          <a href="../.." class="icon icon-home"> OLC Redmine Automator
+        </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../..">Home</a>
-        
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/external_retrieve/">External Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/report_retrieve/">Report Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_upload/">SRA Upload</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Analysis</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../amrsummary/">AMRsummary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../autoclark/">AutoCLARK</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cardrgi/">CARD-RGI (AMR)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gfa_retrieve/">GFA Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pyseer/">GWAS-pyseer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kma/">KMA - Gene Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kraken2/">Kraken2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pointfinder/">PointFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../primerfinder/">PrimerFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sequence_extractor/">SequenceExtractor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snvphyl/">SNVPhyl</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Snippy</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
     </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../../getting_started/">Getting started</a>
-        
+    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
     </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../../troubleshooting/">Troubleshooting</a>
-        
+    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Tutorials</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/create_environment/">Create environment</a>
-        
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/create_pages/">Create pages</a>
-        
+    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
     </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/edit_pages/">Edit pages</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/publish_changes/">Publish changes</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Internal only</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../internal_only/merge/">Merge</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Analysis</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../amrsummary/">Amrsummary</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../autoclark/">Autoclark</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../bcgtree/">Bcgtree</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../cardrgi/">Cardrgi</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../closerelatives/">Closerelatives</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../confindr/">Confindr</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../cowsnphr/">Cowsnphr</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../diversitree/">Diversitree</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../drep/">Drep</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../eCGF/">eCGF</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../ectyper/">Ectyper</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../fastqc/">Fastqc</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../geneseekr/">Geneseekr</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../gfa_retrieve/">Gfa retrieve</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../intimintyper/">Intimintyper</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../kma/">Kma</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../kraken2/">Kraken2</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../mashtree/">Mashtree</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../metaphlan/">Metaphlan</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../mobsuite/">Mobsuite</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../neartree/">Neartree</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../plasmidborneidentity/">Plasmidborneidentity</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../pointfinder/">Pointfinder</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../primerfinder/">Primerfinder</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../prokka/">Prokka</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../psortb/">Psortb</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../pyseer/">Pyseer</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../resfinder/">Resfinder</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../roary/">Roary</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../sequence_extractor/">Sequence extractor</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../sipprverse/">Sipprverse</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Snippy</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#snippy">Snippy</a></li>
-                
-                    <li><a class="toctree-l4" href="#what-does-it-do">What does it do?</a></li>
-                
-                    <li><a class="toctree-l4" href="#how-do-i-use-it">How do I use it?</a></li>
-                
-                    <li><a class="toctree-l4" href="#variant-types">Variant types</a></li>
-                
-                    <li><a class="toctree-l4" href="#how-long-does-it-take">How long does it take?</a></li>
-                
-                    <li><a class="toctree-l4" href="#what-can-go-wrong">What can go wrong?</a></li>
-                
-                    <li><a class="toctree-l4" href="#should-i-use-snippy-or-snvphyl">Should I use Snippy or SNVPhyl?</a></li>
-                
-                    <li><a class="toctree-l4" href="#version">Version</a></li>
-                
-            
-            </ul>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../snvphyl/">Snvphyl</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../staramr/">Staramr</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../strainmash/">Strainmash</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../unknownisolate/">Unknownisolate</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../wgsassembly/">Wgsassembly</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Data</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../data/external_retrieve/">External retrieve</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../data/report_retrieve/">Report retrieve</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../data/sra_upload/">Sra upload</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#variant-types">Variant types</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#should-i-use-snippy-or-snvphyl">Should I use Snippy or SNVPhyl?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../staramr/">staramr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Internal Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/merge/">Merge</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/">Troubleshooting</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_pages/">Create Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/edit_pages/">Edit Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/publish_changes/">Publish Changes</a>
+                  </li>
+              </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">OLC Redmine Automator</a>
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OLC Redmine Automator</a>
+        
       </nav>
-
-      
       <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../..">Docs</a> &raquo;</li>
-    
-      
-        
-          <li>Analysis &raquo;</li>
-        
-      
-    
-    <li>Snippy</li>
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Analysis</li>
+      <li class="breadcrumb-item active">Snippy</li>
     <li class="wy-breadcrumbs-aside">
-      
-        
-          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="icon icon-github"> Edit on GitHub</a>
-        
-      
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/snippy.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
-            <div class="section">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
               
                 <h1 id="snippy">Snippy</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
@@ -522,36 +248,36 @@ for more information.</p>
 <table>
 <thead>
 <tr>
-<th align="center">Type</th>
-<th align="center">Name</th>
-<th align="center">Example</th>
+<th style="text-align: center;">Type</th>
+<th style="text-align: center;">Name</th>
+<th style="text-align: center;">Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">snp</td>
-<td align="center">Single Nucleotide Polymorphism</td>
-<td align="center">A =&gt; T</td>
+<td style="text-align: center;">snp</td>
+<td style="text-align: center;">Single Nucleotide Polymorphism</td>
+<td style="text-align: center;">A =&gt; T</td>
 </tr>
 <tr>
-<td align="center">mnp</td>
-<td align="center">Multiple Nuclotide Polymorphism</td>
-<td align="center">GC =&gt; AT</td>
+<td style="text-align: center;">mnp</td>
+<td style="text-align: center;">Multiple Nuclotide Polymorphism</td>
+<td style="text-align: center;">GC =&gt; AT</td>
 </tr>
 <tr>
-<td align="center">ins</td>
-<td align="center">Insertion</td>
-<td align="center">ATT =&gt; AGTT</td>
+<td style="text-align: center;">ins</td>
+<td style="text-align: center;">Insertion</td>
+<td style="text-align: center;">ATT =&gt; AGTT</td>
 </tr>
 <tr>
-<td align="center">del</td>
-<td align="center">Deletion</td>
-<td align="center">ACGG =&gt; ACG</td>
+<td style="text-align: center;">del</td>
+<td style="text-align: center;">Deletion</td>
+<td style="text-align: center;">ACGG =&gt; ACG</td>
 </tr>
 <tr>
-<td align="center">complex</td>
-<td align="center">Combination of snp/mnp</td>
-<td align="center">ATTC =&gt; GTTA</td>
+<td style="text-align: center;">complex</td>
+<td style="text-align: center;">Combination of snp/mnp</td>
+<td style="text-align: center;">ATTC =&gt; GTTA</td>
 </tr>
 </tbody>
 </table>
@@ -572,29 +298,21 @@ the reference. If you ask for a snippy-analysis with things that are not very re
 <p>Snippy version 4.6.0 (as of 2024-04-05)</p>
               
             </div>
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../snvphyl/" class="btn btn-neutral float-right" title="Snvphyl"/>Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../sipprverse/" class="btn btn-neutral" title="Sipprverse"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../snvphyl/" class="btn btn-neutral float-left" title="SNVPhyl"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../staramr/" class="btn btn-neutral float-right" title="staramr">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <!-- Copyright etc -->
-    
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-	  
+          
         </div>
       </div>
 
@@ -602,19 +320,31 @@ the reference. If you ask for a snippy-analysis with things that are not very re
 
   </div>
 
-<div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
-      
-      
-        <span><a href="../sipprverse/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../snvphyl/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../snvphyl/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../staramr/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
 
 </body>
 </html>

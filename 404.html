@@ -1,309 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        
-        <link rel="shortcut icon" href="/redmine-docs/img/favicon.ico">
-        <title>OLC Redmine Automator</title>
-        <link href="/redmine-docs/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/redmine-docs/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/redmine-docs/css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/docco.min.css">
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="/redmine-docs/img/favicon.ico" />
+    <title>OLC Redmine Automator</title>
+    <link rel="stylesheet" href="/redmine-docs/css/theme.css" />
+    <link rel="stylesheet" href="/redmine-docs/css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+    <!--[if lt IE 9]>
+      <script src="/redmine-docs/js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
 
-        <script src="/redmine-docs/js/jquery-1.10.2.min.js" defer></script>
-        <script src="/redmine-docs/js/bootstrap.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
-    </head>
+<body class="wy-body-for-nav" role="document">
 
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="/redmine-docs/.">OLC Redmine Automator</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="/redmine-docs/." class="icon icon-home"> OLC Redmine Automator
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="/redmine-docs//search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
 
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="navitem">
-                                <a href="/redmine-docs/." class="nav-link">Home</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="/redmine-docs/getting_started/" class="nav-link">Getting Started</a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="/redmine-docs/data/external_retrieve/" class="dropdown-item">External Retrieve</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/data/report_retrieve/" class="dropdown-item">Report Retrieve</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/data/sra_upload/" class="dropdown-item">SRA Upload</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Analysis <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="/redmine-docs/analysis/amrsummary/" class="dropdown-item">AMRsummary</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/autoclark/" class="dropdown-item">AutoCLARK</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/bcgtree/" class="dropdown-item">bcgTree</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/confindr/" class="dropdown-item">ConFindr</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/cowsnphr/" class="dropdown-item">COWSNPhR</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/closerelatives/" class="dropdown-item">CloseRelatives</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/eCGF/" class="dropdown-item">eCGF</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/ectyper/" class="dropdown-item">ECTyper</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/diversitree/" class="dropdown-item">DiversiTree</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/drep/" class="dropdown-item">dRep-ANI</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/geneseekr/" class="dropdown-item">GeneSeekr</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/pyseer/" class="dropdown-item">GWAS-pyseer</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/intimintyper/" class="dropdown-item">IntiminTyper</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/mashtree/" class="dropdown-item">Mashtree</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/mobsuite/" class="dropdown-item">MobSuite</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/neartree/" class="dropdown-item">NearTree</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/plasmidborneidentity/" class="dropdown-item">PlasmidBorneIdentity</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/pointfinder/" class="dropdown-item">PointFinder</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/primerfinder/" class="dropdown-item">PrimerFinder</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/prokka/" class="dropdown-item">Prokka</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/psortb/" class="dropdown-item">PSORTb</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/resfinder/" class="dropdown-item">ResFinder</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/roary/" class="dropdown-item">Roary</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/sipprverse/" class="dropdown-item">sipprverse</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/snvphyl/" class="dropdown-item">SNVPhyl</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/staramr/" class="dropdown-item">staramr</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/strainmash/" class="dropdown-item">StrainMash</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/analysis/wgsassembly/" class="dropdown-item">WGS Assembly</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Internal Use <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="/redmine-docs/internal_only/merge/" class="dropdown-item">Merge</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="navitem">
-                                <a href="/redmine-docs/troubleshooting/" class="nav-link">Troubleshooting</a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="/redmine-docs/tutorials/create_environment/" class="dropdown-item">Create Environment</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/tutorials/create_pages/" class="dropdown-item">Create Pages</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/tutorials/edit_pages/" class="dropdown-item">Edit Pages</a>
-</li>
-                                    
-<li>
-    <a href="/redmine-docs/tutorials/publish_changes/" class="dropdown-item">Publish Changes</a>
-</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-
-    <div class="row-fluid">
-      <div id="main-content" class="span12">
-        <h1 id="404-page-not-found" style="text-align: center">404</h1>
-        <p style="text-align: center"><strong>Page not found</strong></p>
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/.">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/data/external_retrieve/">External Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/data/report_retrieve/">Report Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/data/sra_upload/">SRA Upload</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Analysis</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/amrsummary/">AMRsummary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/autoclark/">AutoCLARK</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/bcgtree/">bcgTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/cardrgi/">CARD-RGI (AMR)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/confindr/">ConFindr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/cowsnphr/">COWSNPhR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/closerelatives/">CloseRelatives</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/eCGF/">eCGF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/ectyper/">ECTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/diversitree/">DiversiTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/drep/">dRep-ANI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/geneseekr/">GeneSeekr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/gfa_retrieve/">GFA Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/pyseer/">GWAS-pyseer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/intimintyper/">IntiminTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/kma/">KMA - Gene Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/kraken2/">Kraken2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/mashtree/">Mashtree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/mobsuite/">MobSuite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/plasmidborneidentity/">PlasmidBorneIdentity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/pointfinder/">PointFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/primerfinder/">PrimerFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/prokka/">Prokka</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/resfinder/">ResFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/roary/">Roary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/sequence_extractor/">SequenceExtractor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/sipprverse/">sipprverse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/snvphyl/">SNVPhyl</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/snippy/">Snippy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/staramr/">staramr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/strainmash/">StrainMash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/unknownisolate/">Unknownisolate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/analysis/wgsassembly/">WGS Assembly</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Internal Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/internal_only/merge/">Merge</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/troubleshooting/">Troubleshooting</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/tutorials/create_environment/">Create Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/tutorials/create_pages/">Create Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/tutorials/edit_pages/">Edit Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="/redmine-docs/tutorials/publish_changes/">Publish Changes</a>
+                  </li>
+              </ul>
       </div>
     </div>
+    </nav>
 
-
-            </div>
-        </div>
-
-        <footer class="col-md-12">
-            <hr>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "/redmine-docs/",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="/redmine-docs/js/base.js" defer></script>
-        <script src="/redmine-docs/search/main.js" defer></script>
-
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
-                <form>
-                    <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="/redmine-docs/.">OLC Redmine Automator</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="/redmine-docs/." class="icon icon-home" aria-label="Docs"></a></li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
 </div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
 
-    </body>
+  <h1 id="404-page-not-found">404</h1>
+
+  <p><strong>Page not found</strong></p>
+
+
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="/redmine-docs/js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "/redmine-docs/";</script>
+    <script src="/redmine-docs/js/theme_extra.js"></script>
+    <script src="/redmine-docs/js/theme.js"></script>
+      <script src="/redmine-docs/search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
 </html>
