@@ -53,7 +53,7 @@ nav:
     - 'Merge': 'internal_only/merge.md'
 - Troubleshooting: 'troubleshooting.md'
 - Tutorials: 
-    - 'Create Environment': 'tutorials/create_environment.md'
+    - 'Open Environment': 'tutorials/open_environment.md'
     - 'Create Pages': 'tutorials/create_pages.md'
     - 'Edit Pages': 'tutorials/edit_pages.md'
     - 'Publish Changes': 'tutorials/publish_changes.md'
