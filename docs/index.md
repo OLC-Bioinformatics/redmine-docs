@@ -40,6 +40,15 @@ For any issues or general help with Redmine, see the [Troubleshooting](troublesh
 </details>
 <br>
 <details>
+  <summary><b>Inspect the contigs of my Hybrid Assembly</b></summary>  
+  Automators that allow you to retrieve gfa (graph files) for your hybrid assemblies:  
+
+   * [**gfaretrieve**](analysis/gfa_retrieve.md) - hybrid assemblies only (MIN sequences)  
+
+
+</details>
+<br>
+<details>
   <summary><b>Determine the genus/species of a whole genome sequence assembly</b></summary>  
   If you are unsure of the genus/species of your isolate, you can use the automator:  
 

@@ -6,15 +6,19 @@ This is the way I edit pages. Feel free to use any method with which you are com
 
 `mkdocs serve`
 
-- Navigate to the served pages in your browser e.g. `http://127.0.0.1:8000/redmine-docs/`
+- Navigate to the served pages in your browser e.g. `http://127.0.0.1:8000/redmine-docs/` 
 
 - Ensure that the page you are going to edit is present in the Nav bar e.g. 'Analysis' -> 'SISTR'
 
 	- You should see an empty page
 
-
-- Open the markdown file with your favourite editor
+- Find the markdown file associated with the page you want to edit within the redmine-docs folder under 'docs'. Open the markdown file with your favourite editor (R, Text Editor, etc.)
 
 - Update the documentation using markdown language - I usually use one of the other files in the folder as a template to ensure that I'm following the same basic format each time
 
 	- Every time you save your document, the served page will refresh
+	
+Basic markdown cheatsheet:
+
+![markdown cheatsheet](../img/markdown_cheatsheet.jpg)
+
