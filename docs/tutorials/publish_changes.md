@@ -27,7 +27,7 @@ Once you are satisfied with your new page, you need to commit your changes to th
 
 In order to push changes, the terminal will request you enter your github credentials after the commands `git push origin` and `mkdocs gh-deploy`.
 
-- Your username will be the email you used to sign up for Github
+- Your username will be your email you used to sign up for Github or your Github username
 - Your password will be your _github token_ NOT your Github password
 
 You can generate a personal access token in your Github settings under `Developer Settings` > Personal access tokens > Tokens (classic). Select an expiration date and your scopes (ie. what you want your token to give access to) then click `Generate token`.
