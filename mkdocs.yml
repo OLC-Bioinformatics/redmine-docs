@@ -51,6 +51,7 @@ nav:
     - 'WGS Assembly': 'analysis/wgsassembly.md'
 - Internal Use:
     - 'Merge': 'internal_only/merge.md'
+    - 'AzureDownload': 'internal_only/azuredownload.md'
 - Troubleshooting: 'troubleshooting.md'
 - Tutorials: 
     - 'Open Environment': 'tutorials/open_environment.md'
