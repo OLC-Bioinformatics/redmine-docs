@@ -202,8 +202,7 @@
               
                 <h1 id="azuredownload">Azuredownload</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>Merge will take data from multiple MiSeq runs of the same strain and combine the FASTQ files in order 
-to produce a better assembly. </p>
+<p>The azuredownload automator will download the raw read data, assembly files, and report files output by the foodport assembly pipeline. It then moves the files to the correct locations on the NAS (e.g. processed sequence data), so that users can use the files for analyses in other redmine automators.</p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
 <p>In the <code>Subject</code> field, put <code>azuredownload</code>. Spelling counts, but case sensitivity doesn't.</p>
@@ -244,7 +243,7 @@ Next line: <code>sequence_folder=folder name</code></p>
 <p>Az will take quite a while, depending on how many samples you have. Probably roughly half an hour per sample.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
 <p>1) Sequence folder cannot be found. Check spelling of the file in description and ensure that you are using dashes instead of underscores. </p>
-<p>2) Sequence folder cannot be found. Do not download the assembly folder from Foodport. After the COWBAT run is finished it will automatically be placed in the correct location on the nas. If you download a replicate an error may occur.</p>
+<p>2) Sequence folder cannot be found. Do not download the assembly folder from Foodport. After the COWBAT run is finished it will automatically be placed in the correct location on the NAS for azuredownload. If you download it manually a replicate an error may occur.</p>
 <p>If the upload is not done correctly you will get a warning message informing you of it.</p>
               
             </div>

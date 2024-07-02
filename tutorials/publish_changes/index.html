@@ -154,6 +154,8 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Publish Changes</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#finding-your-github-token">Finding your Github Token</a>
+    </li>
     </ul>
                   </li>
               </ul>
@@ -201,13 +203,13 @@
 <li>
 <p>commit your changes with a useful message</p>
 <ul>
-<li><code>git commit -m "Added SISTR analysis</code></li>
+<li><code>git commit -m "Added SISTR analysis"</code></li>
 </ul>
 </li>
 <li>
 <p>push your commits</p>
 <ul>
-<li><code>git push origin master</code></li>
+<li><code>git push origin</code></li>
 </ul>
 </li>
 <li>
@@ -217,6 +219,15 @@
 </ul>
 </li>
 </ul>
+<h3 id="finding-your-github-token">Finding your Github Token</h3>
+<p>In order to push changes, the terminal will request you enter your github credentials after the commands <code>git push origin</code> and <code>mkdocs gh-deploy</code>.</p>
+<ul>
+<li>Your username will be your email you used to sign up for Github or your Github username</li>
+<li>Your password will be your <em>github token</em> NOT your Github password</li>
+</ul>
+<p>You can generate a personal access token in your Github settings under <code>Developer Settings</code> &gt; Personal access tokens &gt; Tokens (classic). Select an expiration date and your scopes (ie. what you want your token to give access to) then click <code>Generate token</code>.</p>
+<p>Your token will be a string of characters that you will not remember, so be sure to write it in a secure document.</p>
+<p>Note: the terminal will not show your password as you type it.</p>
               
             </div>
           </div><footer>
