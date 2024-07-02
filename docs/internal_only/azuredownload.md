@@ -2,8 +2,7 @@
 
 ### What does it do?
 
-Merge will take data from multiple MiSeq runs of the same strain and combine the FASTQ files in order 
-to produce a better assembly. 
+The azuredownload automator will download the raw read data, assembly files, and report files output by the foodport assembly pipeline. It then moves the files to the correct locations on the NAS (e.g. processed sequence data), so that users can use the files for analyses in other redmine automators.
 
 ### How do I use it?
 
@@ -64,7 +63,7 @@ Az will take quite a while, depending on how many samples you have. Probably rou
 
 1) Sequence folder cannot be found. Check spelling of the file in description and ensure that you are using dashes instead of underscores. 
 
-2) Sequence folder cannot be found. Do not download the assembly folder from Foodport. After the COWBAT run is finished it will automatically be placed in the correct location on the nas. If you download a replicate an error may occur.
+2) Sequence folder cannot be found. Do not download the assembly folder from Foodport. After the COWBAT run is finished it will automatically be placed in the correct location on the NAS for azuredownload. If you download it manually a replicate an error may occur.
 
 If the upload is not done correctly you will get a warning message informing you of it.
 
