@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/data/sra_upload/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/internal_only/azuredownload/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>SRA Upload - OLC Redmine Automator</title>
+    <title>AzureDownload - OLC Redmine Automator</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "SRA Upload";
-        var mkdocs_page_input_path = "data/sra_upload.md";
-        var mkdocs_page_url = "/redmine-docs/data/sra_upload/";
+        var mkdocs_page_name = "AzureDownload";
+        var mkdocs_page_input_path = "internal_only/azuredownload.md";
+        var mkdocs_page_url = "/redmine-docs/internal_only/azuredownload/";
       </script>
     
     <!--[if lt IE 9]>
@@ -48,30 +48,12 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Data</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../external_retrieve/">External Retrieve</a>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/external_retrieve/">External Retrieve</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../report_retrieve/">Report Retrieve</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/report_retrieve/">Report Retrieve</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">SRA Upload</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_upload/">SRA Upload</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Analysis</span></p>
@@ -152,10 +134,30 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/merge/">Merge</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../merge/">Merge</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/azuredownload/">AzureDownload</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">AzureDownload</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <ul>
@@ -187,10 +189,10 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Data</li>
-      <li class="breadcrumb-item active">SRA Upload</li>
+          <li class="breadcrumb-item">Internal Use</li>
+      <li class="breadcrumb-item active">AzureDownload</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/data/sra_upload.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/internal_only/azuredownload.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -198,44 +200,58 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="sra-upload">SRA Upload</h1>
+                <h1 id="azuredownload">Azuredownload</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>SRA Upload allows you to preload your sequence data for submission to the NCBI SRA using an FTP connection.</p>
+<p>Merge will take data from multiple MiSeq runs of the same strain and combine the FASTQ files in order 
+to produce a better assembly. </p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>SRA Upload</code>. Spelling counts, but case sensitivity doesn't.</p>
+<p>In the <code>Subject</code> field, put <code>azuredownload</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
-<p>Before submitting, you'll need to get your FTP username, FTP password, and FTP folder name from the SRA.
-To do this, log in to the SRA submission portal. Click on the <code>My Submissions</code> tab towards the top right of the page,
-and then in the <code>Start a new submission</code> box, click <code>Sequence Read Archive</code>. Under <code>Options to preload data</code>, click 
-<code>FTP upload</code>, and take note of the <strong>Username</strong>, <strong>Password</strong>, and the text under <strong>Navigate to your account folder.</strong></p>
-<p>Once you have those three things, you're ready to go. Put the username in the first line of the description, password 
-in the second line, and the folder specified in the third (it should be something like <code>uploads/youremail_a1d3a1</code>).
-In subsequent lines, put the SeqIDs you want to upload files for. Once the request finishes running, you should be 
-able to find a folder named with your Redmine issue ID when you select a preload folder during submission.</p>
+<p>In the <code>Description</code> field, the required components are the following:</p>
+<p>First line: <code>machine=other</code><br />
+Next line: <code>location=ncbi</code><br />
+Next line: <code>sequence_folder=folder name</code></p>
+<p>The 'folder name' should be replaced with the name of the sequence folder used for assembly on <a href="http://10.148.57.4/">Foodport</a>. </p>
+<p><strong>Important note:</strong> even if you uploaded the run to Foodport using an underscore "_" in the name, do not use an underscore in the redmine automator. It must be a dash:</p>
+<p><code>sequence_folder=YYMMDD-lab</code></p>
+<p>You must also provide the requested/used machine type as follows <code>machine=miseq</code></p>
+<p>Azuredownload supports the following analyses:</p>
+<ul>
+<li><code>miseq</code> - used for MiSeq sequencer runs assembled on Foodport</li>
+<li><code>nextseq</code> - used for NextSeq sequencer runs assembled on Foodport</li>
+<li><code>other</code> - used for any "other" data assembled on Foodport.<ul>
+<li>For example data downloaded from NCBI and uploaded to Foodport to be assembled with our pipeline. Or random research assemblies done through Foodport.</li>
+<li>The user must also add the <code>flag location=</code> and the name of the location the sequence assemblies are to be stored on the nas</li>
+</ul>
+</li>
+</ul>
+<p>Possible flag locations include:</p>
+<ul>
+<li><code>atcc</code> - for ATCC assemblies </li>
+<li><code>enterobase</code> - for enterobase sequences</li>
+<li><code>ncbi</code> - raw data from SRA or NCBI</li>
+<li><code>merged</code> - any merged sequence data</li>
+<li><code>refseq</code> - refseq sequences</li>
+<li><code>other</code> - anything that does not fit in these categories (eg. research samples)</li>
+</ul>
+<p>An example file can be found with the example issue below.</p>
 <h4 id="example">Example</h4>
-<p>For an example of an SRA Upload, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/14963">issue 14963</a>.</p>
+<p>For an example Azuredownload, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/34137">issue 34137</a>.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>A file named <code>legacy_combinedMetadata.csv</code> will be returned containing a table of information about each equence in the assembly folder.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>If your request is for a small number of files, it will generally be done within a few minutes. The more files requested,
-the longer the request will take.</p>
+<p>Az will take quite a while, depending on how many samples you have. Probably roughly half an hour per sample.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>A few things can go wrong with this process:</p>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) FTP timeout. Sometimes, particularly for larger requests, the upload to the FTP will run into problems and time out,
-in which case you will likely get an error message similar to this: <code>[Errno 104] Connection reset by peer</code>. If this occurs,
-you can either try again later, or, if you had a large request, try splitting it into a few smaller requests. If the
-problem persists, send us an email and we'll try to get it figured out.</p>
-<p>3) Bad FTP credentials. If the username and password for the NCBI FTP site didn't work you'll get a message telling you so.
-Make sure your username is on the first line of the request and password is second.</p>
-<p>4) FTP folder does not exist. If the FTP folder specified on the third line of the description isn't correct,
-you'll get a message saying so.</p>
+<p>1) Sequence folder cannot be found. Check spelling of the file in description and ensure that you are using dashes instead of underscores. </p>
+<p>2) Sequence folder cannot be found. Do not download the assembly folder from Foodport. After the COWBAT run is finished it will automatically be placed in the correct location on the nas. If you download a replicate an error may occur.</p>
+<p>If the upload is not done correctly you will get a warning message informing you of it.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../report_retrieve/" class="btn btn-neutral float-left" title="Report Retrieve"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../analysis/amrsummary/" class="btn btn-neutral float-right" title="AMRsummary">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../merge/" class="btn btn-neutral float-left" title="Merge"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../troubleshooting/" class="btn btn-neutral float-right" title="Troubleshooting">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -262,10 +278,10 @@ you'll get a message saying so.</p>
         </span>
     
     
-      <span><a href="../report_retrieve/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../merge/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../analysis/amrsummary/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../troubleshooting/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
