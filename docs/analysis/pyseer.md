@@ -126,4 +126,7 @@ The bcgTree pipeline time will depend on the number of sequences and bootstraps 
 1. Requested SEQIDs are not available. If we cant find some of the SEQIDs that you request, you will get a warning message informing you of it.
 2. A traits.tsv file was not uploaded to redmine. You will get a warning message informing you to re-submit the request.
 
+### Version
+
+Version 1.3.11 is currently available at the OLC. (as of 2024-07-4)
 

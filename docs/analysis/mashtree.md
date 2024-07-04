@@ -68,3 +68,7 @@ A few things can go wrong with this process:
 
 1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
 message informing you of it.
+
+### Version
+
+Version 0.35.4 is currently available at the OLC. (as of 2024-07-4)

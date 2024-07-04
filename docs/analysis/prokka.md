@@ -37,4 +37,4 @@ have connection issues that stop uploads from happening properly. If this is the
 try again later. FTP connection issues usually only persist for a few hours at a time.
 
 ### Version
-Prokka version on redmine is 1.14.6 (as of 2024-04-05)
+Prokka version on redmine is 1.14.6 (as of 2024-07-03)

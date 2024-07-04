@@ -96,6 +96,6 @@ Snippy appears to be faster than SNVPhyl. It also allows use of both paired-end 
 A comparison of snippy vs SNVPhyl has not been conducted by our lab. The [SNVPhyl publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5628696/) does briefly discuss snippy.
 
 ### Version
-Snippy version 4.6.0 (as of 2024-04-05)
+Snippy version 4.6.0 (as of 2024-07-03)
 
 

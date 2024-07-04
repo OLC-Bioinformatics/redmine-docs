@@ -43,3 +43,7 @@ message informing you of it.
 in which case you will likely get an error message similar to this: `[Errno 104] Connection reset by peer`. If this occurs,
 you can either try again later, or, if you had a large request, try splitting it into a few smaller requests. If the
 problem persists, send us an email and we'll try to get it figured out.
+
+### Version
+
+Mobsuite3 version 3.1.9 is currently available at the OLC. (as of 2024-07-4)

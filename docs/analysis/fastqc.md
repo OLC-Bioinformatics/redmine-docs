@@ -35,4 +35,7 @@ FastQC is usually pretty fast, <1 minute per sequence. The time required for ana
 
 1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.
 
+### Version
+
+Version 0.11.9 is currently available at the OLC. (as of 2024-07-4)
 

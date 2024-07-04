@@ -43,3 +43,7 @@ ConFindr will take between 1 and 2 minutes for each sample.
 
 1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
 message informing you of it.
+
+### Version
+
+Version 4.0.3 is currently available at the OLC. (as of 2024-07-4)

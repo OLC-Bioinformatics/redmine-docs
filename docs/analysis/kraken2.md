@@ -56,4 +56,7 @@ Kraken2 is much faster than the original kraken, however the time required for a
 
 1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.
 
+### Version
+
+Version 2.1.2 is currently available at the OLC. (as of 2024-07-4)
 

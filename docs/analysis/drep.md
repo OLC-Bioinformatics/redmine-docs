@@ -87,3 +87,7 @@ A few things can go wrong with this process:
 message informing you of it.
 
 2) You did not provide an analysis type. Custom analysis only completes dRep compare for the SEQ-IDs listed, whereas enterobacterales will compare your listed sequences to reference sequences from the order Enterobacterales, and listeriaceae will compare your listed sequences to reference sequences from the family Listeriaceae.
+
+### Version
+
+Version 3.2.2 is currently available at the OLC. (as of 2024-07-4)

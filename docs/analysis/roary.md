@@ -84,3 +84,6 @@ Prokka isn't the quickest thing around - expect it to take 2 to 3 minutes for ea
 2. There was an issue with the requested analysistype: either one was not supplied, the was a typo, or you requested a currently-unsupported analysis. An error message detailing the problem will be added to the issue.
 3. **Scoary** You will not get an error if the traits.csv file is not attached or formatted correctly. Roary will complete, but no `.csv` files for each of the traits will be included in the zip file. Unfortunately, you will have to submit the analysis request again with the correct `traits.csv` formatting.
 
+### Version
+
+Roary version 3.13.0 is currently available at the OLC. (as of 2024-07-4)
