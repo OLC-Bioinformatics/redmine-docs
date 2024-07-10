@@ -11,6 +11,7 @@ nav:
     - 'External Retrieve': 'data/external_retrieve.md'
     - 'Report Retrieve': 'data/report_retrieve.md'
     - 'SRA Upload': 'data/sra_upload.md'
+    - 'SRA Download': 'data/sra_download.md'
 - Analysis:
     - 'AMRsummary': 'analysis/amrsummary.md'
     - 'AutoCLARK': 'analysis/autoclark.md'
@@ -33,6 +34,7 @@ nav:
     - 'Mashtree': 'analysis/mashtree.md'
     - 'Metaphlan4': 'analysis/metaphlan.md'
     - 'MobSuite': 'analysis/mobsuite.md'
+    - 'MLST': 'analysis/mlst.md'
     - 'NearTree': 'analysis/neartree.md'
     - 'PlasmidBorneIdentity': 'analysis/plasmidborneidentity.md'
     - 'PointFinder': 'analysis/pointfinder.md'

@@ -12,8 +12,8 @@ will wait in queue until compute resources are freed up. This should be a fairly
 
 #### Contact Info
 
-If you're having issues or want a new tool implemented, email us! For quickest response times, email Andrew with Adam CC'd.
+If you're having issues or want a new tool implemented, email us! For quickest response times, email Ashley with Adam CC'd.
 
-Andrew Low: `andrew.low@canada.ca`
+Ashley Cooper: `ashley.cooper@inspection.gc.ca`
 
-Adam Koziol: `adam.koziol@canada.ca`
+Adam Koziol: `adam.koziol@inspection.gc.ca`
