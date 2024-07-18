@@ -25,7 +25,7 @@ In the `Subject` field, put `sradownload`. Spelling counts, but case sensitivity
 
 #### Example
 
-For an example of an SRA Upload, see [issue 34216](https://redmine.biodiversity.agr.gc.ca/issues/34216).
+For an example of an SRA download, see [issue 34216](https://redmine.biodiversity.agr.gc.ca/issues/34216).
 
 ### How long does it take?
 
