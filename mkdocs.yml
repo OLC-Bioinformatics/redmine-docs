@@ -42,6 +42,7 @@ nav:
     - 'Prokka': 'analysis/prokka.md'
     - 'PSORTb': 'analysis/psortb.md'
     - 'ResFinder': 'analysis/resfinder.md'
+    - 'rMLST': 'analysis/rmlst.md'
     - 'Roary': 'analysis/roary.md'
     - 'SequenceExtractor': 'analysis/sequence_extractor.md'
     - 'sipprverse': 'analysis/sipprverse.md'

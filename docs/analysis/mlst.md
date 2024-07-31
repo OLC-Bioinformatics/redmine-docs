@@ -178,11 +178,11 @@ You can also choose to update the OLC database by entering `update` on the next 
 
 Then add the SEQID's on separate lines to match the rest of the document.
 
-Note that FASTA files can also be attatched to the issue and be processed. This can used in addition to or instead of SEQIDs. However, there is a 5MB limit to the attatched file enforced by Redmine
+Note that FASTA files can also be attatched to the issue and be processed. This can used in addition to or instead of SEQIDs. However, there is a 5MB limit to the attatched file enforced by Redmine.
 
 #### Example
 
-For an example mlst see [issue 34327](https://redmine.biodiversity.agr.gc.ca/issues/34327) or [issue 34328](https://redmine.biodiversity.agr.gc.ca/issues/34328)
+For an example mlst see [issue 34327](https://redmine.biodiversity.agr.gc.ca/issues/34327) or [issue 34328](https://redmine.biodiversity.agr.gc.ca/issues/34328).
 
 #### Interpreting Results
 
@@ -190,7 +190,7 @@ If submitted correctly you will recieve a zip folder named `geneseekr_output_[is
 
 ### How long does it take?
 
-​It should take a minute or two for the automator to run depending on whether the database needs to be installed/updated. Adding more sequences will scale up the time required​ 
+​It should take a minute or two for the automator to run depending on whether the database needs to be installed/updated. Adding more sequences will scale up the time required​.
 
 ### What can go wrong?
 
@@ -202,5 +202,5 @@ A few things can go wrong with this process:
 
 ### Version
 
-The databases can be updated by including the `update` argument in the description 
+The databases can be updated by including the `update` argument in the description.
 
