@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/wgsassembly/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/rmlst/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>WGS Assembly - OLC Redmine Automator</title>
+    <title>rMLST - OLC Redmine Automator</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "WGS Assembly";
-        var mkdocs_page_input_path = "analysis/wgsassembly.md";
-        var mkdocs_page_url = "/redmine-docs/analysis/wgsassembly/";
+        var mkdocs_page_name = "rMLST";
+        var mkdocs_page_input_path = "analysis/rmlst.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/rmlst/";
       </script>
     
     <!--[if lt IE 9]>
@@ -118,7 +118,31 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../rmlst/">rMLST</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">rMLST</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#rmlst_1">rMLST</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#subject-and-description">Subject and description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
                   </li>
@@ -136,27 +160,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">WGS Assembly</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#before-redmine">Before Redmine</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -196,9 +200,9 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Analysis</li>
-      <li class="breadcrumb-item active">WGS Assembly</li>
+      <li class="breadcrumb-item active">rMLST</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/wgsassembly.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/rmlst.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -206,50 +210,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="wgs-assembly">WGS Assembly</h1>
+                <h1 id="rmlst">rMLST</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>WGS Assembly will take an Illumina MiSeq run and put it through the CFIA OLC Workflow for Bacterial Assembly and Typing (COWBAT).</p>
+<h4 id="rmlst_1">rMLST</h4>
+<p>​​The automator runs rMLST analyses on provided SEQIDs. If the rMLST database for the requested genus is not present on the NAS, or an update is requested, the automator downloads and prepares the database. It also runs GeneSeekr to perform rMLST analyses. GeneSeekr rMLST reports are uploaded and attached to the issue​.</p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="before-redmine">Before Redmine</h4>
-<p>Before submitting your request to Redmine, you need to upload your sequence data. Your sequence data should be in a folder
-named YYMMDD_LAB, where YYMMDD is the date sequencing was done, and LAB is a 3-letter code for your lab. For example, a
-sequencing run from Calgary done on July 16, 2018 would be 180716_CAL.</p>
-<p>This folder needs to have the following files:</p>
-<ul>
-<li>SampleSheet.csv (see RDIMS 8040830 for an example SampleSheet)</li>
-<li>CompletedJobInfo.xml</li>
-<li>config.xml</li>
-<li>GenerateFASTQRunStatistics.xml</li>
-<li>RunInfo.xml</li>
-<li>runParameters.xml</li>
-<li>the InterOp folder</li>
-<li>A forward and reverse set of reads for each SEQID specified in your SampleSheet.csv</li>
-</ul>
-<p>To upload this folder, navigate to <code>ftp://ftp.agr.gc.ca/incoming/cfia-ak</code> in a file browser and drag and drop the folder
-to upload. Upload speed will vary depending on your connection. Once your upload is complete, you can head to Redmine
-to submit your issue.</p>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>WGS Assembly</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>The only thing to put in your description is the name of the folder you created and uploaded.</p>
+<h4 id="subject-and-description">Subject and description</h4>
+<p>In the <code>Subject</code> field, put <code>rmlst</code>. Spelling counts, but case sensitivity doesn't.</p>
+<p>You can also choose to update the OLC database by entering <code>update</code> on the next line.</p>
+<p>Then add the SEQID's on separate lines to match the rest of the document.</p>
 <h4 id="example">Example</h4>
-<p>For an example WGS Assembly, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12782">issue 12782</a>.</p>
+<p>For an example rMLST issue see <a href="https://redmine.biodiversity.agr.gc.ca/issues/34424">issue 34424</a>.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>The Roary automator will upload a zip file <code>rmlst_output_[redmine_issue_num].zip</code> once it has completed. It may also say <code>Using database version: [YYMMDD]</code> in the comments if the <code>update</code> command was included in the description.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>WGS Assembly will likely take 5-6 hours to complete, although it can be as fast as 2 hours or as slow as 8.</p>
+<p>​It should take a few minutes for the automator to run depending on whether the database needs to be installed/updated. Adding more sequences will scale up the time required​.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>A few things can go wrong with this process:</p>
-<p>1) FTP upload fails: Your upload to the FTP may time out or otherwise fail. If this happens, you will need to send us an
-email so we can clear out the previous upload attempt before attempting to upload again.</p>
-<p>2) Validation fail: We validate a number of things about the files that are submitted before starting assembly, including
-making sure that all SEQIDs specified in the SampleSheet are uploaded, that the FASTQ files are appropriately sized, and
-that all files required are present. If any of these validation checks fail, send us an email and we'll get things sorted
-out.</p>
+<p>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</p>
+<h3 id="version">Version</h3>
+<p>The databases can be updated by including the <code>update</code> argument in the description.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../unknownisolate/" class="btn btn-neutral float-left" title="Unknownisolate"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../internal_only/merge/" class="btn btn-neutral float-right" title="Merge">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../resfinder/" class="btn btn-neutral float-left" title="ResFinder"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../roary/" class="btn btn-neutral float-right" title="Roary">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -276,10 +261,10 @@ out.</p>
         </span>
     
     
-      <span><a href="../unknownisolate/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../resfinder/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../internal_only/merge/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../roary/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
