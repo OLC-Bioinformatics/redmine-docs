@@ -239,6 +239,24 @@ for more information.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
 <p>Most SNVPhyl requests take ~1 hour to complete. If you submit a request for a larger SNVPhyl (&gt;30 strains), it may take
 substantially longer.</p>
+<details>
+  <summary><b>How to check if your SNVPhyl will fail using Galaxy Docker</b></summary> <br><ol>
+
+<li>Log into the head node by typing the following in the terminal
+<code>ssh ubuntu@head</code> or <code>ssh ubuntu@192.168.1.5</code></li>
+
+<li>If prompted for a password enter the standard bioinformatics password.</li>
+
+<li>Enter <code>watch squeue</code>. Under the column <code>NAME</code> there will be a list of biorequests running. In the same row as your biorequest note your Job ID and the node in which your issue is running under <code>JOBID</code> and <code>NODELIST</code>.</li>
+
+<li>On a web browser of your choice search <code>http://192.168.1.<b>[node#]</b>:<b>[jobID]</b></code>. (Eg. <u>http://192.168.1.3:34595/</u>)
+
+<li>Under the tab user cick log in and login with the following credentials:<b> user: admin@galaxy.org; password: admin.</b></li>
+
+<li>On the right there will be a tab labeled <code>history</code> that will display all the steps the the SNVPhyl runs. If there are many tabs with red x's it will likely fail.</li>
+
+</ol></details>
+<p><br></p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
 <p>A few things can go wrong with this process:</p>
 <p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
@@ -246,9 +264,10 @@ message informing you of it.</p>
 <p>2) Strains too far apart. SNVPhyl requires that the strains you want to compare to the reference be closely related to
 the reference. If you ask for a SNVPhyl with things that are not very related, you will get a warning telling you so.</p>
 <p>3) No output files. Sometimes, SNVPhyl will say it has completed, but the typical output files will not be present. This
-is either because <em>a)</em> there are no SNVs between the two strains, and so SNVPhyl crashes or <em>b)</em> SNVPhyl crashed for an
-unknown reason, which does happen occasionally. If this happens, your best bet is to try running the SNVPhyl again. If
-SNVPhyl keeps crashing even after subsequent attempts, let us know and we'll do our best to fix things.</p>
+is either because:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;a. there are no SNVs between the two strains, and so SNVPhyl crashes. If you want to confirm that there are no SNVs between your two strains you can add a third strain to your description that is related enough to run (eg. try a strain with the same rMLST) but may have variants.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;b. SNVPhyl crashed for an unknown reason, which does happen occasionally. If this happens, your best bet is to try running the SNVPhyl again.</p>
+<p>If SNVPhyl keeps crashing even after subsequent attempts, let us know and we'll do our best to fix things.</p>
 <h3 id="version">Version</h3>
 <p>SNVPhyl on redmine is version 1.0.1 with snvphyl_cli_version=1.3 (as of 2024-04-05)</p>
               
