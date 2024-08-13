@@ -45,6 +45,25 @@ for more information.
 Most SNVPhyl requests take ~1 hour to complete. If you submit a request for a larger SNVPhyl (>30 strains), it may take
 substantially longer.
 
+<details>
+  <summary><b>How to check if your SNVPhyl will fail using Galaxy Docker</b></summary> <br><ol>
+  
+<li>Log into the head node by typing the following in the terminal
+<code>ssh ubuntu@head</code> or <code>ssh ubuntu@192.168.1.5</code></li>
+
+<li>If prompted for a password enter the standard bioinformatics password.</li>
+
+<li>Enter <code>watch squeue</code>. Under the column <code>NAME</code> there will be a list of biorequests running. In the same row as your biorequest note your Job ID and the node in which your issue is running under <code>JOBID</code> and <code>NODELIST</code>.</li>
+
+<li>On a web browser of your choice search <code>http://192.168.1.<b>[node#]</b>:<b>[jobID]</b></code>. (Eg. <u>http://192.168.1.3:34595/</u>)
+
+<li>Under the tab user cick log in and login with the following credentials:<b> user: admin@galaxy.org; password: admin.</b></li>
+
+<li>On the right there will be a tab labeled <code>history</code> that will display all the steps the the SNVPhyl runs. If there are many tabs with red x's it will likely fail.</li>
+
+</ol></details><br>
+
+
 ### What can go wrong?
 
 A few things can go wrong with this process:
@@ -56,9 +75,13 @@ message informing you of it.
 the reference. If you ask for a SNVPhyl with things that are not very related, you will get a warning telling you so.
 
 3) No output files. Sometimes, SNVPhyl will say it has completed, but the typical output files will not be present. This
-is either because _a)_ there are no SNVs between the two strains, and so SNVPhyl crashes or _b)_ SNVPhyl crashed for an
-unknown reason, which does happen occasionally. If this happens, your best bet is to try running the SNVPhyl again. If
-SNVPhyl keeps crashing even after subsequent attempts, let us know and we'll do our best to fix things.
+is either because:
+
+&nbsp;&nbsp;&nbsp;&nbsp;a. there are no SNVs between the two strains, and so SNVPhyl crashes. If you want to confirm that there are no SNVs between your two strains you can add a third strain to your description that is related enough to run (eg. try a strain with the same rMLST) but may have variants.  
+&nbsp;&nbsp;&nbsp;&nbsp;b. SNVPhyl crashed for an unknown reason, which does happen occasionally. If this happens, your best bet is to try running the SNVPhyl again.
+
+  If SNVPhyl keeps crashing even after subsequent attempts, let us know and we'll do our best to fix things.
+  
 
 ### Version
 SNVPhyl on redmine is version 1.0.1 with snvphyl_cli_version=1.3 (as of 2024-04-05)
