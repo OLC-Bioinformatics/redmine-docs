@@ -57,6 +57,7 @@ nav:
     - 'AzureDownload': 'internal_only/azuredownload.md'
 - Troubleshooting: 'troubleshooting.md'
 - Tutorials: 
+    - 'Adding Documentation': 'tutorials/adding_documentation.md'
     - 'Open Environment': 'tutorials/open_environment.md'
     - 'Create Pages': 'tutorials/create_pages.md'
     - 'Edit Pages': 'tutorials/edit_pages.md'

@@ -10,7 +10,9 @@ brief overview of what Redmine can do.
 
 For any issues or general help with Redmine, see the [Troubleshooting](troubleshooting.md) page.
 
-<br>
+If you would like to add documentation to existing pages or create a new page for an analysis tool you can copy, fill out, and send [this form](https://136gc-my.sharepoint.com/:w:/g/personal/evelyn_yu_inspection_gc_ca/EYDC9jmTBHxDnTNOdBs5aTEBFeYvdLAg_1oW-UaIvuPauA?e=j7JdoY) to a bioinformatician. Alternatively, you can follow the instructions using the [tutorial](tutorials/adding_documentation.md) section to add edits yourself.
+
+
 ## Possible Analyses
 ###I want to:
 <details>
