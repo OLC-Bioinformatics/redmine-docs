@@ -152,6 +152,8 @@
               </ul>
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../adding_documentation/">Adding Documentation</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../open_environment/">Open Environment</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Create Pages</a>
@@ -192,23 +194,38 @@
 <p>Ensure that the repository is up-to-date:</p>
 <ul>
 <li>
-<p>if you don't have a local copy of the repositoty, clone a fresh version using <code>git clone https://github.com/OLC-Bioinformatics/redmine-docs.git</code></p>
+<p>if you don't have a local copy of the repository, clone a fresh version using <code>git clone https://github.com/OLC-Bioinformatics/redmine-docs.git</code></p>
 </li>
 <li>
 <p>or update an existing copy with <code>git pull origin master</code> from within the repository</p>
 </li>
 </ul>
-<p>Open <code>redmine-docs/mkdocs.yml</code> in the redmine-docs repository with your favourite text editor</p>
-<p>Decide where you wish to place the new page </p>
+<p>Create a page:</p>
 <ul>
 <li>
-<p>if you want a new analysis, update the file with the desired name and location of the analysis</p>
+<p>Open <code>redmine-docs/mkdocs.yml</code> in the redmine-docs folder (nas2/redmine/redmine-docs) with your favourite text editor</p>
+</li>
+<li>
+<p>Decide where you wish to place the new page </p>
+</li>
+<li>
+<p>Add a line with the desired name and location of the analysis</p>
 <ul>
-<li>e.g. if you want to add SISTR, include the following line <code>- 'SISTR': 'analysis/SISTR.md'</code> (make sure you following the spacing conventions, and that the list is still alphabetical) to the 'Analysis' category</li>
+<li>e.g. if you want to add SISTR, include the following line <code>- 'SISTR': 'analysis/SISTR.md'</code></li>
+<li>make sure you following the spacing conventions, and that the list is still alphabetical) to the 'Analysis' category</li>
+</ul>
+<p><img alt="file_screenshot" src="../../img/mkdocs.yml_screenshot.png" /></p>
+</li>
+<li>
+<p>Create a markdown file in the location specified in mkdocs.yml</p>
+<ul>
+<li>All the files for the pages are in the <code>docs</code> folder (…/redmine/redmine-docs/docs)</li>
+<li>So, in the above example, you would need to create <code>docs/analysis/SISTR.md</code> in the redmine-docs repository</li>
+<li>Ashley usually uses <code>touch</code> to accomplish this: <code>touch docs/analysis/SISTR.md</code> if she is in the root of the repository</li>
+<li>I usually just duplicate another analysis markdown file already in the category I want so I can use it as a template</li>
 </ul>
 </li>
 </ul>
-<p>Create an empty markdown file in the location specified in mkdocs.yml - the files are in the <code>docs</code> folder, so, in the above example, you would need to create <code>docs/analysis/SISTR.md</code> in the redmine-docs repository (I usually use <code>touch</code> to accomplish this: <code>touch docs/analysis/SISTR.md</code> if I'm in the root of the repository)</p>
               
             </div>
           </div><footer>

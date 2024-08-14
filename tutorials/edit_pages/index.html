@@ -152,6 +152,8 @@
               </ul>
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../adding_documentation/">Adding Documentation</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../open_environment/">Open Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../create_pages/">Create Pages</a>
@@ -191,27 +193,34 @@
                 <h2 id="edit-pages">Edit pages</h2>
 <p>This is the way I edit pages. Feel free to use any method with which you are comfortable</p>
 <ul>
-<li>Get the mkdocs preview started</li>
-</ul>
-<p><code>mkdocs serve</code></p>
-<ul>
+<li>
+<p>Get the mkdocs preview started <code>mkdocs serve</code></p>
+</li>
 <li>
 <p>Navigate to the served pages in your browser e.g. <code>http://127.0.0.1:8000/redmine-docs/</code> </p>
 </li>
 <li>
-<p>Ensure that the page you are going to edit is present in the Nav bar e.g. 'Analysis' -&gt; 'SISTR'</p>
+<p>Ensure that the page you are going to edit is present in the Nav bar e.g. 'Analysis' -&gt; 'SISTR'<br />
+<br></p>
+</li>
+<li>
+<p>In your files, find the markdown (.md) file associated with the page you want to edit within the redmine-docs folder under 'docs' (nas2/redmine/redmine-docs/docs)</p>
 <ul>
-<li>You should see an empty page</li>
+<li>Right-click the file to open the markdown file with your favourite editor (R, Text Editor, etc.)</li>
 </ul>
 </li>
 <li>
-<p>Find the markdown file associated with the page you want to edit within the redmine-docs folder under 'docs'. Open the markdown file with your favourite editor (R, Text Editor, etc.)</p>
+<p>Update the documentation using markdown language</p>
+<ul>
+<li>Use one of the other files in the folder as a template to ensure that you follow the same basic format each time</li>
+<li>Note that markdown supports HTML so you can integrate HTML tags to further customize your page</li>
+</ul>
 </li>
 <li>
-<p>Update the documentation using markdown language - I usually use one of the other files in the folder as a template to ensure that I'm following the same basic format each time</p>
-<ul>
-<li>Every time you save your document, the served page will refresh</li>
-</ul>
+<p>Save your text document in order to refresh your served page and view your changes</p>
+</li>
+<li>
+<p>Note that your changes are not actually published on the website until you push them on Github (see <a href="../publish_changes/">Publish Changes</a> tutorial)</p>
 </li>
 </ul>
 <p>Basic markdown cheatsheet:</p>
