@@ -55,7 +55,11 @@ substantially longer.
 
 <li>Enter <code>watch squeue</code>. Under the column <code>NAME</code> there will be a list of biorequests running. In the same row as your biorequest note your Job ID and the node in which your issue is running under <code>JOBID</code> and <code>NODELIST</code>.</li>
 
-<li>On a web browser of your choice search <code>http://192.168.1.<b>[node#]</b>:<b>[jobID]</b></code>. (Eg. <u>http://192.168.1.3:34595/</u>)
+<li>On a web browser of your choice search <code>http://<b>[IP_address]</b>.<b>[node#]</b>:<b>[jobID]</b></code>. (Eg. for a job on node 03 with the ID 34595 the url would be: <u>http://[IP_address].3:34595/</u>)
+	<ul>
+	<li>Please ask a bioinformatician or Cathy for the IP address.</li>
+	</ul>
+</li>
 
 <li>Under the tab user cick log in and login with the following credentials:<b> user: admin@galaxy.org; password: admin.</b></li>
 
