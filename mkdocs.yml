@@ -28,6 +28,7 @@ nav:
     - 'Mashtree': 'analysis/mashtree.md'
     - 'MobSuite': 'analysis/mobsuite.md'
     - 'NearTree': 'analysis/neartree.md'
+    - 'Phastest': 'analysis/phastest.md'
     - 'PlasmidBorneIdentity': 'analysis/plasmidborneidentity.md'
     - 'PointFinder': 'analysis/pointfinder.md'
     - 'PrimerFinder': 'analysis/primerfinder.md'
