@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/phastest/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Phastest - OLC Redmine Automator</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/docco.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">OLC Redmine Automator</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../getting_started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Data</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../data/external_retrieve/" class="dropdown-item">External Retrieve</a>
+</li>
+                                    
+<li>
+    <a href="../../data/report_retrieve/" class="dropdown-item">Report Retrieve</a>
+</li>
+                                    
+<li>
+    <a href="../../data/sra_upload/" class="dropdown-item">SRA Upload</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Analysis</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../amrsummary/" class="dropdown-item">AMRsummary</a>
+</li>
+                                    
+<li>
+    <a href="../autoclark/" class="dropdown-item">AutoCLARK</a>
+</li>
+                                    
+<li>
+    <a href="../bcgtree/" class="dropdown-item">bcgTree</a>
+</li>
+                                    
+<li>
+    <a href="../confindr/" class="dropdown-item">ConFindr</a>
+</li>
+                                    
+<li>
+    <a href="../cowsnphr/" class="dropdown-item">COWSNPhR</a>
+</li>
+                                    
+<li>
+    <a href="../closerelatives/" class="dropdown-item">CloseRelatives</a>
+</li>
+                                    
+<li>
+    <a href="../eCGF/" class="dropdown-item">eCGF</a>
+</li>
+                                    
+<li>
+    <a href="../ectyper/" class="dropdown-item">ECTyper</a>
+</li>
+                                    
+<li>
+    <a href="../diversitree/" class="dropdown-item">DiversiTree</a>
+</li>
+                                    
+<li>
+    <a href="../drep/" class="dropdown-item">dRep-ANI</a>
+</li>
+                                    
+<li>
+    <a href="../geneseekr/" class="dropdown-item">GeneSeekr</a>
+</li>
+                                    
+<li>
+    <a href="../pyseer/" class="dropdown-item">GWAS-pyseer</a>
+</li>
+                                    
+<li>
+    <a href="../intimintyper/" class="dropdown-item">IntiminTyper</a>
+</li>
+                                    
+<li>
+    <a href="../mashtree/" class="dropdown-item">Mashtree</a>
+</li>
+                                    
+<li>
+    <a href="../mobsuite/" class="dropdown-item">MobSuite</a>
+</li>
+                                    
+<li>
+    <a href="../neartree/" class="dropdown-item">NearTree</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Phastest</a>
+</li>
+                                    
+<li>
+    <a href="../plasmidborneidentity/" class="dropdown-item">PlasmidBorneIdentity</a>
+</li>
+                                    
+<li>
+    <a href="../pointfinder/" class="dropdown-item">PointFinder</a>
+</li>
+                                    
+<li>
+    <a href="../primerfinder/" class="dropdown-item">PrimerFinder</a>
+</li>
+                                    
+<li>
+    <a href="../prokka/" class="dropdown-item">Prokka</a>
+</li>
+                                    
+<li>
+    <a href="../psortb/" class="dropdown-item">PSORTb</a>
+</li>
+                                    
+<li>
+    <a href="../resfinder/" class="dropdown-item">ResFinder</a>
+</li>
+                                    
+<li>
+    <a href="../roary/" class="dropdown-item">Roary</a>
+</li>
+                                    
+<li>
+    <a href="../sipprverse/" class="dropdown-item">sipprverse</a>
+</li>
+                                    
+<li>
+    <a href="../snvphyl/" class="dropdown-item">SNVPhyl</a>
+</li>
+                                    
+<li>
+    <a href="../staramr/" class="dropdown-item">staramr</a>
+</li>
+                                    
+<li>
+    <a href="../strainmash/" class="dropdown-item">StrainMash</a>
+</li>
+                                    
+<li>
+    <a href="../wgsassembly/" class="dropdown-item">WGS Assembly</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Internal Use</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../internal_only/merge/" class="dropdown-item">Merge</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../troubleshooting/" class="nav-link">Troubleshooting</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Tutorials</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../tutorials/create_environment/" class="dropdown-item">Create Environment</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/create_pages/" class="dropdown-item">Create Pages</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/edit_pages/" class="dropdown-item">Edit Pages</a>
+</li>
+                                    
+<li>
+    <a href="../../tutorials/publish_changes/" class="dropdown-item">Publish Changes</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../neartree/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../plasmidborneidentity/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#phastest" class="nav-link">PHASTEST</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="phastest">PHASTEST</h2>
+<h3 id="what-does-it-do">What does it do?</h3>
+<p>PHASTEST (PHAge Search Tool with Enhanced Sequence Translation) performs identification, annotation and visualization of prophage sequences within bacterial genomes and plasmids. PHASTEST also supports extensive annotation and interactive visualization of all other genes (protein coding regions, tRNA sequences and rRNA sequences) in those same genomes.</p>
+<h3 id="how-do-i-use-it">How do I use it?</h3>
+<h4 id="subject">Subject</h4>
+<p>In the <code>Subject</code> field, put <code>phastest</code>. Spelling counts, but case sensitivity doesn't.</p>
+<h4 id="description">Description</h4>
+<p><strong>Required Components</strong></p>
+<p>In the <code>Description</code> field, you must provide:</p>
+<ol>
+<li>a list of SEQIDs (one per line)</li>
+</ol>
+<p><strong>Optional Components</strong></p>
+<p>In order to customise your PHASTEST analyses, two settings can be optionally modified</p>
+<ul>
+<li>Annotation mode. <code>deep</code> uses Prophage Database and PHAST-BSD Bacterial Database. <code>lite</code> uses Prophage Database and Swissprot. (Note: 'deep' mode may take significantly longer to complete.)<ul>
+<li>default is <code>lite</code></li>
+<li>modify as follows:<ul>
+<li><code>deep</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Only annotate phage region.<ul>
+<li>default is <code>disabled</code></li>
+<li>modify as follows:<ul>
+<li><code>phage-only</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="example">Example</h4>
+<p>For an example PHASTEST issue, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/35681">issue 35681</a>. NOTE: this is an older example, and the output file is missing the issue number.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>The PHASTEST automator will upload a file called <code>phastest_output_$ISSUENUMBER.zip</code> once it has completed. This file will contain all the outputs generated.</p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>It depends on the number of SEQIDs requested. The PHASTEST pipeline doesn't seem to be multi-threaded, so it takes about an hour per sample. I have added some parallelization, but this simply processes multiple SEQIDs concurrently. There is a limit of 20 CPUs allocated to this automator, so if you specify 20 or fewer SEQIDs, the analysis will take an hour, 21-40 SEQIDs will take two hours, etc.</p>
+<h3 id="what-can-go-wrong">What can go wrong?</h3>
+<ol>
+<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it (NOTE: this does not mean that the analysis is not going to occur).</li>
+</ol></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
