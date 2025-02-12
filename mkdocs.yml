@@ -36,6 +36,7 @@ nav:
     - 'MobSuite': 'analysis/mobsuite.md'
     - 'MLST': 'analysis/mlst.md'
     - 'NearTree': 'analysis/neartree.md'
+    - 'PHASTEST': 'analysis/phastest.md'
     - 'PlasmidBorneIdentity': 'analysis/plasmidborneidentity.md'
     - 'PointFinder': 'analysis/pointfinder.md'
     - 'PrimerFinder': 'analysis/primerfinder.md'
@@ -58,6 +59,7 @@ nav:
 - Troubleshooting: 'troubleshooting.md'
 - Tutorials: 
     - 'Adding Documentation': 'tutorials/adding_documentation.md'
+    - 'Create Environment': 'tutorials/create_environment.md'
     - 'Open Environment': 'tutorials/open_environment.md'
     - 'Create Pages': 'tutorials/create_pages.md'
     - 'Edit Pages': 'tutorials/edit_pages.md'
