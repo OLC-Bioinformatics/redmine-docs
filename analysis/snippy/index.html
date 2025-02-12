@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/snippy/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Snippy - OLC Redmine Automator</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Snippy";
+        var mkdocs_page_input_path = "analysis/snippy.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/snippy/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OLC Redmine Automator
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/external_retrieve/">External Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/report_retrieve/">Report Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_upload/">SRA Upload</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_download/">SRA Download</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Analysis</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../amrsummary/">AMRsummary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../autoclark/">AutoCLARK</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cardrgi/">CARD-RGI (AMR)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gfa_retrieve/">GFA Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pyseer/">GWAS-pyseer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kma/">KMA - Gene Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kraken2/">Kraken2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">PHASTEST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pointfinder/">PointFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../primerfinder/">PrimerFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rmlst/">rMLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sequence_extractor/">SequenceExtractor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snvphyl/">SNVPhyl</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Snippy</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#variant-types">Variant types</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#should-i-use-snippy-or-snvphyl">Should I use Snippy or SNVPhyl?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../staramr/">staramr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Internal Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/merge/">Merge</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/azuredownload/">AzureDownload</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/">Troubleshooting</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_pages/">Create Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/edit_pages/">Edit Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/publish_changes/">Publish Changes</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OLC Redmine Automator</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Analysis</li>
+      <li class="breadcrumb-item active">Snippy</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/snippy.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="snippy">Snippy</h1>
+<h3 id="what-does-it-do">What does it do?</h3>
+<p>Snippy is a tool for rapid haploid variant calling and core genome alignment of closely related genomes. This automator can also be used to build a phylogenetic tree to attempt to show the
+relatedness of these strains. More info can be found at the <a href="https://github.com/tseemann/snippy">Snippy github site</a>.</p>
+<h3 id="how-do-i-use-it">How do I use it?</h3>
+<h4 id="subject">Subject</h4>
+<p>In the <code>Subject</code> field, put <code>snippy</code>. Spelling counts, but case sensitivity doesn't.</p>
+<h4 id="description">Description</h4>
+<p><strong>Required Components</strong></p>
+<p>The first line of your description needs to be <code>reference=</code>, the SEQID of the strain you want to act
+as your reference strain. Ideally, you'll want to pick a high-quality assembly for your reference.</p>
+<p>eg. <code>reference=YYYY-MIN-NNNN</code></p>
+<p>If you wish to attach a reference file instead of providing a SEQID, the line must be <code>reference=attached</code></p>
+<p>You must also include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components</strong></p>
+<p>We have also included the ability to 'cleanup' a multiple sequence alignment, and generate a tree using <a href="http://nickjcroucher.github.io/gubbins/">Gubbins</a> and <a href="http://www.iqtree.org/">IQ-tree</a>. If you call SNPs for multiple isolates from the same reference, you are able to produce an alignment of "core SNPs" to build a phylogeny. To use this function, add the following line in the description:</p>
+<ul>
+<li><code>cleanup_&amp;_tree=True</code></li>
+</ul>
+<p>This automator currently uses IQtree and default settings for gubbins, but other options are available. If you would like additional functions, please contact a bioinformatician and we will do our best to add them.</p>
+<h4 id="example">Example</h4>
+<p>For an example snippy, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/30388">issue 30388</a>.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>The zip file uploaded on snippy completion will contain folders for each of the comparator sequences, as well as core alignment files. Some of the files will also be uploaded/attached directly to the redmine request. Important files are:</p>
+<ul>
+<li><code>core.txt</code>: A summary file. Tab-separated columnar list of alignment/core-size statistics of the number of: aligned, unaligned, variants, and low coverage bases between every strain submitted and the reference.</li>
+<li><code>core.tab</code>: Tab-separated columnar list of core SNP sites with alleles but NO annotations</li>
+<li><code>core.vcf</code>: Multi-sample VCF file with genotype GT tags for all discovered alleles</li>
+<li>Within each sequence folder there will also be files, including a tab separated summary for that particular sequence in comparison to the reference.</li>
+</ul>
+<p>If cleanup_&amp;_tree was included, then tree files will also be included in the output:</p>
+<ul>
+<li><code>{issue.id}.snippy.gubbins.iqtree.tree</code>: An intermediate phylogenetic tree created by gubbins + iqtree. </li>
+<li><code>{issue.id}.snippy_final.clean.core.snp.aln.tree</code>: The <strong>final</strong> phylogeny created from the core snp alignment (created using IQtree and the GTR substitution method).</li>
+</ul>
+<p>If you want to view these tree files, you can use a program such as
+<a href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> or a web-based viewer like <a href="http://phylo.io">phylo.io</a>.</p>
+<p>Other files can also be important - see the <a href="https://github.com/tseemann/snippy">docs on Snippy Output files</a>
+for more information.</p>
+<h3 id="variant-types">Variant types</h3>
+<p>For more information, see the <a href="https://github.com/tseemann/snippy">docs on Snippy Output files</a>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Type</th>
+<th style="text-align: center;">Name</th>
+<th style="text-align: center;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">snp</td>
+<td style="text-align: center;">Single Nucleotide Polymorphism</td>
+<td style="text-align: center;">A =&gt; T</td>
+</tr>
+<tr>
+<td style="text-align: center;">mnp</td>
+<td style="text-align: center;">Multiple Nuclotide Polymorphism</td>
+<td style="text-align: center;">GC =&gt; AT</td>
+</tr>
+<tr>
+<td style="text-align: center;">ins</td>
+<td style="text-align: center;">Insertion</td>
+<td style="text-align: center;">ATT =&gt; AGTT</td>
+</tr>
+<tr>
+<td style="text-align: center;">del</td>
+<td style="text-align: center;">Deletion</td>
+<td style="text-align: center;">ACGG =&gt; ACG</td>
+</tr>
+<tr>
+<td style="text-align: center;">complex</td>
+<td style="text-align: center;">Combination of snp/mnp</td>
+<td style="text-align: center;">ATTC =&gt; GTTA</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>It depends on the number of sequences and coverage/size of sequence files. Small snippy requests take ~15 minutes to complete (see the example request). If you submit a request for a larger snippy (&gt;30 strains), or include larger long-read sequences, it may take substantially longer.</p>
+<h3 id="what-can-go-wrong">What can go wrong?</h3>
+<p>A few things can go wrong with this process:</p>
+<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
+message informing you of it.</p>
+<p>2) Strains too far apart. Snippy requires that the strains you want to compare to the reference be closely related to
+the reference. If you ask for a snippy-analysis with things that are not very related, the analysis will fail. In this case, look at the <code>core.txt</code> file that is uploaded to the redmine request. If there are sequences with 0 under "Aligned", remove those sequences from the request and re-submit.</p>
+<p>3) Why is the cleaned snp tree not showing my single-end sequences? - I'm not sure... the cleaning step(s) using gubbins appears to remove the minion (single-end) sequence data from the cleaned alignment when a multi-analysis is performed using both illumina and minion sequences. The <code>{}.snippy_core_alignment.iqtree.treefile</code>, which is generated before the cleaning steps, will contain all SEQIDS.</p>
+<h3 id="should-i-use-snippy-or-snvphyl">Should I use Snippy or SNVPhyl?</h3>
+<p>...This depends on your goal...</p>
+<p>Snippy appears to be faster than SNVPhyl. It also allows use of both paired-end and single-end raw data files in the same analysis (whereas SNVPhyl <strong>currently does not</strong>).</p>
+<p>A comparison of snippy vs SNVPhyl has not been conducted by our lab. The <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5628696/">SNVPhyl publication</a> does briefly discuss snippy.</p>
+<h3 id="version">Version</h3>
+<p>Snippy version 4.6.0 (as of 2024-07-03)</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../snvphyl/" class="btn btn-neutral float-left" title="SNVPhyl"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../staramr/" class="btn btn-neutral float-right" title="staramr">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../snvphyl/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../staramr/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

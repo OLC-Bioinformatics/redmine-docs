@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/cardrgi/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>CARD-RGI (AMR) - OLC Redmine Automator</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "CARD-RGI (AMR)";
+        var mkdocs_page_input_path = "analysis/cardrgi.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/cardrgi/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OLC Redmine Automator
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/external_retrieve/">External Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/report_retrieve/">Report Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_upload/">SRA Upload</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_download/">SRA Download</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Analysis</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../amrsummary/">AMRsummary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../autoclark/">AutoCLARK</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">CARD-RGI (AMR)</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gfa_retrieve/">GFA Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pyseer/">GWAS-pyseer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kma/">KMA - Gene Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kraken2/">Kraken2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">PHASTEST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pointfinder/">PointFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../primerfinder/">PrimerFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rmlst/">rMLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sequence_extractor/">SequenceExtractor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snvphyl/">SNVPhyl</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snippy/">Snippy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../staramr/">staramr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Internal Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/merge/">Merge</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/azuredownload/">AzureDownload</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/">Troubleshooting</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_pages/">Create Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/edit_pages/">Edit Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/publish_changes/">Publish Changes</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OLC Redmine Automator</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Analysis</li>
+      <li class="breadcrumb-item active">CARD-RGI (AMR)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/cardrgi.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="card-rgi">CARD-RGI</h1>
+<h3 id="what-does-it-do">What does it do?</h3>
+<p>CARD-RGI (Comprehensive Antibiotic Resistance Database - Resistance Gene Identifier) is a program developed by the McMaster University to predict resistomes
+in draft genome assemblies. <a href="https://card.mcmaster.ca/analyze/rgi">CARD website</a></p>
+<p>For more information, see the <a href="https://pubmed.ncbi.nlm.nih.gov/31665441/">CARD publication</a>. If you publish data using this automator, don't forget to cite the authors of the tool <a href="https://pubmed.ncbi.nlm.nih.gov/31665441/">Alcock et al., 2020</a></p>
+<h3 id="how-do-i-use-it">How do I use it?</h3>
+<h4 id="subject">Subject</h4>
+<p>In the <code>Subject</code> field, put <code>CARDRGI</code>. Spelling counts, but case sensitivity doesn't.</p>
+<h4 id="description">Description</h4>
+<p><strong>Required Components</strong></p>
+<p>The first line of the description should be the analysis you would like to run (e.g. <code>analysis=isolate</code>). This will depend on the type of sequence data your are investigating.</p>
+<ul>
+<li>The following options are currently supported:<ul>
+<li><code>isolate</code> - used for resistome analysis of bacterial isolate sequence assemblies</li>
+<li><code>metagenome</code> - used for resistome analysis of metagenome fastq-files. (This option can also be used to 'force' the tool to complete resistome analysis of isolate fastq-files). Currently, this metagenome redmine automator uses <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2336-6">KMA</a> for alignment of gene targets to the raw-read data. If you would like to try the other options (BWA or bowtie2), you can download the stand-alone tool from the <a href="https://github.com/arpcard/rgi#rgi-usage-documentation">CARD github</a>.</li>
+</ul>
+</li>
+</ul>
+<p>You must also include a list of SEQIDs one per line.</p>
+<p><strong>Optional Components</strong></p>
+<p>By default, CARD-RGI will run the analysis for isolate assemblies. In order to customise your CARD-RGI analyses, two additional settings can be optionally modified:</p>
+<ul>
+<li>
+<p>loosehits - the default analysis will only include strict and perfect resistance gene matches. Setting this to true will also include 'loose' hits, which may or may not be contributing to resistance.</p>
+<ul>
+<li>default is <code>False</code> </li>
+<li>If you want to include loose hits, add a line to your description:<ul>
+<li><code>loosehits=TRUE</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>partialgenes - the default analysis will only include full gene matches.</p>
+<ul>
+<li>default is <code>False</code> </li>
+<li>If you want to include partial gene hits, add a line to your description:<ul>
+<li><code>partialgenes=TRUE</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="example">Example</h4>
+<p>For an example using CARDRGI, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/28111">issue 28111</a>. The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks). Please note that 2017-SEQ-0054 is an isolate sequence, not actually a metagenome.</p>
+<h4 id="interpreting-results">Interpreting Results</h4>
+<p>CARD-RGI will upload a zipped folder called <code>card-rgi_output_redmineID.zip</code> to the ftp once it has completed. </p>
+<p><strong>Isolate Analysis</strong></p>
+<p>This folder will contain a <code>CARDRGI_output.csv</code> csv file which shows every AMR gene found in each
+sample-sequence. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
+to look at the <strong>Best_Identities</strong> column, which contains the percent identity of the gene/target match to the top hit in CARD. You can be pretty sure that anything with 100
+is actually there, but anything else requires further analysis to be sure. </p>
+<p>Also, some efflux and point-mutations may confer resistance in specific genera/species but not others, so it is important to consider this before coming to any conclusions even if they are a 100% match. Information about the output table can be found on the <a href="https://github.com/arpcard/rgi#rgi-usage-documentation">CARD-RGI github page</a> under <code>RGI main Tab-Delimited Output Details</code>.</p>
+<p>The isolate analysis will also output individual results files for each sequence, and a RGI-heatmap file including information about all of the isolate sequences in your analysis.</p>
+<p><strong>Metagenome Analysis</strong></p>
+<p>The zip folder will contain individual output files for each sequence analysed. It will also include <code>CARDRGI_gene_mapping_output.csv</code> and <code>CARDRGI_allele_mapping_output.csv</code> files. These contain the CARD-results of all resistance genes found in the raw fastq data for each sample-sequence. The <code>CARDRGI_allele_mapping_output.csv</code> allele file will include the data for the top allele hits for each sequence.</p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>CARD-RGI is pretty fast, however the time required for analysis will depend on the analysis type and number of sequences requested. Expect approximately 2-5 minutes per sequence.</p>
+<h3 id="what-can-go-wrong">What can go wrong?</h3>
+<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
+message informing you of it.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../bcgtree/" class="btn btn-neutral float-left" title="bcgTree"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../confindr/" class="btn btn-neutral float-right" title="ConFindr">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../bcgtree/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../confindr/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
