@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/fastqc/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/fastqmerge/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Fastqc - OLC Redmine Automator</title>
+    <title>fastqmerge - OLC Redmine Automator</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Fastqc";
-        var mkdocs_page_input_path = "analysis/fastqc.md";
-        var mkdocs_page_url = "/redmine-docs/analysis/fastqc/";
+        var mkdocs_page_name = "fastqmerge";
+        var mkdocs_page_input_path = "analysis/fastqmerge.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/fastqmerge/";
       </script>
     
     <!--[if lt IE 9]>
@@ -82,7 +82,9 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Fastqc</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">fastqmerge</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
     </li>
@@ -102,11 +104,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
-    </li>
     </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -206,9 +204,9 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Analysis</li>
-      <li class="breadcrumb-item active">Fastqc</li>
+      <li class="breadcrumb-item active">fastqmerge</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/fastqc.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/fastqmerge.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -216,32 +214,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="fastqcmultiqc">FastQC/MultiQC</h1>
+                <h1 id="fastqmerge">fastqmerge</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>FastQC is a tool for conducting quality control checks on raw sequence data. MultiQC is a tool to aggregate FastQC reports from multiple sequences into a single file/report.</p>
-<p>For more information, see the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC website</a>, and <a href="https://multiqc.info/">MultiQC website</a>.</p>
+<p>fastqmerge is a tool for merging the raw sequence data. This tool merges/cat the multiple raw sequence fastq ids and writes merged sequences in /mnt/nas2/raw_sequence_data/merged_sequences. Technically </p>
+<p>merge R1 from different runs of same sample into merged R1 and merge R2 from different runs of same sample into merged R2 for illumina seqs. For Minion, it combines multiple MIN ids into single merged </p>
+<p>MINion seq. At the end it shows the file where it is written along with the merged file sizes. </p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>fastqc</code>. Spelling counts, but case sensitivity doesn't.</p>
+<p>In the <code>Subject</code> field, put <code>fastqmerge</code>. Spelling counts and case sensitive. Input the Seq ids and provide wether it is singlefastq or paired in the description along with the new seqID for saving the merged sequence. user can run on singlefastq with MINIOn or illumina or both, example is shown in the below issue.</p>
 <h4 id="description">Description</h4>
 <p><strong>Required Components</strong></p>
-<p>You must include a list of SEQIDs one per line.</p>
+<p>You must include a list of SEQIDs with comma separated and need to provide the new name( seqids) for the merged sequence.</p>
 <h4 id="example">Example</h4>
-<p>For an example FastQC analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/30311">issue 30311</a>. The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks).</p>
+<p>For an example FastQC analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/36575">issue 36575</a>.</p>
 <h4 id="interpreting-results">Interpreting Results</h4>
-<p>FastQC/MultiQC will upload the multiqc report and a zipped folder called <code>fastqc_redmineID.zip</code> to both redmine and the ftp once it has completed. This will contain report files for individual sequences, and the multiqc report. (Files are uploaded to both redmine and the ftp in case a large number of sequences are analysed, and therefore reports are too large to be uploaded directly to redmine).</p>
+<p>after merging the sequences, the sequences are saved into the merged_sequences in the nas2 and accessible for further analysis.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>FastQC is usually pretty fast, &lt;1 minute per sequence. The time required for analysis will depend on the number of sequences requested.</p>
+<p>fastqmerge is usually takes 3 mins combining two MIN sequences to single merged MIN sequences. The time required for analysis will depend on the number of sequences requested.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</p>
-<h3 id="version">Version</h3>
-<p>Version 0.11.9 is currently available at the OLC. (as of 2024-07-4)</p>
+<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request or new ids not provided,  you will get a warning message informing you of it.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../drep/" class="btn btn-neutral float-left" title="dRep-ANI"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../fastqmerge/" class="btn btn-neutral float-right" title="fastqmerge">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../fastqc/" class="btn btn-neutral float-left" title="Fastqc"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../geneseekr/" class="btn btn-neutral float-right" title="GeneSeekr">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -268,10 +265,10 @@
         </span>
     
     
-      <span><a href="../drep/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../fastqc/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../fastqmerge/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../geneseekr/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
