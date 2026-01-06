@@ -133,8 +133,10 @@ KMA is very fast, however the time required for analysis will depend on the anal
 
 2) A custom analysis was requested but targets file was not attached. You will get a warning message informing you of it. You must also add the flag `targetsfile=name.fasta` for the automator to recognize your attached multifasta file.
 
-### Version (as of 2023-12-20)
-KMA version = 1.4.9
+### Version (as of 2026-01-06)
+KMA version = 1.6.8
 
 NCBI AMRFinderPlus database (used for amr, biocide, and metal detection) = 3.11
+
+BacMet - converted to nt by James Robertson - amino acid database version 2 from 2018
 
