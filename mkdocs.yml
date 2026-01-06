@@ -37,7 +37,7 @@ nav:
     - 'MobSuite': 'analysis/mobsuite.md'
     - 'MLST': 'analysis/mlst.md'
     - 'NearTree': 'analysis/neartree.md'
-    - 'PHASTEST': 'analysis/phastest.md'
+    - 'Phastest': 'analysis/phastest.md'
     - 'PlasmidBorneIdentity': 'analysis/plasmidborneidentity.md'
     - 'PointFinder': 'analysis/pointfinder.md'
     - 'PrimerFinder': 'analysis/primerfinder.md'
