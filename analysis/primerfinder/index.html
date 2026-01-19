@@ -128,8 +128,6 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
@@ -218,17 +216,10 @@
               
                 <h1 id="primerfinder">PrimerFinder</h1>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>The PrimerFinder performs <em>in silico</em> PCR analyses on FASTA and FASTQ formatted files.</p>
-<p>There are two different modules:</p>
-<p><img alt="PrimerFinder Legacy" src="../../img/primer_finder_legacy.png" /> <img alt="PrimerFinder Supremacy" src="../../img/primer_finder_supremacy.png" /></p>
+<p>The PrimerFinder performs <em>in silico</em> PCR analyses on FASTA files.</p>
+<p><img alt="PrimerFinder Legacy" src="../../img/primer_finder_legacy.png" /></p>
 <p><strong>PrimerFinder Legacy</strong> computes primer binding and amplicon statistics on FASTA formatted files using the now retired ePCR 
 suite of tools from NCBI. </p>
-<p><strong>PrimerFinder Supremacy</strong> is able to process FASTA- and FASTQ-formatted files. If using FASTQ files, 
-<a href="https://sourceforge.net/projects/bbmap/">BBMap</a> is employed to bait out reads containing primer sequences. A second 
-round of baiting is performed using the previously-baited reads. Contigs are assembled by 
-<a href="http://cab.spbu.ru/software/spades/">SPAdes</a> with only the baited reads. </p>
-<p>For both FASTA-formatted files and contigs assembled from FASTQ-formatted files, primers are 
-BLASTed against contigs, and outputs are parsed to determine primer binding, and amplicon statistics</p>
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 <h4 id="subject">Subject</h4>
 <p>In the <code>Subject</code> field, put <code>primer_finder</code>. Spelling counts, but case sensitivity does not.</p>
@@ -236,12 +227,6 @@ BLASTed against contigs, and outputs are parsed to determine primer binding, and
 <p>In the <code>Description</code> field, you must provide:</p>
 <p><strong>Required Components</strong></p>
 <ol>
-<li>
-<p><code>program=requested_program</code></p>
-<ul>
-<li>acceptable programs are <code>legacy</code> and <code>supremacy</code></li>
-</ul>
-</li>
 <li>
 <p><code>analysis=requested_analysis</code></p>
 <ul>
@@ -260,9 +245,20 @@ additional details)</p>
 </ul>
 </li>
 <li>
-<p>a list of SEQIDs (one per line)</p>
+<p>a list of SEQIDs (one per line) - this must be after any other supplied parameters</p>
+<ul>
+<li><strong>IMPORTANT:</strong> You can set optionally <code>inclusivity</code> and <code>exclusivity</code> panels</li>
+<li>If you do not specify a panel, it will default to <code>inclusivity</code></li>
+</ul>
+<p>example:</p>
 </li>
 </ol>
+<pre><code>    inclusivity
+    2014-SEQ-0276
+    exclusivity
+    2025-SEQ-0791
+    2025-SEQ-0799
+</code></pre>
 <p><strong>Optional Components</strong></p>
 <p>In order to customise your PrimerFinder analyses, several settings can be optionally modified</p>
 <ul>
@@ -275,30 +271,40 @@ additional details)</p>
 </li>
 </ul>
 </li>
-<li>Format of sequence files to use (note that PrimerFinder legacy will still use FASTA-formatted files even if you try 
-to specify FASTQ)<ul>
-<li>default is <code>fasta</code></li>
-<li>options are: <code>fasta</code> and <code>fastq</code></li>
+<li>Minimum Amplicon size<ul>
+<li>Default is 0 (no minimum size)</li>
+<li>Maximum is 10000</li>
+<li>Must be smaller than <code>maximum amplicon size</code></li>
 <li>modify as follows:<ul>
-<li><code>format=fastq</code></li>
+<li><code>minimum_amplicon_size=150</code></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>K-mer size to use for SPAdes assembly<ul>
-<li>default is <code>55,77,99,127</code></li>
-<li>either provide and integer, e.g. <code>33</code>, or a comma-separated list, e.g. <code>21,33,55</code></li>
+<li>Maximum Amplicon size<ul>
+<li>Default is 1500</li>
+<li>Maximum is 10000</li>
+<li>Must be larger than <code>minimum amplicon size</code></li>
 <li>modify as follows:<ul>
-<li><code>kmersize=33</code> <em>OR</em></li>
-<li><code>kmersize=21,33,55</code></li>
+<li><code>maximum_amplicon_size=1750</code></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Export amplicons in PrimerFinder Legacy (amplicons are created by default by PrimerFinder Supremacy)<ul>
-<li>default is <code>False</code></li>
+<li>Contig breaks<ul>
+<li>If ipcress cannot find an amplicon, search the genome for the primers and return a positive result if they are found on separate contigs</li>
+<li>default is False</li>
 <li>modify as follows:<ul>
-<li><code>exportamplicons</code></li>
+<li><code>contig_breaks=True</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Probe<ul>
+<li>Probe sequence to be searched against amplicons generated from primer pairs</li>
+<li>this can be supplied more than once</li>
+<li>modify as follows:<ul>
+<li><code>probe=CGCGTTATCATCACTGTTACCGATAGCG</code></li>
 </ul>
 </li>
 </ul>
@@ -341,205 +347,11 @@ iupac = {
 </code></pre>
 <h4 id="examples">Examples</h4>
 <p>Example PrimerFinder analyses:</p>
-<p>PrimerFinder Legacy, custom analyses <a href="https://redmine.biodiversity.agr.gc.ca/issues/16084">issue 16084</a></p>
-<p>PrimerFinder Legacy, vtyper analyses <a href="https://redmine.biodiversity.agr.gc.ca/issues/16085">issue 16085</a></p>
-<p>PrimerFinder Supremacy, custom analyses, FASTA format <a href="https://redmine.biodiversity.agr.gc.ca/issues/16086">issue 16086</a></p>
-<p>PrimerFinder Supremacy, custom analyses, FASTQ format <a href="https://redmine.biodiversity.agr.gc.ca/issues/16087">issue 16087</a></p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p><strong>PrimerFinder Legacy</strong></p>
-<p>PrimerFinder Legacy will upload <code>ePCR_report.csv</code>, which contains the strain name, gene name as parsed from the primer 
-file, location of the calculated amplicon, the size of the amplicon, the name of the contig on which the amplicon was 
-found, the total number of mismatches between the primer set and the target sequence, and the primers used to create the amplicon.</p>
-<p>Here's an example created using the example primer file from the <code>Attachments</code> section of Redmine <a href="https://redmine.biodiversity.agr.gc.ca/issues/16084">issue 16084</a></p>
-<table>
-<thead>
-<tr>
-<th>Sample</th>
-<th>Gene</th>
-<th>GenomeLocation</th>
-<th>AmpliconSize</th>
-<th>Contig</th>
-<th>TotalMismatches</th>
-<th>PrimerSet</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2014-SEQ-1390</td>
-<td>gene1</td>
-<td>30506-30699</td>
-<td>194</td>
-<td>contig_1</td>
-<td>0</td>
-<td>gene1_0_0</td>
-</tr>
-<tr>
-<td>2014-SEQ-1390</td>
-<td>gene2</td>
-<td>476139-476423</td>
-<td>285</td>
-<td>contig_32</td>
-<td>1</td>
-<td>gene2_1_1</td>
-</tr>
-</tbody>
-</table>
-<p>Note that the way the primer set is numbered is based on the number of primer sets with the same gene name: <em>gene1</em> had 
-one primer set, <code>gene1-F</code> and <code>gene1-R</code>, and these are represented as <code>gene1_0_0</code>. There were two
-primer sets for <em>gene2</em>, and in this example <code>gene2-F2</code> and <code>gene2-R2</code> annealed (with one mismatch)</p>
-<p>If requested, amplicon sequences for each match will be created. Using the same example as above <code>2014-SEQ-1390_amplicons.fa</code> will contain:</p>
-<pre><code>&gt;2014-SEQ-1390_contig_1_476139_476423_gene1_0_0
-amplicon..... 
-&gt;2014-SEQ-1390_contig_32_27409_27668_gene2_1_1
-amplicon.....
-</code></pre>
-<p><strong>PrimerFinder Supremacy</strong></p>
-<p>PrimerFinder Supremacy will generate <code>ePCR_report.csv</code>within the <code>consolidated_report</code> folder. This report contains the 
-following fields: strain name, gene name parsed from the primer file, location of the amplicon, size of the amplicon, 
-name of contig on which the amplicon was found, the forward and reverse primers used to create the amplicon, the number of mismatches for the forward and reverse primers.</p>
-<p>Here's an example created using the example primer file from the <code>Attachments</code> section of Redmine <a href="https://redmine.biodiversity.agr.gc.ca/issues/16084">issue 16084</a></p>
-<table>
-<thead>
-<tr>
-<th>Sample</th>
-<th>Gene</th>
-<th>GenomeLocation</th>
-<th>AmpliconSize</th>
-<th>Contig</th>
-<th>ForwardPrimers</th>
-<th>ReversePrimers</th>
-<th>ForwardMismatches</th>
-<th>ReverseMismatches</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2014-SEQ-1390</td>
-<td>gene1</td>
-<td>30506-30699</td>
-<td>194</td>
-<td>contig_1</td>
-<td>gene1-F_0</td>
-<td>gene1-R_0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>2014-SEQ-1390</td>
-<td>gene2</td>
-<td>476139-476423</td>
-<td>285</td>
-<td>contig_32</td>
-<td>gene2-F2_0</td>
-<td>gene2-R2_0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-<p>Note that the primer names have <code>_0</code> appended to the end. In the case of IUPAC bases being present in the primer sequence, this number will be incremented for each primer created to satisfy all possible 
-combinations. </p>
-<p>Amplicon sequences are always included. Using the same example as above, <code>2014-SEQ-1390_amplicons.fa</code> will contain:</p>
-<pre><code>&gt;2014-SEQ-1390_contig_1_gene1-F_0_gene1-R_0
-amplicon
-&gt;2014-SEQ-1390_contig_32_gene2-F2_0_gene2-R2_0
-amplicon
-</code></pre>
-<p>Raw BLAST results are also uploaded. In the example above, <code>2014-SEQ-1390_rawresults.csv</code> will contain:</p>
-<table>
-<thead>
-<tr>
-<th>qseqid</th>
-<th>sseqid</th>
-<th>positive</th>
-<th>mismatch</th>
-<th>gaps</th>
-<th>evalue</th>
-<th>bitscore</th>
-<th>slen</th>
-<th>length</th>
-<th>qstart</th>
-<th>qend</th>
-<th>qseq</th>
-<th>sstart</th>
-<th>send</th>
-<th>sseq</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>contig_1</td>
-<td>gene1-R_0</td>
-<td>25</td>
-<td>0</td>
-<td>0</td>
-<td>3.07E-07</td>
-<td>50.1</td>
-<td>25</td>
-<td>25</td>
-<td>476399</td>
-<td>476423</td>
-<td>TACGGTTCCTTTGACGGTGCGATGA</td>
-<td>25</td>
-<td>1</td>
-<td>TACGGTTCCTTTGACGGTGCGATGA</td>
-</tr>
-<tr>
-<td>contig_1</td>
-<td>gene1-F_0</td>
-<td>25</td>
-<td>0</td>
-<td>0</td>
-<td>3.07E-07</td>
-<td>50.1</td>
-<td>25</td>
-<td>25</td>
-<td>476139</td>
-<td>476163</td>
-<td>GTGAAATTATCGCCACGTTCGGGCA</td>
-<td>1</td>
-<td>25</td>
-<td>GTGAAATTATCGCCACGTTCGGGCA</td>
-</tr>
-<tr>
-<td>contig_32</td>
-<td>gene2-F2_0</td>
-<td>20</td>
-<td>1</td>
-<td>0</td>
-<td>4.41E-06</td>
-<td>42.1</td>
-<td>21</td>
-<td>21</td>
-<td>27648</td>
-<td>27668</td>
-<td>CGCCTTATTATACGACCAAAG</td>
-<td>21</td>
-<td>1</td>
-<td>CGCCTTATTTTACGACCAAAG</td>
-</tr>
-<tr>
-<td>contig_32</td>
-<td>gene2-R2_0</td>
-<td>20</td>
-<td>0</td>
-<td>0</td>
-<td>1.74E-05</td>
-<td>40.1</td>
-<td>20</td>
-<td>20</td>
-<td>27409</td>
-<td>27428</td>
-<td>TGCCCAAAGCAGAGAGATTC</td>
-<td>1</td>
-<td>20</td>
-<td>TGCCCAAAGCAGAGAGATTC</td>
-</tr>
-</tbody>
-</table>
+<p>PrimerFinder Legacy, custom analyses <a href="https://redmine.biodiversity.agr.gc.ca/issues/37389">issue 37389</a></p>
+<p>PrimerFinder Legacy, vtyper analyses <a href="https://redmine.biodiversity.agr.gc.ca/issues/37392">issue 37392</a></p>
+<p>PrimerFinder Legacy, custom analyses, no inclusivity/exclusivity defined <a href="https://redmine.biodiversity.agr.gc.ca/issues/37393">issue 37393</a></p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>PrimerFinder Legacy and PrimerFinder Supremacy on FASTA mode are very fast (seconds per sample), while PrimerFinder 
-Supremacy FASTQ mode is relatively slow (a few minutes per sample)</p>
+<p>PrimerFinder Legacy is very fast (seconds per sample)</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
 <ol>
 <li>Requested SEQIDs are not available. </li>
@@ -547,6 +359,7 @@ Supremacy FASTQ mode is relatively slow (a few minutes per sample)</p>
 <li>Not including the <code>analysis=requested_analysis</code> component, or requesting an unsupported analysis</li>
 <li>Specifying an unsupported number of <code>mismatches</code></li>
 <li>Incorrectly formatted <code>kmersize</code></li>
+<li>Providing a <code>minimum_amplicon_size</code> and/or <code>maximum_amplicon_size</code> with a value that is either too large or to small</li>
 <li>Attaching an incorrectly formatted primer file, or not including a primer file for <code>custom</code> analyses</li>
 <li>?</li>
 </ol>
