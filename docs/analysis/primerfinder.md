@@ -6,8 +6,7 @@ The PrimerFinder performs _in silico_ PCR analyses on FASTA files.
 
 ![PrimerFinder Legacy](../img/primer_finder_legacy.png)
 
-__PrimerFinder Legacy__ computes primer binding and amplicon statistics on FASTA formatted files using the now retired ePCR 
-suite of tools from NCBI. 
+__PrimerFinder Legacy__ computes primer binding and amplicon statistics on FASTA formatted files using the now retired ePCR suite of tools from NCBI. 
 
 ### How do I use it?
 
@@ -115,17 +114,18 @@ __Please don't add too many degenerate bases, as the number of primers combinati
 
 Example PrimerFinder analyses:
  
-PrimerFinder Legacy, custom analyses [issue 37389](https://redmine.biodiversity.agr.gc.ca/issues/37389)
+vtyper analyses [issue 37405](https://redmine.biodiversity.agr.gc.ca/issues/37405)
 
-PrimerFinder Legacy, vtyper analyses [issue 37392](https://redmine.biodiversity.agr.gc.ca/issues/37392)
+custom analyses [issue 37407](https://redmine.biodiversity.agr.gc.ca/issues/37407)
 
-PrimerFinder Legacy, custom analyses, no inclusivity/exclusivity defined [issue 37393](https://redmine.biodiversity.agr.gc.ca/issues/37393)
+vtyper analyses, no inclusivity/exclusivity defined, custom mismatches [issue 37408](https://redmine.biodiversity.agr.gc.ca/issues/37408)
 
+custom analyses with probe [issue 37409](https://redmine.biodiversity.agr.gc.ca/issues/37409)
 
 
 ### How long does it take?
 
-PrimerFinder Legacy is very fast (seconds per sample)
+PrimerFinder is very fast (seconds per sample)
 
 ### What can go wrong?
 
