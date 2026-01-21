@@ -28,7 +28,9 @@ In the `Description` field, you must provide:
         
         - `vtyper` analyses will use the primer set from the vtyper tool
 
-2. a list of SEQIDs (one per line) - this must be after any other supplied parameters
+**And one of the following:**
+
+1. a list of SEQIDs (one per line) - this must be after any other supplied parameters
     - __IMPORTANT:__ You can set optionally `inclusivity` and `exclusivity` panels
     - If you do not specify a panel, it will default to `inclusivity`
 
@@ -40,6 +42,15 @@ In the `Description` field, you must provide:
     2025-SEQ-0791
     2025-SEQ-0799
 ```
+
+
+1. `database=/path/to/database.fasta`
+   - A path to a (multi-)FASTA database to use instead of SEQIDs
+   - the file must be present on the NAS
+   - sequences will extracted from the database and saved into individual files with names taken from the FASTA headers
+        - e.g. gb|CAJ32491.1|ARO:3002622|aadA6/aadA10 [Pseudomonas aeruginosa] -> gb_CAJ32491_1_ARO_3002622_aadA6_aadA10__Pseudomonas_aeruginosa_
+            - Note that the following characters will be substituted for underscores: `"/", ".", "|", " ", "[", "]", "(", ")", ":", and "'"`
+
 
 **Optional Components**
 
@@ -72,6 +83,7 @@ In order to customise your PrimerFinder analyses, several settings can be option
     - this can be supplied more than once
     - modify as follows:
         - `probe=CGCGTTATCATCACTGTTACCGATAGCG`
+
 #### Attachments
 
 For `custom` analyses, you are required to attach a FASTA-formatted file containing the primer set(s) you wish analysed. 
