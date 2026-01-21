@@ -244,34 +244,45 @@ additional details)</p>
 </ul>
 </li>
 </ol>
-<p><strong>And one of the following:</strong></p>
+<p><strong>And <em>AT LEAST ONE</em> of the following:</strong></p>
 <ol>
 <li>
 <p>a list of SEQIDs (one per line) - this must be after any other supplied parameters</p>
 <ul>
-<li><strong>IMPORTANT:</strong> You can set optionally <code>inclusivity</code> and <code>exclusivity</code> panels</li>
-<li>If you do not specify a panel, it will default to <code>inclusivity</code></li>
-</ul>
-<p>example:</p>
-</li>
-</ol>
-<pre><code>    inclusivity
-    2014-SEQ-0276
-    exclusivity
-    2025-SEQ-0791
-    2025-SEQ-0799
-</code></pre>
-<ol>
 <li>
-<p><code>database=/path/to/database.fasta</code></p>
+<p><strong>IMPORTANT:</strong> You can set optionally <code>inclusivity</code> and <code>exclusivity</code> panels</p>
+<ul>
+<li>example:
+<code>inclusivity
+2014-SEQ-0276
+exclusivity
+2025-SEQ-0791
+2025-SEQ-0799</code></li>
+</ul>
+</li>
+<li>
+<p>If you do not specify a panel, it will default to <code>inclusivity</code>
+    -example:
+    <code>2014-SEQ-0276
+    2025-SEQ-0791
+    2025-SEQ-0799</code></p>
+</li>
+</ul>
 </li>
 <li>
 <p>A path to a (multi-)FASTA database to use instead of SEQIDs</p>
-</li>
+<ul>
+<li>example: <code>database=/path/to/database.fasta</code></li>
 <li>the file must be present on the NAS</li>
-<li>sequences will extracted from the database and saved into individual files with names taken from the FASTA headers
-        - e.g. gb|CAJ32491.1|ARO:3002622|aadA6/aadA10 [Pseudomonas aeruginosa] -&gt; gb_CAJ32491_1_ARO_3002622_aadA6_aadA10__Pseudomonas_aeruginosa_
-            - Note that the following characters will be substituted for underscores: <code>"/", ".", "|", " ", "[", "]", "(", ")", ":", and "'"</code></li>
+<li>sequences will extracted from the database and saved into individual files with names taken from the FASTA headers<ul>
+<li>e.g. gb|CAJ32491.1|ARO:3002622|aadA6/aadA10 [Pseudomonas aeruginosa] -&gt; gb_CAJ32491_1_ARO_3002622_aadA6_aadA10__Pseudomonas_aeruginosa_<ul>
+<li>Note that the following characters will be substituted for underscores: <code>"/", ".", "|", " ", "[", "]", "(", ")", ":", and "'"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
 <p><strong>Optional Components</strong></p>
 <p>In order to customise your PrimerFinder analyses, several settings can be optionally modified</p>
