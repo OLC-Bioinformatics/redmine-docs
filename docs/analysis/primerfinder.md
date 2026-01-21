@@ -45,6 +45,7 @@ In the `Description` field, you must provide:
 
 
 1. `database=/path/to/database.fasta`
+
    - A path to a (multi-)FASTA database to use instead of SEQIDs
    - the file must be present on the NAS
    - sequences will extracted from the database and saved into individual files with names taken from the FASTA headers
