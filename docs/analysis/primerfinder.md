@@ -28,27 +28,32 @@ In the `Description` field, you must provide:
         
         - `vtyper` analyses will use the primer set from the vtyper tool
 
-**And one of the following:**
+**And _AT LEAST ONE_ of the following:**
 
 1. a list of SEQIDs (one per line) - this must be after any other supplied parameters
     - __IMPORTANT:__ You can set optionally `inclusivity` and `exclusivity` panels
+        - example:
+        ```
+        inclusivity
+        2014-SEQ-0276
+        exclusivity
+        2025-SEQ-0791
+        2025-SEQ-0799
+        ```
+
     - If you do not specify a panel, it will default to `inclusivity`
-
-    example:
-```
-    inclusivity
-    2014-SEQ-0276
-    exclusivity
-    2025-SEQ-0791
-    2025-SEQ-0799
-```
+        -example:
+        ```
+        2014-SEQ-0276
+        2025-SEQ-0791
+        2025-SEQ-0799
+        ```
 
 
-1. `database=/path/to/database.fasta`
-
-   - A path to a (multi-)FASTA database to use instead of SEQIDs
-   - the file must be present on the NAS
-   - sequences will extracted from the database and saved into individual files with names taken from the FASTA headers
+2. A path to a (multi-)FASTA database to use instead of SEQIDs
+    - example: `database=/path/to/database.fasta`
+    - the file must be present on the NAS
+    - sequences will extracted from the database and saved into individual files with names taken from the FASTA headers
         - e.g. gb|CAJ32491.1|ARO:3002622|aadA6/aadA10 [Pseudomonas aeruginosa] -> gb_CAJ32491_1_ARO_3002622_aadA6_aadA10__Pseudomonas_aeruginosa_
             - Note that the following characters will be substituted for underscores: `"/", ".", "|", " ", "[", "]", "(", ")", ":", and "'"`
 
@@ -105,7 +110,7 @@ The file must have the following format:
     .....
 
 You are allowed to use IUPAC degenerate bases in this file. 
-__Please don't add too many degenerate bases, as the number of primers combinations can increase quickly.__
+__Ipcress (the program that runs the _in silico PCR_ reactions) seems to have the limitation of being able to acceept degenerate bases, but not handling them properly e.g. if there are degenerate bases in a sequence, no matter the number they will count as a single mismatch (even if they shoud return a match e.g. an R should be a match if the query sequence is an 'A' or a 'G'). Therefore, if you actually want to a maximum of two mismatches in a primer pair that contains one or more degenerate bases, you must specify the number of mismatches to be three.__
 
     # Dictionary of degenerate IUPAC codes
     iupac = {
@@ -134,6 +139,8 @@ custom analyses [issue 37407](https://redmine.biodiversity.agr.gc.ca/issues/3740
 vtyper analyses, no inclusivity/exclusivity defined, custom mismatches [issue 37408](https://redmine.biodiversity.agr.gc.ca/issues/37408)
 
 custom analyses with probe [issue 37409](https://redmine.biodiversity.agr.gc.ca/issues/37409)
+
+custom analysis with database option [Issue 37415](https://redmine.biodiversity.agr.gc.ca/issues/37415)
 
 
 ### How long does it take?
