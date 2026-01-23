@@ -353,7 +353,7 @@ seq
 .....
 </code></pre>
 <p>You are allowed to use IUPAC degenerate bases in this file. 
-<strong>Please don't add too many degenerate bases, as the number of primers combinations can increase quickly.</strong></p>
+<strong>Ipcress (the program that runs the <em>in silico PCR</em> reactions) seems to have the limitation of being able to acceept degenerate bases, but not handling them properly e.g. if there are degenerate bases in a sequence, no matter the number they will count as a single mismatch (even if they shoud return a match e.g. an R should be a match if the query sequence is an 'A' or a 'G'). Therefore, if you actually want to a maximum of two mismatches in a primer pair that contains one or more degenerate bases, you must specify the number of mismatches to be three.</strong></p>
 <pre><code># Dictionary of degenerate IUPAC codes
 iupac = {
     'R': ['A', 'G'],
