@@ -100,8 +100,6 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
-    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -229,9 +227,9 @@ Optionally, it can be used to dreplicate genomes.</p>
 <p>The first line of the description should be the analysis you would like to run (e.g. <code>analysis=custom</code>). </p>
 <ul>
 <li>The following options are currently supported:<ul>
-<li><code>custom</code> - compare only the SEQIDs listed in the description</li>
-<li><code>enterobacterales</code> - compare the listed SEQIDs to a set of reference sequences for species from the order Enterobacterales</li>
-<li><code>listeriaceae</code> - compare the listed SEQIDs to a set of reference sequences for species from the family Listeriaceae</li>
+<li><code>custom</code> - compare only the SEQIDs listed in the description
+&lt;!-- - <code>enterobacterales</code> - compare the listed SEQIDs to a set of reference sequences for species from the order Enterobacterales</li>
+<li><code>listeriaceae</code> - compare the listed SEQIDs to a set of reference sequences for species from the family Listeriaceae --&gt;</li>
 </ul>
 </li>
 </ul>
@@ -310,7 +308,7 @@ Optionally, it can be used to dreplicate genomes.</p>
 </ul>
 <h4 id="example">Example</h4>
 <h4 id="interpreting-results">Interpreting Results</h4>
-<p>dRep will upload a zip file to the ftp on completion. This will contain folders with data in the form of tables, figures, etc. ANI values will only be output for clusters of sequences that are related at or above the MASH ANI cutoff. dRep does not output a tree file, however you should be able to replicate the output MASH tree by hierarchical clustering of the MASH table in R. (Hierarchical clustering uses the cluster algorithm command described above)</p>
+<p>dRep will upload a zip file to dropbox on completion. This will contain folders with data in the form of tables, figures, etc. ANI values will only be output for clusters of sequences that are related at or above the MASH ANI cutoff. dRep does not output a tree file, however you should be able to replicate the output MASH tree by hierarchical clustering of the MASH table in R. (Hierarchical clustering uses the cluster algorithm command described above)</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
 <p>This depends largely on the number of strains you want to compare and their relatedness. It can often be as quick as a few minutes
 if you have 10 or less strains, or take several hours for more strains. The primary clustering step uses Mash to determine whether sequences are likely related (based on provided cutoff or default 90%). </p>
@@ -319,9 +317,7 @@ if you have 10 or less strains, or take several hours for more strains. The prim
 <p>A few things can go wrong with this process:</p>
 <p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
 message informing you of it.</p>
-<p>2) You did not provide an analysis type. Custom analysis only completes dRep compare for the SEQ-IDs listed, whereas enterobacterales will compare your listed sequences to reference sequences from the order Enterobacterales, and listeriaceae will compare your listed sequences to reference sequences from the family Listeriaceae.</p>
-<h3 id="version">Version</h3>
-<p>Version 3.2.2 is currently available at the OLC. (as of 2024-07-4)</p>
+<p>2) You did not provide an analysis type. Custom analysis only completes dRep compare for the SEQ-IDs listed. Other analysis types in progress. <!-- whereas enterobacterales will compare your listed sequences to reference sequences from the order Enterobacterales, and listeriaceae will compare your listed sequences to reference sequences from the family Listeriaceae. --></p>
               
             </div>
           </div><footer>

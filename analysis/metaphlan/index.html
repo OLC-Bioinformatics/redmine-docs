@@ -226,7 +226,15 @@
 <p>In the <code>Subject</code> field, put <code>metaphlan</code>. Spelling counts, but case sensitivity doesn't.</p>
 <h4 id="description">Description</h4>
 <p><strong>Required Components</strong></p>
-<p>You must include a list of SEQIDs one per line.</p>
+<p>You must include the type(s) of sequence(s) (fastas, fastqs, nanoporefastqs), each followed by a list of desired SEQIDs - one per line.
+For example, in the description:  </p>
+<p>fastqs<br />
+2023-SEQ-0415<br />
+2023-SEQ-0414<br />
+fastas<br />
+2025-MIN-0333  </p>
+<p>The automator will parse through the provided list, and run the analysis on the specified sequence types.  </p>
+<p><em>IF you would like to analyse both an assembly/fasta, AND the raw data, you MUST list the SEQID under BOTH sequence types</em></p>
 <p><strong>Optional Components</strong></p>
 <p>In order to customise your analyses, additional settings can be optionally modified:</p>
 <ul>
@@ -234,10 +242,8 @@
 <li>default is <code>rel_ab_w_read_stats</code> - profiling a metagenomes in terms of relative abundances and estimate the number of reads coming from each clade</li>
 <li>If you want a different analysis, add the following line:<ul>
 <li><code>analysis=rel_ab</code> - profiling a metagenome in terms of relative abundances</li>
-<li><code>analysis=reads_map</code>  -  mapping from reads to clades (only reads hitting a marker)</li>
 <li><code>analysis=clade_profiles</code> - normalized marker counts for clades with at least a non-null marker</li>
 <li><code>analysis=marker_ab_table</code> - normalized marker counts</li>
-<li><code>analysis=marker_counts</code> - non-normalized marker counts [use with extreme caution]</li>
 <li><code>analysis=marker_pres_table</code> - list of markers present in the sample</li>
 </ul>
 </li>
@@ -245,7 +251,7 @@
 </li>
 </ul>
 <h4 id="example">Example</h4>
-<p>For an example MetaPhlAn4 analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/30290">issue 30290</a>. The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks).</p>
+<p>For an example MetaPhlAn4 analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/37794">issue 37794</a>. The zip file has been attached to this request as an example (the dropbox links expire after approx. 2 weeks).</p>
 <h4 id="interpreting-results">Interpreting Results</h4>
 <p>MetaPhlAn4 will upload a zipped folder called <code>metaphlan4_output_redmineID.zip</code> to the ftp once it has completed. This will contain report files for MetaPhlAn4 and bracken analyses.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
@@ -253,8 +259,7 @@
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
 <p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</p>
 <h3 id="version">Version</h3>
-<p><a href="https://huttenhower.sph.harvard.edu/metaphlan/">MetaPhlAn version 4.0.6</a> (as of 2024-07-03)</p>
-<p>Default database version is currently mpa_vOct22_CHOCOPhlAnSGB_202212</p>
+<p>Default database version is currently mpa_vJan25_CHOCOPhlAnSGB_202503. If you would like a different database version, please contact the bioinformatics team.</p>
               
             </div>
           </div><footer>

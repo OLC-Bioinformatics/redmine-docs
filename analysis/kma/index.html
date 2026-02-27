@@ -116,7 +116,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version-as-of-2026-01-06">Version (as of 2026-01-06)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
     </li>
     </ul>
                   </li>
@@ -234,22 +234,21 @@
 <li><code>amr</code> - used for antimicrobial resistance gene detection</li>
 <li><code>biocide</code> - used for biocide resistance gene detection</li>
 <li><code>metal</code> - used for metal resistance gene detection</li>
-<li><code>verotoxin</code> - used for toxin gene detection in Shiga toxin-producing E. coli (curated by Catherine Carrillo for poresippr)</li>
-<li><code>bacmet</code> - used for metal resistance gene detection using the <a href="http://bacmet.biomedicine.gu.se/">BacMet database</a>, which was converted to nucleotide format by James Robertson (reference to follow)</li>
+<li><code>verotoxin</code> - used for toxin gene detection in Shiga toxin-producing E. coli (curated by Catherine Carrillo for poresippr)
+<!-- - <code>bacmet</code> - used for metal resistance gene detection using the <a href="http://bacmet.biomedicine.gu.se/">BacMet database</a>, which was converted to nucleotide format (use with caution) --></li>
 <li><code>custom</code> - gene detection using a custom target database uploaded by the user. The user <strong>MUST</strong> also add the flag <code>targetsfile=</code> and the name of their database file including the suffix, for example <code>targets.fasta</code> or <code>genes.fasta</code>. The output csv file will use your fasta-file gene headers as names.
 <br></li>
 </ul>
 </li>
-<li>Bacterial Integrative and Conjugative Elements (ICEs) <a href="https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html">ICEberg databases</a> from the <a href="https://academic.oup.com/nar/article/47/D1/D660/5165266">ICEfinder publication</a>:
-<em>CAUTION: the ICEfinder webtool seems to work differently than KMA, and may detect ICEs where KMA does not</em><ul>
-<li><code>all_ices</code> - used for all ICE gene detection</li>
-<li><code>aice</code> - used for actinomycete (AICEs) type ICE gene detection</li>
-<li><code>cime</code> - used for cis-mobilizable elements (CIMEs) ICE gene detection</li>
-<li><code>ime</code> - used for Integrative and Mobilizable Elements (IME) type ICE gene detection</li>
-<li><code>t4ss</code> - used for Type IV Secretion System (T4SS) type ICE gene detection</li>
 </ul>
-</li>
-</ul>
+<!-- - Bacterial Integrative and Conjugative Elements (ICEs) [ICEberg databases](https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html) from the [ICEfinder publication](https://academic.oup.com/nar/article/47/D1/D660/5165266):
+*CAUTION: the ICEfinder webtool seems to work differently than KMA, and may detect ICEs where KMA does not*
+    - `all_ices` - used for all ICE gene detection
+    - `aice` - used for actinomycete (AICEs) type ICE gene detection
+    - `cime` - used for cis-mobilizable elements (CIMEs) ICE gene detection
+    - `ime` - used for Integrative and Mobilizable Elements (IME) type ICE gene detection
+    - `t4ss` - used for Type IV Secretion System (T4SS) type ICE gene detection -->
+
 <p>You must also include a list of SEQIDs one per line.</p>
 <p><strong>Optional Components</strong></p>
 <p>By default, KMA will run the analysis for isolate assemblies. In order to customise your CARD-RGI analyses, additional settings can be optionally modified:</p>
@@ -372,10 +371,8 @@ is actually there, but anything else requires further analysis to be sure.</p>
 <h3 id="what-can-go-wrong">What can go wrong?</h3>
 <p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</p>
 <p>2) A custom analysis was requested but targets file was not attached. You will get a warning message informing you of it. You must also add the flag <code>targetsfile=name.fasta</code> for the automator to recognize your attached multifasta file.</p>
-<h3 id="version-as-of-2026-01-06">Version (as of 2026-01-06)</h3>
-<p>KMA version = 1.6.8</p>
+<h3 id="version">Version</h3>
 <p>NCBI AMRFinderPlus database (used for amr, biocide, and metal detection) = 3.11</p>
-<p>BacMet - converted to nt by James Robertson - amino acid database version 2 from 2018</p>
               
             </div>
           </div><footer>
