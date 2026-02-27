@@ -3,6 +3,9 @@ site_url: https://olc-bioinformatics.github.io/redmine-docs
 site_description: Instructions for OLC Redmine Usage
 repo_url: https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator
 theme: readthedocs
+markdown_extensions:
+  - attr_list
+  - md_in_html
 
 nav:
 - Home: 'index.md'

@@ -21,8 +21,8 @@ The first line of the description should be the analysis you would like to run (
 
 - The following options are currently supported:
     - `custom` - compare only the SEQIDs listed in the description
-    - `enterobacterales` - compare the listed SEQIDs to a set of reference sequences for species from the order Enterobacterales
-    - `listeriaceae` - compare the listed SEQIDs to a set of reference sequences for species from the family Listeriaceae
+    <!-- - `enterobacterales` - compare the listed SEQIDs to a set of reference sequences for species from the order Enterobacterales
+    - `listeriaceae` - compare the listed SEQIDs to a set of reference sequences for species from the family Listeriaceae -->
 
 You must also include a list of SEQIDs one per line.
 
@@ -70,7 +70,7 @@ By default, dRep will run the compare command to compare the set of genomes. In 
 
 #### Interpreting Results
 
-dRep will upload a zip file to the ftp on completion. This will contain folders with data in the form of tables, figures, etc. ANI values will only be output for clusters of sequences that are related at or above the MASH ANI cutoff. dRep does not output a tree file, however you should be able to replicate the output MASH tree by hierarchical clustering of the MASH table in R. (Hierarchical clustering uses the cluster algorithm command described above)
+dRep will upload a zip file to dropbox on completion. This will contain folders with data in the form of tables, figures, etc. ANI values will only be output for clusters of sequences that are related at or above the MASH ANI cutoff. dRep does not output a tree file, however you should be able to replicate the output MASH tree by hierarchical clustering of the MASH table in R. (Hierarchical clustering uses the cluster algorithm command described above)
 
 ### How long does it take?
 
@@ -86,8 +86,4 @@ A few things can go wrong with this process:
 1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
 message informing you of it.
 
-2) You did not provide an analysis type. Custom analysis only completes dRep compare for the SEQ-IDs listed, whereas enterobacterales will compare your listed sequences to reference sequences from the order Enterobacterales, and listeriaceae will compare your listed sequences to reference sequences from the family Listeriaceae.
-
-### Version
-
-Version 3.2.2 is currently available at the OLC. (as of 2024-07-4)
+2) You did not provide an analysis type. Custom analysis only completes dRep compare for the SEQ-IDs listed. Other analysis types in progress. <!-- whereas enterobacterales will compare your listed sequences to reference sequences from the order Enterobacterales, and listeriaceae will compare your listed sequences to reference sequences from the family Listeriaceae. -->

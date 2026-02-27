@@ -2,7 +2,7 @@
 
 This is the way I edit pages. Feel free to use any method with which you are comfortable
 
-- Get the mkdocs preview started `mkdocs serve`
+- Get the mkdocs preview started `mkdocs serve --livereload`
 
 - Navigate to the served pages in your browser e.g. `http://127.0.0.1:8000/redmine-docs/` 
 

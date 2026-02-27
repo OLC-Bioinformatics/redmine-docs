@@ -19,7 +19,7 @@ All you need to put in the description is a list of SEQIDs you want to look for 
 
 #### Example
 
-For an example MobSuite, see [issue 12823](https://redmine.biodiversity.agr.gc.ca/issues/12823).
+For an example MobSuite, see [issue 37387](https://redmine.biodiversity.agr.gc.ca/issues/37387).
 
 #### Interpreting Results
 
@@ -39,11 +39,8 @@ A few things can go wrong with this process:
 1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
 message informing you of it.
 
-2) FTP timeout. Sometimes, particularly for larger requests, the upload of results to the FTP will run into problems and time out,
+2) Dropbox upload timeout. You will likely get an error message. If the problem persists, send us an email and we will try to assist.
+<!-- 2) FTP timeout. Sometimes, particularly for larger requests, the upload of results to the FTP will run into problems and time out,
 in which case you will likely get an error message similar to this: `[Errno 104] Connection reset by peer`. If this occurs,
 you can either try again later, or, if you had a large request, try splitting it into a few smaller requests. If the
-problem persists, send us an email and we'll try to get it figured out.
-
-### Version
-
-Mobsuite3 version 3.1.9 is currently available at the OLC. (as of 2024-07-4)
+problem persists, send us an email and we'll try to get it figured out. -->

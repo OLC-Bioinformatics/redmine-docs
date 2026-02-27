@@ -18,7 +18,18 @@ In the `Subject` field, put `metaphlan`. Spelling counts, but case sensitivity d
 
 **Required Components**
 
-You must include a list of SEQIDs one per line.
+You must include the type(s) of sequence(s) (fastas, fastqs, nanoporefastqs), each followed by a list of desired SEQIDs - one per line.
+For example, in the description:  
+
+fastqs  
+2023-SEQ-0415  
+2023-SEQ-0414  
+fastas  
+2025-MIN-0333  
+
+The automator will parse through the provided list, and run the analysis on the specified sequence types.  
+
+*IF you would like to analyse both an assembly/fasta, AND the raw data, you MUST list the SEQID under BOTH sequence types*
 
 **Optional Components**
 
@@ -28,17 +39,15 @@ In order to customise your analyses, additional settings can be optionally modif
     - default is `rel_ab_w_read_stats` - profiling a metagenomes in terms of relative abundances and estimate the number of reads coming from each clade
     - If you want a different analysis, add the following line:
         - `analysis=rel_ab` - profiling a metagenome in terms of relative abundances
-        - `analysis=reads_map`  -  mapping from reads to clades (only reads hitting a marker)
         - `analysis=clade_profiles` - normalized marker counts for clades with at least a non-null marker
         - `analysis=marker_ab_table` - normalized marker counts
-        - `analysis=marker_counts` - non-normalized marker counts [use with extreme caution]
         - `analysis=marker_pres_table` - list of markers present in the sample
 
 
 
 #### Example
 
-For an example MetaPhlAn4 analysis, see [issue 30290](https://redmine.biodiversity.agr.gc.ca/issues/30290). The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks).
+For an example MetaPhlAn4 analysis, see [issue 37794](https://redmine.biodiversity.agr.gc.ca/issues/37794). The zip file has been attached to this request as an example (the dropbox links expire after approx. 2 weeks).
 
 #### Interpreting Results
 
@@ -54,9 +63,7 @@ The time required for analysis will depend on the analysis type and number of se
 
 ### Version
 
-[MetaPhlAn version 4.0.6](https://huttenhower.sph.harvard.edu/metaphlan/) (as of 2024-07-03)
-
-Default database version is currently mpa_vOct22_CHOCOPhlAnSGB_202212
+Default database version is currently mpa_vJan25_CHOCOPhlAnSGB_202503. If you would like a different database version, please contact the bioinformatics team.
 
 
 

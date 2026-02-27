@@ -25,16 +25,16 @@ The first line of the description should be the analysis you would like to run (
     - `biocide` - used for biocide resistance gene detection
     - `metal` - used for metal resistance gene detection
     - `verotoxin` - used for toxin gene detection in Shiga toxin-producing E. coli (curated by Catherine Carrillo for poresippr)
-    - `bacmet` - used for metal resistance gene detection using the [BacMet database](http://bacmet.biomedicine.gu.se/), which was converted to nucleotide format by James Robertson (reference to follow)
+    <!-- - `bacmet` - used for metal resistance gene detection using the [BacMet database](http://bacmet.biomedicine.gu.se/), which was converted to nucleotide format (use with caution) -->
     - `custom` - gene detection using a custom target database uploaded by the user. The user **MUST** also add the flag `targetsfile=` and the name of their database file including the suffix, for example `targets.fasta` or `genes.fasta`. The output csv file will use your fasta-file gene headers as names.
 <br>
-- Bacterial Integrative and Conjugative Elements (ICEs) [ICEberg databases](https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html) from the [ICEfinder publication](https://academic.oup.com/nar/article/47/D1/D660/5165266):
+<!-- - Bacterial Integrative and Conjugative Elements (ICEs) [ICEberg databases](https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html) from the [ICEfinder publication](https://academic.oup.com/nar/article/47/D1/D660/5165266):
 *CAUTION: the ICEfinder webtool seems to work differently than KMA, and may detect ICEs where KMA does not*
     - `all_ices` - used for all ICE gene detection
     - `aice` - used for actinomycete (AICEs) type ICE gene detection
     - `cime` - used for cis-mobilizable elements (CIMEs) ICE gene detection
     - `ime` - used for Integrative and Mobilizable Elements (IME) type ICE gene detection
-    - `t4ss` - used for Type IV Secretion System (T4SS) type ICE gene detection
+    - `t4ss` - used for Type IV Secretion System (T4SS) type ICE gene detection -->
 
 
 You must also include a list of SEQIDs one per line.
@@ -133,10 +133,8 @@ KMA is very fast, however the time required for analysis will depend on the anal
 
 2) A custom analysis was requested but targets file was not attached. You will get a warning message informing you of it. You must also add the flag `targetsfile=name.fasta` for the automator to recognize your attached multifasta file.
 
-### Version (as of 2026-01-06)
-KMA version = 1.6.8
+### Version
 
 NCBI AMRFinderPlus database (used for amr, biocide, and metal detection) = 3.11
 
-BacMet - converted to nt by James Robertson - amino acid database version 2 from 2018
 
