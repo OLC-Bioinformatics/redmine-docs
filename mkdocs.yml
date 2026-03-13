@@ -26,6 +26,7 @@ nav:
     - 'eCGF': 'analysis/eCGF.md'
     - 'ECTyper': 'analysis/ectyper.md'
     - 'DiversiTree': 'analysis/diversitree.md'
+    - 'Downsample': 'analysis/downsample.md'
     - 'dRep-ANI': 'analysis/drep.md'
     - 'Fastqc': 'analysis/fastqc.md'
     - 'fastqmerge': 'analysis/fastqmerge.md'
