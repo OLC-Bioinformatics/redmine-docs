@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/downsample/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Downsample - OLC Redmine Automator</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Downsample";
+        var mkdocs_page_input_path = "analysis/downsample.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/downsample/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OLC Redmine Automator
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/external_retrieve/">External Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/report_retrieve/">Report Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_upload/">SRA Upload</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_download/">SRA Download</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Analysis</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../amrsummary/">AMRsummary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../autoclark/">AutoCLARK</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cardrgi/">CARD-RGI (AMR)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Downsample</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-description">Example description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#full-example-request">Full example request</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gfa_retrieve/">GFA Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pyseer/">GWAS-pyseer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kma/">KMA - Gene Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kraken2/">Kraken2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pointfinder/">PointFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../primerfinder/">PrimerFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rmlst/">rMLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sequence_extractor/">SequenceExtractor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snvphyl/">SNVPhyl</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snippy/">Snippy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../staramr/">staramr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Internal Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/merge/">Merge</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/azuredownload/">AzureDownload</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/">Troubleshooting</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_pages/">Create Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/edit_pages/">Edit Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/publish_changes/">Publish Changes</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OLC Redmine Automator</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Analysis</li>
+      <li class="breadcrumb-item active">Downsample</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/downsample.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="downsample">Downsample</h1>
+<h3 id="what-does-it-do">What does it do?</h3>
+<p>The Downsample automator retrieves FASTQ files from the OLC NAS (by SEQID)
+and then uses BBMap's <code>reformat.sh</code> to randomly subsample the reads. It can
+subsample by <strong>coverage</strong>, <strong>compressed output size</strong>, or by providing any of
+the standard BBMap <code>reformat.sh</code> sampling options.</p>
+<p>The output is packaged as a zip file and made available via Dropbox.</p>
+<h3 id="how-do-i-use-it">How do I use it?</h3>
+<h4 id="subject">Subject</h4>
+<p>In the <code>Subject</code> field, put <code>downsample</code>. Spelling counts, but case does not.</p>
+<h4 id="description">Description</h4>
+<p><strong>Required components</strong></p>
+<ul>
+<li>A list of SEQIDs, one per line. These are the identifiers used to locate
+  FASTQ files on the NAS.</li>
+</ul>
+<p><strong>Optional components</strong></p>
+<p>You can tell the automator how much to downsample using one of the following:</p>
+<ul>
+<li><code>COVERAGE=&lt;float&gt;</code> — target coverage (e.g., <code>COVERAGE=5</code>)</li>
+<li><code>TARGETSIZE=&lt;size&gt;</code> — target compressed output size (e.g., <code>TARGETSIZE=1G</code>, <code>500M</code>, <code>100000000</code>)</li>
+</ul>
+<p>If neither <code>COVERAGE</code> nor <code>TARGETSIZE</code> is supplied, the automator will
+calculate a target size that aims to keep the compressed output under ~1 GB
+(by estimating the compression ratio of the input files).</p>
+<p><strong>Reformat / sampling options</strong></p>
+<p>Any <code>reformat.sh</code> option supplied as <code>KEY=VALUE</code> in the description will be
+forwarded to <code>reformat.sh</code>. Keys are treated case-insensitively (the automator
+uppercases them internally), so <code>coverage=5</code> and <code>COVERAGE=5</code> behave the same.
+In practice, this means you can use <em>any</em> <code>reformat.sh</code> parameter in your request.</p>
+<p>The most commonly used sampling options are:</p>
+<ul>
+<li><code>SAMPLEREADSTARGET</code> (exact number of reads)</li>
+<li><code>SAMPLEBASETARGET</code> (exact number of bases)</li>
+<li><code>SAMPLERATE</code> (fraction to keep)</li>
+<li><code>SAMPLEFRACTION</code> (same as samplerate)</li>
+<li><code>SAMPLESEED</code> (random seed; set this for repeatable sampling runs)</li>
+<li><code>INTERLEAVED</code> (treat input as interleaved paired reads)</li>
+<li><code>MINLENGTH</code> / <code>MIN_LEN</code> (discard reads shorter than this)</li>
+<li><code>MAXLENGTH</code> / <code>MAX_LEN</code> (discard reads longer than this)</li>
+<li><code>QTRIM</code> / <code>MINQ</code> (trim low-quality bases from read ends)</li>
+<li><code>TRIMQ</code> (quality threshold used for trimming)</li>
+</ul>
+<details>
+<summary><b>Full list of supported `reformat.sh` options (from `reformat.sh --help`)</b></summary>
+
+
+<pre><code class="language-text">Parameters and their defaults:
+
+ow=f                    (overwrite) Overwrites files that already exist.
+app=f                   (append) Append to files that already exist.
+zl=4                    (ziplevel) Set compression level, 1 (low) to 9 (max).
+int=f                   (interleaved) Determines whether INPUT file is considered interleaved.
+fastawrap=70            Length of lines in fasta output.
+fastareadlen=0          Set to a non-zero number to break fasta files into reads of at most this length.
+fastaminlen=1           Ignore fasta reads shorter than this.
+qin=auto                ASCII offset for input quality.  May be 33 (Sanger), 64 (Illumina), or auto.
+qout=auto               ASCII offset for output quality.  May be 33 (Sanger), 64 (Illumina), or auto (same as input).
+qfake=30                Quality value used for fasta to fastq reformatting.
+qfin=&lt;.qual file&gt;       Read qualities from this qual file, for the reads coming from 'in=&lt;fasta file&gt;'
+qfin2=&lt;.qual file&gt;      Read qualities from this qual file, for the reads coming from 'in2=&lt;fasta file&gt;'
+qfout=&lt;.qual file&gt;      Write qualities from this qual file, for the reads going to 'out=&lt;fasta file&gt;'
+qfout2=&lt;.qual file&gt;     Write qualities from this qual file, for the reads coming from 'out2=&lt;fasta file&gt;'
+outsingle=&lt;file&gt;        (outs) If a read is longer than minlength and its mate is shorter, the longer one goes here.
+deleteinput=f           Delete input upon successful completion.
+ref=&lt;file&gt;              Optional reference fasta for sam processing.
+
+Processing Parameters:
+
+verifypaired=f          (vpair) When true, checks reads to see if the names look paired.  Prints an error message if not.
+verifyinterleaved=f     (vint) sets 'vpair' to true and 'interleaved' to true.
+allowidenticalnames=f   (ain) When verifying pair names, allows identical names, instead of requiring /1 and /2 or 1: and 2:
+tossbrokenreads=f       (tbr) Discard reads that have different numbers of bases and qualities.  By default this will be detected and cause a crash.
+ignorebadquality=f      (ibq) Fix out-of-range quality values instead of crashing with a warning.
+addslash=f              Append ' /1' and ' /2' to read names, if not already present.  Please include the flag 'int=t' if the reads are interleaved.
+spaceslash=t            Put a space before the slash in addslash mode.
+addcolon=f              Append ' 1:' and ' 2:' to read names, if not already present.  Please include the flag 'int=t' if the reads are interleaved.
+underscore=f            Change whitespace in read names to underscores.
+rcomp=f                 (rc) Reverse-complement reads.
+rcompmate=f             (rcm) Reverse-complement read 2 only.
+comp=f                  (complement) Reverse-complement reads.
+changequality=t         (cq) N bases always get a quality of 0 and ACGT bases get a min quality of 2.
+quantize=f              Quantize qualities to a subset of values like NextSeq.  Can also be used with comma-delimited list, like quantize=0,8,13,22,27,32,37
+tuc=f                   (touppercase) Change lowercase letters in reads to uppercase.
+uniquenames=f           Make duplicate names unique by appending _&lt;number&gt;.
+remap=                  A set of pairs: remap=CTGN will transform C&gt;T and G&gt;N.
+                        Use remap1 and remap2 to specify read 1 or 2.
+iupacToN=f              (itn) Convert non-ACGTN symbols to N.
+monitor=f               Kill this process if it crashes.  monitor=600,0.01 would kill after 600 seconds under 1% usage.
+crashjunk=t             Crash when encountering reads with invalid bases.
+tossjunk=f              Discard reads with invalid characters as bases.
+fixjunk=f               Convert invalid bases to N (or X for amino acids).
+dotdashxton=f           Specifically convert . - and X to N (or X for amino acids).
+recalibrate=f           (recal) Recalibrate quality scores.  Must first generate matrices with CalcTrueQuality.
+maxcalledquality=41     Quality scores capped at this upper bound.
+mincalledquality=2      Quality scores of ACGT bases will be capped at lower bound.
+trimreaddescription=f   (trd) Trim the names of reads after the first whitespace.
+trimrname=f             For sam/bam files, trim rname/rnext fields after the first space.
+fixheaders=f            Replace characters in headers such as space, *, and | to make them valid file names.
+warnifnosequence=t      For fasta, issue a warning if a sequenceless header is encountered.
+warnfirsttimeonly=t     Issue a warning for only the first sequenceless header.
+utot=f                  Convert U to T (for RNA -&gt; DNA translation).
+padleft=0               Pad the left end of sequences with this many symbols.
+padright=0              Pad the right end of sequences with this many symbols.
+pad=0                   Set padleft and padright to the same value.
+padsymbol=N             Symbol to use for padding.
+
+Sampling parameters:
+
+reads=-1                Set to a positive number to only process this many INPUT reads (or pairs), then quit.
+skipreads=-1            Skip (discard) this many INPUT reads before processing the rest.
+samplerate=1            Randomly output only this fraction of reads; 1 means sampling is disabled.
+sampleseed=-1           Set to a positive number to use that prng seed for sampling (allowing deterministic sampling).
+samplereadstarget=0     (srt) Exact number of OUTPUT reads (or pairs) desired.
+samplebasestarget=0     (sbt) Exact number of OUTPUT bases desired.
+                        Important: srt/sbt flags should not be used with stdin, samplerate, qtrim, minlength, or minavgquality.
+upsample=f              Allow srt/sbt to upsample (duplicate reads) when the target is greater than input.
+prioritizelength=f      If true, calculate a length threshold to reach the target, and retain all reads of at least that length (must set srt or sbt).
+
+Trimming and filtering parameters:
+
+qtrim=f                 Trim read ends to remove bases with quality below trimq.
+                        Values: t (trim both ends), f (neither end), r (right end only), l (left end only), w (sliding window).
+trimq=6                 Regions with average quality BELOW this will be trimmed.  Can be a floating-point number like 7.3.
+minlength=0             (ml) Reads shorter than this after trimming will be discarded.  Pairs will be discarded only if both are shorter.
+mlf=0                   (mlf) Reads shorter than this fraction of original length after trimming will be discarded.
+maxlength=0             If nonzero, reads longer than this after trimming will be discarded.
+breaklength=0           If nonzero, reads longer than this will be broken into multiple reads of this length.  Does not work for paired reads.
+requirebothbad=t        (rbb) Only discard pairs if both reads are shorter than minlen.
+invertfilters=f         (invert) Output failing reads instead of passing reads.
+minavgquality=0         (maq) Reads with average quality (after trimming) below this will be discarded.
+maqb=0                  If positive, calculate maq from this many initial bases.
+chastityfilter=f        (cf) Reads with names  containing ' 1:Y:' or ' 2:Y:' will be discarded.
+barcodefilter=f         Remove reads with unexpected barcodes if barcodes is set, or barcodes containing 'N' otherwise.  
+                        A barcode must be the last part of the read header.
+barcodes=               Comma-delimited list of barcodes or files of barcodes.
+maxns=-1                If 0 or greater, reads with more Ns than this (after trimming) will be discarded.
+minconsecutivebases=0   (mcb) Discard reads without at least this many consecutive called bases.
+forcetrimleft=0         (ftl) If nonzero, trim left bases of the read to this position (exclusive, 0-based).
+forcetrimright=-1       (ftr) If nonnegative, trim right bases of the read after this position (exclusive, 0-based).
+forcetrimright2=0       (ftr2) If positive, trim this many bases on the right end.
+forcetrimmod=5          (ftm) If positive, trim length to be equal to zero modulo this number.
+mingc=0                 Discard reads with GC content below this.
+maxgc=1                 Discard reads with GC content above this.
+gcpairs=t               Use average GC of paired reads.
+                        Also affects gchist.
+
+Illumina-specific parameters:
+top=true                Include reads from the top of the flowcell.
+bottom=true             Include reads from the bottom of the flowcell.
+
+Kmer counting and cardinality estimation parameters:
+k=0                     If positive, count the total number of kmers.
+cardinality=f           (loglog) Count unique kmers using the LogLog algorithm.
+loglogbuckets=1999      Use this many buckets for cardinality estimation.
+
+</code></pre>
+
+
+</details>
+
+<blockquote>
+<p>Note: The automator treats paired files with <code>_R1</code>/<code>_R2</code> suffixes as a pair
+and passes both to <code>reformat.sh</code> so that the output remains synchronized.</p>
+</blockquote>
+<h4 id="example-description">Example description</h4>
+<pre><code>COVERAGE=5
+2024-SEQ-1234
+2024-SEQ-5678
+</code></pre>
+<p>or</p>
+<pre><code>TARGETSIZE=500M
+SAMPLESEED=42
+2024-SEQ-1234
+</code></pre>
+<h4 id="full-example-request">Full example request</h4>
+<p>This is what a complete request might look like (one item per line):</p>
+<pre><code>COVERAGE=5
+SAMPLESEED=42
+SAMPLEBASETARGET=100000000
+INTERLEAVED=true
+2024-SEQ-1234
+2024-SEQ-5678
+</code></pre>
+<p>This will downsample the paired reads for both SEQIDs to ~100 million bases, using a fixed seed for reproducibility.</p>
+<h3 id="interpreting-results">Interpreting Results</h3>
+<p>When the automator finishes, it uploads a zip file named
+<code>downsample_results_&lt;issue number&gt;.zip</code> to Dropbox and posts a download link
+in the Redmine issue.</p>
+<p>The zip contains the downsampled FASTQ files, with the same filenames as the
+originals (the automator removes its internal <code>_downsampled</code> suffix before
+zipping).</p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>Time depends on the input size and the sampling target. It runs one <code>reformat.sh</code>
+call per input file (paired files are processed together), so the runtime scales
+with the number of FASTQ files and their size.</p>
+<h3 id="what-can-go-wrong">What can go wrong?</h3>
+<ol>
+<li>Requested SEQIDs are not available: you will get a warning in the issue and
+   only the available SEQIDs will be processed.</li>
+<li>The automator relies on BBMap (<code>reformat.sh</code> and <code>kmercountexact.sh</code>) being
+   available in the configured conda environment; if those tools are missing or
+   fail, the issue will be updated with an error.</li>
+<li>Invalid or misspelled <code>KEY=VALUE</code> options will cause the job to fail.
+   The automator validates each option against the supported <code>reformat.sh</code>
+   parameters and reports unsupported keys in the issue.</li>
+<li>Invalid values (e.g., <code>COVERAGE=FIVE</code> or <code>TARGETSIZE=oneG</code>) will also
+   trigger an error because the automator expects numeric inputs for those
+   fields.</li>
+<li>If you request <code>COVERAGE=</code> and the genome size cannot be estimated (e.g.
+   <code>kmercountexact.sh</code> fails or produces no peaks), the automator may fail.</li>
+</ol>
+<h3 id="version">Version</h3>
+<p>This automator uses BBMap/BBTools from the <code>bbtools</code> conda environment.
+The exact BBTools version is reported in the issue when the job completes.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../diversitree/" class="btn btn-neutral float-left" title="DiversiTree"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../drep/" class="btn btn-neutral float-right" title="dRep-ANI">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../diversitree/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../drep/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
