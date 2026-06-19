@@ -12,7 +12,11 @@ In the `Subject` field, put `mlst` spelling counts, but case sensitivity doesn't
 
 #### Description
 
-Include the genus on the first line `organism=[name of organism]`. Please note that both spelling AND case sensitivity are important. Here are the organisms currently available for this automator: 
+Include the genus on the first line `organism=[name of organism]`. Please note that both spelling AND case sensitivity are important.
+
+For organisms like `Escherichia coli` that have multiple schemes, you need to specify which scheme you need. `Escherichia coli#1` corresponds to the `Achtman` scheme and `Escherichia coli#2` corresponds to the `Pasteur` scheme
+
+Here are the organisms currently available for this automator: 
 
 <details>
   <summary><b>Full list of supported organisms</b></summary> <br>
