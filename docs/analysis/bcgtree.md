@@ -1,75 +1,195 @@
 # bcgTree
 
-### What does it do?
+## What does it do?
 
-bcgTree is a an automated phylogenetic tree building pipeline that builds trees from bacterial core genomes. The pipeline "automatically extracts 107 essential single-copy core genes, found in a majority of bacteria" (these genes were statistically determined, see [bcgTree publication](https://cdnsciencepub.com/doi/10.1139/gen-2015-0175?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed)). It then uses hidden Markov models and performs a partitioned maximum-likelihood analysis. If you want to 
-learn more about it, check out the [bcgTree publication](https://cdnsciencepub.com/doi/10.1139/gen-2015-0175?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed). Dont forget to cite Ankenbrand and Keller, 2016!
+Use **bcgTree** to build a bacterial phylogeny from conserved single-copy core genes.
 
+The pipeline automatically extracts 107 essential single-copy genes found across a broad range of bacteria, identifies homologues with hidden Markov models, aligns the selected protein sequences, and performs a partitioned maximum-likelihood analysis with RAxML.
 
-### How do I use it?
+bcgTree is intended for bacterial assemblies. Unlike MashTree, its primary tree is based on aligned core-gene protein sequences rather than only estimated whole-genome Mash distances.
 
-#### Subject
+For background, see the [bcgTree publication](https://cdnsciencepub.com/doi/10.1139/gen-2015-0175). Cite Ankenbrand and Keller (2016) when publishing results produced with this workflow.
 
-In the `Subject` field, put `bcgtree`. Spelling counts, but case sensitivity doesnt.
+## How do I use it?
 
-#### Description
+### Subject
 
-**Required Components**
+In the **Subject** field, enter:
 
-In the `Description` field, you must include a list of SEQIDs one per line.
+```text
+bcgtree
+```
 
+Spelling matters, but matching is not case-sensitive.
 
-**Optional Components**
+### Description
 
-In order to customise your bcgTree analysis, several settings can be optionally modified.
+Enter optional parameters first, followed by one bacterial assembly `SEQID` per line:
 
-- If you would like to change the number of bootstraps performed, add the following line to the description before the list of SEQIDs:
-    - default is `100`
-    - modify as follows:
-        - `bootstraps=1000`
-- If you would like to change the minimum number of proteomes in which a gene must occur in order to be kept:
-    - default is `2`
-    - modify as follows:
-        - `min_proteomes=5`
-- If you would like to change the amino acid substitution model used for the partitions by RAxML:
-    - default is `AUTO`
-    - modify as follows:
-        - `aa_substitution_model=GTR`
-    - you can select one of the following amino acid substitution models to use:
-        - AUTO, DAYHOFF, DCMUT, JTT, MTREV, WAG,RTREV, CPREV, VT, BLOSUM62, MTMAM, LG,
-          MTART, MTZOA, PMB, HIVB,HIVW, JTTDCMUT, FLU, STMTREV, DUMMY, DUMMY2,
-          LG4M, LG4X, PROT_FILE, GTR_UNLINKED, GTR
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+```
 
-#### Example
+### Attachments
 
-For an example bcgtree issue see [issue 25083](https://redmine.biodiversity.agr.gc.ca/issues/25083). **NOTE**: the output files for these issues no longer exist on the ftp server.
+The supplied documentation does not identify support for attached assemblies. Use available `SEQID`s unless attachment support has been verified in the current implementation.
 
-#### Interpreting Results
+### Optional parameters
 
-The bcgTree automator will upload links to the ftp for files called `prokka_output.zip` and `bcgtree_output.zip` once it has completed. 
+#### `bootstraps`
 
-The `prokka_output.zip` contains all of the outputs from prokka. Prokka will output a lot of files for each genome you give it - you can find a quick description of
-each file [here](https://github.com/tseemann/prokka#output-files). Of particular interest are the `.faa` files, which bcgTree uses for analysis.
+Sets the number of bootstrap replicates.
 
-The `bcgtree_output.zip` file contains all of the outputs from bcgTree. The alignment files, and gene-id files output by bcgtree can be found in subfolders in the zip file. The most interesting outputs from bcgtree are the RAxML files. These files conaint the phylogenetic trees output by bcgTree: 
+- Default: `100`
+- Example: `bootstraps=1000`
 
-- RAxML_bestTree.final
-- RAxML_bipartitionsBranchLabels.final
-- RAxML_bipartitions.final
-- RAxML_bootstrap.final
+More bootstrap replicates increase runtime.
 
-These files can be opened using a phylogenetic tree viewer of your choice.
+#### `min_proteomes`
 
-There will also be the `config.txt` file containing the command(s) passed to bcgTree, as well as a `bcgtree.log` file containing all of the executed commands and their output(s) (including the random seed values used by RAxML).
+Sets the minimum number of proteomes in which a gene must occur to be retained.
 
+- Default: `2`
+- Example: `min_proteomes=5`
 
-### How long does it take?
+Increasing this value can reduce the number of genes retained when taxa are diverse or assemblies are incomplete.
 
-Prokka isnt the quickest thing around - expect it to take 2 to 3 minutes for each genome you give it. After prokka is finished the bcgTree pipeline time will depend on the number of sequences and bootstraps requested. 
+#### `aa_substitution_model`
 
-### What can go wrong?
+Selects the amino-acid substitution model used for RAxML partitions.
 
-1. Requested SEQIDs are not available. If we cant find some of the SEQIDs that you request, you will get a warning message informing you of it.
-2. There was an issue with the requested amino acid substitution model: there was a typo, or you requested a currently-unsupported substitution model. An error message detailing the problem will be added to the issue.
+- Default: `AUTO`
+- Example: `aa_substitution_model=GTR`
 
+Supported values from the supplied documentation are:
 
+```text
+AUTO
+DAYHOFF
+DCMUT
+JTT
+MTREV
+WAG
+RTREV
+CPREV
+VT
+BLOSUM62
+MTMAM
+LG
+MTART
+MTZOA
+PMB
+HIVB
+HIVW
+JTTDCMUT
+FLU
+STMTREV
+DUMMY
+DUMMY2
+LG4M
+LG4X
+PROT_FILE
+GTR_UNLINKED
+GTR
+```
+
+Copy the model name exactly. Confirm this allowlist against the deployed RAxML/bcgTree version before final publication.
+
+### Example
+
+```text
+bootstraps=100
+min_proteomes=2
+aa_substitution_model=AUTO
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+```
+
+See [issue 25083](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/25083) for an example bcgTree request. The historical result files associated with that issue have been purged.
+
+## Interpreting results
+
+When bcgTree finishes, it provides Dropbox links for two archives:
+
+```text
+prokka_output.zip
+bcgtree_output.zip
+```
+
+### `prokka_output.zip`
+
+Contains Prokka annotation output for each genome. The `.faa` protein FASTA files are used as inputs to bcgTree. See the [Prokka output documentation](https://github.com/tseemann/prokka#output-files) for descriptions of the other files.
+
+### `bcgtree_output.zip`
+
+Contains bcgTree alignments, gene-identifier files, configuration, logs, and RAxML outputs.
+
+Important tree files include:
+
+```text
+RAxML_bestTree.final
+RAxML_bipartitionsBranchLabels.final
+RAxML_bipartitions.final
+RAxML_bootstrap.final
+```
+
+- `RAxML_bestTree.final` contains the best-scoring maximum-likelihood tree.
+- `RAxML_bipartitions.final` contains a tree with bootstrap support values mapped to branches.
+- `RAxML_bipartitionsBranchLabels.final` contains bootstrap support represented as branch labels.
+- `RAxML_bootstrap.final` contains the bootstrap replicate trees.
+
+Open these files in a RAxML/Newick-compatible tree viewer. Use a supported tree file, alignment, model, and bootstrap evidence together when interpreting relationships.
+
+The archive also contains:
+
+- `config.txt` — commands and settings passed to bcgTree;
+- `bcgtree.log` — executed commands, output, and RAxML random seed values.
+
+Keep these files when reproducibility is important.
+
+## How long does it take?
+
+Prokka generally takes approximately two to three minutes per genome. After annotation, bcgTree runtime depends on sample count, retained genes, selected substitution model, and number of bootstrap replicates.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The issue warns that one or more assemblies cannot be found.
+
+**Likely cause:** The requested `SEQID` has no available assembly.
+
+**What to do:** Verify each identifier and confirm that its assembly exists.
+
+### The substitution model is unsupported or misspelled
+
+**Symptom:** The issue reports an invalid amino-acid substitution model.
+
+**Likely cause:** `aa_substitution_model` contains a typo or a value not accepted by the deployed workflow.
+
+**What to do:** Copy a supported model exactly and resubmit the request.
+
+### Too few core genes are retained
+
+**Symptom:** The workflow produces limited alignment data or fails during tree construction.
+
+**Likely cause:** The assemblies are incomplete, the organisms are too diverse, or `min_proteomes` is too restrictive.
+
+**What to do:** Review assembly quality and taxonomic scope, then use the default `min_proteomes` or analyze a more coherent bacterial set.
+
+### Runtime is much longer than expected
+
+**Symptom:** Annotation or tree inference takes substantially longer than a small default request.
+
+**Likely cause:** The request contains many genomes, a high bootstrap count, or computationally demanding settings.
+
+**What to do:** Reduce the dataset or bootstrap count when methodologically appropriate.
+
+## Related automators
+
+- [MashTree](mashtree.md) — builds a rapid distance-based whole-genome tree from Mash estimates.
+- [NearTree](neartree.md) — ranks the closest strains to one query among a supplied set.
+- [Prokka](prokka.md) — annotates assemblies without running the bcgTree phylogeny workflow.

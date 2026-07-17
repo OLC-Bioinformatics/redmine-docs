@@ -84,15 +84,29 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-requested-assembly-is-not-suitable-campylobacter-data">The requested assembly is not suitable Campylobacter data</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-nearest-profile-has-fewer-than-40-matching-loci">The nearest profile has fewer than 40 matching loci</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -100,9 +114,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -125,6 +143,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -156,8 +176,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -173,6 +191,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -209,63 +229,85 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="ecgf">eCGF</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>The eCGF automator performs <em>in silico</em> CGF subtyping of <em>Campylobacter</em> using whole-genome sequence data in FASTA format </p>
-<p>Check out the source code: <a href="https://github.com/dorbarker/cgfprediction">github</a></p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>eCGF</code>. Spelling counts, but case sensitivity does not.</p>
-<h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to process, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example eCGF analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/16196">issue 16196</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>ECTyper will output a summary report, <code>ISSUE_NUMBER_summary_report.csv</code> that should look something like 
-the following excerpt:</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>eCGF</strong> to perform <em>in silico</em> comparative genomic fingerprinting (CGF) subtyping of <em>Campylobacter</em> from whole-genome sequence assemblies in FASTA format.</p>
+<p>The automator evaluates a defined group of CGF loci and reports the closest represented profile together with the number of matching loci.</p>
+<p>The source code is available in the <a href="https://github.com/dorbarker/cgfprediction">cgfprediction repository</a>.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">eCGF
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Enter one <em>Campylobacter</em> assembly <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. eCGF retrieves the FASTA-formatted assembly associated with each requested <code>SEQID</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for the Redmine eCGF automator.</p>
+<h3 id="example">Example</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/16196">issue 16196</a> for an example eCGF request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>The automator uploads a summary report named using the Redmine issue number:</p>
+<pre><code class="language-text">ISSUE_NUMBER_summary_report.csv
+</code></pre>
+<p>The report contains one row per requested genome. It includes binary results for the CGF loci, the nearest represented profile, and the number of matching loci out of 40.</p>
+<p>Example excerpt:</p>
 <table>
 <thead>
 <tr>
-<th>Genes</th>
-<th>11168_cj0008</th>
-<th>11168_cj0033</th>
-<th>11168_cj0035</th>
-<th>...</th>
+<th>Sample</th>
+<th style="text-align: right;"><code>11168_cj0008</code></th>
+<th style="text-align: right;"><code>11168_cj0033</code></th>
+<th style="text-align: right;"><code>11168_cj0035</code></th>
 <th>Nearest Match</th>
-<th>Number of Similarities (/40)</th>
-<th>...</th>
+<th style="text-align: right;">Number of Similarities (/40)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>2018-LET-0106</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>...</td>
-<td>27_3_4</td>
-<td>40</td>
-<td>...</td>
+<td><code>2018-LET-0106</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td><code>27_3_4</code></td>
+<td style="text-align: right;">40</td>
 </tr>
 <tr>
-<td>2018-LET-0012</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>...</td>
-<td>926_2_1</td>
-<td>40</td>
-<td>...</td>
+<td><code>2018-LET-0012</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td><code>926_2_1</code></td>
+<td style="text-align: right;">40</td>
 </tr>
 </tbody>
 </table>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>eCGF is pretty fast - expect it to take a few seconds per genome you give it.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, 
-you will get a warning message informing you of it.</li>
-<li>?</li>
-</ol>
+<p>A value of <code>1</code> or <code>0</code> records the reported state for a CGF locus. <code>Nearest Match</code> identifies the closest represented CGF profile. <code>Number of Similarities (/40)</code> indicates how many of the 40 loci agree with that profile.</p>
+<p>A score of <code>40</code> means that all evaluated loci match the reported profile. A lower score means that one or more loci differ; interpret the profile assignment together with the complete locus pattern and assembly quality.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>eCGF generally takes a few seconds per genome. Total runtime depends on the number of requested assemblies and service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable assemblies.</p>
+<p><strong>Likely cause:</strong> eCGF cannot locate the FASTA-formatted assembly associated with the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that its assembly is available, and submit a corrected request.</p>
+<h3 id="the-requested-assembly-is-not-suitable-campylobacter-data">The requested assembly is not suitable <em>Campylobacter</em> data</h3>
+<p><strong>Symptom:</strong> The report is missing, incomplete, or does not provide a meaningful nearest profile.</p>
+<p><strong>Likely cause:</strong> eCGF is intended for <em>Campylobacter</em> whole-genome assemblies, or the assembly may be incomplete or poor quality.</p>
+<p><strong>What to do:</strong> Confirm the organism and review assembly quality before interpreting the result.</p>
+<h3 id="the-nearest-profile-has-fewer-than-40-matching-loci">The nearest profile has fewer than 40 matching loci</h3>
+<p><strong>Symptom:</strong> <code>Number of Similarities (/40)</code> is less than <code>40</code>.</p>
+<p><strong>Likely cause:</strong> The query differs from the nearest represented profile at one or more loci, or loci may be absent because of assembly quality.</p>
+<p><strong>What to do:</strong> Review the complete binary locus pattern and avoid treating a partial match as an exact profile assignment.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../mlst/">MLST</a> — determines a conventional sequence type for supported <em>Campylobacter</em> organisms and schemes.</li>
+<li><a href="../intimintyper/">IntiminTyper</a> and <a href="../ectyper/">ECTyper</a> — provide specialized typing for <em>Escherichia coli</em>, not <em>Campylobacter</em>.</li>
+</ul>
               
             </div>
           </div><footer>

@@ -1,91 +1,207 @@
 # SNVPhyl
 
-### What does it do?
+## What does it do?
 
-SNVPhyl is a pipeline developed by the Public Health Agency of Canada for evaluating the number of SNPs between a
-reference strain and other closely related strains. It also builds a phylogenetic tree to attempt to show the
-relatedness of these strains. Lots more info can be found at the [SNVPhyl readthedocs site](https://snvphyl.readthedocs.io/en/latest/).
+Use **SNVPhyl** to evaluate single-nucleotide variants between one reference genome and a set of closely related query isolates.
 
-### How do I use it?
+The automator retrieves a reference assembly and paired-end FASTQ files for the query isolates, checks whether the queries are sufficiently similar to the reference, and runs the SNVPhyl Nextflow pipeline with Singularity.
 
-#### Subject
+The output includes pairwise SNV counts, a phylogenetic tree, SNV tables, core-genome statistics, alignments, sample metadata, and pipeline-execution information.
 
-In the `Subject` field, put `SNVPhyl`. Spelling counts, but case sensitivity doesn't.
+SNVPhyl currently requires paired-end query reads containing both R1 and R2 files. Use [Snippy](snippy.md) when an analysis must combine paired-end and single-end raw-read inputs.
 
-#### Description
+## How do I use it?
 
-The first line of your description needs to be `reference`, and the second line the SEQID of the strain you want to act
-as your reference strain. Ideally, you'll want to pick a high-quality assembly for your reference.
+### Subject
 
-If you wish to attach a reference file instead of providing a SEQID, the second line must be `attached`
+In the **Subject** field, enter:
 
-The third line of your description should be `compare`, and lines after that the SEQIDs for strains you want to compare
-your reference to.
+```text
+SNVPhyl
+```
 
-#### Example
+Spelling matters, but matching is not case-sensitive.
 
-For an example SNVPhyl, see [issue 12494](https://redmine.biodiversity.agr.gc.ca/issues/12494).
+### Description
 
-#### Interpreting Results
+Identify exactly one reference and at least one query isolate using this structure:
 
-The zip file uploaded on SNVPhyl completion should contain 10 files. Important files are:
+```text
+reference
+REFERENCE-SEQID
+compare
+QUERY-SEQID-1
+QUERY-SEQID-2
+```
 
-* snvMatrix.tsv: Shows the number of SNVs between every strain submitted.
-* vcf2core.tsv: Shows how much of the genome was covered by the analysis (look at the `Percentage of all positions that are valid, included, and part of the core genome`
-column in the `all` row). This should be at least 90 percent, or the strains you were comparing were probably too far apart
-to get good results.
-* phylogeneticTree.nwk: The phylogenetic tree created by SNVPhyl. If you want to view this tree, you can use a program such as
-[FigTree](http://tree.bio.ed.ac.uk/software/figtree/) or a web-based viewer like [phylo.io](http://phylo.io).
+Rules:
 
-Other files can also be important - see the [docs on SNVPhyl Output files](https://snvphyl.readthedocs.io/en/latest/user/output/)
-for more information.
+- the line after `reference` must contain exactly one reference `SEQID` or `attached`;
+- every line after `compare` is treated as a query `SEQID`;
+- blank lines are ignored;
+- each query must have paired-end FASTQ files containing both R1 and R2 reads.
 
-### How long does it take?
+Choose a high-quality assembly that is closely related to all query isolates as the reference.
 
-Most SNVPhyl requests take ~1 hour to complete. If you submit a request for a larger SNVPhyl (>30 strains), it may take
-substantially longer.
+### Use a reference `SEQID`
 
-<details>
-  <summary><b>How to check if your SNVPhyl will fail using Galaxy Docker</b></summary> <br><ol>
-  
-<li>Log into the head node by typing the following in the terminal
-<code>ssh ubuntu@head</code> or <code>ssh ubuntu@192.168.1.5</code></li>
+```text
+reference
+2026-SEQ-0001
+compare
+2026-SEQ-0002
+2026-SEQ-0003
+2026-SEQ-0004
+```
 
-<li>If prompted for a password enter the standard bioinformatics password.</li>
+### Use an attached reference
 
-<li>Enter <code>watch squeue</code>. Under the column <code>NAME</code> there will be a list of biorequests running. In the same row as your biorequest note your Job ID and the node in which your issue is running under <code>JOBID</code> and <code>NODELIST</code>.</li>
+Put `attached` after `reference` and attach one FASTA-formatted reference file:
 
-<li>On a web browser of your choice search <code>http://<b>[IP_address]</b>.<b>[node#]</b>:<b>[jobID]</b></code>. (Eg. for a job on node 03 with the ID 34595 the url would be: <u>http://[IP_address].3:34595/</u>)
-	<ul>
-	<li>Please ask a bioinformatician or Cathy for the IP address.</li>
-	</ul>
-</li>
+```text
+reference
+attached
+compare
+2026-SEQ-0002
+2026-SEQ-0003
+2026-SEQ-0004
+```
 
-<li>Under the tab user cick log in and login with the following credentials:<b> user: admin@galaxy.org; password: admin.</b></li>
+If `attached` is specified without an attachment, the request stops with an error.
 
-<li>On the right there will be a tab labeled <code>history</code> that will display all the steps the the SNVPhyl runs. If there are many tabs with red x's it will likely fail.</li>
+### Optional parameters
 
-</ol></details><br>
+The supplied documentation does not identify optional SNVPhyl analysis parameters beyond selecting a reference by `SEQID` or attachment.
 
+## Input validation and warnings
 
-### What can go wrong?
+Before starting the pipeline, the automator checks that:
 
-A few things can go wrong with this process:
+- exactly one reference is specified;
+- a reference `SEQID` resolves to a FASTA assembly;
+- an attachment is present when `attached` is used;
+- query `SEQID`s resolve to FASTQ data;
+- each included query has both R1 and R2 reads.
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+Missing query data are reported in the Redmine issue. Queries that appear divergent from the reference generate a warning, but the automator continues with available inputs.
 
-2) Strains too far apart. SNVPhyl requires that the strains you want to compare to the reference be closely related to
-the reference. If you ask for a SNVPhyl with things that are not very related, you will get a warning telling you so.
+## Interpreting results
 
-3) No output files. Sometimes, SNVPhyl will say it has completed, but the typical output files will not be present. This
-is either because:
+When SNVPhyl finishes, it uploads:
 
-&nbsp;&nbsp;&nbsp;&nbsp;a. there are no SNVs between the two strains, and so SNVPhyl crashes. If you want to confirm that there are no SNVs between your two strains you can add a third strain to your description that is related enough to run (eg. try a strain with the same rMLST) but may have variants.  
-&nbsp;&nbsp;&nbsp;&nbsp;b. SNVPhyl crashed for an unknown reason, which does happen occasionally. If this happens, your best bet is to try running the SNVPhyl again.
+```text
+SNVPhyl_<issue-number>.zip
+```
 
-  If SNVPhyl keeps crashing even after subsequent attempts, let us know and we'll do our best to fix things.
-  
+The archive is flattened: output files appear at the top level rather than in their original pipeline directories. If multiple files have the same name, a numeric suffix is added to preserve unique archive filenames.
 
-### Version
-SNVPhyl on redmine is version 1.0.1 with snvphyl_cli_version=1.3 (as of 2024-04-05)
+Important outputs include:
+
+### `snvMatrix.tsv`
+
+Contains pairwise SNV counts between analyzed samples. Use this file to review the number of SNVs separating each sample pair.
+
+SNV counts should be interpreted together with core-genome coverage, reference suitability, and epidemiological context. A universal relatedness threshold is not defined by this documentation.
+
+### `phylogeneticTree.newick`
+
+Contains the inferred phylogenetic tree in Newick format. Open it in a Newick-compatible viewer such as FigTree.
+
+### `snvTable.tsv`
+
+Contains the table of SNVs identified by the workflow.
+
+### `vcf2core.tsv`
+
+Contains core-genome and valid-position statistics. Use it to evaluate how much of the reference genome was included in the analysis.
+
+Low core-genome coverage can indicate that one or more queries are too divergent from the reference for a reliable comparison.
+
+### `snvAlignment.phy`
+
+Contains the SNV alignment in PHYLIP format.
+
+### `metadata.tsv`
+
+Contains sample metadata generated by the pipeline.
+
+### Pipeline-information files
+
+The archive can contain Nextflow execution reports, software information, and other pipeline metadata. Additional output types may include `.tsv`, `.json`, `.txt`, `.newick`, `.bed`, `.html`, `.yml`, `.yaml`, and `.phy` files.
+
+## How long does it take?
+
+Runtime depends on the number of query isolates, read size and coverage, similarity to the reference, and available compute resources. Larger requests generally take longer than small requests.
+
+## What can go wrong?
+
+### No reference or multiple references are supplied
+
+**Symptom:** The automator rejects the request before pipeline execution.
+
+**Likely cause:** The Description does not identify exactly one reference.
+
+**What to do:** Submit a new issue using the documented `reference` and `compare` structure.
+
+### The reference cannot be found
+
+**Symptom:** The issue reports that the reference `SEQID` does not resolve to a FASTA file.
+
+**Likely cause:** The `SEQID` is incorrect or its assembly is unavailable.
+
+**What to do:** Verify the reference identifier or attach one valid FASTA reference.
+
+### `attached` is specified without an attachment
+
+**Symptom:** The request stops with an attachment error.
+
+**Likely cause:** No reference FASTA file was attached.
+
+**What to do:** Attach one FASTA-formatted reference and submit a new issue.
+
+### Query FASTQ data are missing or incomplete
+
+**Symptom:** The issue warns about missing queries, or a sample is omitted from the pipeline sample sheet.
+
+**Likely cause:** The query cannot be found or does not have both R1 and R2 files.
+
+**What to do:** Verify the query `SEQID` and ensure both paired-end files are available.
+
+### A query is too divergent from the reference
+
+**Symptom:** The issue reports a divergence warning or `vcf2core.tsv` shows low core-genome coverage.
+
+**Likely cause:** The reference is not sufficiently close to one or more queries.
+
+**What to do:** Remove divergent queries or choose a more representative reference and submit a new analysis.
+
+### The Nextflow or Singularity pipeline fails
+
+**Symptom:** The issue closes with an error note and may contain only partial output.
+
+**Likely cause:** The pipeline or execution environment failed after processing began.
+
+**What to do:** Review uploaded pipeline-information files and escalate persistent failures to the bioinformatics team.
+
+### No matching results are produced
+
+**Symptom:** The archive contains `NO_RESULTS.txt`.
+
+**Likely cause:** No expected result or pipeline-information files were found.
+
+**What to do:** Review the issue errors and input validation, then correct the request or escalate the failure.
+
+## Software versions
+
+When the issue closes, the automator reports the versions of:
+
+- Nextflow;
+- Singularity;
+- the SNVPhyl Nextflow pipeline.
+
+Record these values when reproducibility is important.
+
+## Related automators
+
+- [Snippy](snippy.md) — performs rapid haploid variant calling and can combine paired-end and single-end raw-read inputs.
+- [COWSNPhR](cowsnphr.md) — maps raw query reads to a reference, calls variants with DeepVariant, annotates variant locations, and builds a tree.

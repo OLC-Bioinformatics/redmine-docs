@@ -1,74 +1,170 @@
 # CARD-RGI
 
-### What does it do?
+## What does it do?
 
-CARD-RGI (Comprehensive Antibiotic Resistance Database - Resistance Gene Identifier) is a program developed by the McMaster University to predict resistomes
-in draft genome assemblies. [CARD website](https://card.mcmaster.ca/analyze/rgi)
+Use **CARD-RGI** to predict the resistome of bacterial isolate assemblies or raw FASTQ data using the Comprehensive Antibiotic Resistance Database and Resistance Gene Identifier.
 
-For more information, see the [CARD publication](https://pubmed.ncbi.nlm.nih.gov/31665441/). If you publish data using this automator, don't forget to cite the authors of the tool [Alcock et al., 2020](https://pubmed.ncbi.nlm.nih.gov/31665441/)
+CARD-RGI supports two analysis modes:
 
-### How do I use it?
+- `isolate` — analyzes bacterial isolate sequence assemblies;
+- `metagenome` — analyzes metagenomic FASTQ files and can also be used to analyze isolate FASTQ files.
 
-#### Subject
+The Redmine metagenome workflow uses KMA to align CARD targets to raw reads. The Redmine automator does not expose the alternative BWA or Bowtie 2 aligners available in the standalone CARD-RGI software.
 
-In the `Subject` field, put `CARDRGI`. Spelling counts, but case sensitivity doesn't.
+For background and output definitions, see the [CARD website](https://card.mcmaster.ca/analyze/rgi), [CARD-RGI documentation](https://github.com/arpcard/rgi#rgi-usage-documentation), and [Alcock et al. (2020)](https://pubmed.ncbi.nlm.nih.gov/31665441/). Cite the CARD authors when publishing results produced with this automator.
 
-#### Description
+## How do I use it?
 
-**Required Components**
+### Subject
 
-The first line of the description should be the analysis you would like to run (e.g. `analysis=isolate`). This will depend on the type of sequence data your are investigating.
+In the **Subject** field, enter:
 
-- The following options are currently supported:
-    - `isolate` - used for resistome analysis of bacterial isolate sequence assemblies
-    - `metagenome` - used for resistome analysis of metagenome fastq-files. (This option can also be used to 'force' the tool to complete resistome analysis of isolate fastq-files). Currently, this metagenome redmine automator uses [KMA](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2336-6) for alignment of gene targets to the raw-read data. If you would like to try the other options (BWA or bowtie2), you can download the stand-alone tool from the [CARD github](https://github.com/arpcard/rgi#rgi-usage-documentation).
+```text
+CARDRGI
+```
 
+Spelling matters, but matching is not case-sensitive.
 
-You must also include a list of SEQIDs one per line.
+### Description
 
-**Optional Components**
+The **Description** field must contain:
 
-By default, CARD-RGI will run the analysis for isolate assemblies. In order to customise your CARD-RGI analyses, two additional settings can be optionally modified:
+1. an analysis declaration as the first line; and
+2. one `SEQID` per line.
 
-- loosehits - the default analysis will only include strict and perfect resistance gene matches. Setting this to true will also include 'loose' hits, which may or may not be contributing to resistance.
-    - default is `False` 
-    - If you want to include loose hits, add a line to your description:
-        - `loosehits=TRUE`
+#### Isolate assemblies
 
-- partialgenes - the default analysis will only include full gene matches.
-    - default is `False` 
-    - If you want to include partial gene hits, add a line to your description:
-        - `partialgenes=TRUE`
+Use `analysis=isolate` for bacterial isolate sequence assemblies:
 
-#### Example
+```text
+analysis=isolate
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-For an example using CARDRGI, see [issue 28111](https://redmine.biodiversity.agr.gc.ca/issues/28111). The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks). Please note that 2017-SEQ-0054 is an isolate sequence, not actually a metagenome.
+#### Raw FASTQ data
 
-#### Interpreting Results
+Use `analysis=metagenome` for metagenomic FASTQ files. This mode can also force resistome analysis of isolate FASTQ files:
 
-CARD-RGI will upload a zipped folder called `card-rgi_output_redmineID.zip` to the ftp once it has completed. 
+```text
+analysis=metagenome
+2026-SEQ-0001
+```
 
-**Isolate Analysis**
+### Attachments
 
-This folder will contain a `CARDRGI_output.csv` csv file which shows every AMR gene found in each
-sample-sequence. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
-to look at the __Best_Identities__ column, which contains the percent identity of the gene/target match to the top hit in CARD. You can be pretty sure that anything with 100
-is actually there, but anything else requires further analysis to be sure. 
+The supplied documentation does not identify a required attachment for either supported analysis mode. CARD-RGI retrieves the requested sequence data using the listed `SEQID`s.
 
-Also, some efflux and point-mutations may confer resistance in specific genera/species but not others, so it is important to consider this before coming to any conclusions even if they are a 100% match. Information about the output table can be found on the [CARD-RGI github page](https://github.com/arpcard/rgi#rgi-usage-documentation) under `RGI main Tab-Delimited Output Details`.
+### Optional parameters
 
-The isolate analysis will also output individual results files for each sequence, and a RGI-heatmap file including information about all of the isolate sequences in your analysis.
+#### `loosehits`
 
-**Metagenome Analysis**
+Controls whether the results include CARD-RGI loose hits in addition to strict and perfect matches.
 
-The zip folder will contain individual output files for each sequence analysed. It will also include `CARDRGI_gene_mapping_output.csv` and `CARDRGI_allele_mapping_output.csv` files. These contain the CARD-results of all resistance genes found in the raw fastq data for each sample-sequence. The `CARDRGI_allele_mapping_output.csv` allele file will include the data for the top allele hits for each sequence.
+- Default: `False`
+- Enable with: `loosehits=TRUE`
 
-### How long does it take?
+Loose hits may or may not contribute to resistance and require careful interpretation.
 
-CARD-RGI is pretty fast, however the time required for analysis will depend on the analysis type and number of sequences requested. Expect approximately 2-5 minutes per sequence.
+#### `partialgenes`
 
-### What can go wrong?
+Controls whether partial gene matches are included.
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+- Default: `False`
+- Enable with: `partialgenes=TRUE`
 
+### Examples
+
+#### Isolate analysis
+
+```text
+analysis=isolate
+loosehits=TRUE
+2026-SEQ-0001
+2026-SEQ-0002
+```
+
+#### Raw-read analysis
+
+```text
+analysis=metagenome
+2026-SEQ-0001
+```
+
+See [issue 28111](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/28111) for an example CARD-RGI request. The example uses `analysis=metagenome` with an isolate sequence rather than a true metagenome. Temporary result-download links associated with the issue may expire.
+
+## Interpreting results
+
+When CARD-RGI finishes, it uploads an archive named using the Redmine issue identifier:
+
+```text
+card-rgi_output_redmineID.zip
+```
+
+### Isolate analysis
+
+The archive contains a combined CSV file:
+
+```text
+CARDRGI_output.csv
+```
+
+This file summarizes AMR gene results for all requested sample sequences. Review the `Best_Identities` column, which reports the percentage identity between the sequence and its top CARD hit.
+
+A result with `100` percent identity provides stronger evidence for the reported target, but identity alone does not establish a resistance phenotype. Efflux systems and point mutations may confer resistance only in particular genera or species. Interpret every result in its organism-specific context.
+
+The isolate archive also contains:
+
+- individual result files for each sequence; and
+- an RGI heatmap file summarizing all isolate sequences in the request.
+
+For detailed column definitions, consult the **RGI main Tab-Delimited Output Details** in the [CARD-RGI documentation](https://github.com/arpcard/rgi#rgi-usage-documentation).
+
+### Metagenome analysis
+
+The archive contains individual output files for each analyzed sequence and two combined mapping files:
+
+```text
+CARDRGI_gene_mapping_output.csv
+CARDRGI_allele_mapping_output.csv
+```
+
+- `CARDRGI_gene_mapping_output.csv` summarizes resistance-gene results detected in the raw FASTQ data.
+- `CARDRGI_allele_mapping_output.csv` reports the top allele hits for each sequence.
+
+## How long does it take?
+
+Runtime depends on the selected analysis mode, amount of sequence data, enabled options, and number of requested sequences. Expect approximately two to five minutes per sequence.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable sequences.
+
+**Likely cause:** CARD-RGI cannot locate the assembly or raw FASTQ files required for the selected analysis mode.
+
+**What to do:** Verify each `SEQID`, confirm that the required sequence-data type is available, and submit a corrected request.
+
+### The analysis mode does not match the available input
+
+**Symptom:** The automator cannot locate or process the expected data for one or more `SEQID`s.
+
+**Likely cause:** `analysis=isolate` was requested for raw reads, or `analysis=metagenome` was requested when the intended input was an assembly.
+
+**What to do:** Use `analysis=isolate` for bacterial isolate assemblies and `analysis=metagenome` for raw FASTQ data.
+
+### Loose or partial hits are overinterpreted
+
+**Symptom:** A reported hit appears weak, incomplete, or inconsistent with the organism's expected resistance profile.
+
+**Likely cause:** `loosehits=TRUE` or `partialgenes=TRUE` included lower-confidence or incomplete matches.
+
+**What to do:** Review identity, match category, gene completeness, organism context, and CARD documentation before drawing conclusions.
+
+## Related automators
+
+- [ResFinder](resfinder.md) — use to detect acquired AMR genes in draft genome assemblies; it does not detect resistance caused by chromosomal point mutations.
+- [StarAMR](staramr.md) — combines acquired-gene detection with supported PointFinder mutation detection for *Campylobacter* and *Salmonella* assemblies.
+- [KMA](kma.md) — use for the Redmine KMA automator's curated AMR, biocide, metal, verotoxin, or custom target databases in assemblies or raw reads.
+- [PointFinder](pointfinder.md) — use for supported chromosomal resistance mutations.

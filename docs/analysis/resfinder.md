@@ -1,42 +1,106 @@
 # ResFinder
 
-### What does it do?
+## What does it do?
 
-ResFinder is a program developed by the Danish Center for Genomic Epidemiology for detection of antibiotic resistance
-in draft genome assemblies. It is very important to note that the Redmine version will only look for acquired antibiotic
-resistance genes (generally plasmid-borne) and not chromosomally encoded AMR genes that are caused by point mutations.
+Use **ResFinder** to detect acquired antibiotic-resistance genes in draft genome assemblies.
 
-If you're interested in chromosomally encoded AMR genes, use the
- [PointFinder automator](pointfinder.md), using the [CARDRGI automator](cardrgi.md), or you can [External Retrieve](../data/external_retrieve.md) your
-assemblies of interest and submit them to an alternate AMR predictor, such as McMaster's webportal [CARD](https://card.mcmaster.ca/analyze/rgi).
+The Redmine ResFinder automator detects acquired resistance genes, which are often plasmid-borne. It does **not** detect resistance caused by chromosomal point mutations. For supported mutation detection, use [PointFinder](pointfinder.md), [StarAMR](staramr.md), or [CARD-RGI](cardrgi.md), depending on the organism, input type, and desired analysis.
 
-### How do I use it?
+ResFinder was developed by the Danish Center for Genomic Epidemiology.
 
-#### Subject
+## How do I use it?
 
-In the `Subject` field, put `ResFinder`. Spelling counts, but case sensitivity doesn't.
+### Subject
 
-#### Description
+In the **Subject** field, enter:
 
-All you need to put in the description is a list of SEQIDs you want to detect AMR in, one per line.
+```text
+ResFinder
+```
 
-#### Example
+Spelling matters, but matching is not case-sensitive.
 
-For an example ResFinder, see [issue 12854](https://redmine.biodiversity.agr.gc.ca/issues/12854).
+### Description
 
-#### Interpreting Results
+In the **Description** field, enter one `SEQID` per line:
 
-ResFinder will upload a file called `resfinder.xlsx` once it has completed, which shows every AMR gene found in each
-sample. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
-to look at the __PercentIdentity__ and __PercentCovered__ columns. You can be pretty sure that anything with 100 for both
-is actually there, but anything else requires further analysis to be sure.
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-### How long does it take?
+The requested `SEQID`s must have draft genome assemblies available.
 
-ResFinder is very fast - it should only take a few seconds to analyze each SEQID requested.
+### Attachments
 
-### What can go wrong?
+No attachment is required. ResFinder retrieves the draft assemblies associated with the requested `SEQID`s.
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+### Optional parameters
 
+The supplied documentation does not identify optional parameters for the Redmine ResFinder automator.
+
+### Example
+
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+```
+
+See [issue 12854](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/12854) for an example ResFinder request.
+
+## Interpreting results
+
+When ResFinder finishes, it uploads:
+
+```text
+resfinder.xlsx
+```
+
+The workbook lists acquired AMR genes detected in each sample. A listed gene or resistance does not by itself establish that the strain expresses the associated resistance phenotype.
+
+Review at least:
+
+- `PercentIdentity` — sequence identity between the detected gene and reference target;
+- `PercentCovered` — coverage of the reference target.
+
+A hit with `100` for both identity and coverage provides stronger evidence that the complete acquired gene is present. Hits with lower identity or coverage require further review.
+
+ResFinder does not report chromosomal point-mutation resistance in this Redmine workflow.
+
+## How long does it take?
+
+ResFinder is generally fast and should take only a few seconds per requested `SEQID`. Total runtime also depends on the number of samples and service workload.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable sequences.
+
+**Likely cause:** ResFinder cannot locate a draft genome assembly for the requested `SEQID`.
+
+**What to do:** Verify each `SEQID`, confirm that its assembly is available, and submit a corrected request.
+
+### Point-mutation resistance is missing from the report
+
+**Symptom:** The ResFinder result does not include an expected chromosomal resistance mutation.
+
+**Likely cause:** The Redmine ResFinder automator only detects acquired resistance genes.
+
+**What to do:** Use [PointFinder](pointfinder.md), [StarAMR](staramr.md), or [CARD-RGI](cardrgi.md) when mutation-based resistance must also be assessed.
+
+### A lower-identity or partially covered hit is difficult to interpret
+
+**Symptom:** A result has less than `100` in `PercentIdentity`, `PercentCovered`, or both.
+
+**Likely cause:** The detected sequence differs from or only partially covers the reference target.
+
+**What to do:** Review the alignment evidence and organism context before concluding that the complete resistance gene is present.
+
+## Related automators
+
+- [PointFinder](pointfinder.md) — detects supported chromosomal mutations associated with antimicrobial resistance.
+- [StarAMR](staramr.md) — combines ResFinder acquired-gene detection with PointFinder mutation detection for supported *Campylobacter* and *Salmonella* assemblies.
+- [CARD-RGI](cardrgi.md) — predicts resistomes in isolate assemblies or raw FASTQ data and can include strict, perfect, loose, and partial CARD hits.
+- [GeneSeekr](geneseekr.md) — provides `analysis=resfinder` for FASTA-formatted inputs.
+- [Sipprverse](sipprverse.md) — provides `analysis=resfinder` for raw, paired-end FASTQ reads.

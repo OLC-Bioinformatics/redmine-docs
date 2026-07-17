@@ -78,17 +78,35 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#confindr_reportcsv">confindr_report.csv</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#confindr_logtxt">confindr_log.txt</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    <li class="toctree-l3"><a class="reference internal" href="#a-contamination-call-is-unexpected">A contamination call is unexpected</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-analysis-fails-unexpectedly">The analysis fails unexpectedly</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -102,9 +120,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -127,6 +149,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -158,8 +182,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -175,6 +197,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -211,37 +235,74 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="confindr">ConFindr</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>ConFindr looks for both intra-species and inter-species contamination in raw reads, which can cause misassemblies and
-erroneous downstream analysis. More details on ConFindr can be found <a href="https://lowandrew.github.io/ConFindr/">on GitHub</a>.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>ConFindr</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to detect contamination in, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example ConFindr, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12881">issue 12881</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>When your request is complete, a file called <code>confindr_output.zip</code> will be uploaded. This contains two files: <code>confindr_log.txt</code>,
-and <code>confindr_report.csv</code>. The report file contains 5 columns:</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>ConFindr</strong> when raw sequencing reads may be contaminated. ConFindr detects evidence of both intra-species and inter-species contamination before assembly or downstream analysis.</p>
+<p>Contaminated reads can produce misassemblies and misleading downstream results. ConFindr is therefore a quality-control tool for raw reads, not a general species-identification workflow.</p>
+<p>For background, see the <a href="https://lowandrew.github.io/ConFindr/">ConFindr documentation</a>.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">ConFindr
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>In the <strong>Description</strong> field, enter one <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>The requested <code>SEQID</code>s must have raw sequencing reads available.</p>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. ConFindr retrieves the raw reads associated with each requested <code>SEQID</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for the Redmine ConFindr automator.</p>
+<h3 id="example">Example</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/12881">issue 12881</a> for an example ConFindr request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When ConFindr finishes, it uploads:</p>
+<pre><code class="language-text">confindr_output.zip
+</code></pre>
+<p>The archive contains:</p>
+<pre><code class="language-text">confindr_report.csv
+confindr_log.txt
+</code></pre>
+<h3 id="confindr_reportcsv"><code>confindr_report.csv</code></h3>
+<p>The report contains five columns:</p>
 <ul>
-<li>Sample: The name of the sample</li>
-<li>Genus: What ConFindr thinks the genus of the sample is. If ConFindr finds more than one genus, both will be listed here.</li>
-<li>NumContamSNVs: How many times ConFindr found something that looked like a contaminating SNV. Anything 3 or over
-is enough to call a sample as contaminated.</li>
-<li>NumUniqueKmers: How many unique kmers were found for the rMLST genes. If this number is over 45000, a sample is called
-as contaminated.</li>
-<li>ContamStatus: Shown as <code>True</code> if ConFindr thinks a sample is contaminated, and <code>False</code> if the sample is thought to be
-clean.</li>
+<li><code>Sample</code> — the sample identifier;</li>
+<li><code>Genus</code> — the genus ConFindr assigns to the sample; more than one genus can be listed when detected;</li>
+<li><code>NumContamSNVs</code> — the number of sites that resemble contaminating SNVs;</li>
+<li><code>NumUniqueKmers</code> — the number of unique k-mers detected for rMLST genes;</li>
+<li><code>ContamStatus</code> — <code>True</code> when ConFindr calls the sample contaminated and <code>False</code> when it calls the sample clean.</li>
 </ul>
-<p>The log file can mostly be ignored - if any unexpected errors come up, we may use it for debugging purposes.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>ConFindr will take between 1 and 2 minutes for each sample.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<h3 id="version">Version</h3>
-<p>Version 4.0.3 is currently available at the OLC. (as of 2024-07-4)</p>
+<p>The documented contamination criteria are:</p>
+<ul>
+<li><code>NumContamSNVs</code> of <code>3</code> or greater; or</li>
+<li><code>NumUniqueKmers</code> greater than <code>45000</code>.</li>
+</ul>
+<p>Use <code>ContamStatus</code> as the overall workflow call, and review the supporting SNV and k-mer values when investigating a result.</p>
+<h3 id="confindr_logtxt"><code>confindr_log.txt</code></h3>
+<p>The log is primarily useful for diagnosing unexpected errors. It normally does not need to be interpreted as a biological result.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>ConFindr generally takes approximately one to two minutes per sample. Total runtime depends on read volume, sample count, and service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> ConFindr cannot locate raw reads for the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that its raw sequence files are available, and submit a corrected request.</p>
+<h3 id="a-contamination-call-is-unexpected">A contamination call is unexpected</h3>
+<p><strong>Symptom:</strong> <code>ContamStatus</code> is <code>True</code> even though the sample was expected to be clean.</p>
+<p><strong>Likely cause:</strong> ConFindr detected at least three contamination-like SNVs, more than 45,000 unique rMLST k-mers, or other supporting evidence reflected in the report.</p>
+<p><strong>What to do:</strong> Review <code>NumContamSNVs</code>, <code>NumUniqueKmers</code>, the assigned genus or genera, raw-read quality, and laboratory context before deciding whether to repeat sequencing or exclude the sample.</p>
+<h3 id="the-analysis-fails-unexpectedly">The analysis fails unexpectedly</h3>
+<p><strong>Symptom:</strong> No usable report is produced, or the Redmine issue reports an execution error.</p>
+<p><strong>Likely cause:</strong> The raw reads may be unavailable, malformed, or unsuitable for processing, or the workflow may have encountered a technical error.</p>
+<p><strong>What to do:</strong> Verify the input files and provide <code>confindr_log.txt</code> to a bioinformatician when escalation is required.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../autoclark/">AutoCLARK</a> — identifies species represented in raw reads or assemblies; it is not a dedicated contamination call.</li>
+<li><a href="../fastqc/">FastQC/MultiQC</a> — evaluates general raw-read quality but does not make ConFindr contamination calls.</li>
+<li><a href="../unknownisolate/">Unknown Isolate</a> — identifies an uncertain isolate from a draft genome assembly rather than testing raw reads for contamination.</li>
+</ul>
               
             </div>
           </div><footer>

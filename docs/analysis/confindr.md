@@ -1,49 +1,116 @@
 # ConFindr
 
-### What does it do?
+## What does it do?
 
-ConFindr looks for both intra-species and inter-species contamination in raw reads, which can cause misassemblies and
-erroneous downstream analysis. More details on ConFindr can be found [on GitHub](https://lowandrew.github.io/ConFindr/).
+Use **ConFindr** when raw sequencing reads may be contaminated. ConFindr detects evidence of both intra-species and inter-species contamination before assembly or downstream analysis.
 
-### How do I use it?
+Contaminated reads can produce misassemblies and misleading downstream results. ConFindr is therefore a quality-control tool for raw reads, not a general species-identification workflow.
 
-#### Subject
+For background, see the [ConFindr documentation](https://lowandrew.github.io/ConFindr/).
 
-In the `Subject` field, put `ConFindr`. Spelling counts, but case sensitivity doesn't.
+## How do I use it?
 
-#### Description
+### Subject
 
-All you need to put in the description is a list of SEQIDs you want to detect contamination in, one per line.
+In the **Subject** field, enter:
 
-#### Example
+```text
+ConFindr
+```
 
-For an example ConFindr, see [issue 12881](https://redmine.biodiversity.agr.gc.ca/issues/12881).
+Spelling matters, but matching is not case-sensitive.
 
-#### Interpreting Results
+### Description
 
-When your request is complete, a file called `confindr_output.zip` will be uploaded. This contains two files: `confindr_log.txt`,
-and `confindr_report.csv`. The report file contains 5 columns:
+In the **Description** field, enter one `SEQID` per line:
 
-* Sample: The name of the sample
-* Genus: What ConFindr thinks the genus of the sample is. If ConFindr finds more than one genus, both will be listed here.
-* NumContamSNVs: How many times ConFindr found something that looked like a contaminating SNV. Anything 3 or over
-is enough to call a sample as contaminated.
-* NumUniqueKmers: How many unique kmers were found for the rMLST genes. If this number is over 45000, a sample is called
-as contaminated.
-* ContamStatus: Shown as `True` if ConFindr thinks a sample is contaminated, and `False` if the sample is thought to be
-clean.
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-The log file can mostly be ignored - if any unexpected errors come up, we may use it for debugging purposes.
+The requested `SEQID`s must have raw sequencing reads available.
 
-### How long does it take?
+### Attachments
 
-ConFindr will take between 1 and 2 minutes for each sample.
+No attachment is required. ConFindr retrieves the raw reads associated with each requested `SEQID`.
 
-### What can go wrong?
+### Optional parameters
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+The supplied documentation does not identify optional parameters for the Redmine ConFindr automator.
 
-### Version
+### Example
 
-Version 4.0.3 is currently available at the OLC. (as of 2024-07-4)
+See [issue 12881](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/12881) for an example ConFindr request.
+
+## Interpreting results
+
+When ConFindr finishes, it uploads:
+
+```text
+confindr_output.zip
+```
+
+The archive contains:
+
+```text
+confindr_report.csv
+confindr_log.txt
+```
+
+### `confindr_report.csv`
+
+The report contains five columns:
+
+- `Sample` — the sample identifier;
+- `Genus` — the genus ConFindr assigns to the sample; more than one genus can be listed when detected;
+- `NumContamSNVs` — the number of sites that resemble contaminating SNVs;
+- `NumUniqueKmers` — the number of unique k-mers detected for rMLST genes;
+- `ContamStatus` — `True` when ConFindr calls the sample contaminated and `False` when it calls the sample clean.
+
+The documented contamination criteria are:
+
+- `NumContamSNVs` of `3` or greater; or
+- `NumUniqueKmers` greater than `45000`.
+
+Use `ContamStatus` as the overall workflow call, and review the supporting SNV and k-mer values when investigating a result.
+
+### `confindr_log.txt`
+
+The log is primarily useful for diagnosing unexpected errors. It normally does not need to be interpreted as a biological result.
+
+## How long does it take?
+
+ConFindr generally takes approximately one to two minutes per sample. Total runtime depends on read volume, sample count, and service workload.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable sequences.
+
+**Likely cause:** ConFindr cannot locate raw reads for the requested `SEQID`.
+
+**What to do:** Verify each `SEQID`, confirm that its raw sequence files are available, and submit a corrected request.
+
+### A contamination call is unexpected
+
+**Symptom:** `ContamStatus` is `True` even though the sample was expected to be clean.
+
+**Likely cause:** ConFindr detected at least three contamination-like SNVs, more than 45,000 unique rMLST k-mers, or other supporting evidence reflected in the report.
+
+**What to do:** Review `NumContamSNVs`, `NumUniqueKmers`, the assigned genus or genera, raw-read quality, and laboratory context before deciding whether to repeat sequencing or exclude the sample.
+
+### The analysis fails unexpectedly
+
+**Symptom:** No usable report is produced, or the Redmine issue reports an execution error.
+
+**Likely cause:** The raw reads may be unavailable, malformed, or unsuitable for processing, or the workflow may have encountered a technical error.
+
+**What to do:** Verify the input files and provide `confindr_log.txt` to a bioinformatician when escalation is required.
+
+## Related automators
+
+- [AutoCLARK](autoclark.md) — identifies species represented in raw reads or assemblies; it is not a dedicated contamination call.
+- [FastQC/MultiQC](fastqc.md) — evaluates general raw-read quality but does not make ConFindr contamination calls.
+- [Unknown Isolate](unknownisolate.md) — identifies an uncertain isolate from a draft genome assembly rather than testing raw reads for contamination.

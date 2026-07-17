@@ -1,78 +1,151 @@
-# sipprverse
+# Sipprverse
 
-### What does it do?
+## What does it do?
 
-The sipprverse is a suite of analyses that detect gene targets in raw FASTQ reads.
+Use **Sipprverse** to detect predefined or custom gene targets directly in raw, paired-end FASTQ reads. Sipprverse operates on unassembled read data; use [GeneSeekr](geneseekr.md) when the targets must be detected in FASTA-formatted assemblies.
 
-### How do I use it?
+## How do I use it?
 
-#### Subject
+### Subject
 
-In the `Subject` field, put `sipprverse`. Spelling counts, but case sensitivity doesn't.
+In the **Subject** field, enter:
 
-#### Description
+```text
+sipprverse
+```
 
-**Required Components**
+Spelling matters, but matching is not case-sensitive.
 
-In the `Description` field, you must provide:
+### Description
 
-1. `analysis=requested_analysis`
+The **Description** field must contain:
 
-    The sipprverse pipeline supports the following analyses (again, spelling counts, but case sensitivity doesn't):
-    
-    - gdcs - determines the presence of genomically-dispersed conserved sequences in the following genera: *Escherichia, Listeria, Salmonella, Vibrio*
-    - genesippr - custom suite of genes derived from the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
-    - mash - finds closest matching RefSeq genome
-    - mlst - determines multi-locus sequence type for the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
-    - pointfinder - detects chromosomal mutations predictive of drug resistance
-    - resfinder - identifies acquired antimicrobial resistance genes
-    - rmlst - determines ribosomal multi-locus sequence type
-    - serosippr - calculates the serotype for *Escherichia*
-    - sixteens - determines closest 16S match
-    - virulence - finds virulence genes
-    - full (all the above analyses)
-    - custom (**you must attach a FASTA-formatted file of targets to the issue**)
+1. an analysis declaration in the form `analysis=requested_analysis`; and
+2. one `SEQID` per line.
 
-2. a list of SEQIDs (one per line)
+Example structure:
 
-**Optional Components**
+```text
+analysis=resfinder
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-In order to customise your sipprverse analyses, several settings can be optionally modified
+#### Supported analyses
 
-- Minimum cutoff for matches to be included in report.
-    - default is `0.90`
-    - modify as follows:
-        - `cutoff=0.85`
-- Average pileup depth cutoff
-    - default is `2`
-    - modify as follows:
-        - `averagedepth=3`
-- Kmer size to use for baiting. Please don't lower this too much (11 is probably about as low as I would recommend)
-    - default is `19`
-    - modify as follows:
-        - `kmersize=11`
-- Do not automatically discard hits if there are internal soft clips present
-    - default is `False`
-    - modify as follows:
-        - `allowsoftclips=True`
+- `gdcs` — detects genomically dispersed conserved sequences in *Escherichia*, *Listeria*, *Salmonella*, and *Vibrio*.
+- `genesippr` — uses a custom suite of genes derived from *Bacillus*, *Campylobacter*, *Escherichia*, *Listeria*, *Salmonella*, *Staphylococcus*, and *Vibrio*.
+- `mash` — finds the closest matching RefSeq genome.
+- `mlst` — determines multilocus sequence type for *Bacillus*, *Campylobacter*, *Escherichia*, *Listeria*, *Salmonella*, *Staphylococcus*, and *Vibrio*.
+- `pointfinder` — detects chromosomal mutations predictive of drug resistance.
+- `resfinder` — identifies acquired antimicrobial-resistance genes.
+- `rmlst` — determines ribosomal multilocus sequence type.
+- `serosippr` — calculates the serotype for *Escherichia*.
+- `sixteens` — determines the closest 16S match.
+- `virulence` — detects virulence genes.
+- `full` — runs all analyses listed above.
+- `custom` — detects targets from a user-supplied FASTA file. This analysis requires an attachment.
 
-#### Example
+### Attachments
 
-For an example sipprverse issue, see [issue 15706](https://redmine.biodiversity.agr.gc.ca/issues/15706) or 
-[issue 15707](https://redmine.biodiversity.agr.gc.ca/issues/15707).
+Most standard analyses do not require an attachment.
 
-#### Interpreting Results
+For `analysis=custom`, attach a FASTA-formatted file containing the target sequences.
 
-The sipprverse automator will upload a file called `sipprverse_output.zip` once it has completed. This file will contain all the reports generated for the requested analysis.
+### Optional parameters
 
-### How long does it take?
+#### `cutoff`
 
-It depends on the analysis requested. The sipprverse pipeline deals with raw reads, so expect that it should take a few minutes to analyze each SEQID requested.
+Sets the minimum cutoff for matches included in a report.
 
-### What can go wrong?
+- Default: `0.90`
+- Example: `cutoff=0.85`
 
-1. Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
-2. There was an issue with the requested analysis: either one was not supplied, the was a typo, or you requested a currently-unsupported analysis. An error message detailing the problem will be added to the issue.
-3. The `custom` analysis requires an attached FASTA-formatted file of gene targets. If the file was not attached, or there was an issue reading the file, an error message detailing the problem will be add to the issue.
+#### `averagedepth`
 
+Sets the average pileup-depth cutoff.
+
+- Default: `2`
+- Example: `averagedepth=3`
+
+#### `kmersize`
+
+Sets the k-mer size used for baiting.
+
+- Default: `19`
+- Example: `kmersize=11`
+
+Avoid lowering this value excessively. The supplied documentation recommends approximately `11` as the practical lower limit.
+
+#### `allowsoftclips`
+
+Controls whether hits containing internal soft clips are automatically discarded.
+
+- Default: `False`
+- Example: `allowsoftclips=True`
+
+### Examples
+
+#### Standard request
+
+```text
+analysis=resfinder
+2026-SEQ-0001
+2026-SEQ-0002
+```
+
+See [issue 15706](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/15706) and [issue 15707](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/15707) for example Sipprverse issues.
+
+#### Custom request
+
+```text
+analysis=custom
+2026-SEQ-0001
+```
+
+Attach the FASTA-formatted target file to the Redmine issue.
+
+## Interpreting results
+
+When Sipprverse finishes, it uploads:
+
+```text
+sipprverse_output.zip
+```
+
+The archive contains the reports generated for the selected analysis. Report contents vary by analysis.
+
+## How long does it take?
+
+Runtime depends on the selected analysis, read volume, and number of requested `SEQID`s. Because Sipprverse processes raw reads, expect a few minutes per `SEQID`.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable sequences.
+
+**Likely cause:** Sipprverse cannot locate the raw paired-end FASTQ data for the requested `SEQID`.
+
+**What to do:** Verify each `SEQID` and confirm that its raw paired-end reads are available.
+
+### The analysis is missing, misspelled, or unsupported
+
+**Symptom:** The issue receives an error describing the requested analysis.
+
+**Likely cause:** The Description omits `analysis=...`, contains a spelling error, or requests an unsupported analysis.
+
+**What to do:** Choose one of the documented analysis names and submit a corrected request.
+
+### A custom target file is missing or unreadable
+
+**Symptom:** The custom analysis cannot read or use its target database.
+
+**Likely cause:** The FASTA-formatted target file was not attached or could not be read.
+
+**What to do:** Attach a valid FASTA-formatted target file and submit a corrected `analysis=custom` request.
+
+## Related automators
+
+- [GeneSeekr](geneseekr.md) — use for target detection in FASTA-formatted assemblies.
+- [KMA](kma.md) — use for supported resistance or toxin targets, or custom targets, in assemblies or raw reads.

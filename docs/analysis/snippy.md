@@ -1,101 +1,183 @@
 # Snippy
 
-### What does it do?
+## What does it do?
 
-Snippy is a tool for rapid haploid variant calling and core genome alignment of closely related genomes. This automator can also be used to build a phylogenetic tree to attempt to show the
-relatedness of these strains. More info can be found at the [Snippy github site](https://github.com/tseemann/snippy).
+Use **Snippy** for rapid haploid variant calling and core-genome alignment of closely related genomes against one reference.
 
-### How do I use it?
+Snippy can call variants for multiple isolates, produce a core alignment, and optionally clean the alignment and create phylogenetic trees with Gubbins and IQ-TREE.
 
-#### Subject
+Snippy supports paired-end and single-end raw-read data in the same analysis. Use [SNVPhyl](snvphyl.md) when the SNVPhyl-specific matrix, core-genome statistics, and Nextflow outputs are required and all query isolates have paired-end R1 and R2 files.
 
-In the `Subject` field, put `snippy`. Spelling counts, but case sensitivity doesn't.
+For background and full output definitions, see the [Snippy repository](https://github.com/tseemann/snippy).
 
-#### Description
+## How do I use it?
 
-**Required Components**
+### Subject
 
-The first line of your description needs to be `reference=`, the SEQID of the strain you want to act
-as your reference strain. Ideally, you'll want to pick a high-quality assembly for your reference.
+In the **Subject** field, enter:
 
-   eg. `reference=YYYY-MIN-NNNN`
+```text
+snippy
+```
 
-If you wish to attach a reference file instead of providing a SEQID, the line must be `reference=attached`
+Spelling matters, but matching is not case-sensitive.
 
-You must also include a list of SEQIDs one per line.
+### Description
 
+The first line selects the reference:
 
-**Optional Components**
+```text
+reference=REFERENCE-SEQID
+```
 
-We have also included the ability to 'cleanup' a multiple sequence alignment, and generate a tree using [Gubbins](http://nickjcroucher.github.io/gubbins/) and [IQ-tree](http://www.iqtree.org/). If you call SNPs for multiple isolates from the same reference, you are able to produce an alignment of "core SNPs" to build a phylogeny. To use this function, add the following line in the description:
+Enter each query `SEQID` on a subsequent line:
 
-  - `cleanup_&_tree=True`
+```text
+reference=2026-MIN-0001
+2026-SEQ-0002
+2026-SEQ-0003
+```
 
-This automator currently uses IQtree and default settings for gubbins, but other options are available. If you would like additional functions, please contact a bioinformatician and we will do our best to add them.
+Choose a high-quality reference assembly that is closely related to all query isolates.
 
-#### Example
+### Use an attached reference
 
-For an example snippy, see [issue 30388](https://redmine.biodiversity.agr.gc.ca/issues/30388).
+Attach one FASTA-formatted reference file and use:
 
-#### Interpreting Results
+```text
+reference=attached
+2026-SEQ-0002
+2026-SEQ-0003
+```
 
-The zip file uploaded on snippy completion will contain folders for each of the comparator sequences, as well as core alignment files. Some of the files will also be uploaded/attached directly to the redmine request. Important files are:
+### Optional parameters
 
-* `core.txt`: A summary file. Tab-separated columnar list of alignment/core-size statistics of the number of: aligned, unaligned, variants, and low coverage bases between every strain submitted and the reference.
-* `core.tab`: Tab-separated columnar list of core SNP sites with alleles but NO annotations
-* `core.vcf`: Multi-sample VCF file with genotype GT tags for all discovered alleles
-* Within each sequence folder there will also be files, including a tab separated summary for that particular sequence in comparison to the reference.
+#### `cleanup_&_tree`
 
-If cleanup_&_tree was included, then tree files will also be included in the output:
+Cleans the core SNP alignment with Gubbins and creates phylogenetic trees with IQ-TREE.
 
-* `{issue.id}.snippy.gubbins.iqtree.tree`: An intermediate phylogenetic tree created by gubbins + iqtree. 
-* `{issue.id}.snippy_final.clean.core.snp.aln.tree`: The **final** phylogeny created from the core snp alignment (created using IQtree and the GTR substitution method).
+- Default: not enabled
+- Enable with:
 
+```text
+cleanup_&_tree=True
+```
 
-If you want to view these tree files, you can use a program such as
-[FigTree](http://tree.bio.ed.ac.uk/software/figtree/) or a web-based viewer like [phylo.io](http://phylo.io).
+The workflow currently uses the configured default Gubbins settings and IQ-TREE. Contact the bioinformatics team if additional options are required.
 
+### Example
 
-Other files can also be important - see the [docs on Snippy Output files](https://github.com/tseemann/snippy)
-for more information.
+```text
+reference=2026-MIN-0001
+cleanup_&_tree=True
+2026-SEQ-0002
+2026-SEQ-0003
+```
 
-### Variant types
+See [issue 30388](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/30388) for an example Snippy request.
 
-For more information, see the [docs on Snippy Output files](https://github.com/tseemann/snippy):
+## Interpreting results
 
-| Type | Name |  Example  |
-|:----------:|:-----------------:|:-----------:|
-| snp | Single Nucleotide Polymorphism |  A => T  |
-| mnp | Multiple Nuclotide Polymorphism | GC => AT |
-| ins | Insertion | ATT => AGTT |
-| del | Deletion | ACGG => ACG |
-| complex | Combination of snp/mnp | ATTC => GTTA |
+The Snippy result archive contains one folder for each comparator sequence and shared core-alignment files. Some important files can also be attached directly to the Redmine issue.
 
-### How long does it take?
+### `core.txt`
 
-It depends on the number of sequences and coverage/size of sequence files. Small snippy requests take ~15 minutes to complete (see the example request). If you submit a request for a larger snippy (>30 strains), or include larger long-read sequences, it may take substantially longer.
+A tab-separated summary of alignment and core-size statistics for each query relative to the reference, including:
 
-### What can go wrong?
+- aligned bases;
+- unaligned bases;
+- variants;
+- low-coverage bases.
 
-A few things can go wrong with this process:
+A query with `0` in the `Aligned` field is not sufficiently represented in the core alignment and should be removed or analyzed with a more appropriate reference.
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+### `core.tab`
 
-2) Strains too far apart. Snippy requires that the strains you want to compare to the reference be closely related to
-the reference. If you ask for a snippy-analysis with things that are not very related, the analysis will fail. In this case, look at the `core.txt` file that is uploaded to the redmine request. If there are sequences with 0 under "Aligned", remove those sequences from the request and re-submit.
+A tab-separated list of core SNP sites and alleles without annotations.
 
-3) Why is the cleaned snp tree not showing my single-end sequences? - I'm not sure... the cleaning step(s) using gubbins appears to remove the minion (single-end) sequence data from the cleaned alignment when a multi-analysis is performed using both illumina and minion sequences. The `{}.snippy_core_alignment.iqtree.treefile`, which is generated before the cleaning steps, will contain all SEQIDS.
+### `core.vcf`
 
-### Should I use Snippy or SNVPhyl?
+A multi-sample VCF containing genotype (`GT`) fields for discovered alleles.
 
-...This depends on your goal...
- 
-Snippy appears to be faster than SNVPhyl. It also allows use of both paired-end and single-end raw data files in the same analysis (whereas SNVPhyl **currently does not**).
+### Per-sequence folders
 
-A comparison of snippy vs SNVPhyl has not been conducted by our lab. The [SNVPhyl publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5628696/) does briefly discuss snippy.
+Each query folder contains files specific to that query-to-reference comparison, including a tab-separated summary.
 
-### Version
-Snippy version 4.6.0 (as of 2024-07-03)
+### Optional tree outputs
 
+When `cleanup_&_tree=True` is included, the output contains tree files including:
 
+```text
+{issue.id}.snippy.gubbins.iqtree.tree
+{issue.id}.snippy_final.clean.core.snp.aln.tree
+```
+
+The first is an intermediate tree produced through the Gubbins/IQ-TREE workflow. The second is the final tree built with IQ-TREE from the cleaned core SNP alignment using the GTR substitution model.
+
+Open tree files with a compatible viewer such as FigTree or a web-based Newick viewer.
+
+A pre-cleaning tree may also be present and can retain samples removed during cleanup. This is particularly relevant when a mixed analysis contains Illumina paired-end data and MinION single-end data.
+
+## Variant types
+
+| Type | Meaning | Example |
+|---|---|---|
+| `snp` | Single-nucleotide polymorphism | `A -> T` |
+| `mnp` | Multiple-nucleotide polymorphism | `GC -> AT` |
+| `ins` | Insertion | `ATT -> AGTT` |
+| `del` | Deletion | `ACGG -> ACG` |
+| `complex` | Combination of SNP/MNP changes | `ATTC -> GTTA` |
+
+Consult the Snippy output documentation for definitions of additional files and fields.
+
+## How long does it take?
+
+Small Snippy requests typically take approximately 15 minutes. Runtime depends on sample count, read coverage and size, input type, cleanup/tree generation, and service workload. Requests containing more than approximately 30 strains or large long-read files can take substantially longer.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The issue warns that one or more query sequences cannot be found.
+
+**Likely cause:** The requested raw-read files are unavailable.
+
+**What to do:** Verify each `SEQID` and confirm that the required read data exist.
+
+### A query is too divergent from the reference
+
+**Symptom:** The analysis fails or `core.txt` reports `0` aligned bases for one or more samples.
+
+**Likely cause:** The selected reference is too distantly related to the query.
+
+**What to do:** Remove the divergent sample or choose a closer, high-quality reference and resubmit the request.
+
+### Single-end samples disappear from the cleaned tree
+
+**Symptom:** MinION single-end samples are present in the pre-cleaning tree but absent from the final cleaned tree.
+
+**Likely cause:** The Gubbins cleanup workflow may remove those samples when paired-end Illumina and single-end MinION data are analyzed together.
+
+**What to do:** Review the pre-cleaning tree, documented in the legacy workflow as `{issue.id}.snippy_core_alignment.iqtree.treefile`, and interpret the cleaned tree with this limitation in mind.
+
+### An attached reference is missing or invalid
+
+**Symptom:** The request cannot initialize the reference.
+
+**Likely cause:** `reference=attached` was supplied without one valid FASTA attachment.
+
+**What to do:** Attach a valid reference FASTA file and resubmit the request.
+
+## Should I use Snippy or SNVPhyl?
+
+Choose according to the workflow requirement:
+
+- **Snippy** is generally faster and can combine paired-end and single-end raw-read data in one analysis.
+- **SNVPhyl** currently requires paired-end R1 and R2 query reads and provides `snvMatrix.tsv`, `vcf2core.tsv`, and the SNVPhyl-specific Nextflow result set.
+
+The documentation does not contain a local validation comparing biological results from the two workflows. Do not treat their outputs or filtering behavior as interchangeable without an appropriate comparison.
+
+## Related automators
+
+- [SNVPhyl](snvphyl.md) — provides pairwise SNV counts, core-genome statistics, alignments, and a Newick tree through the SNVPhyl pipeline.
+- [COWSNPhR](cowsnphr.md) — calls variants with DeepVariant, annotates variant locations, and produces summary tables, alignments, and a tree.

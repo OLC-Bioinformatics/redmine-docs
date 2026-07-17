@@ -80,9 +80,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -105,6 +109,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -133,16 +139,50 @@
     <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#supported-analyses">Supported analyses</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cutoff">cutoff</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#averagedepth">averagedepth</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#kmersize">kmersize</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#allowsoftclips">allowsoftclips</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#standard-request">Standard request</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#custom-request">Custom request</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-analysis-is-missing-misspelled-or-unsupported">The analysis is missing, misspelled, or unsupported</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-custom-target-file-is-missing-or-unreadable">A custom target file is missing or unreadable</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -155,8 +195,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -173,6 +211,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -208,88 +248,107 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="sipprverse">sipprverse</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>The sipprverse is a suite of analyses that detect gene targets in raw FASTQ reads.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>sipprverse</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p><strong>Required Components</strong></p>
-<p>In the <code>Description</code> field, you must provide:</p>
+                <h1 id="sipprverse">Sipprverse</h1>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>Sipprverse</strong> to detect predefined or custom gene targets directly in raw, paired-end FASTQ reads. Sipprverse operates on unassembled read data; use <a href="../geneseekr/">GeneSeekr</a> when the targets must be detected in FASTA-formatted assemblies.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">sipprverse
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>The <strong>Description</strong> field must contain:</p>
 <ol>
-<li>
-<p><code>analysis=requested_analysis</code></p>
-<p>The sipprverse pipeline supports the following analyses (again, spelling counts, but case sensitivity doesn't):</p>
-<ul>
-<li>gdcs - determines the presence of genomically-dispersed conserved sequences in the following genera: <em>Escherichia, Listeria, Salmonella, Vibrio</em></li>
-<li>genesippr - custom suite of genes derived from the following genera: <em>Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio</em></li>
-<li>mash - finds closest matching RefSeq genome</li>
-<li>mlst - determines multi-locus sequence type for the following genera: <em>Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio</em></li>
-<li>pointfinder - detects chromosomal mutations predictive of drug resistance</li>
-<li>resfinder - identifies acquired antimicrobial resistance genes</li>
-<li>rmlst - determines ribosomal multi-locus sequence type</li>
-<li>serosippr - calculates the serotype for <em>Escherichia</em></li>
-<li>sixteens - determines closest 16S match</li>
-<li>virulence - finds virulence genes</li>
-<li>full (all the above analyses)</li>
-<li>custom (<strong>you must attach a FASTA-formatted file of targets to the issue</strong>)</li>
-</ul>
-</li>
-<li>
-<p>a list of SEQIDs (one per line)</p>
-</li>
+<li>an analysis declaration in the form <code>analysis=requested_analysis</code>; and</li>
+<li>one <code>SEQID</code> per line.</li>
 </ol>
-<p><strong>Optional Components</strong></p>
-<p>In order to customise your sipprverse analyses, several settings can be optionally modified</p>
+<p>Example structure:</p>
+<pre><code class="language-text">analysis=resfinder
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h4 id="supported-analyses">Supported analyses</h4>
 <ul>
-<li>Minimum cutoff for matches to be included in report.<ul>
-<li>default is <code>0.90</code></li>
-<li>modify as follows:<ul>
-<li><code>cutoff=0.85</code></li>
+<li><code>gdcs</code> — detects genomically dispersed conserved sequences in <em>Escherichia</em>, <em>Listeria</em>, <em>Salmonella</em>, and <em>Vibrio</em>.</li>
+<li><code>genesippr</code> — uses a custom suite of genes derived from <em>Bacillus</em>, <em>Campylobacter</em>, <em>Escherichia</em>, <em>Listeria</em>, <em>Salmonella</em>, <em>Staphylococcus</em>, and <em>Vibrio</em>.</li>
+<li><code>mash</code> — finds the closest matching RefSeq genome.</li>
+<li><code>mlst</code> — determines multilocus sequence type for <em>Bacillus</em>, <em>Campylobacter</em>, <em>Escherichia</em>, <em>Listeria</em>, <em>Salmonella</em>, <em>Staphylococcus</em>, and <em>Vibrio</em>.</li>
+<li><code>pointfinder</code> — detects chromosomal mutations predictive of drug resistance.</li>
+<li><code>resfinder</code> — identifies acquired antimicrobial-resistance genes.</li>
+<li><code>rmlst</code> — determines ribosomal multilocus sequence type.</li>
+<li><code>serosippr</code> — calculates the serotype for <em>Escherichia</em>.</li>
+<li><code>sixteens</code> — determines the closest 16S match.</li>
+<li><code>virulence</code> — detects virulence genes.</li>
+<li><code>full</code> — runs all analyses listed above.</li>
+<li><code>custom</code> — detects targets from a user-supplied FASTA file. This analysis requires an attachment.</li>
 </ul>
-</li>
+<h3 id="attachments">Attachments</h3>
+<p>Most standard analyses do not require an attachment.</p>
+<p>For <code>analysis=custom</code>, attach a FASTA-formatted file containing the target sequences.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<h4 id="cutoff"><code>cutoff</code></h4>
+<p>Sets the minimum cutoff for matches included in a report.</p>
+<ul>
+<li>Default: <code>0.90</code></li>
+<li>Example: <code>cutoff=0.85</code></li>
 </ul>
-</li>
-<li>Average pileup depth cutoff<ul>
-<li>default is <code>2</code></li>
-<li>modify as follows:<ul>
-<li><code>averagedepth=3</code></li>
+<h4 id="averagedepth"><code>averagedepth</code></h4>
+<p>Sets the average pileup-depth cutoff.</p>
+<ul>
+<li>Default: <code>2</code></li>
+<li>Example: <code>averagedepth=3</code></li>
 </ul>
-</li>
+<h4 id="kmersize"><code>kmersize</code></h4>
+<p>Sets the k-mer size used for baiting.</p>
+<ul>
+<li>Default: <code>19</code></li>
+<li>Example: <code>kmersize=11</code></li>
 </ul>
-</li>
-<li>Kmer size to use for baiting. Please don't lower this too much (11 is probably about as low as I would recommend)<ul>
-<li>default is <code>19</code></li>
-<li>modify as follows:<ul>
-<li><code>kmersize=11</code></li>
+<p>Avoid lowering this value excessively. The supplied documentation recommends approximately <code>11</code> as the practical lower limit.</p>
+<h4 id="allowsoftclips"><code>allowsoftclips</code></h4>
+<p>Controls whether hits containing internal soft clips are automatically discarded.</p>
+<ul>
+<li>Default: <code>False</code></li>
+<li>Example: <code>allowsoftclips=True</code></li>
 </ul>
-</li>
+<h3 id="examples">Examples</h3>
+<h4 id="standard-request">Standard request</h4>
+<pre><code class="language-text">analysis=resfinder
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/15706">issue 15706</a> and <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/15707">issue 15707</a> for example Sipprverse issues.</p>
+<h4 id="custom-request">Custom request</h4>
+<pre><code class="language-text">analysis=custom
+2026-SEQ-0001
+</code></pre>
+<p>Attach the FASTA-formatted target file to the Redmine issue.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When Sipprverse finishes, it uploads:</p>
+<pre><code class="language-text">sipprverse_output.zip
+</code></pre>
+<p>The archive contains the reports generated for the selected analysis. Report contents vary by analysis.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Runtime depends on the selected analysis, read volume, and number of requested <code>SEQID</code>s. Because Sipprverse processes raw reads, expect a few minutes per <code>SEQID</code>.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> Sipprverse cannot locate the raw paired-end FASTQ data for the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code> and confirm that its raw paired-end reads are available.</p>
+<h3 id="the-analysis-is-missing-misspelled-or-unsupported">The analysis is missing, misspelled, or unsupported</h3>
+<p><strong>Symptom:</strong> The issue receives an error describing the requested analysis.</p>
+<p><strong>Likely cause:</strong> The Description omits <code>analysis=...</code>, contains a spelling error, or requests an unsupported analysis.</p>
+<p><strong>What to do:</strong> Choose one of the documented analysis names and submit a corrected request.</p>
+<h3 id="a-custom-target-file-is-missing-or-unreadable">A custom target file is missing or unreadable</h3>
+<p><strong>Symptom:</strong> The custom analysis cannot read or use its target database.</p>
+<p><strong>Likely cause:</strong> The FASTA-formatted target file was not attached or could not be read.</p>
+<p><strong>What to do:</strong> Attach a valid FASTA-formatted target file and submit a corrected <code>analysis=custom</code> request.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../geneseekr/">GeneSeekr</a> — use for target detection in FASTA-formatted assemblies.</li>
+<li><a href="../kma/">KMA</a> — use for supported resistance or toxin targets, or custom targets, in assemblies or raw reads.</li>
 </ul>
-</li>
-<li>Do not automatically discard hits if there are internal soft clips present<ul>
-<li>default is <code>False</code></li>
-<li>modify as follows:<ul>
-<li><code>allowsoftclips=True</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="example">Example</h4>
-<p>For an example sipprverse issue, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/15706">issue 15706</a> or 
-<a href="https://redmine.biodiversity.agr.gc.ca/issues/15707">issue 15707</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>The sipprverse automator will upload a file called <code>sipprverse_output.zip</code> once it has completed. This file will contain all the reports generated for the requested analysis.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>It depends on the analysis requested. The sipprverse pipeline deals with raw reads, so expect that it should take a few minutes to analyze each SEQID requested.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</li>
-<li>There was an issue with the requested analysis: either one was not supplied, the was a typo, or you requested a currently-unsupported analysis. An error message detailing the problem will be added to the issue.</li>
-<li>The <code>custom</code> analysis requires an attached FASTA-formatted file of gene targets. If the file was not attached, or there was an issue reading the file, an error message detailing the problem will be add to the issue.</li>
-</ol>
               
             </div>
           </div><footer>

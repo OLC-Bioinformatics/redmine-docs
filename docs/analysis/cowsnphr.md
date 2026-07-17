@@ -1,62 +1,130 @@
 # COWSNPhR
 
-### What does it do?
+## What does it do?
 
-COWSNPhR (CFIA OLC Workflow for Single Nucleotide PHylogeny Reporting) is a pipeline developed in conjunction with the 
-USDA APHIS Veterinary Services that determines the presence of high quality Single Nucleotide Variants between a 
-reference strain and other closely related strains. Following annotation of the reference strain, using 
-[Prokka](https://github.com/tseemann/prokka), the pipeline maps the raw reads of the query strains to the reference 
-genome using [bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml), finds genetic variants with 
-[DeepVariant](https://github.com/google/deepvariant), extracts variants, creates multiple sequence alignments, and
-calculates a phylogenetic tree using [FastTree](http://www.microbesonline.org/fasttree/) to show the relatedness of 
-these strains. The location of each variant is mapped to the annotation of the reference strain, and all variants are 
-entered in a summary table.
+Use **COWSNPhR**—the CFIA OLC Workflow for Single Nucleotide Phylogeny Reporting—to identify high-quality variants between one reference genome and a group of closely related query strains and to create a phylogenetic tree.
 
-### How do I use it?
+The workflow:
 
-#### Subject
+1. annotates the reference with Prokka;
+2. maps raw query reads to the reference with Bowtie 2;
+3. calls variants with DeepVariant;
+4. extracts and summarizes variants;
+5. creates multiple-sequence alignments;
+6. builds a phylogenetic tree with FastTree;
+7. maps each variant to the reference annotation.
 
-In the `Subject` field, put `cowsnphr`. Spelling counts, but case sensitivity does not.
+COWSNPhR was developed with USDA APHIS Veterinary Services. It requires queries that are closely related to the selected reference.
 
-#### Description
+## How do I use it?
 
-The first line of your description needs to be `reference`, and the second line the SEQID of the strain you want to act
-as your reference strain. Ideally, you'll want to pick a high-quality assembly for your reference.
+### Subject
 
-If you wish to attach a reference file instead of providing a SEQID, the second line must be `attached`
+In the **Subject** field, enter:
 
-The third line of your description should be `compare`, and lines after that the SEQIDs for strains to which you want to 
-compare your reference.
+```text
+cowsnphr
+```
 
-#### Example
+Spelling matters, but matching is not case-sensitive.
 
-For example COWSNPhR analyses, see [issue 15681](https://redmine.biodiversity.agr.gc.ca/issues/15681) and 
-[issue 15682 (uploaded reference file)](https://redmine.biodiversity.agr.gc.ca/issues/15682).
+### Description
 
-#### Interpreting Results
+Use the following structure:
 
-The zip file uploaded on COWSNPhR completion should contain four folders: 
+```text
+reference
+REFERENCE-SEQID
+compare
+QUERY-SEQID-1
+QUERY-SEQID-2
+```
 
-* `vcf_files`: compressed global VCF files 
-* `summary_tables`: table summarizing the location, prevalence, and annotation of variants
-* `alignments`: multiple sequence alignment of variants
-* `tree_files`: phylogenetic tree of alignment. If you want to view this tree, you can use a program such as
-[FigTree](http://tree.bio.ed.ac.uk/software/figtree/) or a web-based viewer like [phylo.io](http://phylo.io).
+Choose a high-quality reference assembly that is closely related to all queries.
 
-### How long does it take?
+### Use an attached reference
 
-Most COWSNPhR requests take ~1 hour to complete. If you submit a request for a larger COWSNPhR analysis (>30 strains), 
-it may take substantially longer.
+Attach one reference file and put `attached` on the line after `reference`:
 
-### What can go wrong?
+```text
+reference
+attached
+compare
+QUERY-SEQID-1
+QUERY-SEQID-2
+```
 
-A few things can go wrong with this process:
+### Optional parameters
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+The supplied documentation does not identify optional COWSNPhR parameters beyond choosing a reference by `SEQID` or attachment.
 
-2) Strains too far apart. COWSNPhR requires that the strains you want to compare to the reference be closely related to
-the reference. If you ask for an analysis with strains that are not very related, you will get a warning telling you so.
+### Examples
 
-3) Other errors. This software is still in active development, so there may be unforeseen issues arising for novel 
-reference: query combinations. 
+See [issue 15681](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/15681) for an example using a reference `SEQID`.
+
+See [issue 15682](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/15682) for an example using an uploaded reference file.
+
+## Interpreting results
+
+The COWSNPhR archive contains four main directories.
+
+### `vcf_files`
+
+Contains compressed global VCF files produced by variant calling.
+
+### `summary_tables`
+
+Contains tables summarizing variant location, prevalence among samples, and reference annotation.
+
+### `alignments`
+
+Contains multiple-sequence alignments of the detected variants.
+
+### `tree_files`
+
+Contains the phylogenetic tree generated from the alignment. Open the tree with a compatible viewer such as FigTree or another Newick tree viewer.
+
+Interpret variant and tree results only when the query strains are sufficiently close to the reference and to one another. The tree represents relationships inferred from the workflow's selected variant positions and filtering; it should be interpreted with the alignment, variant summaries, and reference choice.
+
+## How long does it take?
+
+Most COWSNPhR requests take approximately one hour. Requests containing more than about 30 strains can take substantially longer.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The issue warns that the reference or one or more query sequences cannot be found.
+
+**Likely cause:** The required assembly or raw-read data are unavailable.
+
+**What to do:** Verify all identifiers and confirm that the required files exist.
+
+### Query strains are too distant from the reference
+
+**Symptom:** The issue reports that one or more strains are not sufficiently related to the reference.
+
+**Likely cause:** COWSNPhR requires close reference-query relationships for reliable mapping and variant comparison.
+
+**What to do:** Remove divergent strains or select a closer high-quality reference and submit a new request.
+
+### An uploaded reference is missing or invalid
+
+**Symptom:** The workflow cannot initialize the reference.
+
+**Likely cause:** `attached` was specified without a usable reference attachment.
+
+**What to do:** Attach one valid reference file and resubmit the request.
+
+### A novel reference-query combination fails
+
+**Symptom:** The workflow reports an unexpected error despite apparently valid inputs.
+
+**Likely cause:** COWSNPhR remains under active development and may encounter an untested organism or reference-query combination.
+
+**What to do:** Preserve the issue error and partial outputs and consult the bioinformatics team.
+
+## Related automators
+
+- [SNVPhyl](snvphyl.md) — produces pairwise SNV counts, core-genome statistics, alignments, and a Newick tree from paired-end query reads.
+- [Snippy](snippy.md) — provides rapid variant calling, core alignment, and optional Gubbins/IQ-TREE cleanup and tree generation.

@@ -80,9 +80,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -106,6 +110,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../pointfinder/">PointFinder</a>
@@ -122,17 +128,35 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#gff">.gff</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gbk">.gbk</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    <li class="toctree-l3"><a class="reference internal" href="#the-dropbox-upload-fails">The Dropbox upload fails</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#an-annotation-is-overinterpreted">An annotation is overinterpreted</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -158,8 +182,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -175,6 +197,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -211,31 +235,58 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="prokka">Prokka</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>Prokka annotates genomes, letting you know what genes and other features are present. If you want to 
-learn more about it, check out the <a href="https://www.ncbi.nlm.nih.gov/pubmed/24642063">prokka publication.</a></p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>Prokka</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to process, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example Prokka, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/15195">issue 15195</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>Prokka will output a lot of files for each genome you give it - you can find a quick description of
-each file <a href="https://github.com/tseemann/prokka#output-files">here</a>. Of particular interest are the <code>.gff</code> and <code>.gbk</code> files.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>Prokka isn't the quickest thing around - expect it to take 2 to 3 minutes for each genome you give it.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</li>
-<li>FTP Upload issues. Since the files prokka produces are fairly big, the need to be uploaded to an FTP site. We'll sometimes
-have connection issues that stop uploads from happening properly. If this is the case, you'll get a message telling you to 
-try again later. FTP connection issues usually only persist for a few hours at a time.</li>
-</ol>
-<h3 id="version">Version</h3>
-<p>Prokka version on redmine is 1.14.6 (as of 2024-07-03)</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>Prokka</strong> to annotate genome assemblies and identify genes and other genomic features.</p>
+<p>Prokka produces standardized annotation files that can be inspected directly or used by downstream workflows such as Roary, bcgTree, and pyseer.</p>
+<p>For background, see the <a href="https://www.ncbi.nlm.nih.gov/pubmed/24642063">Prokka publication</a> and <a href="https://github.com/tseemann/prokka#output-files">Prokka output documentation</a>.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">Prokka
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Enter one assembly <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. Prokka retrieves the genome assembly associated with each requested <code>SEQID</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for the Redmine Prokka automator.</p>
+<h3 id="example">Example</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/15195">issue 15195</a> for an example Prokka request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>Prokka creates multiple annotation files for each genome. See the <a href="https://github.com/tseemann/prokka#output-files">Prokka output documentation</a> for the complete output list.</p>
+<p>Important files include:</p>
+<h3 id="gff"><code>.gff</code></h3>
+<p>Contains genomic features and annotations in GFF format, together with sequence information in a format used by workflows such as Roary.</p>
+<h3 id="gbk"><code>.gbk</code></h3>
+<p>Contains the annotated genome in GenBank format for inspection or downstream analysis.</p>
+<p>Other common Prokka outputs can include nucleotide and protein FASTA files, feature tables, and summary files. Record the Prokka version and relevant database information when annotations must be reproducible.</p>
+<p>Automated annotation is predictive. Product names, hypothetical proteins, gene boundaries, and feature calls may require review before use in publication or biological conclusions.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Prokka generally takes approximately two to three minutes per genome. Total runtime depends on assembly size, sample count, service workload, and result-upload time.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable assemblies.</p>
+<p><strong>Likely cause:</strong> Prokka cannot locate the assembly associated with the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify every <code>SEQID</code>, confirm that its assembly exists, and submit a corrected request.</p>
+<h3 id="the-dropbox-upload-fails">The Dropbox upload fails</h3>
+<p><strong>Symptom:</strong> Annotation completes, but the issue reports that the large result package could not be uploaded.</p>
+<p><strong>Likely cause:</strong> A temporary Dropbox connection or upload problem occurred.</p>
+<p><strong>What to do:</strong> Retry later. These connection problems are usually temporary; contact the bioinformatics team if the failure persists.</p>
+<h3 id="an-annotation-is-overinterpreted">An annotation is overinterpreted</h3>
+<p><strong>Symptom:</strong> A predicted gene name or product is treated as experimentally confirmed.</p>
+<p><strong>Likely cause:</strong> Automated annotation assigns features from sequence evidence and reference databases and can contain uncertain or generic calls.</p>
+<p><strong>What to do:</strong> Review important annotations with supporting sequence evidence and appropriate specialized tools.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../roary/">Roary/Scoary</a> — uses Prokka <code>.gff</code> annotations for pan-genome analysis.</li>
+<li><a href="../bcgtree/">bcgTree</a> — uses Prokka <code>.faa</code> protein files for core-gene phylogeny.</li>
+<li><a href="../pyseer/">GWAS-pyseer</a> — uses Prokka annotations to interpret significant k-mers.</li>
+<li><a href="../phastest/">PHASTEST</a> — provides prophage-focused detection, annotation, and visualization.</li>
+</ul>
               
             </div>
           </div><footer>

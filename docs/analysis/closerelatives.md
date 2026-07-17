@@ -1,46 +1,105 @@
 # CloseRelatives
 
-### What does it do?
+## What does it do?
 
-CloseRelatives uses mash to try to figure out what genomes in the CFIA collection are closest
-to a query genome. 
+Use **CloseRelatives** to identify genomes in the CFIA sequence collection that are closest to one query genome.
 
-### How do I use it?
+CloseRelatives uses Mash distances to compare the query assembly with the collection and returns the requested number of nearest genomes. It also provides a complete CSV of distances when a broader review is needed.
 
-#### Subject
+Use CloseRelatives when the candidate comparison set should come from the CFIA collection. Use [NearTree](neartree.md) when you already have a specific candidate list and want to rank closeness within that list.
 
-In the `Subject` field, put `Close Relatives`. Spelling counts, but case sensitivity doesn't.
+## How do I use it?
 
-#### Description
+### Subject
 
-The first line of the description should be the number of closely related strains you want to find, 
-and the second line should be the SeqID you want to use as a query. For example, to find the 5 closest
-genomes to 2014-SEQ-0276, you would enter:
+In the **Subject** field, enter:
 
+```text
+Close Relatives
 ```
-10
+
+Spelling matters, but matching is not case-sensitive.
+
+### Description
+
+The Description must contain exactly two components:
+
+1. the number of closest genomes to return;
+2. the query `SEQID`.
+
+Example requesting the five closest genomes:
+
+```text
+5
 2014-SEQ-0276
 ```
 
-#### Example
+The legacy page's prose said “find the 5 closest genomes” but showed `10` in its example. The replacement uses `5` so the requested count and example agree.
 
-For an example CloseRelatives issue, see [issue 14676](https://redmine.biodiversity.agr.gc.ca/issues/14676).
+### Attachments
 
-#### Interpreting Results
+The supplied documentation does not identify attachment support. Use an available query `SEQID` unless the current implementation has been verified to accept an assembly attachment.
 
-The automator will give you a list of the number of closest strains it found and their mash distances.
-In the event that you want to look at more strains, it will also upload a file called `close_relatives_results.csv` that
-has the distance for every genome in the CFIA collection.
+### Optional parameters
 
-For interpretation of the mash distance reported, know that 0 means that two strains are identical (or at least extremely
-close to identical), and 1 means that two strains have essentially no similarity.
+The supplied documentation does not identify optional parameters beyond the requested number of close relatives on the first line.
 
-### How long does it take?
+### Example
 
-Mash is super quick - close relatives should finish in 2 or 3 minutes.
+See [issue 14676](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14676) for an example CloseRelatives request.
 
-### What can go wrong?
+## Interpreting results
 
-1. Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.
-2. Number of strains desired not requested. If the first line of the description wasn't a number, you'll get an 
-error telling you to enter a number.
+CloseRelatives reports the requested number of closest strains and their Mash distances, ordered from closest to more distant.
+
+It also uploads:
+
+```text
+close_relatives_results.csv
+```
+
+This file contains Mash distances between the query and every genome evaluated in the CFIA collection.
+
+Mash distance interpretation:
+
+- `0` indicates identical or nearly identical sequence content under the Mash comparison;
+- larger values indicate increasing dissimilarity;
+- values approaching `1` indicate little detectable similarity.
+
+A small Mash distance indicates genomic similarity, but it is not by itself a species identification, epidemiological linkage, or phylogenetic conclusion. Interpret results with reference coverage, sequence quality, and the intended downstream analysis.
+
+## How long does it take?
+
+CloseRelatives generally finishes in approximately two to three minutes. Runtime can vary with collection size and service workload.
+
+## What can go wrong?
+
+### The query `SEQID` is unavailable
+
+**Symptom:** The Redmine issue reports that the query sequence cannot be found.
+
+**Likely cause:** The identifier is incorrect or its assembly is unavailable.
+
+**What to do:** Verify the query `SEQID` and confirm that its assembly exists.
+
+### The requested count is missing or invalid
+
+**Symptom:** The issue asks for a valid number of strains.
+
+**Likely cause:** The first Description line is absent or is not a positive integer.
+
+**What to do:** Put the desired number of closest genomes on the first line and the query `SEQID` on the second line.
+
+### The closest match is overinterpreted
+
+**Symptom:** A low Mash distance is treated as definitive biological identity or relatedness.
+
+**Likely cause:** Mash distance is being used without supporting taxonomic, phylogenetic, or epidemiological evidence.
+
+**What to do:** Use the result to select candidates for an appropriate follow-up workflow, such as Unknown Isolate, SNVPhyl, Snippy, or another reviewed comparison.
+
+## Related automators
+
+- [NearTree](neartree.md) — ranks close strains within a user-supplied candidate set.
+- [StrainMash](strainmash.md) — compares an assembly with represented RefSeq type strains.
+- [Unknown Isolate](unknownisolate.md) — combines rMLST, Mash, ANIb, and ANIm evidence for uncertain isolate identification.

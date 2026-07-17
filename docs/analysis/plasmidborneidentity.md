@@ -1,86 +1,183 @@
 # Plasmid-Borne Identity
-![Plasmid-Borne Identity](../img/plasmid_borne_identity.png)
 
-### What does it do?
+![Plasmid-Borne Identity workflow](../img/plasmid_borne_identity.png)
 
-Plasmid-Borne Identity performs GeneSeekr and MOB-suite analyses on FASTA files, and creates a report combining and 
-summarising the outputs.
+## What does it do?
 
-MobSuite is a set of tools developed by the Public Health Agency of Canada for detecting plasmids in draft genome
-assemblies. This tool runs the `mob_recon` part of the suite, which first detects plasmids in the assemblies, and then
-performs typing on the plasmids. More details on MobSuite, including fairly extensive details on the output files
-produced, can be found at the [MobSuite GitHub repository](https://github.com/phac-nml/mob-suite)).
+Use **Plasmid-Borne Identity** to search FASTA-formatted draft genome assemblies for user-supplied gene targets and predict whether each detected target is located on a plasmid or chromosome.
 
-### How do I use it?
+Plasmid-Borne Identity combines:
 
-#### Subject
+- **GeneSeekr** — searches assemblies for the attached target sequences;
+- **MOB-suite `mob_recon`** — reconstructs and types predicted plasmids.
 
-In the `Subject` field, put `plasmid_borne_identity`. Spelling counts, but case sensitivity doesn't.
+The combined report maps target-containing contigs to MOB-suite plasmid predictions. For additional MOB-suite output details, see the [MOB-suite repository](https://github.com/phac-nml/mob-suite).
 
-#### Description
+## How do I use it?
 
-All you need to put in the description is a list of SEQIDs you want to process, one per line.
+### Subject
 
+In the **Subject** field, enter:
 
-#### Attachments
+```text
+plasmid_borne_identity
+```
 
-You are required to attach a FASTA-formatted file containing the gene(s) you wish analysed 
+Spelling matters, but matching is not case-sensitive.
 
+### Description
 
-#### Optional arguments
+In the **Description** field, enter one `SEQID` per line. Optional GeneSeekr parameters can be placed on separate lines before the `SEQID`s.
 
-- BLAST program. **NOTE:** GeneSeekr (and therefore PlasmidBorne Identity) does not check to see if your query or 
-database are the appropriate molecule for the requested program. 
-    - default is `blastn`
-    - You can select one of the following BLAST programs to use:
-        - blastn - nt query: nt db
-        - blastp - protein query: protein db
-        - blastx - translated nt query: protein db
-        - tblastn - protein query: translated nt db
-        - tblastx - translated nt query: translated nt db
-    - modify as follows:
-        - `blast=tblastx`
-- Minimum cutoff for matches to be included in report.
-    - default is `70`
-    - modify as follows:
-        - `cutoff=80`
-- E-value cutoff
-    - default is `1E-05`
-    - modify as follows:
-        - `evalue=1E-10` or
-        - `evalue=0.01`
+```text
+cutoff=80
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-#### Example
+Each requested `SEQID` must have a FASTA-formatted draft genome assembly available.
 
-For an example Plasmid-Borne Identity analysis, see [issue 15644](https://redmine.biodiversity.agr.gc.ca/issues/15644).
+### Attachments
 
-#### Interpreting Results
+Attach a FASTA-formatted file containing the gene targets to search for. The supplied documentation does not specify a required attachment filename or a Description parameter that refers to that filename.
 
-Plasmid-Borne Identity will upload five separate reports once it is complete
+### Optional parameters
 
-`geneseekr_{BLAST_PROGRAM}.xlsx` strain name and percent identity match for all query genes
+#### `blast`
 
-`geneseekr_{BLAST_PROGRAM}_detailed.csv` strain name, and BLAST summary information, including percent match, alignment length, 
-subject length, e-value, number of positives, number of mismatches, and number of gaps for every gene
+Selects the BLAST program used by GeneSeekr.
 
-`geneseekr_{BLAST_PROGRAM}.csv`  same as `geneseekr_{BLAST_PROGRAM}.csv`  same as, but in .csv format
+- Default: `blastn`
+- Accepted values: `blastn`, `blastp`, `blastx`, `tblastn`, `tblastx`
+- Example: `blast=tblastx`
 
-`mob_recon_summary.csv` shows any contigs that are predicted to be plasmids - note that all contigs calculated to be 
-chromosomal are ignored. __Location__ is the name of the predicted plasmid, while __Contig__ is the name contig 
-predicted to contain plasmid sequence. One plasmid can be composed of several contigs if it could not be circularised.
+GeneSeekr and Plasmid-Borne Identity do not verify that the query and database molecule types are appropriate for the selected BLAST program.
 
-`plasmid_borne_summary.csv` combines information from `geneseekr_{BLAST_PROGRAM}.csv`  and `mob_recon_summary.csv`. 
-The contigs of all predicted AMR genes from the `geneseekr_{BLAST_PROGRAM}_detailed.csv` report are used to search 
-the `mob_recon_summary` report. The plasmid predictions, and well as all the incompatibility types for that plasmid 
-are extracted, and used in the report. __Location__ will specify either `chromosome` or the name of the predicted plasmid.
+#### `cutoff`
 
-### How long does it take?
+Sets the minimum cutoff for matches included in the report.
 
-GeneSeekr is very fast, while MOB-suite is relatively slow - it should take a few minutes to analyze each SEQID requested.
+- Default: `70`
+- Example: `cutoff=80`
 
-### What can go wrong?
+#### `evalue`
 
-1. Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
-1. Issue with required FASTA-formatted targets file, including not attaching the file, or the FASTA formatting being incorrect
-1. Specifying the incorrect BLAST analysis program for the provided sequences e.g. blastp with a nucleotide query and db
+Sets the E-value cutoff.
+
+- Default: `1E-05`
+- Examples: `evalue=1E-10` or `evalue=0.01`
+
+### Examples
+
+#### Nucleotide-target request
+
+```text
+cutoff=80
+2026-SEQ-0001
+2026-SEQ-0002
+```
+
+Attach the FASTA-formatted target file. The default BLAST program is `blastn`.
+
+#### Alternate BLAST program
+
+```text
+blast=tblastx
+evalue=1E-10
+2026-SEQ-0001
+```
+
+Verify that the selected BLAST program is appropriate for both the attached targets and assembly database.
+
+See [issue 15644](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/15644) for an example Plasmid-Borne Identity request.
+
+## Interpreting results
+
+Plasmid-Borne Identity uploads five reports. `{BLAST_PROGRAM}` is replaced with the selected BLAST program, such as `blastn`.
+
+### `geneseekr_{BLAST_PROGRAM}.xlsx`
+
+Reports the strain name and percentage-identity match for each query target.
+
+### `geneseekr_{BLAST_PROGRAM}_detailed.csv`
+
+Reports detailed BLAST evidence for each target, including:
+
+- strain name;
+- percentage match;
+- alignment length;
+- subject length;
+- E-value;
+- positives;
+- mismatches;
+- gaps.
+
+### `geneseekr_{BLAST_PROGRAM}.csv`
+
+Provides the GeneSeekr summary in CSV format.
+
+### `mob_recon_summary.csv`
+
+Lists contigs predicted to be plasmid-derived. Contigs predicted to be chromosomal are omitted.
+
+Important fields include:
+
+- `Location` — the predicted plasmid name;
+- `Contig` — the contig predicted to contain plasmid sequence.
+
+One predicted plasmid can contain several contigs when it could not be circularized.
+
+### `plasmid_borne_summary.csv`
+
+Combines detailed GeneSeekr target hits with MOB-suite plasmid predictions. It maps target-containing contigs to predicted plasmids and includes plasmid incompatibility types when available.
+
+The `Location` field reports either:
+
+- `chromosome`; or
+- the name of a predicted plasmid.
+
+This location is a computational prediction. Review the detailed BLAST evidence, assembly context, and MOB-suite reconstruction before drawing conclusions.
+
+## How long does it take?
+
+GeneSeekr is fast, while MOB-suite is comparatively slower. Expect the combined analysis to take a few minutes per requested `SEQID`, depending on assembly size, target count, sample count, and service workload.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable sequences.
+
+**Likely cause:** The automator cannot locate a draft genome assembly for the requested `SEQID`.
+
+**What to do:** Verify each `SEQID`, confirm that its FASTA assembly is available, and submit a corrected request.
+
+### The target attachment is missing or invalid
+
+**Symptom:** The automator cannot read or search the target sequences.
+
+**Likely cause:** The target file was not attached or is not valid FASTA.
+
+**What to do:** Attach a correctly formatted FASTA file containing the target sequences.
+
+### The BLAST program does not match the sequence types
+
+**Symptom:** The analysis returns no useful hits or fails unexpectedly.
+
+**Likely cause:** The selected BLAST program is incompatible with the attached query targets or nucleotide assembly database, for example `blastp` with nucleotide query and database sequences.
+
+**What to do:** Verify the molecule type of the query targets and select the appropriate BLAST program. Use the default `blastn` for nucleotide targets searched against nucleotide assemblies.
+
+### A target has an uncertain predicted location
+
+**Symptom:** A detected target cannot be confidently assigned to a predicted plasmid or chromosome.
+
+**Likely cause:** Draft assemblies can fragment plasmids across contigs, and plasmid reconstruction is predictive.
+
+**What to do:** Review `geneseekr_{BLAST_PROGRAM}_detailed.csv`, `mob_recon_summary.csv`, and the assembly context together.
+
+## Related automators
+
+- [GeneSeekr](geneseekr.md) — searches FASTA-formatted files for predefined or custom targets without plasmid-location summarization.
+- [MobSuite](mobsuite.md) — detects, reconstructs, and types predicted plasmids without requiring a user-supplied target set.
+- [AMRsummary](amrsummary.md) — combines ResFinder acquired-AMR detection with MOB-suite plasmid-location predictions.

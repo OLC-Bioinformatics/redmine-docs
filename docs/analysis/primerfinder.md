@@ -1,161 +1,298 @@
 # PrimerFinder
 
-### What does it do?
+![PrimerFinder Legacy workflow](../img/primer_finder_legacy.png)
 
-The PrimerFinder performs _in silico_ PCR analyses on FASTA files.
+## What does it do?
 
-![PrimerFinder Legacy](../img/primer_finder_legacy.png)
+Use **PrimerFinder** to perform *in silico* PCR on FASTA-formatted sequence data.
 
-__PrimerFinder Legacy__ computes primer binding and amplicon statistics on FASTA formatted files using the now retired ePCR suite of tools from NCBI. 
+PrimerFinder supports:
 
-### How do I use it?
+- `vtyper` — uses the primer set supplied by the VTyper workflow;
+- `custom` — uses a FASTA-formatted primer file attached to the Redmine issue.
 
-#### Subject
+The legacy workflow computes primer-binding and amplicon statistics with the retired NCBI e-PCR suite. The current documented analysis also refers to `ipcress` for *in silico* PCR, particularly when discussing degenerate bases and contig-break behavior. Confirm the deployed backend and output format before removing this implementation note.
 
-In the `Subject` field, put `primer_finder`. Spelling counts, but case sensitivity does not.
+## How do I use it?
 
-#### Description
+### Subject
 
-In the `Description` field, you must provide:
+In the **Subject** field, enter:
 
-**Required Components**
+```text
+primer_finder
+```
 
-1. `analysis=requested_analysis`
+Spelling matters, but matching is not case-sensitive.
 
-    - acceptable analyses are `custom` and `vtyper`
-        - `custom` analyses require a FASTA-formatted file of primers you wish to use (see Attachments section for 
-        additional details)
-        
-        - `vtyper` analyses will use the primer set from the vtyper tool
+### Description
 
-**And _AT LEAST ONE_ of the following:**
+The Description must contain an analysis declaration:
 
-1. a list of SEQIDs (one per line) - this must be after any other supplied parameters
-    - __IMPORTANT:__ You can set optionally `inclusivity` and `exclusivity` panels
-        - example:
-        ```
-        inclusivity
-        2014-SEQ-0276
-        exclusivity
-        2025-SEQ-0791
-        2025-SEQ-0799
-        ```
+```text
+analysis=vtyper
+```
 
-    - If you do not specify a panel, it will default to `inclusivity`
-        -example:
-        ```
-        2014-SEQ-0276
-        2025-SEQ-0791
-        2025-SEQ-0799
-        ```
+or:
 
+```text
+analysis=custom
+```
 
-2. A path to a (multi-)FASTA database to use instead of SEQIDs
-    - example: `database=/path/to/database.fasta`
-    - the file must be present on the NAS
-    - sequences will extracted from the database and saved into individual files with names taken from the FASTA headers
-        - e.g. gb|CAJ32491.1|ARO:3002622|aadA6/aadA10 [Pseudomonas aeruginosa] -> gb_CAJ32491_1_ARO_3002622_aadA6_aadA10__Pseudomonas_aeruginosa_
-            - Note that the following characters will be substituted for underscores: `"/", ".", "|", " ", "[", "]", "(", ")", ":", and "'"`
+It must also specify at least one sequence source:
 
+- one or more `SEQID`s; or
+- a NAS path to a multi-FASTA database using `database=/path/to/database.fasta`.
 
-**Optional Components**
+Enter all parameters before the `SEQID` list.
 
-In order to customise your PrimerFinder analyses, several settings can be optionally modified
+### Inclusivity and exclusivity panels
 
-- Number of mismatches allowed.
-    - default is `2`
-    - options are `0`, `1`, `2`, `3`. Anything else will return an error
-    - modify as follows:
-        - `mismatches=1`
-- Minimum Amplicon size
-    - Default is 0 (no minimum size)
-    - Maximum is 10000
-    - Must be smaller than `maximum amplicon size`
-    - modify as follows:
-        - `minimum_amplicon_size=150`
-- Maximum Amplicon size
-    - Default is 1500
-    - Maximum is 10000
-    - Must be larger than `minimum amplicon size`
-    - modify as follows:
-        - `maximum_amplicon_size=1750`
-- Contig breaks
-    - If ipcress cannot find an amplicon, search the genome for the primers and return a positive result if they are found on separate contigs
-    - default is False
-    - modify as follows:
-        - `contig_breaks=True`
-- Probe
-    - Probe sequence to be searched against amplicons generated from primer pairs
-    - this can be supplied more than once
-    - modify as follows:
-        - `probe=CGCGTTATCATCACTGTTACCGATAGCG`
+Use `inclusivity` and `exclusivity` headings to assign requested `SEQID`s to panels:
 
-#### Attachments
+```text
+analysis=vtyper
+inclusivity
+2014-SEQ-0276
+exclusivity
+2025-SEQ-0791
+2025-SEQ-0799
+```
 
-For `custom` analyses, you are required to attach a FASTA-formatted file containing the primer set(s) you wish analysed. 
-The file must have the following format:
+If no panel heading is supplied, requested `SEQID`s default to the inclusivity panel:
 
-    >gene1-F
-    seq
-    >gene1-R
-    seq
-    >gene2-F1
-    seq
-    >gene2-R1
-    seq
-    >gene2-F2
-    seq
-    >gene2-R2
-    seq
-    .....
+```text
+analysis=vtyper
+2014-SEQ-0276
+2025-SEQ-0791
+2025-SEQ-0799
+```
 
-You are allowed to use IUPAC degenerate bases in this file. 
-__Ipcress (the program that runs the _in silico PCR_ reactions) seems to have the limitation of being able to acceept degenerate bases, but not handling them properly e.g. if there are degenerate bases in a sequence, no matter the number they will count as a single mismatch (even if they shoud return a match e.g. an R should be a match if the query sequence is an 'A' or a 'G'). Therefore, if you actually want to a maximum of two mismatches in a primer pair that contains one or more degenerate bases, you must specify the number of mismatches to be three.__
+### Use a FASTA database from the NAS
 
-    # Dictionary of degenerate IUPAC codes
-    iupac = {
-        'R': ['A', 'G'],
-        'Y': ['C', 'T'],
-        'S': ['C', 'G'],
-        'W': ['A', 'T'],
-        'K': ['G', 'T'],
-        'M': ['A', 'C'],
-        'B': ['C', 'G', 'T'],
-        'D': ['A', 'G', 'T'],
-        'H': ['A', 'C', 'T'],
-        'V': ['A', 'C', 'G'],
-        'N': ['A', 'C', 'G', 'T'],
-        '-': ['-']
-    } 
+Instead of listing `SEQID`s, provide a path to an existing multi-FASTA database:
 
-#### Examples
+```text
+analysis=vtyper
+database=/path/to/database.fasta
+```
 
-Example PrimerFinder analyses:
- 
-vtyper analyses [issue 37405](https://redmine.biodiversity.agr.gc.ca/issues/37405)
+The database file must already exist on the NAS. PrimerFinder extracts each FASTA record into an individual file and derives its filename from the FASTA header.
 
-custom analyses [issue 37407](https://redmine.biodiversity.agr.gc.ca/issues/37407)
+The following header characters are replaced with underscores:
 
-vtyper analyses, no inclusivity/exclusivity defined, custom mismatches [issue 37408](https://redmine.biodiversity.agr.gc.ca/issues/37408)
+```text
+/ . | space [ ] ( ) : '
+```
 
-custom analyses with probe [issue 37409](https://redmine.biodiversity.agr.gc.ca/issues/37409)
+For example, a header resembling:
 
-custom analysis with database option [Issue 37415](https://redmine.biodiversity.agr.gc.ca/issues/37415)
+```text
+gbCAJ32491.1ARO:3002622aadA6/aadA10 [Pseudomonas aeruginosa]
+```
 
+is converted to a sanitized filename resembling:
 
-### How long does it take?
+```text
+gb_CAJ32491_1_ARO_3002622_aadA6_aadA10__Pseudomonas_aeruginosa_
+```
 
-PrimerFinder is very fast (seconds per sample)
+### Attachments
 
-### What can go wrong?
+For `analysis=custom`, attach a FASTA-formatted file containing the primer pairs to test.
 
-1. Requested SEQIDs are not available. 
-1. Not including the `program=requested_program` component, or requesting an unsupported program
-1. Not including the `analysis=requested_analysis` component, or requesting an unsupported analysis
-1. Specifying an unsupported number of `mismatches`
-1. Incorrectly formatted `kmersize`
-1. Providing a `minimum_amplicon_size` and/or `maximum_amplicon_size` with a value that is either too large or to small
-1. Attaching an incorrectly formatted primer file, or not including a primer file for `custom` analyses
-1. ?
+The supplied documentation says the primer file must follow a required format but does not show that format. Consult a known working custom request or the current implementation before publishing a complete primer-file example.
 
-If anything goes wrong, an error message explaining the error should be returned.
+IUPAC degenerate bases are accepted, but the documented `ipcress` behavior may count the presence of degenerate bases as a mismatch even when a degenerate symbol should match the query base. If a primer pair contains one or more degenerate bases and the intended limit is two true mismatches, the existing guidance recommends setting:
+
+```text
+mismatches=3
+```
+
+Verify this behavior against the deployed implementation because it materially affects assay interpretation.
+
+### Optional parameters
+
+#### `mismatches`
+
+Sets the allowed number of mismatches.
+
+- Default: `2`
+- Accepted values: `0`, `1`, `2`, `3`
+- Example: `mismatches=1`
+
+Any other value produces an error.
+
+#### `minimum_amplicon_size`
+
+Sets the minimum accepted amplicon length.
+
+- Default: `0` (no minimum)
+- Maximum accepted value: `10000`
+- Must be less than `maximum_amplicon_size`
+- Example: `minimum_amplicon_size=150`
+
+#### `maximum_amplicon_size`
+
+Sets the maximum accepted amplicon length.
+
+- Default: `1500`
+- Maximum accepted value: `10000`
+- Must be greater than `minimum_amplicon_size`
+- Example: `maximum_amplicon_size=1750`
+
+#### `contig_breaks`
+
+When no complete amplicon is found, controls whether PrimerFinder searches for the two primers on separate contigs and reports a positive result when both are found.
+
+- Default: `False`
+- Example: `contig_breaks=True`
+
+A positive result produced across separate contigs does not demonstrate that the primers bound within one contiguous amplicon. Interpret these results separately from complete amplicons.
+
+#### `probe`
+
+Supplies a probe sequence to search within predicted amplicons. This option can be provided more than once.
+
+```text
+probe=CGCGTTATCATCACTGTTACCGATAGCG
+```
+
+### Examples
+
+#### VTyper analysis with default inclusivity panel
+
+```text
+analysis=vtyper
+2014-SEQ-0276
+2025-SEQ-0791
+```
+
+See [issue 37408](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/37408) for a VTyper request with no explicit panel headings and a custom mismatch setting.
+
+#### VTyper analysis with inclusivity and exclusivity panels
+
+```text
+analysis=vtyper
+inclusivity
+2014-SEQ-0276
+exclusivity
+2025-SEQ-0791
+2025-SEQ-0799
+```
+
+See [issue 37405](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/37405).
+
+#### Custom-primer analysis
+
+```text
+analysis=custom
+mismatches=2
+minimum_amplicon_size=150
+maximum_amplicon_size=1750
+2014-SEQ-0276
+```
+
+Attach the required FASTA-formatted primer file. See [issue 37407](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/37407).
+
+#### Custom analysis with a probe
+
+```text
+analysis=custom
+probe=CGCGTTATCATCACTGTTACCGATAGCG
+2014-SEQ-0276
+```
+
+See [issue 37409](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/37409).
+
+#### Analysis using an existing NAS database
+
+```text
+analysis=custom
+database=/path/to/database.fasta
+```
+
+Attach the custom primer file. See [issue 37415](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/37415).
+
+## Interpreting results
+
+The supplied documentation does not identify the exact output archive or report filenames for the current PrimerFinder workflow.
+
+Interpret results according to:
+
+- inclusivity or exclusivity panel membership;
+- selected mismatch allowance;
+- minimum and maximum amplicon sizes;
+- whether a complete amplicon was found on one contig;
+- whether `contig_breaks=True` produced a split-contig result;
+- whether each supplied probe was found in the predicted amplicon.
+
+Do not interpret a split-contig primer result as equivalent to a complete contiguous amplicon. Review degenerate-primer results carefully because of the documented mismatch-counting limitation.
+
+## How long does it take?
+
+PrimerFinder is generally fast and commonly requires only seconds per sample. Runtime increases with sample count, database size, primer-pair count, probes, and broader amplicon or mismatch settings.
+
+## What can go wrong?
+
+### Required analysis is missing or unsupported
+
+**Symptom:** PrimerFinder rejects the request and reports an analysis error.
+
+**Likely cause:** `analysis=...` is absent, misspelled, or not one of `custom` and `vtyper`.
+
+**What to do:** Add `analysis=custom` or `analysis=vtyper`.
+
+### A required program setting is reported missing
+
+**Symptom:** The issue reports a missing `program=requested_program` component.
+
+**Likely cause:** The legacy error list refers to a required program parameter that is not otherwise documented on the page.
+
+**What to do:** Check a current known-good issue or the deployed implementation before adding a `program` value. This requirement needs technical clarification.
+
+### A custom primer file is missing or malformed
+
+**Symptom:** A custom analysis fails before *in silico* PCR begins.
+
+**Likely cause:** The FASTA-formatted primer file was not attached or does not follow the required primer-pair format.
+
+**What to do:** Use the format from a current known-good custom request and validate the FASTA file before resubmitting.
+
+### The mismatch value is unsupported
+
+**Symptom:** The request returns an error for `mismatches`.
+
+**Likely cause:** The value is outside `0`–`3` or is not an integer.
+
+**What to do:** Select `0`, `1`, `2`, or `3`, accounting for the documented degenerate-base behavior.
+
+### Amplicon-size limits are invalid
+
+**Symptom:** PrimerFinder reports that a minimum or maximum amplicon size is invalid.
+
+**Likely cause:** A value exceeds `10000`, is not numeric, or the minimum is not smaller than the maximum.
+
+**What to do:** Use valid numeric limits with `minimum_amplicon_size < maximum_amplicon_size`.
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The issue reports that one or more requested sequences cannot be found.
+
+**Likely cause:** The `SEQID` is incorrect or its FASTA assembly is unavailable.
+
+**What to do:** Verify each `SEQID` and confirm that its assembly exists.
+
+### A database path is unavailable
+
+**Symptom:** PrimerFinder cannot load the supplied multi-FASTA database.
+
+**Likely cause:** The path is incorrect or the file is not present on the NAS.
+
+**What to do:** Verify the complete path and file permissions before resubmitting.
+
+## Related automators
+
+- [GeneSeekr](geneseekr.md) — searches assemblies for attached custom gene targets using BLAST-based analysis.
+- [IntiminTyper](intimintyper.md) — subtypes detected `eae` genes in *E. coli* assemblies.
+- [ECTyper](ectyper.md) — predicts *E. coli* O- and H-antigen serotypes.

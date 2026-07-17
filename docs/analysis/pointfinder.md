@@ -1,58 +1,125 @@
 # PointFinder
 
-### What does it do?
+## What does it do?
 
-PointFinder is a program complementary to ResFinder developed by the Danish Center for Genomic Epidemiology
-for detection of antibiotic resistance in draft genome assemblies. Unlike ResFinder, PointFinder looks for point
-mutations that are known to confer antibiotic resistance.
+Use **PointFinder** to detect known chromosomal point mutations associated with antibiotic resistance in draft genome assemblies.
 
-### How do I use it?
+PointFinder complements [ResFinder](resfinder.md): ResFinder detects acquired resistance genes, while PointFinder detects supported resistance-associated mutations.
 
-#### Subject
+In this Redmine workflow, PointFinder supports:
 
-In the `Subject` field, put `PointFinder`. Spelling counts, but case sensitivity doesn't.
+- *Campylobacter*;
+- *Escherichia*;
+- *Mycobacterium*;
+- *Neisseria*;
+- *Salmonella*.
 
-#### Description
+The automator determines the genus of each requested sequence and analyzes only sequences belonging to a supported genus.
 
-All you need to put in the description is a list of SEQIDs you want to detect AMR in, one per line.
-Note that PointFinder is limited to detecting mutations in a few genera:
+## How do I use it?
 
-* Campylobacter
-* Escherichia
-* Mycobacterium
-* Neisseria
-* Salmonella
+### Subject
 
-Our PointFinder automator will automatically determine the genus of your requested SEQIDs, and will not attempt to
-analyze any SEQIDs that are not from one of these genera.
+In the **Subject** field, enter:
 
-#### Example
+```text
+PointFinder
+```
 
-For an example PointFinder, see [issue 12933](https://redmine.biodiversity.agr.gc.ca/issues/12933).
+Spelling matters, but matching is not case-sensitive.
 
-#### Interpreting Results
+### Description
 
-PointFinder will upload a zip file called `pointfinder_output.zip`. Within this folder, you will find 3 files per
-SEQID:
+In the **Description** field, enter one `SEQID` per line:
 
-**_Note: Any SEQIDs that had no resistance detected will not have any files uploaded_**
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-* SEQID\_blastn\_PointFinder\_prediction.txt: Has each antibiotic for with known mutations for the genus of interest.
-Anything with a 0 had no detected mutations, anything other had predicted point mutation(s) for that antibiotic.
-* SEQID\_blastn\_PointFinder\_results.txt: A file listing the genes that had mutations, what they were, and what resistance those
-mutations confer.
-* SEQID\_blastn\_PointFinder\_table.txt: Much the same as the \_results.txt file, but also lists known AMR genes that
-did not have point mutations.
+Each requested `SEQID` must have a draft genome assembly available. The automator determines the genus before running PointFinder.
 
-### How long does it take?
+### Attachments
 
-PointFinder should take 30 seconds to 1 minutes for analysis of each sample.
+No attachment is required. PointFinder retrieves the assemblies associated with the requested `SEQID`s.
 
-### What can go wrong?
+### Optional parameters
 
-1) Requested SEQIDs are not available: If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+The supplied documentation does not identify optional parameters for the Redmine PointFinder automator.
 
-2) Can't run on requested genera: If the SEQIDs you request are not one of the genera that PointFinder works on,
-you will get a message saying so. PointFinder will still run on any SEQIDs specified that are from the correct genera.
+### Example
 
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+```
+
+See [issue 12933](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/12933) for an example PointFinder request.
+
+## Interpreting results
+
+When PointFinder finishes, it uploads:
+
+```text
+pointfinder_output.zip
+```
+
+For each `SEQID` with detected resistance, the archive contains three files.
+
+### `SEQID_blastn_PointFinder_prediction.txt`
+
+This file lists antibiotics with known mutations for the identified genus.
+
+- `0` means that no relevant mutation was detected for that antibiotic.
+- A nonzero value indicates one or more predicted point mutations for that antibiotic.
+
+### `SEQID_blastn_PointFinder_results.txt`
+
+This file lists:
+
+- genes containing detected mutations;
+- the identified mutations; and
+- the resistance associated with those mutations.
+
+### `SEQID_blastn_PointFinder_table.txt`
+
+This file contains information similar to the results file and also lists known AMR genes for which no point mutation was detected.
+
+A requested `SEQID` with no detected resistance does not receive these files. The absence of files can therefore indicate that PointFinder detected no supported resistance mutation, provided the sequence was available and belonged to a supported genus.
+
+## How long does it take?
+
+PointFinder generally takes approximately 30 seconds to one minute per analyzed sample. Total runtime depends on the number of samples and service workload.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable sequences.
+
+**Likely cause:** PointFinder cannot locate a draft genome assembly for the requested `SEQID`.
+
+**What to do:** Verify each `SEQID`, confirm that its assembly is available, and submit a corrected request.
+
+### A requested sequence belongs to an unsupported genus
+
+**Symptom:** The Redmine issue reports that PointFinder cannot analyze one or more sequences.
+
+**Likely cause:** The automator identified the sequence as a genus outside the supported list.
+
+**What to do:** Use another AMR workflow appropriate for the organism. Supported sequences in the same request can still be analyzed.
+
+### No result files are uploaded for a supported sequence
+
+**Symptom:** An available sequence from a supported genus has no PointFinder result files.
+
+**Likely cause:** PointFinder detected no supported resistance mutation for that sequence.
+
+**What to do:** Confirm that the sequence was accepted and classified into a supported genus, then interpret the missing files as no supported mutation detected rather than as an acquired-gene result.
+
+## Related automators
+
+- [ResFinder](resfinder.md) — detects acquired AMR genes but not chromosomal point mutations.
+- [StarAMR](staramr.md) — combines ResFinder and supported PointFinder analyses for *Campylobacter* and *Salmonella* assemblies.
+- [CARD-RGI](cardrgi.md) — predicts resistomes in isolate assemblies or raw FASTQ data and may report organism-dependent mutation or efflux evidence.
+- [AMRsummary](amrsummary.md) — combines acquired-gene detection with predicted plasmid location, but does not add PointFinder mutation detection.

@@ -80,9 +80,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/geneseekr/">GeneSeekr</a>
                   </li>
@@ -105,6 +109,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/mlst/">MLST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -136,8 +142,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul class="current">
@@ -151,15 +155,31 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#required-attachment">Required attachment</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-source-seqid-is-unavailable">A source SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-workbook-is-missing-or-malformed">The workbook is missing or malformed</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-merged-output-identifier-is-invalid">The merged output identifier is invalid</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#source-runs-belong-to-different-isolates">Source runs belong to different isolates</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#access-and-navigation">Access and navigation</a>
     </li>
     </ul>
                   </li>
@@ -173,6 +193,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -209,42 +231,80 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="merge">Merge</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>Merge will take data from multiple MiSeq runs of the same strain and combine the FASTQ files in order 
-to produce a better assembly. </p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>Merge</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>No text necessary in the description. You will, however, need to attach an excel file (.xlsx extension)
-with the following headers: </p>
+<blockquote>
+<p><strong>Internal-only workflow:</strong> This page documents an operational sequence-processing automator. It must remain under <code>docs/internal_only/</code> and must not be linked from the standard user index.</p>
+</blockquote>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>Merge</strong> to combine raw FASTQ data from multiple MiSeq runs of the same biological strain and generate a new merged assembly workflow record.</p>
+<p>Merge is intended for authorized internal processing when repeated sequencing runs belong to the same isolate. The source runs must be verified as the same biological sample before submission.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">Merge
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Leave the Description empty. Supply the complete request in one attached Excel workbook with the <code>.xlsx</code> extension.</p>
+<h3 id="required-attachment">Required attachment</h3>
+<p>The workbook must contain these exact headers:</p>
 <ul>
-<li>Location: Should be 'MER'</li>
-<li>SEQID: Put the name of the merged SEQID (YYYY-MER-####)</li>
-<li>OLNID: Can be blank</li>
-<li>LabID: Can be blank</li>
-<li>LabIDIsolate: Can be blank</li>
-<li>OtherName: The SeqIDs you want to merge, separated by semi-colons.</li>
-<li>Genus: Genus of the isolate. Can be left blank.</li>
-<li>Species: Can be blank </li>
-<li>Subspecies: Can be blank</li>
-<li>Serotype: Can be blank</li>
+<li><code>Location</code> — enter <code>MER</code>;</li>
+<li><code>SEQID</code> — new merged identifier in the form <code>YYYY-MER-####</code>;</li>
+<li><code>OLNID</code> — may be blank;</li>
+<li><code>LabID</code> — may be blank;</li>
+<li><code>LabIDIsolate</code> — may be blank;</li>
+<li><code>OtherName</code> — source <code>SEQID</code>s separated by semicolons;</li>
+<li><code>Genus</code> — genus of the isolate; may be blank;</li>
+<li><code>Species</code> — may be blank;</li>
+<li><code>Subspecies</code> — may be blank;</li>
+<li><code>Serotype</code> — may be blank.</li>
 </ul>
-<p>An example file can be found with the example issue below.</p>
-<h4 id="example">Example</h4>
-<p>For an example Merge, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/14285">issue 14285</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>You'll get back the reports and assemblies, as you would for a <code>WGS Assembly</code> issue.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>Merge will take quite a while, depending on how many samples you have. Probably roughly half an hour per sample.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
+<p>Example row concept:</p>
+<pre><code class="language-text">Location: MER
+SEQID: 2026-MER-0001
+OtherName: 2026-SEQ-0001;2026-SEQ-0002
+</code></pre>
+<p>Use a genuine <code>.xlsx</code> workbook rather than a renamed CSV file.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional Description parameters. Optional metadata columns may be left blank as noted above.</p>
+<h3 id="example">Example</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14285">issue 14285</a> for an example Merge request and workbook.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>Merge returns the reports and assemblies normally produced by the WGS assembly workflow for the new merged record.</p>
+<p>Verify that:</p>
+<ul>
+<li>the new <code>YYYY-MER-####</code> identifier is correct;</li>
+<li>every source <code>SEQID</code> belongs to the same biological strain;</li>
+<li>the resulting assembly and reports correspond to the merged input runs;</li>
+<li>expected quality-control metrics improve or remain acceptable.</li>
+</ul>
+<p>Merging additional sequencing data does not guarantee a better assembly if the runs are contaminated, mismatched, or poor quality.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Runtime depends on sample count, read volume, and assembly workload. The supplied documentation estimates approximately 30 minutes per merged sample.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-source-seqid-is-unavailable">A source <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The issue warns that one or more source runs cannot be found.</p>
+<p><strong>Likely cause:</strong> A source identifier in <code>OtherName</code> is incorrect or its FASTQ data are unavailable.</p>
+<p><strong>What to do:</strong> Verify each semicolon-separated source <code>SEQID</code>.</p>
+<h3 id="the-workbook-is-missing-or-malformed">The workbook is missing or malformed</h3>
+<p><strong>Symptom:</strong> The automator cannot parse the request.</p>
+<p><strong>Likely cause:</strong> No <code>.xlsx</code> file was attached, a required header is missing or misspelled, or the file is not a valid Excel workbook.</p>
+<p><strong>What to do:</strong> Use the required headers exactly and attach a valid <code>.xlsx</code> file.</p>
+<h3 id="the-merged-output-identifier-is-invalid">The merged output identifier is invalid</h3>
+<p><strong>Symptom:</strong> The workflow cannot create the new merged record.</p>
+<p><strong>Likely cause:</strong> <code>Location</code> is not <code>MER</code>, or <code>SEQID</code> does not follow the required <code>YYYY-MER-####</code> format.</p>
+<p><strong>What to do:</strong> Correct both fields in the workbook.</p>
+<h3 id="source-runs-belong-to-different-isolates">Source runs belong to different isolates</h3>
+<p><strong>Symptom:</strong> The merged assembly has poor quality, excessive fragmentation, conflicting taxonomic signals, or other unexpected results.</p>
+<p><strong>Likely cause:</strong> FASTQ data from different biological strains were combined.</p>
+<p><strong>What to do:</strong> Stop downstream use, verify sample identity, and repeat the workflow only with runs from the same strain.</p>
+<h2 id="access-and-navigation">Access and navigation</h2>
+<p>Keep this page out of standard-access navigation and retrieval. Link it only from explicitly internal operational documentation.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../analysis/wgsassembly/" class="btn btn-neutral float-left" title="WGS Assembly"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../analysis/unknownisolate/" class="btn btn-neutral float-left" title="Unknownisolate"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../azuredownload/" class="btn btn-neutral float-right" title="AzureDownload">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -272,7 +332,7 @@ message informing you of it.</p>
         </span>
     
     
-      <span><a href="../../analysis/wgsassembly/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../analysis/unknownisolate/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../azuredownload/" style="color: #fcfcfc">Next &raquo;</a></span>

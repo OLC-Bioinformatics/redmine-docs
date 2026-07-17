@@ -1,41 +1,95 @@
 # FastQC/MultiQC
 
-### What does it do?
+## What does it do?
 
-FastQC is a tool for conducting quality control checks on raw sequence data. MultiQC is a tool to aggregate FastQC reports from multiple sequences into a single file/report.
+Use **FastQC/MultiQC** to assess the quality of raw sequence data and review quality-control results across multiple requested sequences.
 
-For more information, see the [FastQC website](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), and [MultiQC website](https://multiqc.info/).
+The automator runs:
 
-### How do I use it?
+- **FastQC** — performs quality-control checks on raw sequence data and creates an individual report for each sequence;
+- **MultiQC** — aggregates the individual FastQC results into a combined report for comparison across the request.
 
-#### Subject
+For background, see the [FastQC website](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [MultiQC website](https://multiqc.info/).
 
-In the `Subject` field, put `fastqc`. Spelling counts, but case sensitivity doesn't.
+## How do I use it?
 
-#### Description
+### Subject
 
-**Required Components**
+In the **Subject** field, enter:
 
-You must include a list of SEQIDs one per line.
+```text
+fastqc
+```
 
+Spelling matters, but matching is not case-sensitive.
 
-#### Example
+### Description
 
-For an example FastQC analysis, see [issue 30311](https://redmine.biodiversity.agr.gc.ca/issues/30311). The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks).
+In the **Description** field, enter one `SEQID` per line:
 
-#### Interpreting Results
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-FastQC/MultiQC will upload the multiqc report and a zipped folder called `fastqc_redmineID.zip` to both redmine and the ftp once it has completed. This will contain report files for individual sequences, and the multiqc report. (Files are uploaded to both redmine and the ftp in case a large number of sequences are analysed, and therefore reports are too large to be uploaded directly to redmine).
+The requested `SEQID`s must have raw sequence data available.
 
-### How long does it take?
+### Attachments
 
-FastQC is usually pretty fast, <1 minute per sequence. The time required for analysis will depend on the number of sequences requested.
+No attachment is required. The automator retrieves the raw sequence data associated with each requested `SEQID`.
 
-### What can go wrong?
+### Optional parameters
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.
+The supplied documentation does not identify optional parameters for the Redmine FastQC/MultiQC automator.
 
-### Version
+### Example
 
-Version 0.11.9 is currently available at the OLC. (as of 2024-07-4)
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
+See [issue 30311](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/30311) for an example FastQC/MultiQC request. Temporary result-download links associated with the issue may expire.
+
+## Interpreting results
+
+When the analysis finishes, the automator uploads:
+
+- the combined MultiQC report; and
+- a ZIP archive named using the Redmine issue identifier:
+
+```text
+fastqc_redmineID.zip
+```
+
+The archive contains individual FastQC report files and the combined MultiQC report.
+
+Results are uploaded to both Redmine and Dropbox. This provides a download option when a request includes enough sequences that the complete report package is too large to attach directly to Redmine.
+
+Use the individual FastQC reports to inspect per-sequence quality metrics. Use the MultiQC report to compare those metrics across all sequences in the request. The supplied documentation does not define project-specific pass/fail thresholds, so interpret warnings and failures in the context of the sequencing platform, intended downstream analysis, and expected library characteristics.
+
+## How long does it take?
+
+FastQC usually takes less than one minute per sequence. Total runtime depends on the number and size of the requested sequence files and current service workload.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable sequences.
+
+**Likely cause:** The automator cannot locate raw sequence data for the requested `SEQID`.
+
+**What to do:** Verify each `SEQID`, confirm that its raw sequence files are available, and submit a corrected request.
+
+### The report package is too large for a Redmine attachment
+
+**Symptom:** The complete report package is not attached directly to the Redmine issue.
+
+**Likely cause:** A request containing many sequences produced reports that exceed the practical Redmine attachment size.
+
+**What to do:** Use the Dropbox download provided by the automator.
+
+## Related automators
+
+- [Downsample](downsample.md) — reduces raw FASTQ data by coverage, output size, read count, base count, or other supported BBMap options.

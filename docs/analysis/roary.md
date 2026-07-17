@@ -1,89 +1,215 @@
-# RoaryScoary
+# Roary/Scoary
 
-### What does it do?
+## What does it do?
 
-####Roary
-Roary is a pipeline for calculating pan genomes. Roary is not intended for metagenomics or for comparing extremely diverse sets of genomes. If you want to 
-learn more about it, check out the [Roary publication](https://academic.oup.com/bioinformatics/article/31/22/3691/240757).
+Use **Roary** to calculate the bacterial pan-genome of a set of related isolate assemblies. Roary identifies core genes, accessory genes, and gene-presence/absence patterns across the submitted genomes.
 
-####Scoary
-Scoary takes the `gene_presence_absence.csv` file output from Roary and a traits file created by the user, and calculates the associations between the given traits and all genes in the accessory genome. For more information, check out the [Scoary github](https://github.com/AdmiralenOla/Scoary) or [Scoary publication](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1108-8).
+Use **Scoary** to test associations between binary traits and genes in the Roary accessory genome. Scoary uses the `gene_presence_absence.csv` output produced by Roary together with a user-supplied traits file.
 
-### How do I use it?
+Roary is intended for related bacterial isolate genomes. It is not intended for metagenomic data or extremely diverse genome sets.
 
-#### Subject
+For background, see the [Roary publication](https://academic.oup.com/bioinformatics/article/31/22/3691/240757), the [Scoary repository](https://github.com/AdmiralenOla/Scoary), and the [Scoary publication](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1108-8).
 
-In the `Subject` field, put `roary`. Spelling counts, but case sensitivity doesn't.
+## How do I use it?
 
-#### Description
+### Subject
 
-**Required Components**
+In the **Subject** field, enter:
 
-In the `Description` field, you must provide the requested analysis type as follows:
+```text
+roary
+```
 
-`analysistype=requested_analysis`
+Spelling matters, but matching is not case-sensitive.
 
-The Roary automator supports the following analyses which perform operations on the pan genome of isolate sequences (again, spelling counts, but case sensitivity doesn't):
+### Description
 
-- union - reports the union of genes found in sequences
-- intersection - reports the intersection of genes found in isolate sequences (core genes)
-- complement - reports the complement of genes found in isolates (accessory genes)
-- gene_multifasta - extracts the sequence of each gene listed and creates multi-fasta files for each gene listed (outputs protein multi-fastas). **NOTE**: you must provide an additional line: `genes=gene1,gene2,geneN` which is a comma-separated list of genes you would like multi-fasta files for (eg. `genes=fliC,gyrA`). **Case sensitivity counts for gene names**
-- difference - reports the gene differences between sets of isolates. You must differentiate between sequence sets by adding the line `set_two` above your second set of sequences in the description (sequences you want compared).
+The first line must select an analysis:
 
-You must also include a list of SEQIDs one per line.
+```text
+analysistype=REQUESTED_ANALYSIS
+```
 
+Enter analysis-specific parameters next, followed by one assembly `SEQID` per line.
 
-**Optional Components - Scoary**
+### Supported analyses
 
-If you would like scoary analysis to be completed, calculating the associations between traits and all genes in the accessory genome **you must attach a csv file of traits (traits.csv) to the issue**. Attaching a `traits.csv` file will automatically result in scoary analysis being conducted.
+#### `union`
 
-**This traits file must be formatted in a specific way**.
+Reports the union of genes found across all submitted isolates.
 
-- the rows should correspond to your isolate sequence IDs
-- the top right cell should be left blank
-- the trait(s) data must be binary (0 for trait absent, 1 for trait present)
-- all SEQ-IDs and traits should be uniquely named and not contain any weird characters (e.g. %;,/&[]@? etc) 
+```text
+analysistype=union
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+```
 
-The below table is an example from the Scoary github:
+#### `intersection`
 
-|   | Trait 1  | Trait 2  | ...  | Trait N  |
-|:-:|:-:|:-:|:-:|:-:|
-| YYYY-SEQ-0001  |  1  | 0 | ...  |  1 |
-| YYYY-SEQ-0002  |  0 |  0 | ...  | 1  |
-| YYYY-SEQ-0003  |  1 |  0 | ... | 1 |
+Reports genes shared by the submitted isolates—the core-gene intersection.
 
+```text
+analysistype=intersection
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+```
 
-For more information, check out the [Scoary github](https://github.com/AdmiralenOla/Scoary)
-     
+#### `complement`
 
+Reports accessory genes that are not shared by every submitted isolate.
 
-#### Example
+```text
+analysistype=complement
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+```
 
-For an example Roary/Scoary issue see [issue 24968](https://redmine.biodiversity.agr.gc.ca/issues/24968), for an example Roary `analysistype=gene_multifasta` issue see [issue 25013](https://redmine.biodiversity.agr.gc.ca/issues/25013). (**NOTE**: the output files for these issues no longer exist on the ftp server.)
+#### `gene_multifasta`
 
-#### Interpreting Results
+Extracts aligned protein sequences for requested genes and creates one multi-FASTA file per gene.
 
-The Roary automator will upload links to the ftp for files called `prokka_output.zip` and `roary_output.zip` once it has completed. 
+Also include a comma-separated `genes` line. Gene names are case-sensitive:
 
-The `prokka_output.zip` contains all of the outputs from prokka. Prokka will output a lot of files for each genome you give it - you can find a quick description of
-each file [here](https://github.com/tseemann/prokka#output-files). Of particular interest are the `.gff` files, which Roary uses for analysis.
+```text
+analysistype=gene_multifasta
+genes=fliC,gyrA
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+```
 
-The `roary_output.zip` file contains all of the outputs from roary. Some additional files will be present depending on the analysis type chosen:
+#### `difference`
 
-- gene_multifasta - the zip file will include `.fa` files that contain the aligned protein sequences for the requested gene(s) (one for file each gene included in the analysis, eg. `gene_multifasta_fliC.fa` and `gene_multifasta_gyrA.fa`). If you'd like, these sequences can be further analysed using NCBI protein blast.
-- scoary - the zip file will include `.csv` file(s) for each of the traits (column headers) provided in the attached `traits.csv` file.
+Reports gene differences between two isolate sets. Put `set_two` immediately before the second group:
 
-### How long does it take?
+```text
+analysistype=difference
+2026-SEQ-0001
+2026-SEQ-0002
+set_two
+2026-SEQ-0003
+2026-SEQ-0004
+```
 
-Prokka isn't the quickest thing around - expect it to take 2 to 3 minutes for each genome you give it. After prokka is finished the Roary pipeline time will depend on the analysis type, and the number of genes/traits requested (in the case of gene_multifasta and scoary). 
+### Attachments and Scoary analysis
 
-### What can go wrong?
+To run Scoary automatically, attach a CSV file named:
 
-1. Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.
-2. There was an issue with the requested analysistype: either one was not supplied, the was a typo, or you requested a currently-unsupported analysis. An error message detailing the problem will be added to the issue.
-3. **Scoary** You will not get an error if the traits.csv file is not attached or formatted correctly. Roary will complete, but no `.csv` files for each of the traits will be included in the zip file. Unfortunately, you will have to submit the analysis request again with the correct `traits.csv` formatting.
+```text
+traits.csv
+```
 
-### Version
+The traits file must follow these rules:
 
-Roary version 3.13.0 is currently available at the OLC. (as of 2024-07-4)
+- each row represents one isolate `SEQID`;
+- the upper-left cell is blank;
+- each remaining column represents one uniquely named trait;
+- trait values are binary: `0` for absent and `1` for present;
+- all `SEQID`s and trait names must be unique;
+- avoid characters such as `%`, `;`, `,`, `/`, `&`, `[`, `]`, `@`, and `?`.
+
+Example:
+
+```csv
+,Trait 1,Trait 2,Trait N
+2026-SEQ-0001,1,0,1
+2026-SEQ-0002,0,0,1
+2026-SEQ-0003,1,0,1
+```
+
+Attaching a correctly formatted `traits.csv` causes Scoary to test associations between every trait column and accessory-gene presence/absence.
+
+### Optional parameters
+
+The supplied documentation does not identify other user-configurable Roary or Scoary parameters.
+
+### Examples
+
+See [issue 24968](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/24968) for an example Roary/Scoary request.
+
+See [issue 25013](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/25013) for a `gene_multifasta` request. Historical Dropbox files for these issues are no longer available.
+
+## Interpreting results
+
+The automator provides Dropbox links for:
+
+```text
+prokka_output.zip
+roary_output.zip
+```
+
+### `prokka_output.zip`
+
+Contains Prokka annotation output for every submitted genome. Roary uses the `.gff` files from these annotations. See the [Prokka output documentation](https://github.com/tseemann/prokka#output-files) for descriptions of the other files.
+
+### `roary_output.zip`
+
+Contains standard Roary pan-genome outputs and analysis-specific files.
+
+For `gene_multifasta`, the archive contains one protein multi-FASTA per requested gene, for example:
+
+```text
+gene_multifasta_fliC.fa
+gene_multifasta_gyrA.fa
+```
+
+These files contain aligned protein sequences for the requested genes. They can be used for appropriate downstream protein-sequence analysis.
+
+When a valid `traits.csv` is attached, the archive includes one or more Scoary CSV results corresponding to the supplied trait columns.
+
+Interpret Scoary associations as statistical associations, not proof that a gene causes the trait. Review population structure, sample size, trait balance, multiple-testing results, gene annotation, and biological plausibility before drawing conclusions.
+
+## How long does it take?
+
+Prokka generally takes approximately two to three minutes per genome. Roary runtime then depends on genome count and analysis type. `gene_multifasta` and Scoary requests also scale with the number of requested genes or traits.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The issue warns that one or more assemblies cannot be found.
+
+**Likely cause:** An identifier is incorrect or its assembly is unavailable.
+
+**What to do:** Verify every `SEQID` and confirm that its assembly exists.
+
+### The analysis type is missing or unsupported
+
+**Symptom:** The issue reports an `analysistype` error.
+
+**Likely cause:** `analysistype` is absent, misspelled, or not one of the documented values.
+
+**What to do:** Use `union`, `intersection`, `complement`, `gene_multifasta`, or `difference` exactly as documented.
+
+### `gene_multifasta` does not produce the expected genes
+
+**Symptom:** One or more requested gene FASTA files are absent.
+
+**Likely cause:** The `genes` line is missing, a gene name has incorrect capitalization, or the gene is not represented in the pan-genome results.
+
+**What to do:** Add a comma-separated `genes=` line and copy gene names with exact case.
+
+### Scoary output is absent
+
+**Symptom:** Roary completes, but no trait-specific Scoary CSV files appear.
+
+**Likely cause:** `traits.csv` was missing, named incorrectly, malformed, or inconsistent with the submitted `SEQID`s. The legacy workflow may not report this as an explicit error.
+
+**What to do:** Correct the filename and CSV structure, then submit the complete analysis again.
+
+### The genome set is too diverse
+
+**Symptom:** Annotation, clustering, or pan-genome results are unstable or difficult to interpret.
+
+**Likely cause:** Roary was applied to genomes that are not sufficiently related.
+
+**What to do:** Restrict the request to a coherent related isolate set and reassess organism identity and assembly quality.
+
+## Related automators
+
+- [Pyseer](pyseer.md) — performs microbial genome-wide association using k-mers or a previous Roary gene-presence/absence matrix while accounting for population structure.
+- [Prokka](prokka.md) — produces standalone genome annotations without pan-genome analysis.
+- [dRep](drep.md) — compares genomes by ANI or dereplicates a genome set before downstream analysis.

@@ -80,9 +80,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -106,6 +110,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">PointFinder</a>
@@ -118,15 +124,37 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#seqid_blastn_pointfinder_predictiontxt">SEQID_blastn_PointFinder_prediction.txt</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#seqid_blastn_pointfinder_resultstxt">SEQID_blastn_PointFinder_results.txt</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#seqid_blastn_pointfinder_tabletxt">SEQID_blastn_PointFinder_table.txt</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-sequence-belongs-to-an-unsupported-genus">A requested sequence belongs to an unsupported genus</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#no-result-files-are-uploaded-for-a-supported-sequence">No result files are uploaded for a supported sequence</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -156,8 +184,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -173,6 +199,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -209,46 +237,82 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="pointfinder">PointFinder</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>PointFinder is a program complementary to ResFinder developed by the Danish Center for Genomic Epidemiology
-for detection of antibiotic resistance in draft genome assemblies. Unlike ResFinder, PointFinder looks for point
-mutations that are known to confer antibiotic resistance.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>PointFinder</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to detect AMR in, one per line.
-Note that PointFinder is limited to detecting mutations in a few genera:</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>PointFinder</strong> to detect known chromosomal point mutations associated with antibiotic resistance in draft genome assemblies.</p>
+<p>PointFinder complements <a href="../resfinder/">ResFinder</a>: ResFinder detects acquired resistance genes, while PointFinder detects supported resistance-associated mutations.</p>
+<p>In this Redmine workflow, PointFinder supports:</p>
 <ul>
-<li>Campylobacter</li>
-<li>Escherichia</li>
-<li>Mycobacterium</li>
-<li>Neisseria</li>
-<li>Salmonella</li>
+<li><em>Campylobacter</em>;</li>
+<li><em>Escherichia</em>;</li>
+<li><em>Mycobacterium</em>;</li>
+<li><em>Neisseria</em>;</li>
+<li><em>Salmonella</em>.</li>
 </ul>
-<p>Our PointFinder automator will automatically determine the genus of your requested SEQIDs, and will not attempt to
-analyze any SEQIDs that are not from one of these genera.</p>
-<h4 id="example">Example</h4>
-<p>For an example PointFinder, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12933">issue 12933</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>PointFinder will upload a zip file called <code>pointfinder_output.zip</code>. Within this folder, you will find 3 files per
-SEQID:</p>
-<p><strong><em>Note: Any SEQIDs that had no resistance detected will not have any files uploaded</em></strong></p>
+<p>The automator determines the genus of each requested sequence and analyzes only sequences belonging to a supported genus.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">PointFinder
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>In the <strong>Description</strong> field, enter one <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>Each requested <code>SEQID</code> must have a draft genome assembly available. The automator determines the genus before running PointFinder.</p>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. PointFinder retrieves the assemblies associated with the requested <code>SEQID</code>s.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for the Redmine PointFinder automator.</p>
+<h3 id="example">Example</h3>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/12933">issue 12933</a> for an example PointFinder request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When PointFinder finishes, it uploads:</p>
+<pre><code class="language-text">pointfinder_output.zip
+</code></pre>
+<p>For each <code>SEQID</code> with detected resistance, the archive contains three files.</p>
+<h3 id="seqid_blastn_pointfinder_predictiontxt"><code>SEQID_blastn_PointFinder_prediction.txt</code></h3>
+<p>This file lists antibiotics with known mutations for the identified genus.</p>
 <ul>
-<li>SEQID_blastn_PointFinder_prediction.txt: Has each antibiotic for with known mutations for the genus of interest.
-Anything with a 0 had no detected mutations, anything other had predicted point mutation(s) for that antibiotic.</li>
-<li>SEQID_blastn_PointFinder_results.txt: A file listing the genes that had mutations, what they were, and what resistance those
-mutations confer.</li>
-<li>SEQID_blastn_PointFinder_table.txt: Much the same as the _results.txt file, but also lists known AMR genes that
-did not have point mutations.</li>
+<li><code>0</code> means that no relevant mutation was detected for that antibiotic.</li>
+<li>A nonzero value indicates one or more predicted point mutations for that antibiotic.</li>
 </ul>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>PointFinder should take 30 seconds to 1 minutes for analysis of each sample.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available: If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) Can't run on requested genera: If the SEQIDs you request are not one of the genera that PointFinder works on,
-you will get a message saying so. PointFinder will still run on any SEQIDs specified that are from the correct genera.</p>
+<h3 id="seqid_blastn_pointfinder_resultstxt"><code>SEQID_blastn_PointFinder_results.txt</code></h3>
+<p>This file lists:</p>
+<ul>
+<li>genes containing detected mutations;</li>
+<li>the identified mutations; and</li>
+<li>the resistance associated with those mutations.</li>
+</ul>
+<h3 id="seqid_blastn_pointfinder_tabletxt"><code>SEQID_blastn_PointFinder_table.txt</code></h3>
+<p>This file contains information similar to the results file and also lists known AMR genes for which no point mutation was detected.</p>
+<p>A requested <code>SEQID</code> with no detected resistance does not receive these files. The absence of files can therefore indicate that PointFinder detected no supported resistance mutation, provided the sequence was available and belonged to a supported genus.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>PointFinder generally takes approximately 30 seconds to one minute per analyzed sample. Total runtime depends on the number of samples and service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> PointFinder cannot locate a draft genome assembly for the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that its assembly is available, and submit a corrected request.</p>
+<h3 id="a-requested-sequence-belongs-to-an-unsupported-genus">A requested sequence belongs to an unsupported genus</h3>
+<p><strong>Symptom:</strong> The Redmine issue reports that PointFinder cannot analyze one or more sequences.</p>
+<p><strong>Likely cause:</strong> The automator identified the sequence as a genus outside the supported list.</p>
+<p><strong>What to do:</strong> Use another AMR workflow appropriate for the organism. Supported sequences in the same request can still be analyzed.</p>
+<h3 id="no-result-files-are-uploaded-for-a-supported-sequence">No result files are uploaded for a supported sequence</h3>
+<p><strong>Symptom:</strong> An available sequence from a supported genus has no PointFinder result files.</p>
+<p><strong>Likely cause:</strong> PointFinder detected no supported resistance mutation for that sequence.</p>
+<p><strong>What to do:</strong> Confirm that the sequence was accepted and classified into a supported genus, then interpret the missing files as no supported mutation detected rather than as an acquired-gene result.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../resfinder/">ResFinder</a> — detects acquired AMR genes but not chromosomal point mutations.</li>
+<li><a href="../staramr/">StarAMR</a> — combines ResFinder and supported PointFinder analyses for <em>Campylobacter</em> and <em>Salmonella</em> assemblies.</li>
+<li><a href="../cardrgi/">CARD-RGI</a> — predicts resistomes in isolate assemblies or raw FASTQ data and may report organism-dependent mutation or efflux evidence.</li>
+<li><a href="../amrsummary/">AMRsummary</a> — combines acquired-gene detection with predicted plasmid location, but does not add PointFinder mutation detection.</li>
+</ul>
               
             </div>
           </div><footer>

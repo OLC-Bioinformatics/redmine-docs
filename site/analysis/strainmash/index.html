@@ -80,9 +80,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -105,6 +109,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -142,21 +148,47 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mashdistance">MashDistance</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#nummatchinghashes">NumMatchingHashes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#medianmultiplicity">MedianMultiplicity</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pvalue">Pvalue</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#referencestrain">ReferenceStrain</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#organism">Organism</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-closest-match-has-weak-support">The closest match has weak support</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mashdistance-appears-inconsistent-with-mash-conventions">MashDistance appears inconsistent with Mash conventions</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -173,6 +205,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -209,37 +243,65 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="strainmash">StrainMash</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>StrainMash uses the MinHash algorithm (as implemented by <a href="https://github.com/marbl/mash">mash</a>) in order to very quickly
-find which RefSeq type strain an assembly is closest to. This can be very useful if you aren't entirely sure what species
-it is that you've actually sequnced.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>StrainMash</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to analyze, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example StrainMash, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12860">issue 12860</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>StrainMash will upload a zip file once it finishes. This contains a folder called output, which will have a
-text file for each SEQID entered showing results.</p>
-<p>These text files have 6 columns:</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>StrainMash</strong> to identify the RefSeq type strain most similar to a draft genome assembly.</p>
+<p>StrainMash uses the MinHash algorithm implemented by <a href="https://github.com/marbl/mash">Mash</a> to compare an assembly quickly with reference type strains. It is useful when the expected species of an assembled isolate is uncertain.</p>
+<p>StrainMash identifies the closest reference in its database; it does not by itself provide the multi-method rMLST and ANI evidence produced by <a href="../unknownisolate/">Unknown Isolate</a>, and it is not a mixed-community profiler.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">StrainMash
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>In the <strong>Description</strong> field, enter one assembly <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. StrainMash retrieves the draft assembly associated with each requested <code>SEQID</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for the Redmine StrainMash automator.</p>
+<h3 id="example">Example</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/12860">issue 12860</a> for an example StrainMash request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When StrainMash finishes, it uploads a ZIP archive containing an <code>output</code> directory. The directory contains one text report per requested <code>SEQID</code>.</p>
+<p>Each report contains six columns.</p>
+<h3 id="mashdistance"><code>MashDistance</code></h3>
+<p>The existing automator documentation describes this value as a closeness score for the query and reference and recommends at least <code>0.98</code> for a very close match.</p>
+<p>Standard Mash distance convention normally uses smaller values for closer sequences, so the reported field may be a transformed similarity value or may be mislabeled in the legacy documentation. Confirm the current output semantics before using the <code>0.98</code> threshold in a final identification decision.</p>
+<h3 id="nummatchinghashes"><code>NumMatchingHashes</code></h3>
+<p>Reports the number of matching hashes. The documented range uses <code>1000/1000</code> as a perfect match and <code>0</code> as no similarity. The legacy guidance recommends more than <code>850</code> matching hashes for a close reference match.</p>
+<h3 id="medianmultiplicity"><code>MedianMultiplicity</code></h3>
+<p>The legacy documentation states that this value can usually be ignored and should normally be <code>1</code>.</p>
+<h3 id="pvalue"><code>Pvalue</code></h3>
+<p>Reports the statistical significance assigned to the hit. The legacy guidance expects <code>0</code> for a very close reference match.</p>
+<h3 id="referencestrain"><code>ReferenceStrain</code></h3>
+<p>Reports the NCBI accession of the reference strain.</p>
+<h3 id="organism"><code>Organism</code></h3>
+<p>Reports the organism name associated with the reference strain.</p>
+<p>Interpret the closest match using the score semantics, matching-hash support, reference coverage, and organism context. A closest database match is not necessarily a definitive species identification when reference representation is limited or the assembly is contaminated, incomplete, or divergent.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>StrainMash generally takes approximately 30 seconds to one minute per sample. Total runtime depends on sample count and service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> StrainMash cannot locate a draft assembly for the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that its assembly is available, and submit a corrected request.</p>
+<h3 id="the-closest-match-has-weak-support">The closest match has weak support</h3>
+<p><strong>Symptom:</strong> The top reference result has relatively few matching hashes or an uncertain similarity score.</p>
+<p><strong>Likely cause:</strong> The query may be distant from represented type strains, poorly assembled, contaminated, or absent from the reference collection.</p>
+<p><strong>What to do:</strong> Review assembly quality and contamination, then use <a href="../unknownisolate/">Unknown Isolate</a> for broader rMLST, MASH, ANIb, and ANIm evidence.</p>
+<h3 id="mashdistance-appears-inconsistent-with-mash-conventions"><code>MashDistance</code> appears inconsistent with Mash conventions</h3>
+<p><strong>Symptom:</strong> The reported value increases with similarity even though standard Mash distance normally decreases as sequences become more similar.</p>
+<p><strong>Likely cause:</strong> The automator may report a transformed similarity score under the <code>MashDistance</code> heading, or the legacy description may be incorrect.</p>
+<p><strong>What to do:</strong> Confirm the current output calculation or inspect a known reference match before interpreting this field quantitatively.</p>
+<h2 id="related-automators">Related automators</h2>
 <ul>
-<li>MashDistance: Represents roughly how close the query sequence is the the reference strain. 1 is a perfect match, 0 is no
-similarity. To say that something very closely matches a reference strain, this number should be <em><em>at least</em></em> 0.98</li>
-<li>NumMatchingHashes: Another measure of how close the query sequence is to the reference strain. 1000/1000 is a perfect match,
-0 is no similarity. Number needs to be fairly high (&gt;850) for close matches to reference.</li>
-<li>MedianMultiplicity: Can mostly be ignored. Should always be 1.</li>
-<li>Pvalue: An attempt to assign significance to the hit. Should be zero for anything that very closely matches a reference
-strain.</li>
-<li>ReferenceStrain: The NCBI Accession for the reference strain.</li>
-<li>Organism: The name of the organism that is the reference strain.</li>
+<li><a href="../unknownisolate/">Unknown Isolate</a> — combines rMLST, MASH, ANIb, and ANIm evidence for uncertain isolate identification.</li>
+<li><a href="../autoclark/">AutoCLARK</a> — reports species represented in raw reads or draft assemblies.</li>
+<li><a href="../kraken2/">Kraken2/Bracken</a> and <a href="../metaphlan/">MetaPhlAn4</a> — profile taxonomic composition in metagenomic data.</li>
 </ul>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>StrainMash should take about 30 seconds to 1 minute to analyze each sample you send to it.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
               
             </div>
           </div><footer>

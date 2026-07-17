@@ -1,106 +1,127 @@
 # External Retrieve
 
-### What does it do?
+## What does it do?
 
-External retrieve is a process that will upload data you request (either raw reads or draft assemblies) to an FTP site
-so that you can download it in the event that you need to have your files locally available.
+Use **External Retrieve** to collect raw reads or draft genome assemblies for requested `SEQID`s and make them available for local download through the configured external transfer service.
 
-### How do I use it?
+External Retrieve is intended for users who need local copies of sequence files or need to share an exported data package. It does not run a biological analysis.
 
-#### Subject
+## How do I use it?
 
-In the `Subject` field, put `External Retrieve`. Spelling counts, but case sensitivity doesn't.
+### Subject
 
-#### Description
+In the **Subject** field, enter:
 
-The first line of your description tells the process whether you want to rename the retrieved files for upload to
-the SRA (e.g. 2014-SEQ-0349_S11_L001_R1_001.fastq.gz renamed to 2014-SEQ-0349_R1.fastq.gz). Note that this option requires 
-FASTQ files to be retrieved (see below)
+```text
+External Retrieve
+```
 
+Spelling matters, but matching is not case-sensitive.
 
-The next line specifies whether you want raw reads or draft assemblies. For reads,
-the first line should be `fastq`, and for assemblies the first line should be `fasta`. 
+### Description
 
-Every line after that should be a SEQID that you want the data for.
+Specify the requested file type, then enter one `SEQID` per line:
 
-#### Example
+- `fastq` — retrieve raw reads;
+- `fasta` — retrieve draft genome assemblies.
 
-For an example of an External Retrieve, see [issue 12822](https://redmine.biodiversity.agr.gc.ca/issues/12822) or
-SRA formatting [issue 18760](https://redmine.biodiversity.agr.gc.ca/issues/18760).
+#### Retrieve raw reads
 
-### How long does it take?
+```text
+fastq
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-If your request is for a small number of files, it will generally be done within a few minutes. The more files requested,
-the longer the request will take.
+#### Retrieve assemblies
 
-### What can go wrong?
+```text
+fasta
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-A few things can go wrong with this process:
+### SRA filename formatting
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+The workflow can optionally rename retrieved FASTQ files for SRA submission. For example, a lane-specific filename such as:
 
-2) FTP timeout. Sometimes, particularly for larger requests, the upload to the FTP will run into problems and time out,
-in which case you will likely get an error message similar to this: `[Errno 104] Connection reset by peer`. If this occurs,
-you can either try again later, or, if you had a large request, try splitting it into a few smaller requests. If the
-problem persists, send us an email and we'll try to get it figured out.
+```text
+2014-SEQ-0349_S11_L001_R1_001.fastq.gz
+```
 
-###Alternatives to Redmine
+can be simplified to:
 
-For when redmine is being mean:
-<details>
-	<summary>Nastools.py</summary><br>
+```text
+2014-SEQ-0349_R1.fastq.gz
+```
 
-	<p>Note: Must be done on a linux computer connected to the nas</p><br>
-	
-	
-	<ol>
+The supplied documentation says the first Description line controls this option, but it does not provide the exact keyword or accepted value. Verify the syntax from a known working request or the current implementation before publishing a complete SRA-formatting example.
 
-	<li>Open a text document and copy paste your SEQID’s in it</li>
-	<li>Download the text document into a folder</li>
-	<li>Open the folder in the terminal
+This option requires `fastq` retrieval.
 
-		<ul>
-		<li> Enter <code>cd /mnt/[.../your_folder_name]</code> in the terminal OR</li>
-		<li> Right click on your folder in files and select “open in terminal”</li>
-		</ul></li>
+### Attachments
 
-	<li>In the terminal type <code>nastools.py gedit [name_of_SEQID_doc]</code></li>
+No attachment is required. External Retrieve locates the requested data by `SEQID`.
 
-	<li>Then enter “nastools.py” and the relevant commands:
-	
-	<ul>
-		<li><code>-- file [name_of_SEQID_doc]</code>: sequences to retrieve</li>
-		<li><code>-- type [fasta or fastq]</code>: what type of file you want to retrieve</li>
-		<li><code>-- outdir [new_folder_name]</code>: where the output files will be located</li>
-		<li><code>-- copy</code>: will create copies instead of links to your files <b>(OPTIONAL)</b></li>
-	</ul></li>
+### Optional parameters
 
-	<li>This will then either create symbolic links (links that lead to the file location of desired files), or copies of the files requested if you added <code>--copy</code></li>
-	
-	</ol>
+No optional parameter other than the incompletely documented SRA filename-formatting option is identified in the supplied page.
 
-</details>
+### Examples
 
-<details>
-	<summary>Foodport</summary><br>
-	
-	<ol>
-	
-	<li>Scroll down on the Home Page and click the <code>File Zone</code> button</li>
+See [issue 12822](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/12822) for an example External Retrieve request.
 
-	<li>Click <code>Locate Files</code></li>
+See [issue 18760](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/18760) for an example involving SRA filename formatting.
 
-	<li>Under the text box <code>Full or Partial File Name(s). One per line</code> enter your SEQIDs on separate lines</li>
+## Interpreting results
 
-	<li>Do not close or refresh your tab when the run is in progress</li>
+When the request finishes, use the download link posted to the Redmine issue to retrieve the exported files.
 
-	<li>From FileZone Home your run should be the latest run that has the blue bar “processing” (it’ll automatically be called <code>regexes-##</code>)</li>
+Verify that:
 
-	<li>Click the gray button <code>File Outputs</code> and click the download button(s) for the files you would like to download</li>
-	
-	</ol>
-	
-	</details>
-<br>
+- every expected `SEQID` is represented;
+- the requested data type is correct;
+- paired FASTQ files contain both mates when paired-end data were requested;
+- SRA-formatted filenames were applied only when requested;
+- the downloaded files are complete before using or sharing them.
 
+The supplied documentation describes an FTP destination, but transfer infrastructure can change. Follow the link and instructions posted by the completed Redmine request.
+
+## How long does it take?
+
+Small requests generally finish within a few minutes. Runtime increases with the number and size of requested files and the time required to upload the resulting package.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The issue warns that one or more sequences cannot be found.
+
+**Likely cause:** The identifier is incorrect or the requested FASTA or FASTQ data are unavailable.
+
+**What to do:** Verify each `SEQID` and confirm that the requested data type exists.
+
+### The transfer times out
+
+**Symptom:** The issue reports an upload failure such as `Connection reset by peer`.
+
+**Likely cause:** The transfer service timed out, particularly for a large request.
+
+**What to do:** Retry later or divide a large export into smaller requests. Escalate persistent failures to the bioinformatics team.
+
+### SRA filename formatting is not applied
+
+**Symptom:** Retrieved FASTQ files retain lane-specific names.
+
+**Likely cause:** The SRA-renaming option was missing, used with `fasta`, or supplied with incorrect syntax.
+
+**What to do:** Verify the current SRA-formatting keyword from a known working request and use it only with `fastq` retrieval.
+
+## Alternatives when Redmine retrieval is unavailable
+
+The legacy page describes direct NAS tooling and FoodPort File Zone as operational alternatives. These methods depend on local permissions, mounted storage, and the current FoodPort interface. They should be maintained in internal operational documentation rather than on the standard External Retrieve page.
+
+## Related data workflows
+
+- [Report Retrieve](report_retrieve.md) — retrieves COWBAT assembly reports for requested `SEQID`s.
+- [SRA Download](sra_download.md) — imports runs from NCBI SRA, stores the reads, and submits them to FoodPort/COWBAT processing.

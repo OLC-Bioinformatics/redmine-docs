@@ -80,9 +80,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -106,6 +110,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../pointfinder/">PointFinder</a>
@@ -124,15 +130,29 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-isolate-is-assigned-the-wrong-gram-class">The isolate is assigned the wrong Gram class</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-localization-prediction-is-uncertain">A localization prediction is uncertain</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -156,8 +176,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -173,6 +191,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -209,30 +229,55 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="psortb">PSORTb</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>PSORTb is a program developed by the Brinkman lab at Simon Fraser University - it attempts to figure out what
-the subcellular location of proteins might be. If you wnat to know more, you can check out the 
-<a href="https://academic.oup.com/bioinformatics/article/26/13/1608/201357">PSORTb publication</a> or the 
-<a href="https://www.psort.org/documentation/index.html">PSORTb documentation</a>. </p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>PSORTb</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to find protein localizations for, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example PSORTb, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/16061">issue 16061</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>PSORTb will upload a zip file - this will contain FASTA-formatted proteins as predicted and annotated by prokka, and 
-a text file for each SEQID that has the predicted subcellular localization for each protein.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>PSORTb is pretty slow - expect it to take at least 20 to 30 minutes per SEQID requested.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available: If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) PSORTb needs to know whether a strain is gram positive or gram negative - you'll see that each of the text files
-you get have either <code>grampos</code> or <code>gramneg</code> in them, depending on whether or not we predicted that isolate to be gram 
-positive or gram negative. We're fairly sure that our classification is fairly robust, but there might be exceptions.
-If you put an isolate through and it's wrongly classified, email <code>andrew.low@canada.ca</code> and we'll get it sorted out!</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>PSORTb</strong> to predict the subcellular localization of proteins encoded by a genome assembly.</p>
+<p>The workflow first uses Prokka to predict and annotate proteins, then runs PSORTb to assign localization categories. PSORTb was developed by the Brinkman laboratory at Simon Fraser University.</p>
+<p>For background, see the <a href="https://academic.oup.com/bioinformatics/article/26/13/1608/201357">PSORTb publication</a> and <a href="https://www.psort.org/documentation/index.html">PSORTb documentation</a>.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">PSORTb
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Enter one assembly <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. PSORTb retrieves the assembly associated with each requested <code>SEQID</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for the Redmine PSORTb automator.</p>
+<h3 id="example">Example</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/16061">issue 16061</a> for an example PSORTb request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>PSORTb uploads a ZIP archive containing:</p>
+<ul>
+<li>FASTA-formatted protein sequences predicted and annotated by Prokka; and</li>
+<li>one text report per <code>SEQID</code> containing the predicted subcellular localization of each protein.</li>
+</ul>
+<p>Report filenames include either <code>grampos</code> or <code>gramneg</code>, reflecting whether the workflow classified the isolate as Gram-positive or Gram-negative for PSORTb analysis.</p>
+<p>Subcellular-localization assignments are computational predictions. Review the reported localization category, prediction confidence or score when available, protein annotation, and organism biology before drawing conclusions.</p>
+<p>The Gram classification affects the PSORTb model used. An incorrect Gram classification can therefore affect localization results.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>PSORTb generally takes at least 20–30 minutes per requested <code>SEQID</code>. Total runtime depends on genome size, sample count, and service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue warns that an assembly cannot be found.</p>
+<p><strong>Likely cause:</strong> The identifier is incorrect or the assembly is unavailable.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code> and confirm that its assembly exists.</p>
+<h3 id="the-isolate-is-assigned-the-wrong-gram-class">The isolate is assigned the wrong Gram class</h3>
+<p><strong>Symptom:</strong> A result filename or report indicates <code>grampos</code> when <code>gramneg</code> was expected, or the reverse.</p>
+<p><strong>Likely cause:</strong> The workflow's automatic Gram classification was incorrect for the isolate.</p>
+<p><strong>What to do:</strong> Do not rely on the affected localization predictions. Contact the bioinformatics team with the issue number and expected Gram class so the analysis can be reviewed.</p>
+<h3 id="a-localization-prediction-is-uncertain">A localization prediction is uncertain</h3>
+<p><strong>Symptom:</strong> A protein is unclassified or has weak or conflicting localization evidence.</p>
+<p><strong>Likely cause:</strong> The sequence lacks sufficient localization signals, the protein is incomplete, or the automated annotation is uncertain.</p>
+<p><strong>What to do:</strong> Review the protein sequence and annotation and use appropriate supporting tools or experimental evidence.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../prokka/">Prokka</a> — produces general genome and protein annotations without PSORTb localization predictions.</li>
+</ul>
               
             </div>
           </div><footer>

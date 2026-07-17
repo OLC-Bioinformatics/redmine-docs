@@ -1,66 +1,138 @@
-# GFA Retrieve and Bandage Diagram - Hybrid Assembly Viewer
+# GFA Retrieve and Bandage Diagram — Hybrid Assembly Viewer
 
-### What does it do?
+## What does it do?
 
-The GFA retrieve function will retrieve GFA files (.gfa - graph fragment assembly) that are created by the hybrid assembly pipeline. The program Bandage can be used to visualise these files. [Bandage](https://rrwick.github.io/Bandage/) displays connections which are not present in the contigs (assembly) file.
+Use **GFA Retrieve** to obtain Graphical Fragment Assembly (`.gfa`) files produced by the hybrid assembly pipeline. A GFA file represents assembly-graph connections that are not visible in a standard contig FASTA file.
 
+Use [Bandage](https://rrwick.github.io/Bandage/) to draw and inspect the graph. The graph can help identify simple, well-resolved assemblies and complex assemblies that may need further investigation.
 
-### How do I use the automator?
+Only the hybrid assembly pipeline currently produces GFA files, so requests should use MIN identifiers in the form `YYYY-MIN-NNNN`.
 
-#### Subject
+## How do I use it?
 
-In the `Subject` field, put `gfaretrieve`.
+### Subject
 
-#### Description
+In the **Subject** field, enter:
 
-**Required Components**
+```text
+gfaretrieve
+```
 
-All you need to put in the description is a list of SEQIDs you want to process, one per line.
-</br> 
-**Currently, only the hybrid pipeline outputs .gfa files, so SEQIDs should be YYYY-MIN-NNNN**
+### Description
 
+In the **Description** field, enter one hybrid-assembly `SEQID` per line:
 
-#### Example
+```text
+2026-MIN-0001
+2026-MIN-0002
+```
 
-For an example gfa retrieve, see [issue 33691](https://redmine.biodiversity.agr.gc.ca/issues/33691).
+Older MIN assemblies may not have a GFA file if they were created before the pipeline produced this output.
 
-### How do I download Bandage and view the assembly?
+### Attachments
 
-Bandage can (currently) be downloaded and used on windows corporate laptops. However, additional tools like BLAST are unfortunately not currently usable with the program on corporate Windows laptops/tablets (at the moment). To download, navigate to the [Bandage website](https://rrwick.github.io/Bandage/) and click "Download Windows". Extract the zip file to a location of your choosing. Within the unzipped folder, you will find a folder titled "Bandage", within this is "Bandage.exe". If you double-click "Bandage.exe" it should open the Bandage GUI for you:
+No attachment is required. GFA Retrieve locates the graph file associated with each requested hybrid assembly.
 
-![Bandage GUI](../img/bandage_gui.jpg)
+### Optional parameters
 
+The supplied documentation does not identify optional parameters for GFA Retrieve.
 
-- You can then open your .gfa files in the GUI, by clicking File > Load graph
-    - this will open a window where you can search your computer for your .gfa file
-    - once the gfa file is loaded, the GUI will look like this:
-![Load Graph GUI](../img/bandage_gfa_loaded.jpg)
-    - click "Draw graph" on the left panel, under the "Graph drawing" section, and it will draw a bandage diagram for you!
+### Example
 
-##### Bandage Graph Interpretation
+```text
+2026-MIN-0001
+2026-MIN-0002
+```
 
-**Good Hybrid Assembly**
+See [issue 33691](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/33691) for an example GFA Retrieve request.
 
-- the below diagram is for 2024-MIN-0073, which is a *Klebsiella*. You can see that the hybrid assembly resulted in 3 separate contigs, likely one large contig for the chromosome and two smaller plasmids.
-![Good Bandage](../img/good_hybrid_assembly.jpg)
+## Interpreting results
 
+Open each `.gfa` file in Bandage to visualize the assembly graph.
 
-**Bad Hybrid Assembly**
+A simple graph with a small number of separate components can be consistent with a well-resolved hybrid assembly. For example, one large component may represent the chromosome and smaller components may represent plasmids. Graph structure alone is not definitive proof of chromosome or plasmid identity.
 
-- the below diagram is for a hybrid assembly in which incorrect Illumina reads were used. Illumina reads for an *Acinetobacter* isolate sequence were mapped to nanopore reads from a *Klebsiella* isolate sequence, which resulted in 93 contigs (instead of 3). You can see that the assembly is messy and very difficult to visualize/interpret. If your hybrid assembly looks like this, you should re-evaluate what sequences were used and/or speak with a bioinformatician.
-![Bad Bandage](../img/bad_hybrid_assembly.jpg)
+A tangled graph with many components or unresolved connections can indicate a complex or problematic assembly. Potential causes include incorrect read pairing, contamination, repeated regions, insufficient data, or combining Illumina and Nanopore reads from different isolates. Review the source data and consult a bioinformatician before drawing conclusions.
 
-### Bandage Tutorial
+## Download and open Bandage
 
-The [Bandage wiki](https://github.com/rrwick/Bandage/wiki/Getting-started) has a great tutorial of how to load data, as well as descriptions on how to visualize and manipulate data.
+Bandage can currently be downloaded and used on corporate Windows laptops. Additional tools integrated with Bandage, such as BLAST, may not be available in that environment.
 
-### How long does it take?
+1. Go to the [Bandage website](https://rrwick.github.io/Bandage/).
+2. Select **Download Windows**.
+3. Extract the downloaded ZIP archive.
+4. Open the extracted `Bandage` folder.
+5. Double-click `Bandage.exe`.
 
-The time required for gfa file retrieval will depend on the number of SEQIDs in your request.
+The initial interface should resemble:
 
-### What can go wrong?
+![Bandage graphical user interface](../img/bandage_gui.jpg)
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it. This is likely to happen for older MIN sequences, where the pipeline did not create .gfa files.
+To load and draw a graph:
 
+1. Select **File → Load graph**.
+2. Choose the `.gfa` file.
+3. After the file loads, select **Draw graph** in the **Graph drawing** panel.
 
+A loaded graph should resemble:
 
+![Bandage with a loaded GFA graph](../img/bandage_gfa_loaded.jpg)
+
+### Example of a simple hybrid assembly graph
+
+The following example is `2024-MIN-0073`, a *Klebsiella* hybrid assembly with three separate components. These may represent one chromosome and two plasmids.
+
+![Example of a simple hybrid assembly graph](../img/good_hybrid_assembly.jpg)
+
+### Example of a problematic hybrid assembly graph
+
+The following example used Illumina reads from an *Acinetobacter* isolate with Nanopore reads from a *Klebsiella* isolate. The resulting graph contains 93 contigs and is difficult to interpret.
+
+![Example of a problematic hybrid assembly graph](../img/bad_hybrid_assembly.jpg)
+
+If a graph resembles this example, verify that the Illumina and Nanopore reads came from the same isolate and discuss the assembly with a bioinformatician.
+
+For additional instructions, see the [Bandage getting-started tutorial](https://github.com/rrwick/Bandage/wiki/Getting-started).
+
+## How long does it take?
+
+GFA retrieval time depends on the number of requested `SEQID`s, file availability, and current service workload.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable sequences or graph files.
+
+**Likely cause:** The `SEQID` is incorrect, the hybrid assembly is unavailable, or the assembly has no GFA output.
+
+**What to do:** Verify the `SEQID` and confirm that it is a hybrid `YYYY-MIN-NNNN` assembly.
+
+### An older MIN assembly has no GFA file
+
+**Symptom:** The assembly exists, but GFA Retrieve cannot return a graph file.
+
+**Likely cause:** The assembly was generated before the hybrid pipeline produced GFA files.
+
+**What to do:** Consult a bioinformatician to determine whether the graph can be regenerated.
+
+### Bandage cannot use an integrated BLAST function
+
+**Symptom:** Bandage opens and draws a graph, but an additional BLAST-dependent feature does not work on the corporate Windows device.
+
+**Likely cause:** The supporting BLAST programs are not available in the corporate Windows environment.
+
+**What to do:** Use Bandage for graph visualization and consult a bioinformatician if BLAST-assisted graph analysis is required.
+
+### The graph is highly fragmented or tangled
+
+**Symptom:** Bandage shows many components or complex unresolved connections.
+
+**Likely cause:** The assembly may contain mismatched reads, contamination, repeated regions, insufficient data, or another assembly-quality issue.
+
+**What to do:** Verify that the Illumina and Nanopore reads belong to the same isolate, review sequence quality, and consult a bioinformatician.
+
+## Related automators
+
+- [SequenceExtractor](sequence_extractor.md) — extracts a nucleotide interval or complete contig from an assembly.
+- [MobSuite](mobsuite.md) — predicts plasmid-derived contigs and performs plasmid typing in draft genome assemblies.

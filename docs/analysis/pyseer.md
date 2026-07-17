@@ -1,132 +1,306 @@
 # GWAS-pyseer
 
-### What does it do?
+## What does it do?
 
-pyseer is a tool for microbial-pangenome wide association studies (mGWAS). It is the reimplementation of [seer](https://github.com/johnlees/seer). pyseer allows one to analyse a set of genomes for genetic variation associated with bacterial phenotypes (such as antibiotic resistance, virulence, and host specificity). It is strongly suggested that you check out the [pyseer publication](https://academic.oup.com/bioinformatics/article/34/24/4310/5047751) and [pyseer documentation](https://pyseer.readthedocs.io/en/master/index.html) before use to determine which analysis is appropriate for your dataset. If used for publication, dont forget to cite Lees et al., 2018!
+Use **pyseer** to perform a microbial genome-wide association study (mGWAS) and identify genetic variants associated with a measured bacterial phenotype, such as antimicrobial resistance, virulence, or host specificity.
 
-This redmine-automator will allow you to conduct a mGWAS using sequence data stored on the OLC-CFIA cluster. There are a few different options available, but if you would like another customisable option added to the automator (see [pyseer documentation](https://pyseer.readthedocs.io/en/master/index.html)) please contact an OLC-bioinformatician.
+The Redmine automator supports association testing with:
 
+- k-mers detected from the submitted genomes;
+- gene-presence/absence data from a previous Roary request;
+- an SNV mode documented as under development.
 
-### How do I use it?
+Association studies can be strongly affected by population structure, phenotype quality, sample size, relatedness, and multiple testing. Review the [pyseer documentation](https://pyseer.readthedocs.io/en/master/index.html), [usage guidance](https://pyseer.readthedocs.io/en/master/usage.html#population-structure), and [Lees et al. (2018)](https://academic.oup.com/bioinformatics/article/34/24/4310/5047751) before selecting a model. Cite the pyseer authors when publishing results.
 
-#### Subject
+## How do I use it?
 
-In the `Subject` field, put `pyseer`. Spelling counts, but case sensitivity doesnt.
+### Subject
 
-<p>&nbsp;</p>
+In the **Subject** field, enter:
+
+```text
+pyseer
+```
+
+Spelling matters, but matching is not case-sensitive.
 
 ### Description
 
-####**Required Components**
+The Description must include:
 
-In the `Description` field, you must include an analysistype as follows:
-`analysistype=requested_analysis`:
+1. `analysistype=...`;
+2. analysis-specific parameters;
+3. population-structure and model settings when required;
+4. one assembly `SEQID` per line.
 
-- `kmer`:
-    - Will detect and count k-mers in selected dataset, then use k-mers as a variant to test both short variation and gene presence/absence.
-    - The k-mers will be annotated by the redmine automator using [prokka](https://github.com/tseemann/prokka#output-files)
-    - If kmer analysis is selected, it is also suggested that you upload a references.txt file (see description below). 
-- `Roary`:
-    - Roary will use the gene_presence_absence.Rtab file from a previous Roary analysis.
-    - To use this analysis type, you must first run a roary analysis using the OLC Redmine Automator. See the [roary docs](https://olc-bioinformatics.github.io/redmine-docs/analysis/roary/) for details.
-    - You must then include `roaryissue=redmine_issue_id`, where redmine_issue_id is the biorequest number from the roary analysis previously run (this will copy the gene_presence_absence.Rtab file from the previous issue to the current pyseer biorequest). **Please note:** the gene_presence_absence.Rtab files are only retained by the OLC system for requests made after 24-11-2021.
-- `snv` (currently under development):
-    - Will test the association of SNPs mapped to a reference.
+### Supported analysis types
 
-You **must** attach a traits.tsv file. It must be named **traits.tsv** for the automator to work. This file must contain the SEQ-IDs in the first column, and trait (numerical) in the second column. The automator defaults to `binary` for traits (1,0 - for presence,absence). However, it is possible to use continuous data if you also include `continuous=True` in the description (default is `continuous=False`). You may also include `NA` if trait was not determined for that sequence.
+#### `kmer`
 
+Detects and counts k-mers, then tests them as variants representing short sequence variation and gene presence/absence. The automator uses Prokka to annotate significant k-mer matches.
 
-You must also include a list of SEQIDs one per line.  
+```text
+analysistype=kmer
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+```
 
-<p>&nbsp;</p>
+A custom `references.txt` file is recommended when trusted reference-quality assemblies are available.
 
-####**Optional Components**
+#### `Roary`
 
-In order to customise your pyseer analysis, several settings can be modified. These settings will depend on which options were selected.
+Uses `gene_presence_absence.Rtab` from a previous Roary Redmine request.
 
-##### **Population structure**
+Also provide the source Redmine issue identifier:
 
-The first step of pyseer is to estimate the population structure. This can be done a number of ways. 
+```text
+analysistype=Roary
+roaryissue=12345
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+```
 
-- `mash` (default):
-    - [mash](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0997-x) is the default distance/phylogeny used by the pyseer automator.
-    - uses mash sketch to produce pairwise distance matrix, then calculate distances between all pairs of samples using mash dist.
-    - a mash tree is also produced, and this phylogeny will be used to create the kinship matrix if the linearmixed association model is chosen
-- `bcgtree`: 
-    - if [bcgtree](https://pubmed.ncbi.nlm.nih.gov/27603265/) is selected, you can change a number of parameters. Please see the OLC Redmine Automator documentation for [bcgtree docs](https://olc-bioinformatics.github.io/redmine-docs/analysis/bcgtree/) for a list of options.
-    - bcgtree phylogeny creation will take a while, and required time will increased with larger datasets. It is suggested you run a bcgtree biorequest separately for large datasets.
-    - a phylogeny is output by bcgtree (RAxML_bestTree.final), which is then used to calculate distances between samples, and/or kinship matrix creation.
-- `custom`:
-    - if `distance=custom` is selected, a phylogeny tree file in newick format named `tree.newick` must also be attached to the request. 
-    - This tree can be created however you'd like, but must be named `tree.newick` and the tree tip-labels must be the same as the SEQIDs in the pyseer request
-    - the uploaded phylogeny will then be used for distance calculations between pairs of samples, and/or kinship matrix creation.
+The source Roary issue must contain a retained `gene_presence_absence.Rtab`. The supplied documentation states that these files are retained only for requests made after November 24, 2021.
 
-##### **Association models**
+Confirm whether `Roary` is case-sensitive in the current parser; the supplied page uses an uppercase `R` here.
 
-Please review the [pyseer documentation](https://pyseer.readthedocs.io/en/master/usage.html#population-structure) for a description of models. The current association models available for the pyseer automator include:
+#### `snv`
 
-- `fixed`:
-    - The patristic distances between all samples are used
-    - A GLM is run on each variant
-- `linearmixed`:
-    - A linear mixed model (LMM) of fixed and random effects is fitted to the data
-    - The selected phylogeny will be used to calculate pairwise distances (**note**:mash may be less accurate than other phylogenies).
-    - Calculates the similarities between sequences based on the shared branch length between each pair's most recent common ancestor and the root.
+The supplied documentation labels SNV analysis as under development. It requires an attached phenotype file named exactly:
 
-##### **References file for k-mer analysis**
+```text
+traits.tsv
+```
 
-If a references file (`references.txt`) is not uploaded to the redmine request, one will be automatically generated. The benefit of uploading the references file is that you can select a few trusted reference sequences for the annotations. Otherwise, all sequences in the request will be included as "reference" quality.
+The first column contains `SEQID`s and the second contains the trait value. Binary traits use `1` for presence and `0` for absence. `NA` can be used when the phenotype was not determined.
 
-The references are used first, and allow a close match of a k-mer. The drafts are used second, and require an exact match of the k-mer.
+For continuous phenotypes, include:
 
-This `references.txt` is a tab-separated file containing the sequence filename, annotation filename, and type of the references to be used (there are no headers required):
+```text
+continuous=True
+```
 
+The default is documented as:
 
-| XXXX-SEQ-0001.fasta | XXXX-SEQ-0001.gff |  ref  |
-|:-------------------:|:-----------------:|:-----:|
-| XXXX-MIN-0001.fasta | XXXX-MIN-0001.gff |  ref  |
-| XXXX-SEQ-0002.fasta | XXXX-SEQ-0002.gff | draft |
-| XXXX-SEQ-0340.fasta | XXXX-SEQ-0340.gff | draft |
+```text
+continuous=False
+```
 
+Do not rely on `analysistype=snv` for production analysis until its current implementation and validation status have been confirmed.
 
-#### Example
+### Trait attachment
 
-For an example pyseer issue see [issue 25083](https://redmine.biodiversity.agr.gc.ca/issues/25083). **NOTE**: the output files for these issues no longer exist on the ftp server.
+The supplied documentation explicitly requires `traits.tsv` for SNV mode and later lists a missing `traits.tsv` as a general failure. It does not clearly state the phenotype-file requirements for `kmer` and `Roary` modes, even though association testing requires a phenotype.
 
-### Interpreting Results
+Before publishing this page as final, verify whether every analysis type requires `traits.tsv`, and confirm the accepted header, delimiter, phenotype column, sample matching, covariates, and missing-value behavior.
 
-The pyseer automator will upload links to the ftp for files called `pyseer_output.zip`, and possibly `prokka_output.zip` and `bcgtree_output.zip` depending on selected options.
+### Population structure
 
-The `pyseer_output.zip` will contain all of the pyseer outputs including the tree files and distance matrices. See [pyseer tutorial](https://pyseer.readthedocs.io/en/master/tutorial.html)
+Select the source of population-structure information with `distance`.
 
-- `kmer` analysis will output `pyseer_kmers.txt`, the significant kmers (`significant_kmers.txt`), `annotated_kmers.txt`, and `gene_hits.txt` which is a summary file of the annotated k-mers found by pyseer.
-    - the summarised annotated `gene_hits.txt` file can be graphed using R. See the [pyseer tutorial](https://pyseer.readthedocs.io/en/master/tutorial.html)
-- `roary` analysis will output a `pyseer_COGs.txt` (COG = clusters of orthologous groups) file which contains the COGs not filtered out by pyseer. 
-    - The first column in this file will contain the gene name (from the roary output gene_presence_absence.Rtab file)
-    - If `high-bse` or `bad-chisq` are listed in the last column, there may be a high effect size/low frequency result (`high-bse`) or MAF filter may not be stringent enough (`bad-chisq`).
+#### Mash distance
 
-If `analysistype=kmer`, and/or `distance=bcgtree` were selected, the automator will upload a link to the ftp `prokka_output.zip`. This contains all of the outputs from prokka. Prokka will output a lot of files for each genome you give it - you can find a quick description of
-each file [here](https://github.com/tseemann/prokka#output-files). Of particular interest are the `.gff` files, which pyseer uses for annotations.
+Mash is the documented default. The automator creates Mash sketches, a pairwise distance matrix, and a Mash tree. The tree can be used to create the kinship matrix for a linear mixed model.
 
-If `distance=bcgtree` was used for distance/phylogeny, the `bcgtree_output.zip` file contains all of the outputs from bcgTree. The alignment files, and gene-id files output by bcgtree can be found in subfolders in the zip file. The most interesting outputs from bcgtree are the RAxML files. These files conaint the phylogenetic trees output by bcgTree: 
+```text
+distance=mash
+```
 
+#### bcgTree
 
-### How long does it take?
+Use bcgTree to create a core-gene phylogeny:
 
-This will depend on the number of sequences requested, and the analysis type.
+```text
+distance=bcgtree
+```
 
-K-mer analysis will take hours in order to count the number of k-mers in a large number of sequences.
+bcgTree options documented on the [bcgTree page](bcgtree.md) can also affect this step. This mode is slower, especially for large datasets. For a large study, consider producing and validating the tree separately.
 
-Prokka isnt the quickest thing around - expect it to take 2 to 3 minutes for each genome you give it. 
+#### Custom tree
 
-The bcgTree pipeline time will depend on the number of sequences and bootstraps requested. If a large number of sequences is being analysed, it is suggested you create a separate issue for phylogeny generation with bcgtree (however this is yet to be tested).
+Attach a Newick file named exactly:
 
-### What can go wrong?
+```text
+tree.newick
+```
 
-1. Requested SEQIDs are not available. If we cant find some of the SEQIDs that you request, you will get a warning message informing you of it.
-2. A traits.tsv file was not uploaded to redmine. You will get a warning message informing you to re-submit the request.
+and specify:
 
-### Version
+```text
+distance=custom
+```
 
-Version 1.3.11 is currently available at the OLC. (as of 2024-07-4)
+Every tree tip label must exactly match a `SEQID` in the pyseer request.
 
+### Association models
+
+#### `fixed`
+
+Uses pairwise patristic distances and applies a generalized linear model to each variant.
+
+```text
+model=fixed
+```
+
+The supplied documentation describes the model names but does not explicitly show the request parameter key. Verify whether the deployed parser uses `model`, `association`, or another key before final publication.
+
+#### `linearmixed`
+
+Fits a linear mixed model with fixed and random effects and uses the selected phylogeny to construct sample relatedness or kinship.
+
+```text
+model=linearmixed
+```
+
+The request-key caveat above also applies. Mash-based relatedness may be less accurate than a validated phylogeny for some datasets.
+
+### `references.txt` for k-mer annotation
+
+When no file is attached, the automator generates one and treats all submitted sequences as reference quality.
+
+To choose trusted references explicitly, attach a tab-separated file named:
+
+```text
+references.txt
+```
+
+It has no header and contains:
+
+1. sequence filename;
+2. annotation filename;
+3. type: `ref` or `draft`.
+
+Example:
+
+```text
+2026-SEQ-0001.fasta	2026-SEQ-0001.gff	ref
+2026-MIN-0001.fasta	2026-MIN-0001.gff	ref
+2026-SEQ-0002.fasta	2026-SEQ-0002.gff	draft
+2026-SEQ-0340.fasta	2026-SEQ-0340.gff	draft
+```
+
+Reference-quality records are searched first and allow a close k-mer match. Draft records are searched afterward and require an exact match.
+
+### Example
+
+See [issue 25083](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/25083) for a historical pyseer request. Its result files are no longer available.
+
+## Interpreting results
+
+The automator uploads:
+
+```text
+pyseer_output.zip
+```
+
+Depending on selected options, it can also upload:
+
+```text
+prokka_output.zip
+bcgtree_output.zip
+```
+
+### K-mer analysis
+
+Important files include:
+
+```text
+pyseer_kmers.txt
+significant_kmers.txt
+annotated_kmers.txt
+gene_hits.txt
+```
+
+- `pyseer_kmers.txt` contains tested k-mer results;
+- `significant_kmers.txt` contains k-mers passing the workflow's significance criteria;
+- `annotated_kmers.txt` contains annotation results for significant k-mers;
+- `gene_hits.txt` summarizes annotated gene hits and can be used for downstream visualization.
+
+### Roary analysis
+
+The important output is:
+
+```text
+pyseer_COGs.txt
+```
+
+The first column contains the gene name from the Roary `gene_presence_absence.Rtab`. Results not filtered out by pyseer remain in this file.
+
+Flags in the last column can include:
+
+- `high-bse` — a high effect-size/low-frequency result;
+- `bad-chisq` — a result for which the minor-allele-frequency filter may be insufficient.
+
+Treat flagged results cautiously and review the pyseer documentation and model assumptions.
+
+### Population-structure outputs
+
+`pyseer_output.zip` can contain tree files and distance matrices. When `analysistype=kmer` or `distance=bcgtree` is selected, `prokka_output.zip` can contain annotation files, particularly `.gff` files used in the workflow.
+
+When `distance=bcgtree` is used, `bcgtree_output.zip` contains the core-gene alignment, identifiers, logs, and RAxML tree files described on the [bcgTree page](bcgtree.md).
+
+Association does not establish causation. Review effect size, frequency, population-structure correction, phenotype quality, multiple-testing correction, annotation, and biological plausibility. Validate important findings independently.
+
+## How long does it take?
+
+Runtime depends on sample count, analysis type, population-structure method, model, and annotation requirements.
+
+K-mer analysis can take several hours because k-mers must be counted across the complete dataset. Prokka generally takes approximately two to three minutes per genome. bcgTree runtime depends on genome count and bootstrap settings.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The issue warns that one or more assemblies cannot be found.
+
+**Likely cause:** An identifier is incorrect or its assembly is unavailable.
+
+**What to do:** Verify every `SEQID` and confirm that its assembly exists.
+
+### The phenotype file is missing or invalid
+
+**Symptom:** The issue asks for `traits.tsv`, or the association analysis cannot align phenotypes with samples.
+
+**Likely cause:** The file is missing, named incorrectly, malformed, or contains identifiers that do not match the request.
+
+**What to do:** Supply a correctly formatted file named `traits.tsv` after verifying the requirements for the selected analysis type.
+
+### The previous Roary result is unavailable
+
+**Symptom:** `analysistype=Roary` cannot load `gene_presence_absence.Rtab`.
+
+**Likely cause:** `roaryissue` is incorrect, the source request predates retention, or its output has been removed.
+
+**What to do:** Verify the issue identifier or run a new Roary analysis before resubmitting pyseer.
+
+### A custom tree cannot be used
+
+**Symptom:** Population-structure setup fails with `distance=custom`.
+
+**Likely cause:** The file is not named `tree.newick`, is not valid Newick, or its tip labels do not exactly match the requested `SEQID`s.
+
+**What to do:** Correct the file name, syntax, and tip labels.
+
+### The model or request key is unsupported
+
+**Symptom:** The automator rejects the selected association model.
+
+**Likely cause:** The model value or request parameter key differs from the legacy documentation.
+
+**What to do:** Verify a current known-good request or inspect the parser before resubmitting.
+
+### Results are unstable or misleading
+
+**Symptom:** Associations have extreme effects, low frequency, warning flags, or change substantially with the population-structure method.
+
+**Likely cause:** The dataset may be small, imbalanced, highly structured, confounded, or inadequately filtered.
+
+**What to do:** Reassess study design, phenotype balance, variant frequency, population-structure correction, and independent validation with a qualified bioinformatician or statistician.
+
+## Related automators
+
+- [Roary/Scoary](roary.md) — calculates a pan-genome and performs simpler binary accessory-gene/trait association analysis.
+- [bcgTree](bcgtree.md) and [MashTree](mashtree.md) — provide population-structure options or supporting phylogenies.
+- [Prokka](prokka.md) — provides genome annotations used in k-mer interpretation.

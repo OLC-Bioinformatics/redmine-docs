@@ -1,69 +1,126 @@
 # Azuredownload
 
-### What does it do?
+> **Internal-only workflow:** This page documents an operational data-ingestion automator. It must remain under `docs/internal_only/` and must not be linked from the standard user index.
 
-The azuredownload automator will download the raw read data, assembly files, and report files output by the foodport assembly pipeline. It then moves the files to the correct locations on the NAS (e.g. processed sequence data), so that users can use the files for analyses in other redmine automators.
+## What does it do?
 
-### How do I use it?
+Use **Azuredownload** to retrieve raw reads, assemblies, and reports produced by the FoodPort assembly pipeline and place them in the appropriate NAS locations for use by other Redmine automators.
 
-#### Subject
+The workflow is intended for authorized internal data management. It uses the FoodPort sequence-folder name, sequencing-machine category, and destination category to locate and organize a completed assembly run.
 
-In the `Subject` field, put `azuredownload`. Spelling counts, but case sensitivity doesn't.
+## How do I use it?
 
-#### Description
+### Subject
 
+In the **Subject** field, enter:
 
-In the `Description` field, the required components are the following:
+```text
+azuredownload
+```
 
-First line: `machine=other`  
-Next line: `location=ncbi`  
-Next line: `sequence_folder=folder name`
+Spelling matters, but matching is not case-sensitive.
 
-The 'folder name' should be replaced with the name of the sequence folder used for assembly on [Foodport](http://10.148.57.4/). 
+### Description
 
-**Important note:** even if you uploaded the run to Foodport using an underscore "_" in the name, do not use an underscore in the redmine automator. It must be a dash:
+Provide exactly one value for each required field:
 
-`sequence_folder=YYMMDD-lab`
+```text
+machine=MACHINE_TYPE
+location=DESTINATION
+sequence_folder=YYMMDD-lab
+```
 
-You must also provide the requested/used machine type as follows `machine=miseq`
+#### `machine`
 
-Azuredownload supports the following analyses:
+Select the source data category:
 
+- `machine=miseq` — MiSeq runs assembled through FoodPort;
+- `machine=nextseq` — NextSeq runs assembled through FoodPort;
+- `machine=other` — other data assembled through FoodPort, including research assemblies or data obtained from NCBI and processed through the pipeline.
 
-- `miseq` - used for MiSeq sequencer runs assembled on Foodport
-- `nextseq` - used for NextSeq sequencer runs assembled on Foodport
-- `other` - used for any "other" data assembled on Foodport.
-	- For example data downloaded from NCBI and uploaded to Foodport to be assembled with our pipeline. Or random research assemblies done through Foodport.
-	- The user must also add the `flag location=` and the name of the location the sequence assemblies are to be stored on the nas
-	
-Possible flag locations include:
+#### `location`
 
-- `atcc` - for ATCC assemblies 
-- `enterobase` - for enterobase sequences
-- `ncbi` - raw data from SRA or NCBI
-- `merged` - any merged sequence data
-- `refseq` - refseq sequences
-- `other` - anything that does not fit in these categories (eg. research samples)
+Select the NAS destination category:
 
-An example file can be found with the example issue below.
+- `location=atcc` — ATCC assemblies;
+- `location=enterobase` — EnteroBase sequences;
+- `location=ncbi` — raw data obtained from SRA or NCBI;
+- `location=merged` — merged sequence data;
+- `location=refseq` — RefSeq sequences;
+- `location=other` — research or other data that do not fit the listed categories.
 
-#### Example
+#### `sequence_folder`
 
-For an example Azuredownload, see [issue 34137](https://redmine.biodiversity.agr.gc.ca/issues/34137).
+Use the sequence-folder name associated with the completed FoodPort assembly run.
 
-#### Interpreting Results
+Use dashes, not underscores:
 
-A file named `legacy_combinedMetadata.csv` will be returned containing a table of information about each equence in the assembly folder.
+```text
+sequence_folder=YYMMDD-lab
+```
 
-### How long does it take?
+Even when the original FoodPort upload name contained an underscore, the Redmine request must use the corresponding dashed form.
 
-Az will take quite a while, depending on how many samples you have. Probably roughly half an hour per sample.
+### Attachments
 
-### What can go wrong?
+No attachment is required. The automator locates the completed FoodPort output using `sequence_folder`.
 
-1) Sequence folder cannot be found. Check spelling of the file in description and ensure that you are using dashes instead of underscores. 
+### Optional parameters
 
-2) Sequence folder cannot be found. Do not download the assembly folder from Foodport. After the COWBAT run is finished it will automatically be placed in the correct location on the NAS for azuredownload. If you download it manually a replicate an error may occur.
+The supplied documentation does not identify optional parameters.
 
-If the upload is not done correctly you will get a warning message informing you of it.
+### Example
 
+```text
+machine=other
+location=ncbi
+sequence_folder=260717-research
+```
+
+See [issue 34137](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/34137) for an example Azuredownload request.
+
+## Interpreting results
+
+Azuredownload returns:
+
+```text
+legacy_combinedMetadata.csv
+```
+
+This CSV contains metadata for the sequences found in the assembly folder. The workflow also moves the retrieved raw reads, assemblies, and reports into the configured NAS locations so downstream automators can resolve the resulting sequence records.
+
+Verify that the expected sequences appear in the metadata report and that the selected `machine` and `location` categories match the source and intended destination.
+
+## How long does it take?
+
+Runtime depends on sample count, file sizes, and storage-transfer performance. The supplied documentation estimates approximately 30 minutes per sample.
+
+## What can go wrong?
+
+### The sequence folder cannot be found
+
+**Symptom:** The issue reports that the assembly folder is unavailable.
+
+**Likely cause:** `sequence_folder` is misspelled, uses underscores instead of dashes, or does not correspond to a completed FoodPort run.
+
+**What to do:** Verify the exact folder identifier and use the dashed form.
+
+### The FoodPort assembly folder was downloaded manually
+
+**Symptom:** The workflow cannot find the expected pipeline output or encounters duplicate/replication errors.
+
+**Likely cause:** The assembly folder was manually downloaded instead of being left for the completed COWBAT/FoodPort process to place in the expected location.
+
+**What to do:** Do not manually download or relocate the assembly folder. Allow the completed pipeline to place it in the location used by Azuredownload.
+
+### The machine or destination category is invalid
+
+**Symptom:** The automator cannot route or store the retrieved data correctly.
+
+**Likely cause:** `machine` or `location` is missing, misspelled, or unsupported.
+
+**What to do:** Use one documented value for each required field.
+
+## Access and navigation
+
+Keep this page out of standard-access navigation and retrieval. Link it only from explicitly internal operational documentation.

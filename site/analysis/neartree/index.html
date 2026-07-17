@@ -80,9 +80,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -114,17 +118,35 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#candidate-strains-are-too-distant">Candidate strains are too distant</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-requested-result-count-is-invalid">The requested result count is invalid</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-closest-result-is-overinterpreted">The closest result is overinterpreted</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -156,8 +178,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -173,6 +193,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -209,37 +231,83 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="neartree">NearTree</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>NearTree will take a query SEQID, and then find the <em>X</em> closest strains to it out of a list specified by creating a
-phylogenetic tree and looking for the tips that are closest to your query strain.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>NearTree</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>The first line of the description should be the number of closest strains you want to your query strain.
-The second line must say <code>query</code>, and the third line should be the query SEQID you want to find close relatives for.
-The fourth line must say <code>reference</code>, and every line after that should be a SEQID you want to compare your query to.</p>
-<h4 id="example">Example</h4>
-<p>For an example NearTree, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12940">issue 12940</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>Upon completion, you'll be given a list of the SEQIDs that are closest to the query specified. The most closely related
-will be listed first, with each SEQID listed after that becoming slightly more distant.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>This depends largely on the number of strains you want to use to create the tree. It can often be as quick as a few minutes
-if you have 10 or less strains, or take several hours if you want a larger (100 or so strain) tree.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>A few things can go wrong with this process:</p>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) Strains too far apart. NearTree will warn you if it thinks that the strains you want to make a tree from are
-not closely related enough. If you get this warning, you may want to consider creating a new issue while leaving out
-the strains it says are too far.</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>NearTree</strong> to select a requested number of strains that are closest to one query strain within a user-supplied comparison set.</p>
+<p>NearTree creates a distance-based tree for the query and reference <code>SEQID</code>s, then ranks the tree tips closest to the query. It returns an ordered list rather than a full phylogenetic interpretation.</p>
+<p>Use NearTree when the goal is to choose close comparators from a defined set. Use MashTree or bcgTree when the goal is to inspect a complete tree.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">NearTree
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>The Description uses this exact order:</p>
+<ol>
+<li>number of closest strains to return;</li>
+<li>the line <code>query</code>;</li>
+<li>one query <code>SEQID</code>;</li>
+<li>the line <code>reference</code>;</li>
+<li>all candidate comparison <code>SEQID</code>s, one per line.</li>
+</ol>
+<p>Example requesting the five closest strains:</p>
+<pre><code class="language-text">5
+query
+2026-SEQ-0001
+reference
+2026-SEQ-0002
+2026-SEQ-0003
+2026-SEQ-0004
+2026-SEQ-0005
+2026-SEQ-0006
+2026-SEQ-0007
+</code></pre>
+<p>The requested count should not exceed the number of valid reference candidates.</p>
+<h3 id="attachments">Attachments</h3>
+<p>The supplied documentation does not identify attachment support. Use available <code>SEQID</code>s unless the current implementation has been verified to accept files.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters beyond the number of closest strains on the first line.</p>
+<h3 id="example">Example</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/12940">issue 12940</a> for an example NearTree request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>NearTree returns an ordered list of the comparison <code>SEQID</code>s closest to the query.</p>
+<ul>
+<li>the first result is the closest strain found in the supplied comparison set;</li>
+<li>each subsequent result is progressively more distant according to the workflow's tree-based distance ranking.</li>
+</ul>
+<p>The result identifies relative closeness only among the candidates you supplied. It does not prove that the first result is the closest strain in the full database or population, and it does not provide a universal relatedness threshold.</p>
+<p>If the workflow warns that candidates are too distant, reconsider the comparison set before using the ranking for downstream analysis.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Runtime depends primarily on the number of candidate strains. A set of 10 or fewer strains can finish in a few minutes, while a comparison involving approximately 100 strains can take several hours.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The issue warns that the query or one or more reference candidates cannot be found.</p>
+<p><strong>Likely cause:</strong> An identifier is incorrect or its assembly is unavailable.</p>
+<p><strong>What to do:</strong> Verify every <code>SEQID</code> and confirm that the required assemblies exist.</p>
+<h3 id="candidate-strains-are-too-distant">Candidate strains are too distant</h3>
+<p><strong>Symptom:</strong> NearTree warns that some supplied strains are not sufficiently related.</p>
+<p><strong>Likely cause:</strong> The reference set spans organisms that are too diverse for a meaningful close-strain ranking.</p>
+<p><strong>What to do:</strong> Remove the flagged distant strains and submit a more coherent comparison set.</p>
+<h3 id="the-requested-result-count-is-invalid">The requested result count is invalid</h3>
+<p><strong>Symptom:</strong> NearTree cannot return the requested number of closest strains.</p>
+<p><strong>Likely cause:</strong> The first line is not a valid positive integer or exceeds the number of valid reference candidates.</p>
+<p><strong>What to do:</strong> Use a positive integer no greater than the available reference-set size.</p>
+<h3 id="the-closest-result-is-overinterpreted">The closest result is overinterpreted</h3>
+<p><strong>Symptom:</strong> The first returned strain is treated as the globally closest available organism.</p>
+<p><strong>Likely cause:</strong> NearTree ranks only the candidate strains included in the request.</p>
+<p><strong>What to do:</strong> Expand or revise the candidate set when broader comparison is required.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../mashtree/">MashTree</a> — creates a complete tree from Mash distances for listed assemblies and optional reference sets.</li>
+<li><a href="../bcgtree/">bcgTree</a> — builds a maximum-likelihood bacterial tree from essential single-copy core genes.</li>
+<li><a href="../strainmash/">StrainMash</a> — compares one assembly with represented RefSeq type strains.</li>
+</ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../mlst/" class="btn btn-neutral float-left" title="MLST"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../plasmidborneidentity/" class="btn btn-neutral float-right" title="PlasmidBorneIdentity">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../phastest/" class="btn btn-neutral float-right" title="Phastest">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -269,7 +337,7 @@ the strains it says are too far.</p>
       <span><a href="../mlst/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../plasmidborneidentity/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../phastest/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

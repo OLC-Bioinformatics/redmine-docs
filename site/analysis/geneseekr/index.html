@@ -80,9 +80,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">GeneSeekr</a>
     <ul class="current">
@@ -93,16 +97,56 @@
     <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#supported-analyses">Supported analyses</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#blast">blast</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cutoff">cutoff</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#evalue">evalue</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#align">align</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#unique">unique</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#fasta">fasta</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#resfinder-request">ResFinder request</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cgmlst-request">cgMLST request</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#custom-request">Custom request</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-analysis-is-missing-misspelled-or-unsupported">The analysis is missing, misspelled, or unsupported</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-custom-target-file-is-missing-or-unreadable">A custom target file is missing or unreadable</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -125,6 +169,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -156,8 +202,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -173,6 +217,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -209,115 +255,139 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="geneseekr">GeneSeekr</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>The GeneSeekr is a suite of analyses that detect gene targets in FASTA-formatted files.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>geneseekr</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p><strong>Required Components</strong></p>
-<p>In the <code>Description</code> field, you must provide the requested analysis type as follows:</p>
-<p><code>analysis=requested_analysis</code></p>
-<p>The GeneSeekr pipeline supports the following analyses (again, spelling counts, but case sensitivity doesn't):</p>
-<ul>
-<li><code>gdcs</code> - determines the presence of genomically-dispersed conserved sequences in the following genera: <em>Escherichia, Listeria, Salmonella, Vibrio</em>. <strong>NOTE</strong>: you must provide an additional line: <code>organism=ORGANISM</code></li>
-<li><code>genesippr</code> - custom suite of genes derived from the following genera: <em>Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio</em></li>
-<li><code>mlst</code> - determines multi-locus sequence type for the following genera: <em>Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio</em>. <strong>NOTE</strong>: you must provide an additional line: <code>organism=ORGANISM</code></li>
-<li><code>cgmlst</code> - determines core genome multi-locus sequence type for the following genera: <em>Escherichia, Yersinia</em>. <strong>NOTE</strong>: you must provide an additional line: <code>organism=ORGANISM</code></li>
-<li><code>resfinder</code> - identifies acquired antimicrobial resistance genes</li>
-<li><code>rmlst</code> - determines ribosomal multi-locus sequence type</li>
-<li><code>serosippr</code> - calculates the serotype for <em>Escherichia</em></li>
-<li><code>sixteens</code> - determines closest 16S match</li>
-<li><code>virulence</code> - finds virulence genes</li>
-<li><code>custom</code> (<strong>you must attach a FASTA-formatted file of target(s) to the issue</strong>)
-<br></li>
-<li>Bacterial Integrative and Conjugative Elements (ICEs) <a href="https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html">ICEberg databases</a> from the <a href="https://academic.oup.com/nar/article/47/D1/D660/5165266">ICEfinder publication</a>:<ul>
-<li><code>all_ices</code> - used for all ICE gene detection</li>
-<li><code>aice</code> - used for actinomycete (AICEs) type ICE gene detection</li>
-<li><code>cime</code> - used for cis-mobilizable elements (CIMEs) ICE gene detection</li>
-<li><code>ime</code> - used for Integrative and Mobilizable Elements (IME) type ICE gene detection</li>
-<li><code>t4ss</code> - used for Type IV Secretion System (T4SS) type ICE gene detection</li>
-</ul>
-</li>
-</ul>
-<p>You must also include a list of SEQIDs one per line.</p>
-<p><strong>Optional Components</strong></p>
-<p>In order to customise your GeneSeekr analyses, several settings can be optionally modified</p>
-<ul>
-<li>BLAST program. <strong>NOTE:</strong> GeneSeekr does not check to see if your query or database are the appropriate molecule for the requested program. Additionally, none of the standard analyses currently have protein databases.<ul>
-<li>default is <code>blastn</code></li>
-<li>You can select one of the following BLAST programs to use:<ul>
-<li>blastn - nt query: nt db</li>
-<li>blastp - protein query: protein db</li>
-<li>blastx - translated nt query: protein db</li>
-<li>tblastn - protein query: translated nt db</li>
-<li>tblastx - translated nt query: translated nt db</li>
-</ul>
-</li>
-<li>modify as follows:<ul>
-<li><code>blast=tblastx</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Minimum cutoff for matches to be included in report.<ul>
-<li>default is <code>70</code></li>
-<li>modify as follows:<ul>
-<li><code>cutoff=80</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>E-value cutoff<ul>
-<li>default is <code>1E-05</code></li>
-<li>modify as follows:<ul>
-<li><code>evalue=1E-10</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Include alignments in reports<ul>
-<li>default is <code>False</code></li>
-<li>modify as follows:<ul>
-<li><code>align=True</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Report unique hits only - does not report multiple hits at the same location in a contig. Instead, only the best hit is reported, and the rest are discarded<ul>
-<li>default is <code>False</code></li>
-<li>modify as follows:<ul>
-<li><code>unique=True</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Include FASTA file output of strain-specific target sequence matches <ul>
-<li>default is <code>False</code></li>
-<li>modify as follows:<ul>
-<li><code>fasta=True</code>       </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="example">Example</h4>
-<p>For example GeneSeekr issues, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/14470">issue 14470 (ResFindr)</a>, <a href="https://redmine.biodiversity.agr.gc.ca/issues/14471">issue 14471 (custom)</a>, or <a href="https://redmine.biodiversity.agr.gc.ca/issues/27867">issue 27867 (cgMLST)</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>The GeneSeekr automator will upload a file called <code>geneseekr_output.zip</code> once it has completed. This file will contain all the reports generated for the requested analysis.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>It depends on the analysis requested. The GeneSeekr pipeline should take about a minute to analyze each SEQID requested.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>GeneSeekr</strong> to detect predefined or custom gene targets in FASTA-formatted files. GeneSeekr operates on assembled sequence data; use <a href="../sipprverse/">Sipprverse</a> when the targets must be detected directly in raw, paired-end FASTQ reads.</p>
+<p>GeneSeekr supports gene detection, selected typing analyses, and custom target databases. The supported analysis name must be supplied in the Redmine issue Description.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">geneseekr
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>The <strong>Description</strong> field must contain:</p>
 <ol>
-<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</li>
-<li>There was an issue with the requested analysis: either one was not supplied, the was a typo, or you requested a currently-unsupported analysis. An error message detailing the problem will be added to the issue.</li>
-<li>The <code>custom</code> analysis requires an attached FASTA-formatted file of gene targets. If the file was not attached, or there was an issue reading the file, an error message detailing the problem will be add to the issue.</li>
+<li>an analysis declaration in the form <code>analysis=requested_analysis</code>;</li>
+<li>any additional field required by that analysis; and</li>
+<li>one <code>SEQID</code> per line.</li>
 </ol>
+<p>Example structure:</p>
+<pre><code class="language-text">analysis=resfinder
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h4 id="supported-analyses">Supported analyses</h4>
+<ul>
+<li><code>gdcs</code> — detects genomically dispersed conserved sequences in <em>Escherichia</em>, <em>Listeria</em>, <em>Salmonella</em>, and <em>Vibrio</em>. Also include <code>organism=ORGANISM</code>.</li>
+<li><code>genesippr</code> — uses a custom suite of genes derived from <em>Bacillus</em>, <em>Campylobacter</em>, <em>Escherichia</em>, <em>Listeria</em>, <em>Salmonella</em>, <em>Staphylococcus</em>, and <em>Vibrio</em>.</li>
+<li><code>mlst</code> — determines multilocus sequence type for <em>Bacillus</em>, <em>Campylobacter</em>, <em>Escherichia</em>, <em>Listeria</em>, <em>Salmonella</em>, <em>Staphylococcus</em>, and <em>Vibrio</em>. Also include <code>organism=ORGANISM</code>.</li>
+<li><code>cgmlst</code> — determines core-genome multilocus sequence type for <em>Escherichia</em> and <em>Yersinia</em>. Also include <code>organism=ORGANISM</code>.</li>
+<li><code>resfinder</code> — identifies acquired antimicrobial-resistance genes.</li>
+<li><code>rmlst</code> — determines ribosomal multilocus sequence type.</li>
+<li><code>serosippr</code> — calculates the serotype for <em>Escherichia</em>.</li>
+<li><code>sixteens</code> — determines the closest 16S match.</li>
+<li><code>virulence</code> — detects virulence genes.</li>
+<li><code>custom</code> — detects targets from a user-supplied FASTA file. This analysis requires an attachment.</li>
+</ul>
+<p>GeneSeekr also provides analyses based on ICEberg databases from the <a href="https://academic.oup.com/nar/article/47/D1/D660/5165266">ICEfinder publication</a>:</p>
+<ul>
+<li><code>all_ices</code> — detects all included integrative and conjugative element targets.</li>
+<li><code>aice</code> — detects actinomycete integrative and conjugative element targets.</li>
+<li><code>cime</code> — detects cis-mobilizable element targets.</li>
+<li><code>ime</code> — detects integrative and mobilizable element targets.</li>
+<li><code>t4ss</code> — detects Type IV Secretion System targets.</li>
+</ul>
+<p>The ICEberg databases are available from the <a href="https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html">ICEberg download page</a>.</p>
+<h3 id="attachments">Attachments</h3>
+<p>Most standard analyses do not require an attachment.</p>
+<p>For <code>analysis=custom</code>, attach a FASTA-formatted file containing the target sequences. The source documentation does not specify a required attachment filename or a Description parameter that refers to it; verify the attachment requirements with the current implementation if a custom request fails.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<h4 id="blast"><code>blast</code></h4>
+<p>Selects the BLAST program.</p>
+<ul>
+<li>Default: <code>blastn</code></li>
+<li>Accepted values: <code>blastn</code>, <code>blastp</code>, <code>blastx</code>, <code>tblastn</code>, <code>tblastx</code></li>
+<li>Example: <code>blast=tblastx</code></li>
+</ul>
+<p>GeneSeekr does not verify that the query and database molecule types are appropriate for the selected BLAST program. None of the standard analyses currently uses a protein database.</p>
+<h4 id="cutoff"><code>cutoff</code></h4>
+<p>Sets the minimum cutoff for matches included in the report.</p>
+<ul>
+<li>Default: <code>70</code></li>
+<li>Example: <code>cutoff=80</code></li>
+</ul>
+<h4 id="evalue"><code>evalue</code></h4>
+<p>Sets the E-value cutoff.</p>
+<ul>
+<li>Default: <code>1E-05</code></li>
+<li>Example: <code>evalue=1E-10</code></li>
+</ul>
+<h4 id="align"><code>align</code></h4>
+<p>Controls whether reports include alignments.</p>
+<ul>
+<li>Default: <code>False</code></li>
+<li>Example: <code>align=True</code></li>
+</ul>
+<h4 id="unique"><code>unique</code></h4>
+<p>Controls whether only the best hit is reported when multiple hits occur at the same location in a contig.</p>
+<ul>
+<li>Default: <code>False</code></li>
+<li>Example: <code>unique=True</code></li>
+</ul>
+<h4 id="fasta"><code>fasta</code></h4>
+<p>Controls whether the output includes FASTA files containing strain-specific target-sequence matches.</p>
+<ul>
+<li>Default: <code>False</code></li>
+<li>Example: <code>fasta=True</code></li>
+</ul>
+<h3 id="examples">Examples</h3>
+<h4 id="resfinder-request">ResFinder request</h4>
+<pre><code class="language-text">analysis=resfinder
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14470">issue 14470</a> for an example ResFinder request.</p>
+<h4 id="cgmlst-request">cgMLST request</h4>
+<pre><code class="language-text">analysis=cgmlst
+organism=Escherichia
+2026-SEQ-0001
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/27867">issue 27867</a> for an example cgMLST request.</p>
+<h4 id="custom-request">Custom request</h4>
+<pre><code class="language-text">analysis=custom
+2026-SEQ-0001
+</code></pre>
+<p>Attach the FASTA-formatted target file to the issue. See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14471">issue 14471</a> for an example custom request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When GeneSeekr finishes, it uploads:</p>
+<pre><code class="language-text">geneseekr_output.zip
+</code></pre>
+<p>The archive contains the reports generated for the selected analysis. The supplied documentation does not define a single common report schema because the contents depend on the requested analysis. Interpret each report according to the selected analysis and its reported fields.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Runtime depends on the selected analysis and the number of requested <code>SEQID</code>s. As a general estimate, GeneSeekr takes approximately one minute per <code>SEQID</code>.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> GeneSeekr cannot locate the requested assembled sequence data.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code> and confirm that its FASTA-formatted assembly is available before submitting a corrected request.</p>
+<h3 id="the-analysis-is-missing-misspelled-or-unsupported">The analysis is missing, misspelled, or unsupported</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives an error describing the requested analysis.</p>
+<p><strong>Likely cause:</strong> The Description does not include <code>analysis=...</code>, contains a spelling error, or requests an analysis that GeneSeekr does not support.</p>
+<p><strong>What to do:</strong> Choose one of the documented analysis names and submit a corrected request.</p>
+<h3 id="a-custom-target-file-is-missing-or-unreadable">A custom target file is missing or unreadable</h3>
+<p><strong>Symptom:</strong> The custom analysis cannot read or use its target database.</p>
+<p><strong>Likely cause:</strong> The FASTA-formatted target file was not attached or could not be read.</p>
+<p><strong>What to do:</strong> Attach a valid FASTA-formatted target file and submit a corrected <code>analysis=custom</code> request.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../sipprverse/">Sipprverse</a> — use for predefined or custom target detection directly in raw, paired-end FASTQ reads.</li>
+<li><a href="../kma/">KMA</a> — use for its supported resistance and toxin analyses, or custom targets, in assemblies or raw reads.</li>
+</ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../fastqc/" class="btn btn-neutral float-left" title="Fastqc"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../fastqmerge/" class="btn btn-neutral float-left" title="fastqmerge"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../gfa_retrieve/" class="btn btn-neutral float-right" title="GFA Retrieve">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -345,7 +415,7 @@
         </span>
     
     
-      <span><a href="../fastqc/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../fastqmerge/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../gfa_retrieve/" style="color: #fcfcfc">Next &raquo;</a></span>

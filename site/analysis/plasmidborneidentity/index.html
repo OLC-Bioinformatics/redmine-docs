@@ -80,9 +80,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -106,6 +110,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
+                  </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">PlasmidBorneIdentity</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
@@ -118,17 +124,55 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#optional-arguments">Optional arguments</a>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#blast">blast</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    <li class="toctree-l4"><a class="reference internal" href="#cutoff">cutoff</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    <li class="toctree-l4"><a class="reference internal" href="#evalue">evalue</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#nucleotide-target-request">Nucleotide-target request</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#alternate-blast-program">Alternate BLAST program</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#geneseekr_blast_programxlsx">geneseekr_{BLAST_PROGRAM}.xlsx</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#geneseekr_blast_program_detailedcsv">geneseekr_{BLAST_PROGRAM}_detailed.csv</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#geneseekr_blast_programcsv">geneseekr_{BLAST_PROGRAM}.csv</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mob_recon_summarycsv">mob_recon_summary.csv</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#plasmid_borne_summarycsv">plasmid_borne_summary.csv</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-target-attachment-is-missing-or-invalid">The target attachment is missing or invalid</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-blast-program-does-not-match-the-sequence-types">The BLAST program does not match the sequence types</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-target-has-an-uncertain-predicted-location">A target has an uncertain predicted location</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -160,8 +204,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -177,6 +219,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -213,87 +257,129 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="plasmid-borne-identity">Plasmid-Borne Identity</h1>
-<p><img alt="Plasmid-Borne Identity" src="../../img/plasmid_borne_identity.png" /></p>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>Plasmid-Borne Identity performs GeneSeekr and MOB-suite analyses on FASTA files, and creates a report combining and 
-summarising the outputs.</p>
-<p>MobSuite is a set of tools developed by the Public Health Agency of Canada for detecting plasmids in draft genome
-assemblies. This tool runs the <code>mob_recon</code> part of the suite, which first detects plasmids in the assemblies, and then
-performs typing on the plasmids. More details on MobSuite, including fairly extensive details on the output files
-produced, can be found at the <a href="https://github.com/phac-nml/mob-suite">MobSuite GitHub repository</a>).</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>plasmid_borne_identity</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to process, one per line.</p>
-<h4 id="attachments">Attachments</h4>
-<p>You are required to attach a FASTA-formatted file containing the gene(s) you wish analysed </p>
-<h4 id="optional-arguments">Optional arguments</h4>
+<p><img alt="Plasmid-Borne Identity workflow" src="../../img/plasmid_borne_identity.png" /></p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>Plasmid-Borne Identity</strong> to search FASTA-formatted draft genome assemblies for user-supplied gene targets and predict whether each detected target is located on a plasmid or chromosome.</p>
+<p>Plasmid-Borne Identity combines:</p>
 <ul>
-<li>BLAST program. <strong>NOTE:</strong> GeneSeekr (and therefore PlasmidBorne Identity) does not check to see if your query or 
-database are the appropriate molecule for the requested program. <ul>
-<li>default is <code>blastn</code></li>
-<li>You can select one of the following BLAST programs to use:<ul>
-<li>blastn - nt query: nt db</li>
-<li>blastp - protein query: protein db</li>
-<li>blastx - translated nt query: protein db</li>
-<li>tblastn - protein query: translated nt db</li>
-<li>tblastx - translated nt query: translated nt db</li>
+<li><strong>GeneSeekr</strong> — searches assemblies for the attached target sequences;</li>
+<li><strong>MOB-suite <code>mob_recon</code></strong> — reconstructs and types predicted plasmids.</li>
 </ul>
-</li>
-<li>modify as follows:<ul>
-<li><code>blast=tblastx</code></li>
+<p>The combined report maps target-containing contigs to MOB-suite plasmid predictions. For additional MOB-suite output details, see the <a href="https://github.com/phac-nml/mob-suite">MOB-suite repository</a>.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">plasmid_borne_identity
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>In the <strong>Description</strong> field, enter one <code>SEQID</code> per line. Optional GeneSeekr parameters can be placed on separate lines before the <code>SEQID</code>s.</p>
+<pre><code class="language-text">cutoff=80
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>Each requested <code>SEQID</code> must have a FASTA-formatted draft genome assembly available.</p>
+<h3 id="attachments">Attachments</h3>
+<p>Attach a FASTA-formatted file containing the gene targets to search for. The supplied documentation does not specify a required attachment filename or a Description parameter that refers to that filename.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<h4 id="blast"><code>blast</code></h4>
+<p>Selects the BLAST program used by GeneSeekr.</p>
+<ul>
+<li>Default: <code>blastn</code></li>
+<li>Accepted values: <code>blastn</code>, <code>blastp</code>, <code>blastx</code>, <code>tblastn</code>, <code>tblastx</code></li>
+<li>Example: <code>blast=tblastx</code></li>
 </ul>
-</li>
+<p>GeneSeekr and Plasmid-Borne Identity do not verify that the query and database molecule types are appropriate for the selected BLAST program.</p>
+<h4 id="cutoff"><code>cutoff</code></h4>
+<p>Sets the minimum cutoff for matches included in the report.</p>
+<ul>
+<li>Default: <code>70</code></li>
+<li>Example: <code>cutoff=80</code></li>
 </ul>
-</li>
-<li>Minimum cutoff for matches to be included in report.<ul>
-<li>default is <code>70</code></li>
-<li>modify as follows:<ul>
-<li><code>cutoff=80</code></li>
+<h4 id="evalue"><code>evalue</code></h4>
+<p>Sets the E-value cutoff.</p>
+<ul>
+<li>Default: <code>1E-05</code></li>
+<li>Examples: <code>evalue=1E-10</code> or <code>evalue=0.01</code></li>
 </ul>
-</li>
+<h3 id="examples">Examples</h3>
+<h4 id="nucleotide-target-request">Nucleotide-target request</h4>
+<pre><code class="language-text">cutoff=80
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>Attach the FASTA-formatted target file. The default BLAST program is <code>blastn</code>.</p>
+<h4 id="alternate-blast-program">Alternate BLAST program</h4>
+<pre><code class="language-text">blast=tblastx
+evalue=1E-10
+2026-SEQ-0001
+</code></pre>
+<p>Verify that the selected BLAST program is appropriate for both the attached targets and assembly database.</p>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/15644">issue 15644</a> for an example Plasmid-Borne Identity request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>Plasmid-Borne Identity uploads five reports. <code>{BLAST_PROGRAM}</code> is replaced with the selected BLAST program, such as <code>blastn</code>.</p>
+<h3 id="geneseekr_blast_programxlsx"><code>geneseekr_{BLAST_PROGRAM}.xlsx</code></h3>
+<p>Reports the strain name and percentage-identity match for each query target.</p>
+<h3 id="geneseekr_blast_program_detailedcsv"><code>geneseekr_{BLAST_PROGRAM}_detailed.csv</code></h3>
+<p>Reports detailed BLAST evidence for each target, including:</p>
+<ul>
+<li>strain name;</li>
+<li>percentage match;</li>
+<li>alignment length;</li>
+<li>subject length;</li>
+<li>E-value;</li>
+<li>positives;</li>
+<li>mismatches;</li>
+<li>gaps.</li>
 </ul>
-</li>
-<li>E-value cutoff<ul>
-<li>default is <code>1E-05</code></li>
-<li>modify as follows:<ul>
-<li><code>evalue=1E-10</code> or</li>
-<li><code>evalue=0.01</code></li>
+<h3 id="geneseekr_blast_programcsv"><code>geneseekr_{BLAST_PROGRAM}.csv</code></h3>
+<p>Provides the GeneSeekr summary in CSV format.</p>
+<h3 id="mob_recon_summarycsv"><code>mob_recon_summary.csv</code></h3>
+<p>Lists contigs predicted to be plasmid-derived. Contigs predicted to be chromosomal are omitted.</p>
+<p>Important fields include:</p>
+<ul>
+<li><code>Location</code> — the predicted plasmid name;</li>
+<li><code>Contig</code> — the contig predicted to contain plasmid sequence.</li>
 </ul>
-</li>
+<p>One predicted plasmid can contain several contigs when it could not be circularized.</p>
+<h3 id="plasmid_borne_summarycsv"><code>plasmid_borne_summary.csv</code></h3>
+<p>Combines detailed GeneSeekr target hits with MOB-suite plasmid predictions. It maps target-containing contigs to predicted plasmids and includes plasmid incompatibility types when available.</p>
+<p>The <code>Location</code> field reports either:</p>
+<ul>
+<li><code>chromosome</code>; or</li>
+<li>the name of a predicted plasmid.</li>
 </ul>
-</li>
+<p>This location is a computational prediction. Review the detailed BLAST evidence, assembly context, and MOB-suite reconstruction before drawing conclusions.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>GeneSeekr is fast, while MOB-suite is comparatively slower. Expect the combined analysis to take a few minutes per requested <code>SEQID</code>, depending on assembly size, target count, sample count, and service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> The automator cannot locate a draft genome assembly for the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that its FASTA assembly is available, and submit a corrected request.</p>
+<h3 id="the-target-attachment-is-missing-or-invalid">The target attachment is missing or invalid</h3>
+<p><strong>Symptom:</strong> The automator cannot read or search the target sequences.</p>
+<p><strong>Likely cause:</strong> The target file was not attached or is not valid FASTA.</p>
+<p><strong>What to do:</strong> Attach a correctly formatted FASTA file containing the target sequences.</p>
+<h3 id="the-blast-program-does-not-match-the-sequence-types">The BLAST program does not match the sequence types</h3>
+<p><strong>Symptom:</strong> The analysis returns no useful hits or fails unexpectedly.</p>
+<p><strong>Likely cause:</strong> The selected BLAST program is incompatible with the attached query targets or nucleotide assembly database, for example <code>blastp</code> with nucleotide query and database sequences.</p>
+<p><strong>What to do:</strong> Verify the molecule type of the query targets and select the appropriate BLAST program. Use the default <code>blastn</code> for nucleotide targets searched against nucleotide assemblies.</p>
+<h3 id="a-target-has-an-uncertain-predicted-location">A target has an uncertain predicted location</h3>
+<p><strong>Symptom:</strong> A detected target cannot be confidently assigned to a predicted plasmid or chromosome.</p>
+<p><strong>Likely cause:</strong> Draft assemblies can fragment plasmids across contigs, and plasmid reconstruction is predictive.</p>
+<p><strong>What to do:</strong> Review <code>geneseekr_{BLAST_PROGRAM}_detailed.csv</code>, <code>mob_recon_summary.csv</code>, and the assembly context together.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../geneseekr/">GeneSeekr</a> — searches FASTA-formatted files for predefined or custom targets without plasmid-location summarization.</li>
+<li><a href="../mobsuite/">MobSuite</a> — detects, reconstructs, and types predicted plasmids without requiring a user-supplied target set.</li>
+<li><a href="../amrsummary/">AMRsummary</a> — combines ResFinder acquired-AMR detection with MOB-suite plasmid-location predictions.</li>
 </ul>
-<h4 id="example">Example</h4>
-<p>For an example Plasmid-Borne Identity analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/15644">issue 15644</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>Plasmid-Borne Identity will upload five separate reports once it is complete</p>
-<p><code>geneseekr_{BLAST_PROGRAM}.xlsx</code> strain name and percent identity match for all query genes</p>
-<p><code>geneseekr_{BLAST_PROGRAM}_detailed.csv</code> strain name, and BLAST summary information, including percent match, alignment length, 
-subject length, e-value, number of positives, number of mismatches, and number of gaps for every gene</p>
-<p><code>geneseekr_{BLAST_PROGRAM}.csv</code>  same as <code>geneseekr_{BLAST_PROGRAM}.csv</code>  same as, but in .csv format</p>
-<p><code>mob_recon_summary.csv</code> shows any contigs that are predicted to be plasmids - note that all contigs calculated to be 
-chromosomal are ignored. <strong>Location</strong> is the name of the predicted plasmid, while <strong>Contig</strong> is the name contig 
-predicted to contain plasmid sequence. One plasmid can be composed of several contigs if it could not be circularised.</p>
-<p><code>plasmid_borne_summary.csv</code> combines information from <code>geneseekr_{BLAST_PROGRAM}.csv</code>  and <code>mob_recon_summary.csv</code>. 
-The contigs of all predicted AMR genes from the <code>geneseekr_{BLAST_PROGRAM}_detailed.csv</code> report are used to search 
-the <code>mob_recon_summary</code> report. The plasmid predictions, and well as all the incompatibility types for that plasmid 
-are extracted, and used in the report. <strong>Location</strong> will specify either <code>chromosome</code> or the name of the predicted plasmid.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>GeneSeekr is very fast, while MOB-suite is relatively slow - it should take a few minutes to analyze each SEQID requested.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</li>
-<li>Issue with required FASTA-formatted targets file, including not attaching the file, or the FASTA formatting being incorrect</li>
-<li>Specifying the incorrect BLAST analysis program for the provided sequences e.g. blastp with a nucleotide query and db</li>
-</ol>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../neartree/" class="btn btn-neutral float-left" title="NearTree"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../phastest/" class="btn btn-neutral float-left" title="Phastest"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../pointfinder/" class="btn btn-neutral float-right" title="PointFinder">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -321,7 +407,7 @@ message informing you of it.</li>
         </span>
     
     
-      <span><a href="../neartree/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../phastest/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../pointfinder/" style="color: #fcfcfc">Next &raquo;</a></span>

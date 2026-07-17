@@ -57,19 +57,39 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#before-creating-the-request">Before creating the request</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-ftp-transfer-times-out">The FTP transfer times out</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-ftp-credentials-are-rejected">The FTP credentials are rejected</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-ftp-folder-does-not-exist">The FTP folder does not exist</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-data-workflows">Related data workflows</a>
     </li>
     </ul>
                   </li>
@@ -98,9 +118,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/geneseekr/">GeneSeekr</a>
                   </li>
@@ -123,6 +147,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/mlst/">MLST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -154,8 +180,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -171,6 +195,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -207,37 +233,87 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="sra-upload">SRA Upload</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>SRA Upload allows you to preload your sequence data for submission to the NCBI SRA using an FTP connection.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>SRA Upload</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>Before submitting, you'll need to get your FTP username, FTP password, and FTP folder name from the SRA.
-To do this, log in to the SRA submission portal. Click on the <code>My Submissions</code> tab towards the top right of the page,
-and then in the <code>Start a new submission</code> box, click <code>Sequence Read Archive</code>. Under <code>Options to preload data</code>, click 
-<code>FTP upload</code>, and take note of the <strong>Username</strong>, <strong>Password</strong>, and the text under <strong>Navigate to your account folder.</strong></p>
-<p>Once you have those three things, you're ready to go. Put the username in the first line of the description, password 
-in the second line, and the folder specified in the third (it should be something like <code>uploads/youremail_a1d3a1</code>).
-In subsequent lines, put the SeqIDs you want to upload files for. Once the request finishes running, you should be 
-able to find a folder named with your Redmine issue ID when you select a preload folder during submission.</p>
-<h4 id="example">Example</h4>
-<p>For an example of an SRA Upload, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/14963">issue 14963</a>.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>If your request is for a small number of files, it will generally be done within a few minutes. The more files requested,
-the longer the request will take.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>A few things can go wrong with this process:</p>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) FTP timeout. Sometimes, particularly for larger requests, the upload to the FTP will run into problems and time out,
-in which case you will likely get an error message similar to this: <code>[Errno 104] Connection reset by peer</code>. If this occurs,
-you can either try again later, or, if you had a large request, try splitting it into a few smaller requests. If the
-problem persists, send us an email and we'll try to get it figured out.</p>
-<p>3) Bad FTP credentials. If the username and password for the NCBI FTP site didn't work you'll get a message telling you so.
-Make sure your username is on the first line of the request and password is second.</p>
-<p>4) FTP folder does not exist. If the FTP folder specified on the third line of the description isn't correct,
-you'll get a message saying so.</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>SRA Upload</strong> to transfer raw sequence files associated with internal <code>SEQID</code>s into the preload area of an NCBI Sequence Read Archive submission using SRA-provided FTP credentials.</p>
+<p>SRA Upload handles file transfer only. You must first create or begin an SRA submission and obtain the temporary FTP username, password, and account-folder path from the SRA submission portal.</p>
+<blockquote>
+<p><strong>Credential warning:</strong> The Redmine Description contains a temporary FTP password. Restrict the issue to the appropriate project and users, do not reuse the password elsewhere, and remove or rotate credentials when the transfer is complete if the SRA workflow permits it.</p>
+</blockquote>
+<h2 id="before-creating-the-request">Before creating the request</h2>
+<ol>
+<li>Sign in to the NCBI SRA submission portal.</li>
+<li>Open <strong>My Submissions</strong>.</li>
+<li>Start or open a <strong>Sequence Read Archive</strong> submission.</li>
+<li>Under the data-preload options, select <strong>FTP upload</strong>.</li>
+<li>Record the temporary:</li>
+<li>username;</li>
+<li>password;</li>
+<li>account-folder path shown under <strong>Navigate to your account folder</strong>.</li>
+</ol>
+<p>Portal labels may change over time. Use the FTP credentials and destination shown by the active SRA submission.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">SRA Upload
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Use this exact line order:</p>
+<ol>
+<li>SRA FTP username;</li>
+<li>SRA FTP password;</li>
+<li>SRA account-folder path;</li>
+<li>one <code>SEQID</code> per subsequent line.</li>
+</ol>
+<p>Example structure:</p>
+<pre><code class="language-text">FTP_USERNAME
+FTP_PASSWORD
+uploads/account_folder
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>Do not include the placeholder values literally. Copy the current temporary credentials and folder path from the SRA submission portal.</p>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. SRA Upload locates the raw sequence files associated with each requested <code>SEQID</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for SRA Upload.</p>
+<h3 id="example">Example</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14963">issue 14963</a> for an example SRA Upload request.</p>
+<p>Do not copy expired credentials from an old issue.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When the transfer finishes, return to the SRA submission and select the preload folder. The uploaded files should appear in a directory named with the Redmine issue identifier.</p>
+<p>Verify that:</p>
+<ul>
+<li>the expected issue-number folder exists;</li>
+<li>every requested <code>SEQID</code> has the expected FASTQ file or paired files;</li>
+<li>filenames are appropriate for the SRA submission;</li>
+<li>file sizes are plausible and the transfer completed before continuing the submission.</li>
+</ul>
+<p>A completed Redmine issue confirms the transfer workflow finished; it does not by itself confirm that the SRA submission metadata or final NCBI submission is complete.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Small requests generally finish within a few minutes. Runtime increases with the number and size of the files and current network performance.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The issue warns that one or more requested sequences cannot be found.</p>
+<p><strong>Likely cause:</strong> The identifier is incorrect or its raw FASTQ data are unavailable.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code> and confirm that the raw reads exist.</p>
+<h3 id="the-ftp-transfer-times-out">The FTP transfer times out</h3>
+<p><strong>Symptom:</strong> The issue reports an error such as <code>Connection reset by peer</code>.</p>
+<p><strong>Likely cause:</strong> The FTP connection failed, often during a large transfer.</p>
+<p><strong>What to do:</strong> Retry later or divide a large upload into smaller requests. Escalate persistent failures to the bioinformatics team.</p>
+<h3 id="the-ftp-credentials-are-rejected">The FTP credentials are rejected</h3>
+<p><strong>Symptom:</strong> The issue reports an authentication failure.</p>
+<p><strong>Likely cause:</strong> The username or password is incorrect, expired, or placed on the wrong line.</p>
+<p><strong>What to do:</strong> Obtain current credentials from the active SRA submission and ensure the username is first and password second.</p>
+<h3 id="the-ftp-folder-does-not-exist">The FTP folder does not exist</h3>
+<p><strong>Symptom:</strong> The issue reports that the destination folder cannot be found.</p>
+<p><strong>Likely cause:</strong> The third line does not exactly match the account-folder path supplied by SRA.</p>
+<p><strong>What to do:</strong> Copy the path from <strong>Navigate to your account folder</strong> without modifying it.</p>
+<h2 id="related-data-workflows">Related data workflows</h2>
+<ul>
+<li><a href="../external_retrieve/">External Retrieve</a> — exports raw reads or assemblies for local download.</li>
+<li><a href="../sra_download/">SRA Download</a> — imports public SRA runs into the internal FoodPort/COWBAT workflow.</li>
+</ul>
               
             </div>
           </div><footer>

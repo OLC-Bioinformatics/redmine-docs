@@ -61,13 +61,27 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-dropbox-upload-times-out">The Dropbox upload times out</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-data-workflows">Related data workflows</a>
     </li>
     </ul>
                   </li>
@@ -98,9 +112,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/geneseekr/">GeneSeekr</a>
                   </li>
@@ -123,6 +141,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/mlst/">MLST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -154,8 +174,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -171,6 +189,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -207,25 +227,47 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="report-retrieve">Report Retrieve</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>Report retrieve will grab assembly reports for you and upload them to the FTP.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>Report Retrieve</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>Put the SEQIDs you want reports for in the description, one per line. </p>
-<h4 id="example">Example</h4>
-<p>For an example of an External Retrieve, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/13931">issue 13931</a>.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>This should be almost instant - your request should be processed within a few minutes.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>A few things can go wrong with this process:</p>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) FTP timeout. Sometimes, particularly for larger requests, the upload to the FTP will run into problems and time out,
-in which case you will likely get an error message similar to this: <code>Upload of result files was unsucessful due to
-FTP connectivity issues</code>. If this occurs, your best bet is to try again later. If problems persist, send us an email
-and we'll look into it.</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>Report Retrieve</strong> to collect COWBAT assembly-pipeline reports for requested <code>SEQID</code>s and make them available through Dropbox.</p>
+<p>Report Retrieve retrieves reports rather than raw reads or assembly FASTA files. Use <a href="../external_retrieve/">External Retrieve</a> when sequence data are required.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">Report Retrieve
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Enter one assembly <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. Report Retrieve locates reports associated with each requested <code>SEQID</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for Report Retrieve.</p>
+<h3 id="example">Example</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/13931">issue 13931</a> for an example Report Retrieve request.</p>
+<p>The legacy page incorrectly called this an “External Retrieve” example; the link is retained here as the Report Retrieve example identified by that page.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When processing finishes, use the Dropbox link posted to the Redmine issue to download the retrieved report package.</p>
+<p>Verify that the package contains reports for every available requested <code>SEQID</code>. If the issue warns about missing identifiers, the package may contain only the reports that could be located.</p>
+<p>The supplied page does not identify the exact archive name or report directory structure. Confirm those details from a recent completed request before adding exact filenames.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Report Retrieve is generally fast and should process a normal request within a few minutes. Large result packages can take longer to upload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue warns that one or more requested sequences or reports cannot be found.</p>
+<p><strong>Likely cause:</strong> The identifier is incorrect or no COWBAT reports are available for that sequence.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code> and confirm that the corresponding assembly-pipeline reports exist.</p>
+<h3 id="the-dropbox-upload-times-out">The Dropbox upload times out</h3>
+<p><strong>Symptom:</strong> The issue reports that result-file upload was unsuccessful because of network connectivity.</p>
+<p><strong>Likely cause:</strong> The report package is large or the Dropbox connection encountered a temporary failure.</p>
+<p><strong>What to do:</strong> Retry later or split a large request into smaller batches. Contact the bioinformatics team if the problem persists.</p>
+<h2 id="related-data-workflows">Related data workflows</h2>
+<ul>
+<li><a href="../external_retrieve/">External Retrieve</a> — retrieves raw reads or draft assemblies for local download.</li>
+<li><a href="../sra_download/">SRA Download</a> — imports external SRA runs and submits them for FoodPort/COWBAT processing.</li>
+</ul>
               
             </div>
           </div><footer>

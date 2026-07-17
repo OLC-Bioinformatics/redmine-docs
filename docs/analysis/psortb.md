@@ -1,41 +1,89 @@
 # PSORTb
 
-### What does it do?
+## What does it do?
 
-PSORTb is a program developed by the Brinkman lab at Simon Fraser University - it attempts to figure out what
-the subcellular location of proteins might be. If you wnat to know more, you can check out the 
-[PSORTb publication](https://academic.oup.com/bioinformatics/article/26/13/1608/201357) or the 
-[PSORTb documentation](https://www.psort.org/documentation/index.html). 
+Use **PSORTb** to predict the subcellular localization of proteins encoded by a genome assembly.
 
-### How do I use it?
+The workflow first uses Prokka to predict and annotate proteins, then runs PSORTb to assign localization categories. PSORTb was developed by the Brinkman laboratory at Simon Fraser University.
 
-#### Subject
+For background, see the [PSORTb publication](https://academic.oup.com/bioinformatics/article/26/13/1608/201357) and [PSORTb documentation](https://www.psort.org/documentation/index.html).
 
-In the `Subject` field, put `PSORTb`. Spelling counts, but case sensitivity doesn't.
+## How do I use it?
 
-#### Description
+### Subject
 
-All you need to put in the description is a list of SEQIDs you want to find protein localizations for, one per line.
+In the **Subject** field, enter:
 
-#### Example
+```text
+PSORTb
+```
 
-For an example PSORTb, see [issue 16061](https://redmine.biodiversity.agr.gc.ca/issues/16061).
+Spelling matters, but matching is not case-sensitive.
 
-#### Interpreting Results
+### Description
 
-PSORTb will upload a zip file - this will contain FASTA-formatted proteins as predicted and annotated by prokka, and 
-a text file for each SEQID that has the predicted subcellular localization for each protein.
+Enter one assembly `SEQID` per line:
 
-### How long does it take?
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-PSORTb is pretty slow - expect it to take at least 20 to 30 minutes per SEQID requested.
+### Attachments
 
-### What can go wrong?
+No attachment is required. PSORTb retrieves the assembly associated with each requested `SEQID`.
 
-1) Requested SEQIDs are not available: If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+### Optional parameters
 
-2) PSORTb needs to know whether a strain is gram positive or gram negative - you'll see that each of the text files
-you get have either `grampos` or `gramneg` in them, depending on whether or not we predicted that isolate to be gram 
-positive or gram negative. We're fairly sure that our classification is fairly robust, but there might be exceptions.
-If you put an isolate through and it's wrongly classified, email `andrew.low@canada.ca` and we'll get it sorted out!
+The supplied documentation does not identify optional parameters for the Redmine PSORTb automator.
+
+### Example
+
+See [issue 16061](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/16061) for an example PSORTb request.
+
+## Interpreting results
+
+PSORTb uploads a ZIP archive containing:
+
+- FASTA-formatted protein sequences predicted and annotated by Prokka; and
+- one text report per `SEQID` containing the predicted subcellular localization of each protein.
+
+Report filenames include either `grampos` or `gramneg`, reflecting whether the workflow classified the isolate as Gram-positive or Gram-negative for PSORTb analysis.
+
+Subcellular-localization assignments are computational predictions. Review the reported localization category, prediction confidence or score when available, protein annotation, and organism biology before drawing conclusions.
+
+The Gram classification affects the PSORTb model used. An incorrect Gram classification can therefore affect localization results.
+
+## How long does it take?
+
+PSORTb generally takes at least 20–30 minutes per requested `SEQID`. Total runtime depends on genome size, sample count, and service workload.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue warns that an assembly cannot be found.
+
+**Likely cause:** The identifier is incorrect or the assembly is unavailable.
+
+**What to do:** Verify each `SEQID` and confirm that its assembly exists.
+
+### The isolate is assigned the wrong Gram class
+
+**Symptom:** A result filename or report indicates `grampos` when `gramneg` was expected, or the reverse.
+
+**Likely cause:** The workflow's automatic Gram classification was incorrect for the isolate.
+
+**What to do:** Do not rely on the affected localization predictions. Contact the bioinformatics team with the issue number and expected Gram class so the analysis can be reviewed.
+
+### A localization prediction is uncertain
+
+**Symptom:** A protein is unclassified or has weak or conflicting localization evidence.
+
+**Likely cause:** The sequence lacks sufficient localization signals, the protein is incomplete, or the automated annotation is uncertain.
+
+**What to do:** Review the protein sequence and annotation and use appropriate supporting tools or experimental evidence.
+
+## Related automators
+
+- [Prokka](prokka.md) — produces general genome and protein annotations without PSORTb localization predictions.

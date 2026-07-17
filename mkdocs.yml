@@ -57,7 +57,6 @@ nav:
     - 'staramr': 'analysis/staramr.md'
     - 'StrainMash': 'analysis/strainmash.md'
     - 'Unknownisolate': 'analysis/unknownisolate.md'
-    - 'WGS Assembly': 'analysis/wgsassembly.md'
 - Internal Use:
     - 'Merge': 'internal_only/merge.md'
     - 'AzureDownload': 'internal_only/azuredownload.md'

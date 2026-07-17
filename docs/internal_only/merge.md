@@ -1,48 +1,113 @@
 # Merge
 
-### What does it do?
+> **Internal-only workflow:** This page documents an operational sequence-processing automator. It must remain under `docs/internal_only/` and must not be linked from the standard user index.
 
-Merge will take data from multiple MiSeq runs of the same strain and combine the FASTQ files in order 
-to produce a better assembly. 
+## What does it do?
 
-### How do I use it?
+Use **Merge** to combine raw FASTQ data from multiple MiSeq runs of the same biological strain and generate a new merged assembly workflow record.
 
-#### Subject
+Merge is intended for authorized internal processing when repeated sequencing runs belong to the same isolate. The source runs must be verified as the same biological sample before submission.
 
-In the `Subject` field, put `Merge`. Spelling counts, but case sensitivity doesn't.
+## How do I use it?
 
-#### Description
+### Subject
 
-No text necessary in the description. You will, however, need to attach an excel file (.xlsx extension)
-with the following headers: 
+In the **Subject** field, enter:
 
-- Location: Should be 'MER'
-- SEQID: Put the name of the merged SEQID (YYYY-MER-####)
-- OLNID: Can be blank
-- LabID: Can be blank
-- LabIDIsolate: Can be blank
-- OtherName: The SeqIDs you want to merge, separated by semi-colons.
-- Genus: Genus of the isolate. Can be left blank.
-- Species: Can be blank 
-- Subspecies: Can be blank
-- Serotype: Can be blank
+```text
+Merge
+```
 
-An example file can be found with the example issue below.
+Spelling matters, but matching is not case-sensitive.
 
-#### Example
+### Description
 
-For an example Merge, see [issue 14285](https://redmine.biodiversity.agr.gc.ca/issues/14285).
+Leave the Description empty. Supply the complete request in one attached Excel workbook with the `.xlsx` extension.
 
-#### Interpreting Results
+### Required attachment
 
-You'll get back the reports and assemblies, as you would for a `WGS Assembly` issue.
+The workbook must contain these exact headers:
 
-### How long does it take?
+- `Location` — enter `MER`;
+- `SEQID` — new merged identifier in the form `YYYY-MER-####`;
+- `OLNID` — may be blank;
+- `LabID` — may be blank;
+- `LabIDIsolate` — may be blank;
+- `OtherName` — source `SEQID`s separated by semicolons;
+- `Genus` — genus of the isolate; may be blank;
+- `Species` — may be blank;
+- `Subspecies` — may be blank;
+- `Serotype` — may be blank.
 
-Merge will take quite a while, depending on how many samples you have. Probably roughly half an hour per sample.
+Example row concept:
 
-### What can go wrong?
+```text
+Location: MER
+SEQID: 2026-MER-0001
+OtherName: 2026-SEQ-0001;2026-SEQ-0002
+```
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+Use a genuine `.xlsx` workbook rather than a renamed CSV file.
 
+### Optional parameters
+
+The supplied documentation does not identify optional Description parameters. Optional metadata columns may be left blank as noted above.
+
+### Example
+
+See [issue 14285](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14285) for an example Merge request and workbook.
+
+## Interpreting results
+
+Merge returns the reports and assemblies normally produced by the WGS assembly workflow for the new merged record.
+
+Verify that:
+
+- the new `YYYY-MER-####` identifier is correct;
+- every source `SEQID` belongs to the same biological strain;
+- the resulting assembly and reports correspond to the merged input runs;
+- expected quality-control metrics improve or remain acceptable.
+
+Merging additional sequencing data does not guarantee a better assembly if the runs are contaminated, mismatched, or poor quality.
+
+## How long does it take?
+
+Runtime depends on sample count, read volume, and assembly workload. The supplied documentation estimates approximately 30 minutes per merged sample.
+
+## What can go wrong?
+
+### A source `SEQID` is unavailable
+
+**Symptom:** The issue warns that one or more source runs cannot be found.
+
+**Likely cause:** A source identifier in `OtherName` is incorrect or its FASTQ data are unavailable.
+
+**What to do:** Verify each semicolon-separated source `SEQID`.
+
+### The workbook is missing or malformed
+
+**Symptom:** The automator cannot parse the request.
+
+**Likely cause:** No `.xlsx` file was attached, a required header is missing or misspelled, or the file is not a valid Excel workbook.
+
+**What to do:** Use the required headers exactly and attach a valid `.xlsx` file.
+
+### The merged output identifier is invalid
+
+**Symptom:** The workflow cannot create the new merged record.
+
+**Likely cause:** `Location` is not `MER`, or `SEQID` does not follow the required `YYYY-MER-####` format.
+
+**What to do:** Correct both fields in the workbook.
+
+### Source runs belong to different isolates
+
+**Symptom:** The merged assembly has poor quality, excessive fragmentation, conflicting taxonomic signals, or other unexpected results.
+
+**Likely cause:** FASTQ data from different biological strains were combined.
+
+**What to do:** Stop downstream use, verify sample identity, and repeat the workflow only with runs from the same strain.
+
+## Access and navigation
+
+Keep this page out of standard-access navigation and retrieval. Link it only from explicitly internal operational documentation.

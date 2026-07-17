@@ -1,50 +1,125 @@
 # SRA Upload
 
-### What does it do?
+## What does it do?
 
-SRA Upload allows you to preload your sequence data for submission to the NCBI SRA using an FTP connection.
+Use **SRA Upload** to transfer raw sequence files associated with internal `SEQID`s into the preload area of an NCBI Sequence Read Archive submission using SRA-provided FTP credentials.
 
-### How do I use it?
+SRA Upload handles file transfer only. You must first create or begin an SRA submission and obtain the temporary FTP username, password, and account-folder path from the SRA submission portal.
 
-#### Subject
+> **Credential warning:** The Redmine Description contains a temporary FTP password. Restrict the issue to the appropriate project and users, do not reuse the password elsewhere, and remove or rotate credentials when the transfer is complete if the SRA workflow permits it.
 
-In the `Subject` field, put `SRA Upload`. Spelling counts, but case sensitivity doesn't.
+## Before creating the request
 
-#### Description
+1. Sign in to the NCBI SRA submission portal.
+2. Open **My Submissions**.
+3. Start or open a **Sequence Read Archive** submission.
+4. Under the data-preload options, select **FTP upload**.
+5. Record the temporary:
+   - username;
+   - password;
+   - account-folder path shown under **Navigate to your account folder**.
 
-Before submitting, you'll need to get your FTP username, FTP password, and FTP folder name from the SRA.
-To do this, log in to the SRA submission portal. Click on the `My Submissions` tab towards the top right of the page,
-and then in the `Start a new submission` box, click `Sequence Read Archive`. Under `Options to preload data`, click 
-`FTP upload`, and take note of the __Username__, __Password__, and the text under __Navigate to your account folder.__
+Portal labels may change over time. Use the FTP credentials and destination shown by the active SRA submission.
 
-Once you have those three things, you're ready to go. Put the username in the first line of the description, password 
-in the second line, and the folder specified in the third (it should be something like `uploads/youremail_a1d3a1`).
-In subsequent lines, put the SeqIDs you want to upload files for. Once the request finishes running, you should be 
-able to find a folder named with your Redmine issue ID when you select a preload folder during submission.
+## How do I use it?
 
-#### Example
+### Subject
 
-For an example of an SRA Upload, see [issue 14963](https://redmine.biodiversity.agr.gc.ca/issues/14963).
+In the **Subject** field, enter:
 
-### How long does it take?
+```text
+SRA Upload
+```
 
-If your request is for a small number of files, it will generally be done within a few minutes. The more files requested,
-the longer the request will take.
+Spelling matters, but matching is not case-sensitive.
 
-### What can go wrong?
+### Description
 
-A few things can go wrong with this process:
+Use this exact line order:
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+1. SRA FTP username;
+2. SRA FTP password;
+3. SRA account-folder path;
+4. one `SEQID` per subsequent line.
 
-2) FTP timeout. Sometimes, particularly for larger requests, the upload to the FTP will run into problems and time out,
-in which case you will likely get an error message similar to this: `[Errno 104] Connection reset by peer`. If this occurs,
-you can either try again later, or, if you had a large request, try splitting it into a few smaller requests. If the
-problem persists, send us an email and we'll try to get it figured out.
+Example structure:
 
-3) Bad FTP credentials. If the username and password for the NCBI FTP site didn't work you'll get a message telling you so.
-Make sure your username is on the first line of the request and password is second.
+```text
+FTP_USERNAME
+FTP_PASSWORD
+uploads/account_folder
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-4) FTP folder does not exist. If the FTP folder specified on the third line of the description isn't correct,
-you'll get a message saying so.
+Do not include the placeholder values literally. Copy the current temporary credentials and folder path from the SRA submission portal.
+
+### Attachments
+
+No attachment is required. SRA Upload locates the raw sequence files associated with each requested `SEQID`.
+
+### Optional parameters
+
+The supplied documentation does not identify optional parameters for SRA Upload.
+
+### Example
+
+See [issue 14963](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14963) for an example SRA Upload request.
+
+Do not copy expired credentials from an old issue.
+
+## Interpreting results
+
+When the transfer finishes, return to the SRA submission and select the preload folder. The uploaded files should appear in a directory named with the Redmine issue identifier.
+
+Verify that:
+
+- the expected issue-number folder exists;
+- every requested `SEQID` has the expected FASTQ file or paired files;
+- filenames are appropriate for the SRA submission;
+- file sizes are plausible and the transfer completed before continuing the submission.
+
+A completed Redmine issue confirms the transfer workflow finished; it does not by itself confirm that the SRA submission metadata or final NCBI submission is complete.
+
+## How long does it take?
+
+Small requests generally finish within a few minutes. Runtime increases with the number and size of the files and current network performance.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The issue warns that one or more requested sequences cannot be found.
+
+**Likely cause:** The identifier is incorrect or its raw FASTQ data are unavailable.
+
+**What to do:** Verify each `SEQID` and confirm that the raw reads exist.
+
+### The FTP transfer times out
+
+**Symptom:** The issue reports an error such as `Connection reset by peer`.
+
+**Likely cause:** The FTP connection failed, often during a large transfer.
+
+**What to do:** Retry later or divide a large upload into smaller requests. Escalate persistent failures to the bioinformatics team.
+
+### The FTP credentials are rejected
+
+**Symptom:** The issue reports an authentication failure.
+
+**Likely cause:** The username or password is incorrect, expired, or placed on the wrong line.
+
+**What to do:** Obtain current credentials from the active SRA submission and ensure the username is first and password second.
+
+### The FTP folder does not exist
+
+**Symptom:** The issue reports that the destination folder cannot be found.
+
+**Likely cause:** The third line does not exactly match the account-folder path supplied by SRA.
+
+**What to do:** Copy the path from **Navigate to your account folder** without modifying it.
+
+## Related data workflows
+
+- [External Retrieve](external_retrieve.md) — exports raw reads or assemblies for local download.
+- [SRA Download](sra_download.md) — imports public SRA runs into the internal FoodPort/COWBAT workflow.

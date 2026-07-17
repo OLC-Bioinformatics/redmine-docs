@@ -1,74 +1,163 @@
 # MashTree
 
-### What does it do?
+## What does it do?
 
-MashTree will take a list of SEQIDs, and then create a
-phylogenetic tree using Mash distances. See [mashtree github](https://github.com/lskatz/mashtree) and the [mashtree docs](https://github.com/lskatz/mashtree/blob/master/docs/ALGORITHM.md) for more information. (The mashtree docs explains how mash is used to create the phylogeny).
+Use **MashTree** to build a rapid whole-genome tree from a list of sequence assemblies using Mash distances.
 
-If you use mashtree, please remember to cite [Katz et al., 2019](Mashtree: a rapid comparison of whole genome sequence files), [Ondov et al., 2016](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0997-x) and [Ondov et al., 2019](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1841-x)
+MashTree uses MinHash sketches to estimate pairwise genomic distances and construct a tree. It is useful for rapid exploratory comparison of many genomes, but the resulting tree is distance-based and is not built from a whole-genome alignment.
 
+For background, see the [MashTree repository](https://github.com/lskatz/mashtree), the [MashTree algorithm documentation](https://github.com/lskatz/mashtree/blob/master/docs/ALGORITHM.md), and the Mash publications. Cite Katz et al. (2019), Ondov et al. (2016), and Ondov et al. (2019) when publishing results produced with this workflow.
 
-### How do I use it?
+## How do I use it?
 
-#### Subject
+### Subject
 
-In the `Subject` field, put `mashtree`. Spelling counts, but case sensitivity doesn't.
+In the **Subject** field, enter:
 
-#### Description
+```text
+mashtree
+```
 
-**Required Components**
+Spelling matters, but matching is not case-sensitive.
 
-The first line of the description should be the analysis you would like to run (e.g. `analysis=custom`). 
+### Description
 
-- The following options are currently supported:
-    - `custom` - compare only the SEQIDs listed in the description
-    - `enterobacterales` - compare the listed SEQIDs to a set of reference sequences for species from the order Enterobacterales
-    - `listeriaceae` - compare the listed SEQIDs to a set of reference sequences for species from the family Listeriaceae
+The first line selects the analysis mode:
 
-You must also include a list of SEQIDs one per line.
+```text
+analysis=ANALYSIS_NAME
+```
 
-**Optional Components**
+Enter optional parameters next, followed by one `SEQID` per line.
 
-- genomesize: 
-    - default is `5000000` 
-    - If you want to use a genome size estimate, add a line to your description:
-        - `genomesize=3000000`
+### Supported analyses
 
-- mindepth - if mindepth is zero, then it will be chosen in a smart but slower method to discard lower-abundance kmers.
-    - default is `5` 
-    - If you want to use a minimum depth, add a line to your description:
-        - `mindepth=10`
+#### `custom`
 
-- kmerlength - [Mash kmer size](https://mash.readthedocs.io/en/latest/sketches.html) "larger k-mers will provide more specificity while smaller k-mers will provide more sensitivity. (Larger genomes will also require larger k-mers to avoid k-mers that are shared by chance)."
-    - default is `21` 
-    - If you want to change the k-mer size, add a line to your description:
-        - `kmerlength=30`
+Compares only the assemblies listed in the Description:
 
-- sketch-size - [Mash sketch size](https://mash.readthedocs.io/en/latest/sketches.html) "corresponds to the number of (non-redundant) min-hashes that are kept. Larger sketches will better represent the sequence, but at the cost of larger sketch files and longer comparison times."
-    - default is `10000` 
-    - If you want to change the mash sketch-size, add a line to your description:
-        - `sketch-size=1000`
+```text
+analysis=custom
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+```
 
+#### `enterobacterales`
 
-#### Example
+Compares the listed assemblies with a reference set representing species from order Enterobacterales.
 
-For an example MashTree, see [issue 26206](https://redmine.biodiversity.agr.gc.ca/issues/26206).
+```text
+analysis=enterobacterales
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-#### Interpreting Results
+#### `listeriaceae`
 
-Upon completion, you'll be given a treefile.
+Compares the listed assemblies with a reference set representing species from family Listeriaceae.
 
-### How long does it take?
+```text
+analysis=listeriaceae
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-This depends largely on the number of strains you want to use to create the tree. It can often be as quick as a few minutes. 
+### Attachments
 
-### What can go wrong?
+The supplied documentation does not identify support for attached assemblies. Use available `SEQID`s unless attachment support has been verified in the current implementation.
 
-A few things can go wrong with this process:
+### Optional parameters
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+#### `genomesize`
 
-### Version
+Sets the expected genome size.
 
-Version 0.35.4 is currently available at the OLC. (as of 2024-07-4)
+- Default: `5000000`
+- Example: `genomesize=3000000`
+
+Choose a value appropriate for the organisms being compared.
+
+#### `mindepth`
+
+Sets the minimum k-mer depth. A value of `0` uses a smarter but slower method to discard lower-abundance k-mers.
+
+- Default: `5`
+- Example: `mindepth=10`
+
+#### `kmerlength`
+
+Sets the Mash k-mer size.
+
+- Default: `21`
+- Example: `kmerlength=30`
+
+Larger k-mers generally provide more specificity, while smaller k-mers provide more sensitivity. Larger genomes can require larger k-mers to reduce chance sharing.
+
+#### `sketch-size`
+
+Sets the number of non-redundant MinHash values retained in each Mash sketch.
+
+- Default: `10000`
+- Example: `sketch-size=1000`
+
+Larger sketches better represent each sequence but increase sketch size and comparison time.
+
+### Example
+
+```text
+analysis=custom
+genomesize=5000000
+mindepth=5
+kmerlength=21
+sketch-size=10000
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+```
+
+See [issue 26206](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/26206) for an example MashTree request.
+
+## Interpreting results
+
+When MashTree finishes, it uploads a Newick-formatted tree file to the Redmine issue.
+
+Open the file in a Newick-compatible tree viewer. Branch lengths represent relationships derived from Mash distance estimates. Interpret them as rapid genome-distance comparisons rather than alignment-derived substitutions.
+
+For `enterobacterales` and `listeriaceae`, the tree also includes the workflow's reference genomes. The nearest reference can help place a query within the represented collection, but a nearest tree position alone is not a definitive taxonomic assignment.
+
+## How long does it take?
+
+Runtime depends mainly on the number and size of assemblies, sketch parameters, and selected reference set. Small requests can finish in a few minutes; large sketches or many genomes take longer.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable assemblies.
+
+**Likely cause:** MashTree cannot locate an assembly for the requested `SEQID`.
+
+**What to do:** Verify each `SEQID` and confirm that its assembly is available.
+
+### The selected analysis is unsupported or misspelled
+
+**Symptom:** The automator cannot choose a comparison set.
+
+**Likely cause:** `analysis` is missing or is not one of `custom`, `enterobacterales`, and `listeriaceae`.
+
+**What to do:** Use a supported analysis value exactly as documented.
+
+### Genomes are too dissimilar for a useful tree
+
+**Symptom:** The tree contains very long branches or relationships that are difficult to interpret.
+
+**Likely cause:** The included genomes are too diverse, the reference set is inappropriate, or sketch settings are unsuitable.
+
+**What to do:** Compare a more coherent genome set, select a better analysis mode, and review `genomesize`, `kmerlength`, `mindepth`, and `sketch-size`.
+
+## Related automators
+
+- [bcgTree](bcgtree.md) — builds a bacterial phylogeny from essential single-copy core genes using a partitioned maximum-likelihood analysis.
+- [NearTree](neartree.md) — ranks the closest strains to one query among a supplied comparison set.
+- [StrainMash](strainmash.md) — identifies the closest represented RefSeq type strain for an assembly.

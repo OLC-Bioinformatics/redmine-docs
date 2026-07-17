@@ -1,43 +1,115 @@
 # NearTree
 
-### What does it do?
+## What does it do?
 
-NearTree will take a query SEQID, and then find the _X_ closest strains to it out of a list specified by creating a
-phylogenetic tree and looking for the tips that are closest to your query strain.
+Use **NearTree** to select a requested number of strains that are closest to one query strain within a user-supplied comparison set.
 
-### How do I use it?
+NearTree creates a distance-based tree for the query and reference `SEQID`s, then ranks the tree tips closest to the query. It returns an ordered list rather than a full phylogenetic interpretation.
 
-#### Subject
+Use NearTree when the goal is to choose close comparators from a defined set. Use MashTree or bcgTree when the goal is to inspect a complete tree.
 
-In the `Subject` field, put `NearTree`. Spelling counts, but case sensitivity doesn't.
+## How do I use it?
 
-#### Description
+### Subject
 
-The first line of the description should be the number of closest strains you want to your query strain.
-The second line must say `query`, and the third line should be the query SEQID you want to find close relatives for.
-The fourth line must say `reference`, and every line after that should be a SEQID you want to compare your query to.
+In the **Subject** field, enter:
 
-#### Example
+```text
+NearTree
+```
 
-For an example NearTree, see [issue 12940](https://redmine.biodiversity.agr.gc.ca/issues/12940).
+Spelling matters, but matching is not case-sensitive.
 
-#### Interpreting Results
+### Description
 
-Upon completion, you'll be given a list of the SEQIDs that are closest to the query specified. The most closely related
-will be listed first, with each SEQID listed after that becoming slightly more distant.
+The Description uses this exact order:
 
-### How long does it take?
+1. number of closest strains to return;
+2. the line `query`;
+3. one query `SEQID`;
+4. the line `reference`;
+5. all candidate comparison `SEQID`s, one per line.
 
-This depends largely on the number of strains you want to use to create the tree. It can often be as quick as a few minutes
-if you have 10 or less strains, or take several hours if you want a larger (100 or so strain) tree.
+Example requesting the five closest strains:
 
-### What can go wrong?
+```text
+5
+query
+2026-SEQ-0001
+reference
+2026-SEQ-0002
+2026-SEQ-0003
+2026-SEQ-0004
+2026-SEQ-0005
+2026-SEQ-0006
+2026-SEQ-0007
+```
 
-A few things can go wrong with this process:
+The requested count should not exceed the number of valid reference candidates.
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+### Attachments
 
-2) Strains too far apart. NearTree will warn you if it thinks that the strains you want to make a tree from are
-not closely related enough. If you get this warning, you may want to consider creating a new issue while leaving out
-the strains it says are too far.
+The supplied documentation does not identify attachment support. Use available `SEQID`s unless the current implementation has been verified to accept files.
+
+### Optional parameters
+
+The supplied documentation does not identify optional parameters beyond the number of closest strains on the first line.
+
+### Example
+
+See [issue 12940](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/12940) for an example NearTree request.
+
+## Interpreting results
+
+NearTree returns an ordered list of the comparison `SEQID`s closest to the query.
+
+- the first result is the closest strain found in the supplied comparison set;
+- each subsequent result is progressively more distant according to the workflow's tree-based distance ranking.
+
+The result identifies relative closeness only among the candidates you supplied. It does not prove that the first result is the closest strain in the full database or population, and it does not provide a universal relatedness threshold.
+
+If the workflow warns that candidates are too distant, reconsider the comparison set before using the ranking for downstream analysis.
+
+## How long does it take?
+
+Runtime depends primarily on the number of candidate strains. A set of 10 or fewer strains can finish in a few minutes, while a comparison involving approximately 100 strains can take several hours.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The issue warns that the query or one or more reference candidates cannot be found.
+
+**Likely cause:** An identifier is incorrect or its assembly is unavailable.
+
+**What to do:** Verify every `SEQID` and confirm that the required assemblies exist.
+
+### Candidate strains are too distant
+
+**Symptom:** NearTree warns that some supplied strains are not sufficiently related.
+
+**Likely cause:** The reference set spans organisms that are too diverse for a meaningful close-strain ranking.
+
+**What to do:** Remove the flagged distant strains and submit a more coherent comparison set.
+
+### The requested result count is invalid
+
+**Symptom:** NearTree cannot return the requested number of closest strains.
+
+**Likely cause:** The first line is not a valid positive integer or exceeds the number of valid reference candidates.
+
+**What to do:** Use a positive integer no greater than the available reference-set size.
+
+### The closest result is overinterpreted
+
+**Symptom:** The first returned strain is treated as the globally closest available organism.
+
+**Likely cause:** NearTree ranks only the candidate strains included in the request.
+
+**What to do:** Expand or revise the candidate set when broader comparison is required.
+
+## Related automators
+
+- [MashTree](mashtree.md) — creates a complete tree from Mash distances for listed assemblies and optional reference sets.
+- [bcgTree](bcgtree.md) — builds a maximum-likelihood bacterial tree from essential single-copy core genes.
+- [StrainMash](strainmash.md) — compares one assembly with represented RefSeq type strains.

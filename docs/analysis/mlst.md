@@ -1,210 +1,297 @@
 # MLST
 
-### What does it do?
+## What does it do?
 
-​​The automator runs MLST analyses on provided SEQIDs. If the MLST database for the requested genus is not present on the NAS, or an update is requested, the automator downloads and prepares the database. It also runs GeneSeekr to perform MLST analyses. GeneSeekr MLST reports are uploaded and attached to the issue​.
+Use **MLST** to determine multilocus sequence types for supported organisms from draft genome assemblies or attached FASTA files.
 
-### How do I use it?
+The automator prepares the requested MLST database when it is not already available on the NAS or when an update is requested. It then runs GeneSeekr and attaches the MLST reports to the Redmine issue.
 
-#### Subject
+## How do I use it?
 
-In the `Subject` field, put `mlst` spelling counts, but case sensitivity doesn't.
+### Subject
 
-#### Description
+In the **Subject** field, enter:
 
-Include the genus on the first line `organism=[name of organism]`. Please note that both spelling AND case sensitivity are important.
+```text
+mlst
+```
 
-For organisms like `Escherichia coli` that have multiple schemes, you need to specify which scheme you need. `Escherichia coli#1` corresponds to the `Achtman` scheme and `Escherichia coli#2` corresponds to the `Pasteur` scheme
+Spelling matters, but matching is not case-sensitive.
 
-Here are the organisms currently available for this automator: 
+### Description
 
-<details>
-  <summary><b>Full list of supported organisms</b></summary> <br>
-	<ul>
-	
-<li>Achromobacter spp.</li>
-<li>Acinetobacter baumannii#1</li>
-<li>Acinetobacter baumannii#2</li>
-<li>Aeromonas spp.</li>
-<li>Aggregatibacter actinomycetemcomitans</li>
-<li>Anaplasma phagocytophilum</li>
-<li>Arcobacter spp.</li>
-<li>Aspergillus fumigatus</li>
-<li>Bacillus cereus</li>
-<li>Bacillus licheniformis</li>
-<li>Bacillus subtilis</li>
-<li>Bacteroides fragilis</li>
-<li>Bartonella bacilliformis</li>
-<li>Bartonella henselae</li>
-<li>Bartonella washoensis</li>
-<li>Bordetella spp.</li>
-<li>Borrelia spp.</li>
-<li>Brachyspira hampsonii</li>
-<li>Brachyspira hyodysenteriae</li>
-<li>Brachyspira intermedia</li>
-<li>Brachyspira pilosicoli</li>
-<li>Brachyspira spp.</li>
-<li>Brucella spp.</li>
-<li>Burkholderia cepacia complex</li>
-<li>Burkholderia pseudomallei</li>
-<li>Campylobacter concisus/curvus</li>
-<li>Campylobacter fetus</li>
-<li>Campylobacter helveticus</li>
-<li>Campylobacter hyointestinalis</li>
-<li>Campylobacter insulaenigrae</li>
-<li>Campylobacter jejuni</li>
-<li>Campylobacter lanienae</li>
-<li>Campylobacter lari</li>
-<li>Campylobacter sputorum</li>
-<li>Campylobacter upsaliensis</li>
-<li>Candida albicans</li>
-<li>Candida glabrata</li>
-<li>Candida krusei</li>
-<li>Candida tropicalis</li>
-<li>Candidatus Liberibacter solanacearum</li>
-<li>Carnobacterium maltaromaticum</li>
-<li>Chlamydiales spp.</li>
-<li>Citrobacter freundii</li>
-<li>Clonorchis sinensis</li>
-<li>Clostridioides difficile</li>
-<li>Clostridium botulinum</li>
-<li>Clostridium perfringens</li>
-<li>Clostridium septicum</li>
-<li>Corynebacterium diphtheriae</li>
-<li>Cronobacter spp.</li>
-<li>Cutibacterium acnes</li>
-<li>Dichelobacter nodosus</li>
-<li>Edwardsiella spp.</li>
-<li>Enterobacter cloacae</li>
-<li>Enterococcus faecalis</li>
-<li>Enterococcus faecium</li>
-<li>Escherichia coli#1</li>
-<li>Escherichia coli#2</li>
-<li>Flavobacterium psychrophilum</li>
-<li>Gallibacterium anatis</li>
-<li>Geotrichum spp.</li>
-<li>Glaesserella parasuis</li>
-<li>Haemophilus influenzae</li>
-<li>Helicobacter cinaedi</li>
-<li>Helicobacter pylori</li>
-<li>Helicobacter suis</li>
-<li>Kingella kingae</li>
-<li>Klebsiella aerogenes</li>
-<li>Klebsiella oxytoca</li>
-<li>Klebsiella pneumoniae</li>
-<li>Kudoa septempunctata</li>
-<li>Lactobacillus salivarius</li>
-<li>Lactococcus lactis bacteriophage</li>
-<li>Leptospira spp.</li>
-<li>Leptospira spp.#2</li>
-<li>Leptospira spp.#3</li>
-<li>Listeria monocytogenes</li>
-<li>Macrococcus canis</li>
-<li>Macrococcus caseolyticus</li>
-<li>Mammaliicoccus sciuri</li>
-<li>Mannheimia haemolytica</li>
-<li>Melissococcus plutonius</li>
-<li>Moraxella catarrhalis</li>
-<li>Mycobacteria spp.</li>
-<li>Mycobacteroides abscessus</li>
-<li>Mycoplasma agalactiae</li>
-<li>Mycoplasma anserisalpingitidis</li>
-<li>Mycoplasma bovis</li>
-<li>Mycoplasma flocculare</li>
-<li>Mycoplasma gallisepticum#1</li>
-<li>Mycoplasma gallisepticum#2</li>
-<li>Mycoplasma hominis</li>
-<li>Mycoplasma hyopneumoniae</li>
-<li>Mycoplasma hyorhinis</li>
-<li>Mycoplasma iowae</li>
-<li>Mycoplasma pneumoniae</li>
-<li>Mycoplasma synoviae</li>
-<li>Neisseria spp.</li>
-<li>Orientia tsutsugamushi</li>
-<li>Ornithobacterium rhinotracheale</li>
-<li>Paenibacillus larvae</li>
-<li>Pasteurella multocida#1</li>
-<li>Pasteurella multocida#2</li>
-<li>Pediococcus pentosaceus</li>
-<li>Photobacterium damselae</li>
-<li>Piscirickettsia salmonis</li>
-<li>Porphyromonas gingivalis</li>
-<li>Pseudomonas aeruginosa</li>
-<li>Pseudomonas fluorescens</li>
-<li>Pseudomonas putida</li>
-<li>Rhodococcus spp.</li>
-<li>Riemerella anatipestifer</li>
-<li>Salmonella enterica</li>
-<li>Saprolegnia parasitica</li>
-<li>Shewanella spp.</li>
-<li>Sinorhizobium spp.</li>
-<li>Staphylococcus aureus</li>
-<li>Staphylococcus chromogenes</li>
-<li>Staphylococcus epidermidis</li>
-<li>Staphylococcus haemolyticus</li>
-<li>Staphylococcus hominis</li>
-<li>Staphylococcus lugdunensis</li>
-<li>Staphylococcus pseudintermedius</li>
-<li>Stenotrophomonas maltophilia</li>
-<li>Streptococcus agalactiae</li>
-<li>Streptococcus bovis/equinus complex (SBSEC)</li>
-<li>Streptococcus canis</li>
-<li>Streptococcus dysgalactiae equisimilis</li>
-<li>Streptococcus gallolyticus</li>
-<li>Streptococcus oralis</li>
-<li>Streptococcus pneumoniae</li>
-<li>Streptococcus pyogenes</li>
-<li>Streptococcus suis</li>
-<li>Streptococcus thermophilus</li>
-<li>Streptococcus thermophilus#2</li>
-<li>Streptococcus uberis</li>
-<li>Streptococcus zooepidemicus</li>
-<li>Streptomyces spp</li>
-<li>Taylorella spp.</li>
-<li>Tenacibaculum spp.</li>
-<li>Treponema pallidum</li>
-<li>Trichomonas vaginalis</li>
-<li>Ureaplasma spp.</li>
-<li>Vibrio cholerae</li>
-<li>Vibrio cholerae#2</li>
-<li>Vibrio parahaemolyticus</li>
-<li>Vibrio spp.</li>
-<li>Vibrio tapetis</li>
-<li>Vibrio vulnificus</li>
-<li>Wolbachia</li>
-<li>Xylella fastidiosa</li>
-<li>Yersinia pseudotuberculosis</li>
-<li>Yersinia ruckeri</li>
-	</ul> 
-</details>
-<br>
-You can also choose to update the OLC database by entering `update` on the next line.
+The first line must identify the exact organism or scheme:
 
-Then add the SEQID's on separate lines to match the rest of the document.
+```text
+organism=SUPPORTED ORGANISM
+```
 
-Note that FASTA files can also be attatched to the issue and be processed. This can used in addition to or instead of SEQIDs. However, there is a 5MB limit to the attatched file enforced by Redmine.
+The organism value is both spelling-sensitive and case-sensitive. Copy it exactly from the supported-organism list below.
 
-#### Example
+Enter one `SEQID` per subsequent line:
 
-For an example mlst see [issue 34327](https://redmine.biodiversity.agr.gc.ca/issues/34327) or [issue 34328](https://redmine.biodiversity.agr.gc.ca/issues/34328).
+```text
+organism=Salmonella enterica
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-#### Interpreting Results
+### Multiple schemes for one organism
 
-If submitted correctly you will recieve a zip folder named `geneseekr_output_[issue num].zip` that contains a excel sheet you can download.
+Some organisms have more than one MLST scheme. For *Escherichia coli*:
 
-### How long does it take?
+- `Escherichia coli#1` selects the Achtman scheme;
+- `Escherichia coli#2` selects the Pasteur scheme.
 
-​It should take a minute or two for the automator to run depending on whether the database needs to be installed/updated. Adding more sequences will scale up the time required​.
+Example:
 
-### What can go wrong?
+```text
+organism=Escherichia coli#1
+2026-SEQ-0001
+```
 
-A few things can go wrong with this process:
+### Database update
 
-1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.
+Add `update` on the line after `organism=...` to request preparation of the current database used by the automator:
 
-2) Requested an unsupported organism. Please see the list of supported organisms above.
+```text
+organism=Listeria monocytogenes
+update
+2026-SEQ-0001
+```
 
-### Version
+Updating or installing a database increases runtime.
 
-The databases can be updated by including the `update` argument in the description.
+### Attachments
 
+FASTA files can be attached and processed either instead of, or in addition to, `SEQID`s.
+
+Redmine enforces a 5 MB limit for attached files. Use an available `SEQID` rather than an attachment when the FASTA file exceeds that limit.
+
+### Optional parameters
+
+The supplied documentation does not identify options other than the `update` command and the exact `organism` or scheme selection.
+
+### Examples
+
+See [issue 34327](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/34327) and [issue 34328](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/34328) for example MLST requests.
+
+## Supported organisms and schemes
+
+Use the exact value shown below after `organism=`.
+
+```text
+Achromobacter spp.
+Acinetobacter baumannii#1
+Acinetobacter baumannii#2
+Aeromonas spp.
+Aggregatibacter actinomycetemcomitans
+Anaplasma phagocytophilum
+Arcobacter spp.
+Aspergillus fumigatus
+Bacillus cereus
+Bacillus licheniformis
+Bacillus subtilis
+Bacteroides fragilis
+Bartonella bacilliformis
+Bartonella henselae
+Bartonella washoensis
+Bordetella spp.
+Borrelia spp.
+Brachyspira hampsonii
+Brachyspira hyodysenteriae
+Brachyspira intermedia
+Brachyspira pilosicoli
+Brachyspira spp.
+Brucella spp.
+Burkholderia cepacia complex
+Burkholderia pseudomallei
+Campylobacter concisus/curvus
+Campylobacter fetus
+Campylobacter helveticus
+Campylobacter hyointestinalis
+Campylobacter insulaenigrae
+Campylobacter jejuni
+Campylobacter lanienae
+Campylobacter lari
+Campylobacter sputorum
+Campylobacter upsaliensis
+Candida albicans
+Candida glabrata
+Candida krusei
+Candida tropicalis
+Candidatus Liberibacter solanacearum
+Carnobacterium maltaromaticum
+Chlamydiales spp.
+Citrobacter freundii
+Clonorchis sinensis
+Clostridioides difficile
+Clostridium botulinum
+Clostridium perfringens
+Clostridium septicum
+Corynebacterium diphtheriae
+Cronobacter spp.
+Cutibacterium acnes
+Dichelobacter nodosus
+Edwardsiella spp.
+Enterobacter cloacae
+Enterococcus faecalis
+Enterococcus faecium
+Escherichia coli#1
+Escherichia coli#2
+Flavobacterium psychrophilum
+Gallibacterium anatis
+Geotrichum spp.
+Glaesserella parasuis
+Haemophilus influenzae
+Helicobacter cinaedi
+Helicobacter pylori
+Helicobacter suis
+Kingella kingae
+Klebsiella aerogenes
+Klebsiella oxytoca
+Klebsiella pneumoniae
+Kudoa septempunctata
+Lactobacillus salivarius
+Lactococcus lactis bacteriophage
+Leptospira spp.
+Leptospira spp.#2
+Leptospira spp.#3
+Listeria monocytogenes
+Macrococcus canis
+Macrococcus caseolyticus
+Mammaliicoccus sciuri
+Mannheimia haemolytica
+Melissococcus plutonius
+Moraxella catarrhalis
+Mycobacteria spp.
+Mycobacteroides abscessus
+Mycoplasma agalactiae
+Mycoplasma anserisalpingitidis
+Mycoplasma bovis
+Mycoplasma flocculare
+Mycoplasma gallisepticum#1
+Mycoplasma gallisepticum#2
+Mycoplasma hominis
+Mycoplasma hyopneumoniae
+Mycoplasma hyorhinis
+Mycoplasma iowae
+Mycoplasma pneumoniae
+Mycoplasma synoviae
+Neisseria spp.
+Orientia tsutsugamushi
+Ornithobacterium rhinotracheale
+Paenibacillus larvae
+Pasteurella multocida#1
+Pasteurella multocida#2
+Pediococcus pentosaceus
+Photobacterium damselae
+Piscirickettsia salmonis
+Porphyromonas gingivalis
+Pseudomonas aeruginosa
+Pseudomonas fluorescens
+Pseudomonas putida
+Rhodococcus spp.
+Riemerella anatipestifer
+Salmonella enterica
+Saprolegnia parasitica
+Shewanella spp.
+Sinorhizobium spp.
+Staphylococcus aureus
+Staphylococcus chromogenes
+Staphylococcus epidermidis
+Staphylococcus haemolyticus
+Staphylococcus hominis
+Staphylococcus lugdunensis
+Staphylococcus pseudintermedius
+Stenotrophomonas maltophilia
+Streptococcus agalactiae
+Streptococcus bovis/equinus complex (SBSEC)
+Streptococcus canis
+Streptococcus dysgalactiae equisimilis
+Streptococcus gallolyticus
+Streptococcus oralis
+Streptococcus pneumoniae
+Streptococcus pyogenes
+Streptococcus suis
+Streptococcus thermophilus
+Streptococcus thermophilus#2
+Streptococcus uberis
+Streptococcus zooepidemicus
+Streptomyces spp
+Taylorella spp.
+Tenacibaculum spp.
+Treponema pallidum
+Trichomonas vaginalis
+Ureaplasma spp.
+Vibrio cholerae
+Vibrio cholerae#2
+Vibrio parahaemolyticus
+Vibrio spp.
+Vibrio tapetis
+Vibrio vulnificus
+Wolbachia
+Xylella fastidiosa
+Yersinia pseudotuberculosis
+Yersinia ruckeri
+```
+
+This list reflects the supplied documentation. Because MLST schemes change over time, confirm the current scheme list before treating it as permanent.
+
+## Interpreting results
+
+When MLST finishes, it uploads an archive named using the Redmine issue number:
+
+```text
+geneseekr_output_<issue number>.zip
+```
+
+The archive contains an Excel report generated by the GeneSeekr MLST analysis.
+
+Interpret the reported sequence type according to the selected organism and scheme. Results from different schemes for the same organism are not interchangeable; record whether the Achtman, Pasteur, or another numbered scheme was used.
+
+When `update` is requested, the issue may report the database version used. Record that version when results need to be reproducible.
+
+## How long does it take?
+
+MLST generally takes one to two minutes, depending on whether the selected database must be installed or updated. Runtime increases with the number of sequences and attachments.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable assemblies.
+
+**Likely cause:** The automator cannot locate the requested sequence assembly.
+
+**What to do:** Verify each `SEQID` and confirm that its assembly is available.
+
+### The organism or scheme is unsupported
+
+**Symptom:** The issue reports that the requested MLST database cannot be selected.
+
+**Likely cause:** The value after `organism=` is misspelled, has incorrect capitalization, or is not in the supported list.
+
+**What to do:** Copy an exact value from the supported-organism list, including any `#1`, `#2`, or `#3` suffix.
+
+### The wrong scheme is selected
+
+**Symptom:** The result uses a sequence-type scheme different from the one expected for the project.
+
+**Likely cause:** An organism with multiple schemes was requested without selecting the intended numbered value.
+
+**What to do:** Confirm the required scheme before submission. For *E. coli*, use `Escherichia coli#1` for Achtman or `Escherichia coli#2` for Pasteur.
+
+### An attached FASTA file is rejected
+
+**Symptom:** Redmine does not accept the attachment or the automator cannot process it.
+
+**Likely cause:** The file exceeds the 5 MB attachment limit or is not valid FASTA.
+
+**What to do:** Verify FASTA formatting and file size. Use an existing `SEQID` when possible.
+
+## Related automators
+
+- [rMLST](rmlst.md) — performs ribosomal MLST using ribosomal protein genes and can update its database.
+- [ECTyper](ectyper.md) — determines O- and H-antigen serotypes for *Escherichia coli* assemblies rather than sequence type.
+- [Unknown Isolate](unknownisolate.md) — combines rMLST with MASH and ANI evidence for uncertain organism identification.

@@ -1,51 +1,126 @@
 # AMRsummary
 
-### What does it do?
+## What does it do?
 
-AMRsummary performs ResFinder and MOB-suite analyses on FASTA files, and creates a report combining and summarising the outputs.
+Use **AMRsummary** to detect acquired antimicrobial-resistance genes in FASTA-formatted draft genome assemblies, predict plasmid contigs, and summarize whether detected AMR genes are located on a predicted plasmid or chromosome.
 
-ResFinder is a program developed by the Danish Center for Genomic Epidemiology for detection of antibiotic resistance
-in draft genome assemblies. It is very important to note that the Redmine version will only look for acquired antibiotic
-resistance genes (generally plasmid-borne) and not chromosomally encoded AMR genes that are caused by point mutations.
+AMRsummary combines:
 
-MobSuite is a set of tools developed by the Public Health Agency of Canada for detecting plasmids in draft genome
-assemblies. This tool runs the `mob_recon` part of the suite, which first detects plasmids in the assemblies, and then
-performs typing on the plasmids. More details on MobSuite, including fairly extensive details on the output files
-produced, can be found at the [MobSuite GitHub repository](https://github.com/phac-nml/mob-suite)).
+- **ResFinder** — detects acquired AMR genes in draft genome assemblies;
+- **MOB-suite `mob_recon`** — reconstructs and types predicted plasmids from draft genome assemblies.
 
-### How do I use it?
+The Redmine ResFinder workflow does not detect resistance caused by chromosomal point mutations. Use [PointFinder](pointfinder.md), [StarAMR](staramr.md), or [CARD-RGI](cardrgi.md) when mutation-based resistance must also be assessed.
 
-#### Subject
+For additional MOB-suite output details, see the [MOB-suite repository](https://github.com/phac-nml/mob-suite).
 
-In the `Subject` field, put `amr summary`. Spelling counts, but case sensitivity doesn't.
+## How do I use it?
 
-#### Description
+### Subject
 
-All you need to put in the description is a list of SEQIDs you want to process, one per line.
+In the **Subject** field, enter:
 
-#### Example
+```text
+amr summary
+```
 
-For an example AMRsummary, see [issue 14100](https://redmine.biodiversity.agr.gc.ca/issues/14100).
+Spelling matters, but matching is not case-sensitive.
 
-#### Interpreting Results
+### Description
 
-AMRSummary will upload three separate reports once it is complete
+In the **Description** field, enter one `SEQID` per line:
 
-- `resfinder_blastn.xlsx` shows every AMR gene found in each sample. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
-to look at the __PercentIdentity__ and __PercentCovered__ columns. You can be pretty sure that anything with 100 for both
-is actually there, but anything else requires further analysis to be sure.
-- `mob_recon_summary.csv` shows any contigs that are predicted to be plasmids - note that all contigs calculated to be chromosomal are ignored. __Location__ is the name of the predicted plasmid,
-while __Contig__ is the name contig predicted to contain plasmid sequence. One plasmid can be composed of several contigs if it could not be circularised.
-- `amr_summary.csv` combines the two previous reports. The contigs of all predicted AMR genes from the `resfinder_assembled` report are used to search the `mob_recon_summary` report.
-The plasmid predictions, and well as all the incompatibility types for that plasmid are extracted, and used in the report. __Location__ will specify either `chromosome` or
-the name of the predicted plasmid.
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-### How long does it take?
+Each requested `SEQID` must have a FASTA-formatted draft genome assembly available.
 
-ResFinder is very fast, while MOB-suite is relatively slow - it should take a few minutes to analyze each SEQID requested.
+### Attachments
 
-### What can go wrong?
+No attachment is required. AMRsummary retrieves the assemblies associated with the requested `SEQID`s.
 
-1. Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.
+### Optional parameters
 
+The supplied documentation does not identify optional parameters for the Redmine AMRsummary automator.
+
+### Example
+
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+```
+
+See [issue 14100](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14100) for an example AMRsummary request.
+
+## Interpreting results
+
+AMRsummary uploads three reports.
+
+### `resfinder_blastn.xlsx`
+
+This workbook lists acquired AMR genes detected in each sample. Review:
+
+- `PercentIdentity` — sequence identity between the detected gene and reference target;
+- `PercentCovered` — coverage of the reference target.
+
+A hit with `100` for both identity and coverage provides stronger evidence that the complete acquired gene is present. Lower-identity or partially covered hits require further review. A listed gene does not by itself establish an expressed resistance phenotype.
+
+### `mob_recon_summary.csv`
+
+This report lists contigs that MOB-suite predicts to be plasmid-derived. Contigs predicted to be chromosomal are omitted.
+
+Important fields include:
+
+- `Location` — the predicted plasmid name;
+- `Contig` — the contig predicted to contain plasmid sequence.
+
+A predicted plasmid can contain several contigs when it could not be circularized.
+
+### `amr_summary.csv`
+
+This combined report maps the contigs containing acquired AMR-gene hits to the MOB-suite plasmid predictions. It includes the predicted location and plasmid incompatibility types when available.
+
+The `Location` field reports either:
+
+- `chromosome`; or
+- the name of a predicted plasmid.
+
+The location is a computational prediction and should be interpreted with the underlying ResFinder and MOB-suite evidence.
+
+## How long does it take?
+
+ResFinder is fast, while MOB-suite is comparatively slower. Expect AMRsummary to take a few minutes per requested `SEQID`, depending on assembly size, sample count, and service workload.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable sequences.
+
+**Likely cause:** AMRsummary cannot locate a draft genome assembly for the requested `SEQID`.
+
+**What to do:** Verify each `SEQID`, confirm that its FASTA assembly is available, and submit a corrected request.
+
+### Expected mutation-based resistance is absent
+
+**Symptom:** The report contains acquired-gene findings but not an expected chromosomal resistance mutation.
+
+**Likely cause:** AMRsummary uses the Redmine ResFinder workflow, which does not detect resistance caused by chromosomal point mutations.
+
+**What to do:** Use [PointFinder](pointfinder.md), [StarAMR](staramr.md), or [CARD-RGI](cardrgi.md), as appropriate.
+
+### An AMR gene has an uncertain predicted location
+
+**Symptom:** A detected gene cannot be confidently assigned to a predicted plasmid or chromosome.
+
+**Likely cause:** Draft assemblies can fragment plasmids across contigs, and plasmid reconstruction is predictive.
+
+**What to do:** Review `resfinder_blastn.xlsx`, `mob_recon_summary.csv`, and the underlying assembly evidence together before drawing conclusions.
+
+## Related automators
+
+- [ResFinder](resfinder.md) — detects acquired AMR genes in draft genome assemblies without plasmid-location summarization.
+- [MobSuite](mobsuite.md) — detects, reconstructs, and types predicted plasmids in draft genome assemblies.
+- [Plasmid-Borne Identity](plasmidborneidentity.md) — searches assemblies for user-supplied target genes and predicts whether matching targets are plasmid-borne.
+- [PointFinder](pointfinder.md) — detects supported chromosomal resistance mutations.

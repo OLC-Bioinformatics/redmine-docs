@@ -88,21 +88,51 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#treeprogram">treeprogram</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#diversitree_reporthtml">diversitree_report.html</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#treenwk">tree.nwk</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-strains-are-too-divergent-for-parsnp">The strains are too divergent for Parsnp</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-requested-subset-size-is-invalid">The requested subset size is invalid</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-selected-subset-is-overgeneralized">The selected subset is overgeneralized</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -125,6 +155,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -156,8 +188,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -173,6 +203,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -209,46 +241,91 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="diversitree">DiversiTree</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>DiversiTree is used for creating phylogenetic trees using <a href="http://harvest.readthedocs.io/en/latest/content/parsnp.html">parsnp</a>,
-and optionally finding a specified number of strains that represent the most genetic diversity.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>DiversiTree</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>The first line of the description should be the number of diverse strains you want picked. If all you want here is the
-tree and don't care about the number of strains, you can set this to 1. Subsequent lines should be the SEQIDs you want
-to create the tree from. Note that these strains should all be fairly closely related, or the tree creation may fail (so
-try to keep things to the same species).</p>
-<p>By default, DiversiTree uses a tree creation program called <code>parsnp</code>. Another option available is <code>mashtree</code>, which is 
-generally faster at making trees and can handle more diversity between samples, but may create less accurate
-trees. If you want to use <code>mashtree</code>, add a line at the end of your description that says <code>treeprogram=mashtree</code>. You can
-look at <a href="https://redmine.biodiversity.agr.gc.ca/issues/14724">issue 14724</a> for an example request that 
-uses <code>mashtree</code>.</p>
-<h4 id="example">Example</h4>
-<p>For an example DiversiTree, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12100">issue 12100</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>DiversiTree will upload two files to Redmine on completion: <code>diversitree_report.html</code>, and <code>tree.nwk</code>. The <code>diversitree.html</code> 
-can be opened in any web browser, and has a picture of the tree with selected strains highlighted, and a list of the
-<em>X</em> most diverse strains, where <em>X</em> is the number specified in the first line of the description. The <code>tree.nwk</code> file
-contains the phylogenetic tree created in newick format. If you want to view this tree, you can use a program such as
-<a href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> or a web-based viewer like <a href="http://phylo.io">phylo.io</a>.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>This depends largely on the number of strains you want to use to create the tree. It can often be as quick as a few minutes
-if you have 10 or less strains, or take several hours if you want a larger (100 or so strain) tree.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>A few things can go wrong with this process:</p>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) Strains too far apart. DiversiTree will warn you if it thinks that the strains you want to make a tree from are
-not closely related enough. If you get this warning, you may want to consider creating a new issue while leaving out
-the strains it says are too far, or use <code>mashtree</code> as your tree creation program.</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>DiversiTree</strong> to build a tree from a supplied set of assemblies and select a requested number of strains that represent the greatest genetic diversity in that set.</p>
+<p>By default, DiversiTree builds the tree with Parsnp. It can optionally use MashTree, which is generally faster and tolerates more diversity among samples but produces a distance-based tree rather than a core-genome alignment tree.</p>
+<p>Use DiversiTree when the objective is to choose a diverse subset from a defined group. Use <a href="../neartree/">NearTree</a> when the objective is to select strains closest to one query.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">DiversiTree
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>The first line is the number of diverse strains to select. Enter each assembly <code>SEQID</code> on a subsequent line.</p>
+<p>Example selecting five diverse strains:</p>
+<pre><code class="language-text">5
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+2026-SEQ-0004
+2026-SEQ-0005
+2026-SEQ-0006
+</code></pre>
+<p>If the tree is needed but subset selection is not important, use <code>1</code> on the first line as documented by the existing workflow.</p>
+<p>For the default Parsnp workflow, include fairly closely related strains—preferably from the same species—to reduce the risk of tree-construction failure.</p>
+<h3 id="attachments">Attachments</h3>
+<p>The supplied documentation does not identify attachment support. Use available assembly <code>SEQID</code>s unless the current implementation has been verified to accept files.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<h4 id="treeprogram"><code>treeprogram</code></h4>
+<p>Selects the tree-building program.</p>
+<ul>
+<li>Default: <code>parsnp</code></li>
+<li>Alternative: <code>treeprogram=mashtree</code></li>
+</ul>
+<p>Place the option in the Description. The legacy page puts it at the end:</p>
+<pre><code class="language-text">5
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+treeprogram=mashtree
+</code></pre>
+<p>MashTree is generally faster and can handle more diverse genomes, but its tree is based on Mash distance estimates. Parsnp is more appropriate when a core-genome alignment tree among suitably related genomes is required.</p>
+<h3 id="examples">Examples</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/12100">issue 12100</a> for an example DiversiTree request.</p>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14724">issue 14724</a> for an example using <code>treeprogram=mashtree</code>.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>DiversiTree uploads:</p>
+<pre><code class="language-text">diversitree_report.html
+tree.nwk
+</code></pre>
+<h3 id="diversitree_reporthtml"><code>diversitree_report.html</code></h3>
+<p>Open this report in a web browser. It displays the tree, highlights the selected strains, and lists the requested number of strains representing diversity within the supplied set.</p>
+<h3 id="treenwk"><code>tree.nwk</code></h3>
+<p>Contains the complete tree in Newick format. Open it with a Newick-compatible tree viewer such as FigTree.</p>
+<p>Interpret the selected subset relative to the genomes included in the request and the chosen tree program. The selected strains represent diversity within that supplied set; they are not necessarily the most diverse strains in the wider CFIA collection.</p>
+<p>Parsnp and MashTree use different methods, so their branch lengths and selected subsets may differ. Record the selected <code>treeprogram</code> when results must be reproducible.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Runtime depends primarily on the number and relatedness of assemblies and the selected tree program. Requests with 10 or fewer strains can finish in a few minutes. Requests involving approximately 100 strains can take several hours.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The issue warns that one or more assemblies cannot be found.</p>
+<p><strong>Likely cause:</strong> An identifier is incorrect or its assembly is unavailable.</p>
+<p><strong>What to do:</strong> Verify every <code>SEQID</code> and confirm that its assembly exists.</p>
+<h3 id="the-strains-are-too-divergent-for-parsnp">The strains are too divergent for Parsnp</h3>
+<p><strong>Symptom:</strong> DiversiTree warns that some strains are too distant or the default tree construction fails.</p>
+<p><strong>Likely cause:</strong> The supplied group is too diverse for a stable Parsnp core-genome analysis.</p>
+<p><strong>What to do:</strong> Remove divergent strains, analyze a more coherent taxonomic group, or use <code>treeprogram=mashtree</code> when a distance-based tree is suitable.</p>
+<h3 id="the-requested-subset-size-is-invalid">The requested subset size is invalid</h3>
+<p><strong>Symptom:</strong> The workflow cannot select the requested number of diverse strains.</p>
+<p><strong>Likely cause:</strong> The first line is not a positive integer or exceeds the number of valid assemblies.</p>
+<p><strong>What to do:</strong> Use a positive integer no greater than the number of available samples.</p>
+<h3 id="the-selected-subset-is-overgeneralized">The selected subset is overgeneralized</h3>
+<p><strong>Symptom:</strong> The output is described as representing diversity beyond the supplied genome set.</p>
+<p><strong>Likely cause:</strong> DiversiTree selects only from the assemblies included in the request.</p>
+<p><strong>What to do:</strong> Define the candidate set deliberately and describe the result as diversity within that set.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../neartree/">NearTree</a> — selects strains closest to one query rather than a diverse subset.</li>
+<li><a href="../mashtree/">MashTree</a> — builds a complete Mash-distance tree without DiversiTree subset selection.</li>
+<li><a href="../bcgtree/">bcgTree</a> — builds a bacterial core-gene maximum-likelihood tree.</li>
+</ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../ectyper/" class="btn btn-neutral float-left" title="ECTyper"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../drep/" class="btn btn-neutral float-right" title="dRep-ANI">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../downsample/" class="btn btn-neutral float-right" title="Downsample">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -278,7 +355,7 @@ the strains it says are too far, or use <code>mashtree</code> as your tree creat
       <span><a href="../ectyper/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../drep/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../downsample/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

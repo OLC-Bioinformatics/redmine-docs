@@ -1,40 +1,100 @@
 # rMLST
 
-### What does it do?
+## What does it do?
 
-####rMLST
+Use **rMLST** to perform ribosomal multilocus sequence typing on requested sequence assemblies.
 
-​​The automator runs rMLST analyses on provided SEQIDs. If the rMLST database for the requested genus is not present on the NAS, or an update is requested, the automator downloads and prepares the database. It also runs GeneSeekr to perform rMLST analyses. GeneSeekr rMLST reports are uploaded and attached to the issue​.
+The automator prepares the required rMLST database when it is not already present on the NAS or when an update is requested. It then runs the GeneSeekr rMLST analysis and attaches the reports to the Redmine issue.
 
-### How do I use it?
+rMLST uses ribosomal protein gene loci and can support organism identification and comparison across a broad range of bacteria. It is different from conventional MLST, which uses an organism- or scheme-specific set of housekeeping loci.
 
-#### Subject and description
+## How do I use it?
 
-In the `Subject` field, put `rmlst`. Spelling counts, but case sensitivity doesn't.
+### Subject
 
-You can also choose to update the OLC database by entering `update` on the next line.
+In the **Subject** field, enter:
 
-Then add the SEQID's on separate lines to match the rest of the document.
+```text
+rmlst
+```
 
+Spelling matters, but matching is not case-sensitive.
 
-#### Example
+### Description
 
-For an example rMLST issue see [issue 34424](https://redmine.biodiversity.agr.gc.ca/issues/34424).
+Enter one `SEQID` per line:
 
-#### Interpreting Results
+```text
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-The Roary automator will upload a zip file `rmlst_output_[redmine_issue_num].zip` once it has completed. It may also say `Using database version: [YYMMDD]` in the comments if the `update` command was included in the description.
+### Database update
 
-### How long does it take?
+To request a database update, place `update` before the `SEQID` list:
 
-​It should take a few minutes for the automator to run depending on whether the database needs to be installed/updated. Adding more sequences will scale up the time required​.
+```text
+update
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-### What can go wrong?
+Updating or installing the database increases runtime.
 
-Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.
+### Attachments
 
-### Version
+The supplied documentation does not identify support for attached FASTA files in the dedicated Redmine rMLST automator. Use requested `SEQID`s unless the current implementation has been verified to support attachments.
 
-The databases can be updated by including the `update` argument in the description.
+### Optional parameters
 
+The supplied documentation does not identify optional parameters other than the `update` command.
 
+### Example
+
+See [issue 34424](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/34424) for an example rMLST request.
+
+## Interpreting results
+
+When rMLST finishes, it uploads an archive named using the Redmine issue number:
+
+```text
+rmlst_output_<redmine issue number>.zip
+```
+
+The archive contains the GeneSeekr rMLST reports.
+
+If `update` was included, a Redmine comment may report the database version in `YYMMDD` form:
+
+```text
+Using database version: YYMMDD
+```
+
+Record the database version when reproducibility is important. Interpret the rMLST match and support in the context of database coverage and sequence quality; a weak or conflicting match may require [Unknown Isolate](unknownisolate.md) or another follow-up workflow.
+
+## How long does it take?
+
+rMLST generally takes a few minutes. Runtime depends on whether the database must be installed or updated and increases with the number of requested sequences.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable assemblies.
+
+**Likely cause:** The automator cannot locate the assembly associated with the requested `SEQID`.
+
+**What to do:** Verify each `SEQID`, confirm that its assembly is available, and submit a corrected request.
+
+### Database preparation increases runtime or fails
+
+**Symptom:** The request takes longer than expected or reports a database installation or update error.
+
+**Likely cause:** The required rMLST database was absent, an update was requested, or database preparation failed.
+
+**What to do:** Review the issue messages for the database version or error. Escalate persistent database-preparation failures to the bioinformatics team.
+
+## Related automators
+
+- [MLST](mlst.md) — performs organism- and scheme-specific multilocus sequence typing.
+- [Unknown Isolate](unknownisolate.md) — combines rMLST with MASH, ANIb, and ANIm evidence in a GROBI report.
+- [GeneSeekr](geneseekr.md) — provides `analysis=rmlst` among its supported analyses.

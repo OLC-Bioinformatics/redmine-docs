@@ -80,9 +80,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -110,23 +114,37 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    <li class="toctree-l3"><a class="reference internal" href="#the-dropbox-upload-times-out">The Dropbox upload times out</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-plasmid-prediction-is-uncertain">A plasmid prediction is uncertain</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -158,8 +176,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -175,6 +191,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -211,35 +229,56 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="mobsuite">MobSuite</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>MobSuite is a set of tools developed by the Public Health Agency of Canada for detecting plasmids in draft genome
-assemblies. This tool runs the <code>mob_recon</code> part of the suite, which first detects plasmids in the assemblies, and then
-performs typing on the plasmids. More details on MobSuite, including fairly extensive details on the output files
-produced, can be found at the <a href="https://github.com/phac-nml/mob-suite">MobSuite GitHub repository</a>.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>MobSuite</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to look for plasmids in, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example MobSuite, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12823">issue 12823</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>MobSuite outputs quite a few files. The zip file uploaded will have one folder for each SEQID requested.
-Within each folder, you will find a number of MobSuite output files. Of particular interest is the <code>contig_report.txt</code> file,
-which assigns each contig in your assembly as chromosomal or plasmid, and has typing info on plasmid-derived contigs.
-Full descriptions of all files can be found at the <a href="https://github.com/phac-nml/mob-suite">MobSuite GitHub repository</a>.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>MobSuite works fairly quickly - it should take roughly one minute to analyze each SEQID that you have requested.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>A few things can go wrong with this process:</p>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) FTP timeout. Sometimes, particularly for larger requests, the upload of results to the FTP will run into problems and time out,
-in which case you will likely get an error message similar to this: <code>[Errno 104] Connection reset by peer</code>. If this occurs,
-you can either try again later, or, if you had a large request, try splitting it into a few smaller requests. If the
-problem persists, send us an email and we'll try to get it figured out.</p>
-<h3 id="version">Version</h3>
-<p>Mobsuite3 version 3.1.9 is currently available at the OLC. (as of 2024-07-4)</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>MobSuite</strong> to detect, reconstruct, and type predicted plasmids in draft genome assemblies.</p>
+<p>The Redmine automator runs the <code>mob_recon</code> component of MOB-suite. <code>mob_recon</code> assigns assembly contigs to predicted chromosome or plasmid groups and provides typing information for reconstructed plasmids.</p>
+<p>MOB-suite was developed by the Public Health Agency of Canada. For method details and complete output definitions, see the <a href="https://github.com/phac-nml/mob-suite">MOB-suite repository</a>.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">MobSuite
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Enter one draft-assembly <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. MobSuite retrieves the draft genome assembly associated with each requested <code>SEQID</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for the Redmine MobSuite automator.</p>
+<h3 id="example">Example</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/37387">issue 37387</a> for an example MobSuite request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>MobSuite uploads a ZIP archive containing one directory for each requested <code>SEQID</code>. Each directory contains the MOB-suite output for that assembly.</p>
+<p>An important output is:</p>
+<pre><code class="language-text">contig_report.txt
+</code></pre>
+<p>This report assigns each assembly contig to a predicted chromosome or plasmid group and includes typing information for plasmid-derived contigs.</p>
+<p>Plasmid reconstruction from a draft assembly is predictive. One plasmid may be represented by several contigs, repeated regions can complicate reconstruction, and chromosomal or plasmid assignments should be interpreted with assembly quality and supporting evidence.</p>
+<p>See the <a href="https://github.com/phac-nml/mob-suite">MOB-suite repository</a> for definitions of all other output files and columns.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>MobSuite generally takes approximately one minute per requested <code>SEQID</code>. Total runtime depends on assembly size, sample count, compute availability, and result-upload time.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable assemblies.</p>
+<p><strong>Likely cause:</strong> MobSuite cannot locate the draft assembly associated with the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that its assembly exists, and submit a corrected request.</p>
+<h3 id="the-dropbox-upload-times-out">The Dropbox upload times out</h3>
+<p><strong>Symptom:</strong> The analysis may complete, but the issue reports an upload error or does not provide a usable result link.</p>
+<p><strong>Likely cause:</strong> The Dropbox upload timed out or encountered a temporary connection problem.</p>
+<p><strong>What to do:</strong> Retry later if the problem is transient. If it persists, contact the bioinformatics team with the Redmine issue number.</p>
+<h3 id="a-plasmid-prediction-is-uncertain">A plasmid prediction is uncertain</h3>
+<p><strong>Symptom:</strong> A predicted plasmid is fragmented across several contigs or a contig assignment is difficult to interpret.</p>
+<p><strong>Likely cause:</strong> The draft assembly is fragmented, contains repeated sequence, or lacks enough context for unambiguous reconstruction.</p>
+<p><strong>What to do:</strong> Review <code>contig_report.txt</code>, assembly quality, and other MOB-suite outputs together. Use long-read or hybrid assembly evidence when available.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../amrsummary/">AMRsummary</a> — combines ResFinder acquired-AMR results with MOB-suite plasmid-location predictions.</li>
+<li><a href="../plasmidborneidentity/">Plasmid-Borne Identity</a> — searches assemblies for user-supplied targets and predicts whether matching targets are plasmid-borne.</li>
+<li><a href="../phastest/">PHASTEST</a> — detects prophage regions in bacterial genomes and plasmids rather than reconstructing plasmids.</li>
+</ul>
               
             </div>
           </div><footer>

@@ -1,149 +1,112 @@
 # OLC Redmine Automator
 
-To facilitate the sharing of the CFIA's genomic data and tools to analyze this data, we make use of the Redmine
-platform. Our instance of Redmine can be found [here](https://redmine.biodiversity.agr.gc.ca) (note that you must be on
-the CFIA network in order to access Redmine).
+The OLC Redmine Automator provides access to genomic data, analysis tools, and data-management workflows through Redmine. Access requires the appropriate organizational network and CFIA Genomics project permissions.
 
-If you have not yet gotten started with Redmine or want to know how the Redmine automator works and what it can do,
-take a look at our [Getting Started](getting_started.md) page for instructions on how to start using Redmine and a
-brief overview of what Redmine can do.
+- New users: [Getting Started](getting_started.md)
+- General help: [Troubleshooting](troubleshooting.md)
+- Documentation contributions: [Adding documentation](tutorials/adding_documentation.md)
 
-For any issues or general help with Redmine, see the [Troubleshooting](troubleshooting.md) page.
+## Tool and database versions
 
-If you would like to add documentation to existing pages or create a new page for an analysis tool you can copy, fill out, and send [this form](https://136gc-my.sharepoint.com/:w:/g/personal/evelyn_yu_inspection_gc_ca/EYDC9jmTBHxDnTNOdBs5aTEBFeYvdLAg_1oW-UaIvuPauA?e=j7JdoY) to a bioinformatician. Alternatively, you can follow the instructions using the [tutorial](tutorials/adding_documentation.md) section to add edits yourself.
+Automator requests report tool and database versions when available. If a completed request does not report information needed for reproducibility, contact the bioinformatics team and include the Redmine issue number.
 
-## Tool Versions
+## Choose a workflow
 
-Tool versions are now being output to the user's redmine request. If the version is not printed, please let us know and we will update your request with the information.
+### Import, export, or retrieve data and reports
 
+- [External Retrieve](data/external_retrieve.md) — exports raw reads or draft assemblies for local download.
+- [Report Retrieve](data/report_retrieve.md) — retrieves COWBAT assembly-pipeline reports for requested `SEQID`s.
+- [SRA Download](data/sra_download.md) — imports FASTQ data from NCBI SRA and submits it to FoodPort/COWBAT processing.
+- [SRA Upload](data/sra_upload.md) — transfers internal raw-read files into an NCBI SRA submission preload folder.
 
-## Possible Analyses
-###I want to:
-<details>
-  <summary><b>Download sequence data, or share sequence data with a collaborator</b></summary> <br>
+### Assess, combine, or reduce raw-read data
 
-  To retrieve a zip file of your sequence data (which can also be shared with external collaborators) use automators:
-  <a href="data/external_retrieve">External retrieve</a> - exports a list of sequences in a zipped file
+- [FastQC/MultiQC](analysis/fastqc.md) — creates per-sample read-quality reports and a combined MultiQC report.
+- [Downsample](analysis/downsample.md) — reduces FASTQ data by coverage, compressed size, read count, base count, sampling fraction, or supported BBMap options.
+- [Downsample option reference](analysis/downsample_reformat_options.md) — lists additional supported `reformat.sh` options and defaults.
+- [fastqmerge](analysis/fastqmerge.md) — combines FASTQ files from multiple sequencing runs of the same biological sample.
 
-</details>
-<br>
-<details>
-  <summary><b>Download COWBAT reports for a list of sequence assemblies</b></summary> <br>
-  To retrieve a zip file of the COWBAT assembly pipeline reports for your list of SeqIDs: <br>
+### Detect genes or run in silico PCR
 
-<a href="data/report_retrieve">Report retrieve</a> - exports a csv file of the legacy_combinedMetadata for your sequences, as well as a zip file containing all reports for those sequences.
+- [GeneSeekr](analysis/geneseekr.md) — searches FASTA-formatted assemblies for predefined or attached custom targets.
+- [Sipprverse](analysis/sipprverse.md) — searches raw paired-end FASTQ reads for predefined or custom targets.
+- [KMA](analysis/kma.md) — screens assemblies or raw reads against curated or custom target databases.
+- [PrimerFinder](analysis/primerfinder.md) — performs *in silico* PCR using VTyper or attached custom primer sets.
 
-</details>
-<br>
-<details>
-  <summary><b>Detect gene(s) in my sequences</b></summary><br>
-  Automators that allow you to screen sequence(s) for gene targets: <br>
+### Detect or summarize antimicrobial resistance
 
-<ul>
-<li><b><a href="analysis/geneseekr">GeneSeekr</a></b> - assemblies only</li>
-<li><b><a href="analysis/kma">KMA</a></b> - assemblies only</li>
-<!--<li><b><a href="analysis/cardrgi">CARDRGI</a></b> - specific to AMR detection</li>-->
-</ul>
+- [ResFinder](analysis/resfinder.md) — detects acquired AMR genes in draft genome assemblies; it does not detect chromosomal point mutations.
+- [PointFinder](analysis/pointfinder.md) — detects supported resistance-associated point mutations in selected genera.
+- [StarAMR](analysis/staramr.md) — combines acquired-gene detection with supported mutation detection for *Campylobacter* and *Salmonella* assemblies.
+- [CARD-RGI](analysis/cardrgi.md) — predicts resistomes in isolate assemblies or raw FASTQ data.
+- [AMRsummary](analysis/amrsummary.md) — combines acquired-AMR detection with predicted plasmid or chromosome location.
+- [Plasmid-Borne Identity](analysis/plasmidborneidentity.md) — searches for user-supplied targets and predicts whether matching targets are plasmid-borne.
 
-</details>
-<br>
-<details>
-  <summary><b>Inspect the contigs of my Hybrid Assembly</b></summary> <br>
-  Automators that allow you to retrieve gfa (graph files) for your hybrid assemblies: 
+GeneSeekr, Sipprverse, and KMA also provide AMR-related target-screening modes. Use their pages when input type or a curated/custom target database determines the workflow choice.
 
-  <ul>
-  <li><b><a href="analysis/gfa_retrieve">gfaretrieve</a></b> - hybrid assemblies only (MIN sequences)</li>
-  </ul>
+### Identify an organism, profile taxonomy, or investigate contamination
 
-</details>
-<br>
-<details>
-  <summary><b>Determine the genus/species of a whole genome sequence assembly</b></summary> <br>
-  If you are unsure of the genus/species of your isolate, you can use the automator: 
+- [Unknown Isolate](analysis/unknownisolate.md) — identifies an uncertain isolate assembly using rMLST, Mash, ANIb, and ANIm evidence in a GROBI report.
+- [StrainMash](analysis/strainmash.md) — identifies the closest represented RefSeq type strain for an assembly.
+- [AutoCLARK](analysis/autoclark.md) — reports species represented in raw reads or draft assemblies.
+- [Kraken2/Bracken](analysis/kraken2.md) — performs taxonomic classification and refined abundance estimation using selectable databases.
+- [MetaPhlAn4](analysis/metaphlan.md) — profiles microbial communities using clade-specific marker genes.
+- [ConFindr](analysis/confindr.md) — detects intra-species and inter-species contamination in raw sequencing reads.
 
-<ul>
-<li><b><a href="analysis/unknown_isolate">Unknownisolate</a></b> -  compares WGS assembly to ATCC and RefSeq genomes, and determines rMLST type. Outputs a GROBI report for probably identity.</li>
-</ul>
+AutoCLARK, Kraken2/Bracken, and MetaPhlAn4 are taxonomic-analysis workflows. ConFindr is the dedicated raw-read contamination workflow.
 
-</details>
-<br>
-<details>
-  <summary><b>Find the <i>X</i> most diverse sequences in a set of sequences</b></summary><br>
-  If you want to find a number of diverse (e.g. distantly related) sequences from a set of sequences :  
+### Type an isolate
 
-<ul>
-	<li><b><a href="analysis/diversitree">diversitree</a></b> - will output a list based on user's requested number of sequences.</li>
-</ul>
+- [MLST](analysis/mlst.md) — determines an organism- and scheme-specific multilocus sequence type.
+- [rMLST](analysis/rmlst.md) — performs ribosomal multilocus sequence typing.
+- [ECTyper](analysis/ectyper.md) — predicts O- and H-antigen serotypes for *Escherichia coli* assemblies.
+- [IntiminTyper](analysis/intimintyper.md) — assigns intimin (`eae`) subtypes to supported *E. coli* assemblies.
+- [eCGF](analysis/eCGF.md) — performs comparative genomic fingerprinting subtyping for *Campylobacter* assemblies.
 
-</details>
-<br>
-<details>
-  <summary><b>Find sequences closely related to a query sequence</b></summary><br>
-  If you want to find <i>X</i> number of closest strains in a list to a query SeqID:  
-  
-<ul><li><b><a href="analysis/neartree">NearTree</a></b> - calculates the most closely related strains to your query SeqID based on MASH distance</li></ul>
+### Compare closely related isolates by SNVs or SNPs
 
-</details>
-<br>
-<details>
-  <summary><b>Determine taxonomy in metagenomes</b></summary><br>
-  If you want to detect the different organisms in your metagenomic sequence, you can use the automators:  
+- [SNVPhyl](analysis/snvphyl.md) — analyzes paired-end query reads and produces pairwise SNV counts, core-genome statistics, an alignment, and a Newick tree.
+- [Snippy](analysis/snippy.md) — performs rapid variant calling and core alignment, supports paired-end and single-end reads, and can optionally create cleaned IQ-TREE outputs.
+- [COWSNPhR](analysis/cowsnphr.md) — calls variants with DeepVariant, maps them to reference annotations, and creates summary tables, alignments, and a FastTree phylogeny.
 
-<ul>
-   <li><b><a href="analysis/metaphlan">Metaphlan</a></b> - more specific than Kraken2, but less sensitive.</li>
-   <li><b><a href="analysis/kraken2">Kraken2/Bracken</a></b> - more sensitive than metaphlan, but likely to give false positives to closely related genera/species. Bracken is more accurate than Kraken2 and Metaphlan4 (according to our publication <b><a href="https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-023-03148-6">Cooper et al, 2023</a></b>).</li>
-</ul>
+All three workflows require a suitable reference and closely related query isolates. Their filters and output values are not interchangeable.
 
-</details>
-<br>
-<details>
-  <summary><b>Find SNPs in my sequences</b></summary><br>
-  To detect single nucleotide polymorphisms (SNPs) in your sequences, you can use the automators:  
+### Build a tree or select close or diverse genomes
 
-<ul>
-   <li><b><a href="analysis/snvphyl">SNVPhyl</a></b></li>
-   <li><b><a href="analysis/snippy">Snippy</a></b></li>
+- [MashTree](analysis/mashtree.md) — builds a rapid whole-genome distance tree from Mash estimates.
+- [bcgTree](analysis/bcgtree.md) — builds a partitioned maximum-likelihood bacterial tree from essential single-copy core genes.
+- [NearTree](analysis/neartree.md) — ranks candidate strains closest to one query within a supplied comparison set.
+- [CloseRelatives](analysis/closerelatives.md) — finds CFIA collection genomes closest to one query using Mash distance.
+- [DiversiTree](analysis/diversitree.md) — creates a Parsnp or MashTree tree and selects a diverse subset from the supplied genomes.
+- [dRep](analysis/drep.md) — compares assemblies by Mash and secondary ANI algorithms or dereplicates a genome set.
 
-</details>
-<br>
-<details>
-  <summary><b>Annotate my sequence assemblies</b></summary><br>
-  To annotate your sequence assemblies, you can use the automators:  
+### Analyze a pan-genome or microbial association
 
-<ul>
-<li><b><a href="analysis/prokka">Prokka</a></b> - whole genome annotation to identify features in gDNA (bacterial, archaeal, and viral)</li>
-<li><b>Bakta</b> - automator currently under development</li>
-</ul>
+- [Roary/Scoary](analysis/roary.md) — calculates a pan-genome and can test binary trait associations against accessory-gene presence/absence.
+- [GWAS-pyseer](analysis/pyseer.md) — performs microbial genome-wide association with explicit population-structure correction.
 
-</details>
-<br>
-<details>
-  <summary><b>Create a phylogeny</b></summary> <br>
-  To create a phylogenetic tree from a list of sequences, you can use the automators:  
+### Annotate genomes or detect mobile genetic elements
 
-<ul>
-   <li><b><a href="analysis/mashtree">MASHtree</a></b> - creates a phylogeny using MASH distances</li>
-   <li><b><a href="analysis/bcgtree">bcgtree</a></b> - builds a phylogeny using bacterial core genes ("107 essential single-copy core genes")</li>
-   <li><b>iqtree</b> - automator currently under development</li>
-</ul>
-</details>
-<br>
-<details>
-  <summary><b>Detect and type plasmids in my sequence assemblies</b></summary> <br>
+- [Prokka](analysis/prokka.md) — annotates genome assemblies and produces standard feature, nucleotide, and protein outputs.
+- [MobSuite](analysis/mobsuite.md) — reconstructs and types predicted plasmids in draft genome assemblies.
+- [PHASTEST](analysis/phastest.md) — identifies, annotates, and visualizes prophage regions in bacterial genomes and plasmids.
 
-  <a href="analysis/mobsuite">Mobsuite</a> - detects and types plasmids in draft genome assemblies
+### Extract or inspect assembly data
 
-</details>
-<br>
+- [SequenceExtractor](analysis/sequence_extractor.md) — extracts a requested interval or complete contig from an assembly.
+- [GFA Retrieve](analysis/gfa_retrieve.md) — retrieves GFA graphs from supported hybrid assemblies for visualization in Bandage.
 
-<details>
-  <summary><b>Run a genome wide association study (GWAS)</b></summary><br>
-  You can use the automators:  
+### Predict protein subcellular localization
 
-<ul>
-   <li><b><a href="analysis/roary">Roary/Scoary</a></b></li>
-   <li><b><a href="analysis/pyseer">Pyseer</a></b></li>
-</ul>
+- [PSORTb](analysis/psortb.md) — predicts the subcellular localization of proteins encoded by a genome assembly.
 
-</details>
-<br>
+## Before submitting a request
+
+1. Open the selected workflow page.
+2. Confirm whether it requires raw reads, an assembly, an attachment, or a previous Redmine result.
+3. Copy the documented Subject exactly.
+4. Preserve the documented Description order and parameter spelling.
+5. Review attachment filenames, formats, and size limits.
+6. Check the expected runtime and troubleshooting section.
+
+Internal operational workflows are intentionally excluded from this standard-access index.

@@ -80,6 +80,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">dRep-ANI</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
@@ -90,21 +92,61 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#mash_ani_threshold">mash_ANI_threshold</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#s_ani">S_ANI</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#coverage_threshold">coverage_threshold</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#clusteralgorithm">clusteralgorithm</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#comparisonalgorithm">comparisonalgorithm</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#command">command</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#compare-genomes-with-default-thresholds">Compare genomes with default thresholds</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#compare-a-broader-primary-cluster-with-fastani">Compare a broader primary cluster with FastANI</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#dereplicate-a-genome-set">Dereplicate a genome set</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    <li class="toctree-l3"><a class="reference internal" href="#the-analysis-type-is-missing-or-unsupported">The analysis type is missing or unsupported</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#expected-ani-values-are-absent">Expected ANI values are absent</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-comparison-or-clustering-algorithm-is-unsupported">The comparison or clustering algorithm is unsupported</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dereplication-removes-more-genomes-than-expected">Dereplication removes more genomes than expected</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
                   </li>
@@ -127,6 +169,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
                   </li>
@@ -158,8 +202,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -175,6 +217,8 @@
               <p class="caption"><span class="caption-text">Tutorials</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
                   </li>
@@ -211,116 +255,150 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="drep">dRep</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p><a href="https://drep.readthedocs.io/en/latest/overview.html">dRep</a>, developed by Matt Olm, is used to compare genomes and determine relatedness in the form of average nucleotide identity (ANI).
-Optionally, it can be used to dreplicate genomes.</p>
-<p>For more information, see the <a href="https://www.nature.com/articles/ismej2017126">dRep publication</a>. If you publish data using this automator, don't forget to cite the authors of the tool <a href="https://www.nature.com/articles/ismej2017126">Olm et al., 2017</a></p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>drep</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p><strong>Required Components</strong></p>
-<p>The first line of the description should be the analysis you would like to run (e.g. <code>analysis=custom</code>). </p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>dRep</strong> to compare genome assemblies by average nucleotide identity (ANI) or to dereplicate a genome set.</p>
+<p>dRep first performs Mash-based primary clustering. It then applies a selected secondary comparison algorithm only within genome clusters meeting the primary Mash ANI threshold. This two-stage design avoids expensive ANI comparisons between clearly unrelated genomes.</p>
+<p>The <code>compare</code> command produces relatedness and ANI outputs. The <code>dereplicate</code> command groups similar genomes and selects representatives according to dRep's workflow.</p>
+<p>For background, see the <a href="https://drep.readthedocs.io/en/latest/overview.html">dRep documentation</a> and <a href="https://www.nature.com/articles/ismej2017126">Olm et al. (2017)</a>. Cite the dRep authors when publishing results produced with this automator.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">drep
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>The first line selects the analysis mode:</p>
+<pre><code class="language-text">analysis=custom
+</code></pre>
+<p>Enter optional parameters next, followed by one assembly <code>SEQID</code> per line:</p>
+<pre><code class="language-text">analysis=custom
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<p>Only <code>custom</code> is documented as currently supported. It compares or dereplicates only the listed genomes.</p>
+<h3 id="attachments">Attachments</h3>
+<p>The supplied documentation does not identify attachment support. Use available assembly <code>SEQID</code>s unless the current implementation has been verified to accept files.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<h4 id="mash_ani_threshold"><code>mash_ANI_threshold</code></h4>
+<p>Sets the primary Mash ANI clustering threshold. Only genomes clustering at or above this threshold proceed to secondary ANI comparison.</p>
 <ul>
-<li>The following options are currently supported:<ul>
-<li><code>custom</code> - compare only the SEQIDs listed in the description</li>
-<li><code>enterobacterales</code> - compare the listed SEQIDs to a set of reference sequences for species from the order Enterobacterales</li>
-<li><code>listeriaceae</code> - compare the listed SEQIDs to a set of reference sequences for species from the family Listeriaceae</li>
+<li>Default: <code>0.9</code> (90%)</li>
+<li>Example: <code>mash_ANI_threshold=0.8</code></li>
 </ul>
-</li>
-</ul>
-<p>You must also include a list of SEQIDs one per line.</p>
-<p><strong>Optional Components</strong></p>
-<p>By default, dRep will run the compare command to compare the set of genomes. In order to customise your dRep analyses, several settings can be optionally modified</p>
+<p>Lowering this threshold can create broader clusters and substantially increase secondary-comparison runtime.</p>
+<h4 id="s_ani"><code>S_ANI</code></h4>
+<p>Sets the secondary clustering ANI threshold.</p>
 <ul>
-<li>
-<p>MASH ANI cutoff - this value is important, as only sequences clustering within this 'relatedness' threshold will be analysed using the secondary ANI algorithm (which is what determines the ANI values)</p>
+<li>Default: <code>0.99</code> (99%)</li>
+<li>Example: <code>S_ANI=0.9</code></li>
+</ul>
+<h4 id="coverage_threshold"><code>coverage_threshold</code></h4>
+<p>Sets the minimum overlap required between genomes during secondary comparisons.</p>
 <ul>
-<li>default is <code>0.9</code> (90%) </li>
-<li>If you want to use custom cutoffs for MASH clustering, add a line to your description:<ul>
-<li><code>mash_ANI_threshold=0.8</code></li>
+<li>Default: <code>0.1</code> (10%)</li>
+<li>Example: <code>coverage_threshold=0.2</code></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Secondary clustering cutoff</p>
+<h4 id="clusteralgorithm"><code>clusteralgorithm</code></h4>
+<p>Selects the hierarchical clustering linkage method.</p>
 <ul>
-<li>default is <code>0.99</code> (99%) </li>
-<li>modify as follows:<ul>
-<li><code>S_ANI=0.9</code></li>
+<li>Default: <code>average</code></li>
+<li>Example: <code>clusteralgorithm=ward</code></li>
+<li>Supported values:</li>
+<li><code>median</code></li>
+<li><code>weighted</code></li>
+<li><code>single</code></li>
+<li><code>complete</code></li>
+<li><code>average</code></li>
+<li><code>ward</code></li>
+<li><code>centroid</code></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>coverage threshold (minimum overlap between genomes when doing secondary comparisons)</p>
+<h4 id="comparisonalgorithm"><code>comparisonalgorithm</code></h4>
+<p>Selects the secondary ANI comparison algorithm.</p>
 <ul>
-<li>default is <code>0.1</code> (10%) </li>
-<li>modify as follows:<ul>
-<li><code>coverage_threshold=0.2</code></li>
+<li>Default: <code>ANImf</code></li>
+<li>Example: <code>comparisonalgorithm=fastANI</code></li>
+<li>Supported values:</li>
+<li><code>fastANI</code></li>
+<li><code>ANImf</code></li>
+<li><code>ANIn</code></li>
+<li><code>gANI</code></li>
+<li><code>goANI</code></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>cluster algorithm </p>
+<h4 id="command"><code>command</code></h4>
+<p>Selects comparison or dereplication behavior.</p>
 <ul>
-<li>default is <code>average</code> </li>
-<li>modify as follows:<ul>
-<li><code>clusteralgorithm=ward</code></li>
+<li>Default: <code>compare</code></li>
+<li>Compare genomes: <code>command=compare</code></li>
+<li>Dereplicate genomes: <code>command=dereplicate</code></li>
 </ul>
-</li>
-<li>available algorithms include:<ul>
-<li><code>median</code>, <code>weighted</code>, <code>single</code>, <code>complete</code>, <code>average</code>, <code>ward</code>, <code>centroid</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>comparison algorithm </p>
+<h3 id="examples">Examples</h3>
+<h4 id="compare-genomes-with-default-thresholds">Compare genomes with default thresholds</h4>
+<pre><code class="language-text">analysis=custom
+command=compare
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<h4 id="compare-a-broader-primary-cluster-with-fastani">Compare a broader primary cluster with FastANI</h4>
+<pre><code class="language-text">analysis=custom
+mash_ANI_threshold=0.8
+comparisonalgorithm=fastANI
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<h4 id="dereplicate-a-genome-set">Dereplicate a genome set</h4>
+<pre><code class="language-text">analysis=custom
+command=dereplicate
+S_ANI=0.99
+coverage_threshold=0.1
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<p>The supplied documentation does not provide a working Redmine issue link for dRep.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When dRep finishes, it uploads a ZIP archive to Dropbox. The archive contains dRep tables, figures, clustering data, and other workflow outputs.</p>
+<p>ANI values are calculated only for genomes placed in primary clusters meeting <code>mash_ANI_threshold</code>. If two genomes do not have a secondary ANI value, they may have failed the primary threshold rather than failed processing.</p>
+<p>dRep does not directly output a tree file in this workflow. A Mash-based dendrogram can be reproduced by applying hierarchical clustering to the Mash-distance table with the selected <code>clusteralgorithm</code>, but that reconstruction is not equivalent to receiving a maintained tree artifact from the automator.</p>
+<p>For <code>command=dereplicate</code>, review the clustering thresholds, coverage requirement, and selected representative genomes. Dereplication results depend directly on these settings and should not be interpreted without recording them.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Runtime depends on sample count, genome relatedness, thresholds, and the selected secondary algorithm.</p>
+<p>A set of 10 or fewer genomes can finish in a few minutes. Larger sets can take several hours. Closely related genomes can also take longer because more pairs advance from Mash primary clustering to the slower secondary ANI comparison.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The issue warns that one or more assemblies cannot be found.</p>
+<p><strong>Likely cause:</strong> An identifier is incorrect or its assembly is unavailable.</p>
+<p><strong>What to do:</strong> Verify every <code>SEQID</code> and confirm that its assembly exists.</p>
+<h3 id="the-analysis-type-is-missing-or-unsupported">The analysis type is missing or unsupported</h3>
+<p><strong>Symptom:</strong> The automator rejects the request before dRep starts.</p>
+<p><strong>Likely cause:</strong> <code>analysis=custom</code> is absent or another analysis type was requested.</p>
+<p><strong>What to do:</strong> Put <code>analysis=custom</code> on the first line.</p>
+<h3 id="expected-ani-values-are-absent">Expected ANI values are absent</h3>
+<p><strong>Symptom:</strong> Some genome pairs have no secondary ANI result.</p>
+<p><strong>Likely cause:</strong> They did not cluster together at or above <code>mash_ANI_threshold</code> or did not meet the coverage requirement.</p>
+<p><strong>What to do:</strong> Review primary clustering and overlap before changing thresholds. Lower thresholds only when methodologically justified.</p>
+<h3 id="the-comparison-or-clustering-algorithm-is-unsupported">The comparison or clustering algorithm is unsupported</h3>
+<p><strong>Symptom:</strong> The issue reports an invalid <code>comparisonalgorithm</code> or <code>clusteralgorithm</code>.</p>
+<p><strong>Likely cause:</strong> The value is misspelled or not in the supported list.</p>
+<p><strong>What to do:</strong> Copy a documented value exactly.</p>
+<h3 id="dereplication-removes-more-genomes-than-expected">Dereplication removes more genomes than expected</h3>
+<p><strong>Symptom:</strong> The representative set is smaller or grouped differently than anticipated.</p>
+<p><strong>Likely cause:</strong> <code>S_ANI</code>, <code>coverage_threshold</code>, primary clustering, or algorithm settings are more permissive or restrictive than intended.</p>
+<p><strong>What to do:</strong> Review all thresholds and clustering outputs before accepting the representative set.</p>
+<h2 id="related-automators">Related automators</h2>
 <ul>
-<li>default is <code>ANImf</code> </li>
-<li>modify as follows:<ul>
-<li><code>comparisonalgorithm=fastANI</code></li>
+<li><a href="../diversitree/">DiversiTree</a> — selects strains representing diversity within a supplied set rather than dereplicating by ANI.</li>
+<li><a href="../closerelatives/">CloseRelatives</a> — finds genomes in the CFIA collection closest to one query by Mash distance.</li>
+<li><a href="../mashtree/">MashTree</a> — builds a Mash-distance tree for a supplied genome set.</li>
+<li><a href="../unknownisolate/">Unknown Isolate</a> — uses dRep compare as part of a multi-method organism-identification workflow.</li>
 </ul>
-</li>
-<li>available algorithms include:<ul>
-<li><code>fastANI</code>, <code>ANImf</code>, <code>ANIn</code>, <code>gANI</code>, <code>goANI</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>command type (compare genomes for ANI values, or dereplicate, see <a href="https://drep.readthedocs.io/en/latest/overview.html">dRep</a>).</p>
-<ul>
-<li>default is <code>compare</code> </li>
-<li>modify as follows:<ul>
-<li><code>command=dereplicate</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="example">Example</h4>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>dRep will upload a zip file to the ftp on completion. This will contain folders with data in the form of tables, figures, etc. ANI values will only be output for clusters of sequences that are related at or above the MASH ANI cutoff. dRep does not output a tree file, however you should be able to replicate the output MASH tree by hierarchical clustering of the MASH table in R. (Hierarchical clustering uses the cluster algorithm command described above)</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>This depends largely on the number of strains you want to compare and their relatedness. It can often be as quick as a few minutes
-if you have 10 or less strains, or take several hours for more strains. The primary clustering step uses Mash to determine whether sequences are likely related (based on provided cutoff or default 90%). </p>
-<p>The secondary analysis which calculates the ANI values is only completed on sets of genomes that have at least 90% Mash ANI (unless this cutoff is modified). These secondary comparisons are slower (more sensitive and accurate for ANI). Therefore, if you have a large number of closely related genomes your job may take longer to complete.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>A few things can go wrong with this process:</p>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) You did not provide an analysis type. Custom analysis only completes dRep compare for the SEQ-IDs listed, whereas enterobacterales will compare your listed sequences to reference sequences from the order Enterobacterales, and listeriaceae will compare your listed sequences to reference sequences from the family Listeriaceae.</p>
-<h3 id="version">Version</h3>
-<p>Version 3.2.2 is currently available at the OLC. (as of 2024-07-4)</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../diversitree/" class="btn btn-neutral float-left" title="DiversiTree"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../downsample/" class="btn btn-neutral float-left" title="Downsample"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../fastqc/" class="btn btn-neutral float-right" title="Fastqc">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -348,7 +426,7 @@ message informing you of it.</p>
         </span>
     
     
-      <span><a href="../diversitree/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../downsample/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../fastqc/" style="color: #fcfcfc">Next &raquo;</a></span>

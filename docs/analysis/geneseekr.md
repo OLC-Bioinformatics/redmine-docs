@@ -1,96 +1,187 @@
 # GeneSeekr
 
-### What does it do?
+## What does it do?
 
-The GeneSeekr is a suite of analyses that detect gene targets in FASTA-formatted files.
+Use **GeneSeekr** to detect predefined or custom gene targets in FASTA-formatted files. GeneSeekr operates on assembled sequence data; use [Sipprverse](sipprverse.md) when the targets must be detected directly in raw, paired-end FASTQ reads.
 
-### How do I use it?
+GeneSeekr supports gene detection, selected typing analyses, and custom target databases. The supported analysis name must be supplied in the Redmine issue Description.
 
-#### Subject
+## How do I use it?
 
-In the `Subject` field, put `geneseekr`. Spelling counts, but case sensitivity doesn't.
+### Subject
 
-#### Description
+In the **Subject** field, enter:
 
-**Required Components**
+```text
+geneseekr
+```
 
-In the `Description` field, you must provide the requested analysis type as follows:
+Spelling matters, but matching is not case-sensitive.
 
-`analysis=requested_analysis`
+### Description
 
-The GeneSeekr pipeline supports the following analyses (again, spelling counts, but case sensitivity doesn't):
+The **Description** field must contain:
 
-- `gdcs` - determines the presence of genomically-dispersed conserved sequences in the following genera: *Escherichia, Listeria, Salmonella, Vibrio*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
-- `genesippr` - custom suite of genes derived from the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*
-- `mlst` - determines multi-locus sequence type for the following genera: *Bacillus, Campylobacter, Escherichia, Listeria, Salmonella, Staphylococcus, Vibrio*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
-- `cgmlst` - determines core genome multi-locus sequence type for the following genera: *Escherichia, Yersinia*. **NOTE**: you must provide an additional line: `organism=ORGANISM`
-- `resfinder` - identifies acquired antimicrobial resistance genes
-- `rmlst` - determines ribosomal multi-locus sequence type
-- `serosippr` - calculates the serotype for *Escherichia*
-- `sixteens` - determines closest 16S match
-- `virulence` - finds virulence genes
-- `custom` (**you must attach a FASTA-formatted file of target(s) to the issue**)
-<br>
-- Bacterial Integrative and Conjugative Elements (ICEs) [ICEberg databases](https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html) from the [ICEfinder publication](https://academic.oup.com/nar/article/47/D1/D660/5165266):
-    - `all_ices` - used for all ICE gene detection
-    - `aice` - used for actinomycete (AICEs) type ICE gene detection
-    - `cime` - used for cis-mobilizable elements (CIMEs) ICE gene detection
-    - `ime` - used for Integrative and Mobilizable Elements (IME) type ICE gene detection
-    - `t4ss` - used for Type IV Secretion System (T4SS) type ICE gene detection
+1. an analysis declaration in the form `analysis=requested_analysis`;
+2. any additional field required by that analysis; and
+3. one `SEQID` per line.
 
-You must also include a list of SEQIDs one per line.
+Example structure:
 
-**Optional Components**
+```text
+analysis=resfinder
+2026-SEQ-0001
+2026-SEQ-0002
+```
 
-In order to customise your GeneSeekr analyses, several settings can be optionally modified
+#### Supported analyses
 
-- BLAST program. **NOTE:** GeneSeekr does not check to see if your query or database are the appropriate molecule for the requested program. Additionally, none of the standard analyses currently have protein databases.
-    - default is `blastn`
-    - You can select one of the following BLAST programs to use:
-        - blastn - nt query: nt db
-        - blastp - protein query: protein db
-        - blastx - translated nt query: protein db
-        - tblastn - protein query: translated nt db
-        - tblastx - translated nt query: translated nt db
-    - modify as follows:
-        - `blast=tblastx`
-- Minimum cutoff for matches to be included in report.
-    - default is `70`
-    - modify as follows:
-        - `cutoff=80`
-- E-value cutoff
-    - default is `1E-05`
-    - modify as follows:
-        - `evalue=1E-10`
-- Include alignments in reports
-    - default is `False`
-    - modify as follows:
-        - `align=True`
-- Report unique hits only - does not report multiple hits at the same location in a contig. Instead, only the best hit is reported, and the rest are discarded
-    - default is `False`
-    - modify as follows:
-        - `unique=True`
-- Include FASTA file output of strain-specific target sequence matches 
-    - default is `False`
-    - modify as follows:
-        - `fasta=True`       
+- `gdcs` — detects genomically dispersed conserved sequences in *Escherichia*, *Listeria*, *Salmonella*, and *Vibrio*. Also include `organism=ORGANISM`.
+- `genesippr` — uses a custom suite of genes derived from *Bacillus*, *Campylobacter*, *Escherichia*, *Listeria*, *Salmonella*, *Staphylococcus*, and *Vibrio*.
+- `mlst` — determines multilocus sequence type for *Bacillus*, *Campylobacter*, *Escherichia*, *Listeria*, *Salmonella*, *Staphylococcus*, and *Vibrio*. Also include `organism=ORGANISM`.
+- `cgmlst` — determines core-genome multilocus sequence type for *Escherichia* and *Yersinia*. Also include `organism=ORGANISM`.
+- `resfinder` — identifies acquired antimicrobial-resistance genes.
+- `rmlst` — determines ribosomal multilocus sequence type.
+- `serosippr` — calculates the serotype for *Escherichia*.
+- `sixteens` — determines the closest 16S match.
+- `virulence` — detects virulence genes.
+- `custom` — detects targets from a user-supplied FASTA file. This analysis requires an attachment.
 
+GeneSeekr also provides analyses based on ICEberg databases from the [ICEfinder publication](https://academic.oup.com/nar/article/47/D1/D660/5165266):
 
-#### Example
+- `all_ices` — detects all included integrative and conjugative element targets.
+- `aice` — detects actinomycete integrative and conjugative element targets.
+- `cime` — detects cis-mobilizable element targets.
+- `ime` — detects integrative and mobilizable element targets.
+- `t4ss` — detects Type IV Secretion System targets.
 
-For example GeneSeekr issues, see [issue 14470 (ResFindr)](https://redmine.biodiversity.agr.gc.ca/issues/14470), [issue 14471 (custom)](https://redmine.biodiversity.agr.gc.ca/issues/14471), or [issue 27867 (cgMLST)](https://redmine.biodiversity.agr.gc.ca/issues/27867).
+The ICEberg databases are available from the [ICEberg download page](https://bioinfo-mml.sjtu.edu.cn/ICEberg2/download.html).
 
-#### Interpreting Results
+### Attachments
 
-The GeneSeekr automator will upload a file called `geneseekr_output.zip` once it has completed. This file will contain all the reports generated for the requested analysis.
+Most standard analyses do not require an attachment.
 
-### How long does it take?
+For `analysis=custom`, attach a FASTA-formatted file containing the target sequences. The source documentation does not specify a required attachment filename or a Description parameter that refers to it; verify the attachment requirements with the current implementation if a custom request fails.
 
-It depends on the analysis requested. The GeneSeekr pipeline should take about a minute to analyze each SEQID requested.
+### Optional parameters
 
-### What can go wrong?
+#### `blast`
 
-1. Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.
-2. There was an issue with the requested analysis: either one was not supplied, the was a typo, or you requested a currently-unsupported analysis. An error message detailing the problem will be added to the issue.
-3. The `custom` analysis requires an attached FASTA-formatted file of gene targets. If the file was not attached, or there was an issue reading the file, an error message detailing the problem will be add to the issue.
+Selects the BLAST program.
 
+- Default: `blastn`
+- Accepted values: `blastn`, `blastp`, `blastx`, `tblastn`, `tblastx`
+- Example: `blast=tblastx`
+
+GeneSeekr does not verify that the query and database molecule types are appropriate for the selected BLAST program. None of the standard analyses currently uses a protein database.
+
+#### `cutoff`
+
+Sets the minimum cutoff for matches included in the report.
+
+- Default: `70`
+- Example: `cutoff=80`
+
+#### `evalue`
+
+Sets the E-value cutoff.
+
+- Default: `1E-05`
+- Example: `evalue=1E-10`
+
+#### `align`
+
+Controls whether reports include alignments.
+
+- Default: `False`
+- Example: `align=True`
+
+#### `unique`
+
+Controls whether only the best hit is reported when multiple hits occur at the same location in a contig.
+
+- Default: `False`
+- Example: `unique=True`
+
+#### `fasta`
+
+Controls whether the output includes FASTA files containing strain-specific target-sequence matches.
+
+- Default: `False`
+- Example: `fasta=True`
+
+### Examples
+
+#### ResFinder request
+
+```text
+analysis=resfinder
+2026-SEQ-0001
+2026-SEQ-0002
+```
+
+See [issue 14470](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14470) for an example ResFinder request.
+
+#### cgMLST request
+
+```text
+analysis=cgmlst
+organism=Escherichia
+2026-SEQ-0001
+```
+
+See [issue 27867](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/27867) for an example cgMLST request.
+
+#### Custom request
+
+```text
+analysis=custom
+2026-SEQ-0001
+```
+
+Attach the FASTA-formatted target file to the issue. See [issue 14471](https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14471) for an example custom request.
+
+## Interpreting results
+
+When GeneSeekr finishes, it uploads:
+
+```text
+geneseekr_output.zip
+```
+
+The archive contains the reports generated for the selected analysis. The supplied documentation does not define a single common report schema because the contents depend on the requested analysis. Interpret each report according to the selected analysis and its reported fields.
+
+## How long does it take?
+
+Runtime depends on the selected analysis and the number of requested `SEQID`s. As a general estimate, GeneSeekr takes approximately one minute per `SEQID`.
+
+## What can go wrong?
+
+### A requested `SEQID` is unavailable
+
+**Symptom:** The Redmine issue receives a warning identifying unavailable sequences.
+
+**Likely cause:** GeneSeekr cannot locate the requested assembled sequence data.
+
+**What to do:** Verify each `SEQID` and confirm that its FASTA-formatted assembly is available before submitting a corrected request.
+
+### The analysis is missing, misspelled, or unsupported
+
+**Symptom:** The Redmine issue receives an error describing the requested analysis.
+
+**Likely cause:** The Description does not include `analysis=...`, contains a spelling error, or requests an analysis that GeneSeekr does not support.
+
+**What to do:** Choose one of the documented analysis names and submit a corrected request.
+
+### A custom target file is missing or unreadable
+
+**Symptom:** The custom analysis cannot read or use its target database.
+
+**Likely cause:** The FASTA-formatted target file was not attached or could not be read.
+
+**What to do:** Attach a valid FASTA-formatted target file and submit a corrected `analysis=custom` request.
+
+## Related automators
+
+- [Sipprverse](sipprverse.md) — use for predefined or custom target detection directly in raw, paired-end FASTQ reads.
+- [KMA](kma.md) — use for its supported resistance and toxin analyses, or custom targets, in assemblies or raw reads.
