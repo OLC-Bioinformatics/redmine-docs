@@ -27,6 +27,7 @@ nav:
     - 'ECTyper': 'analysis/ectyper.md'
     - 'DiversiTree': 'analysis/diversitree.md'
     - 'Downsample': 'analysis/downsample.md'
+    - 'Downsample Options': 'analysis/downsample_reformat_options.md'
     - 'dRep-ANI': 'analysis/drep.md'
     - 'Fastqc': 'analysis/fastqc.md'
     - 'fastqmerge': 'analysis/fastqmerge.md'
