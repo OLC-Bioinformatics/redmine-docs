@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -110,21 +112,55 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-analyses">Supported analyses</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#custom">custom</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    <li class="toctree-l4"><a class="reference internal" href="#enterobacterales">enterobacterales</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#listeriaceae">listeriaceae</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#genomesize">genomesize</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#mindepth">mindepth</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#kmerlength">kmerlength</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#sketch-size">sketch-size</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    <li class="toctree-l3"><a class="reference internal" href="#the-selected-analysis-is-unsupported-or-misspelled">The selected analysis is unsupported or misspelled</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#genomes-are-too-dissimilar-for-a-useful-tree">Genomes are too dissimilar for a useful tree</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
@@ -143,6 +179,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -163,8 +201,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -219,80 +255,107 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="mashtree">MashTree</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>MashTree will take a list of SEQIDs, and then create a
-phylogenetic tree using Mash distances. See <a href="https://github.com/lskatz/mashtree">mashtree github</a> and the <a href="https://github.com/lskatz/mashtree/blob/master/docs/ALGORITHM.md">mashtree docs</a> for more information. (The mashtree docs explains how mash is used to create the phylogeny).</p>
-<p>If you use mashtree, please remember to cite <a href="Mashtree: a rapid comparison of whole genome sequence files">Katz et al., 2019</a>, <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0997-x">Ondov et al., 2016</a> and <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1841-x">Ondov et al., 2019</a></p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>mashtree</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p><strong>Required Components</strong></p>
-<p>The first line of the description should be the analysis you would like to run (e.g. <code>analysis=custom</code>). </p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>MashTree</strong> to build a rapid whole-genome tree from a list of sequence assemblies using Mash distances.</p>
+<p>MashTree uses MinHash sketches to estimate pairwise genomic distances and construct a tree. It is useful for rapid exploratory comparison of many genomes, but the resulting tree is distance-based and is not built from a whole-genome alignment.</p>
+<p>For background, see the <a href="https://github.com/lskatz/mashtree">MashTree repository</a>, the <a href="https://github.com/lskatz/mashtree/blob/master/docs/ALGORITHM.md">MashTree algorithm documentation</a>, and the Mash publications. Cite Katz et al. (2019), Ondov et al. (2016), and Ondov et al. (2019) when publishing results produced with this workflow.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">mashtree
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>The first line selects the analysis mode:</p>
+<pre><code class="language-text">analysis=ANALYSIS_NAME
+</code></pre>
+<p>Enter optional parameters next, followed by one <code>SEQID</code> per line.</p>
+<h3 id="supported-analyses">Supported analyses</h3>
+<h4 id="custom"><code>custom</code></h4>
+<p>Compares only the assemblies listed in the Description:</p>
+<pre><code class="language-text">analysis=custom
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<h4 id="enterobacterales"><code>enterobacterales</code></h4>
+<p>Compares the listed assemblies with a reference set representing species from order Enterobacterales.</p>
+<pre><code class="language-text">analysis=enterobacterales
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h4 id="listeriaceae"><code>listeriaceae</code></h4>
+<p>Compares the listed assemblies with a reference set representing species from family Listeriaceae.</p>
+<pre><code class="language-text">analysis=listeriaceae
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>The supplied documentation does not identify support for attached assemblies. Use available <code>SEQID</code>s unless attachment support has been verified in the current implementation.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<h4 id="genomesize"><code>genomesize</code></h4>
+<p>Sets the expected genome size.</p>
 <ul>
-<li>The following options are currently supported:<ul>
-<li><code>custom</code> - compare only the SEQIDs listed in the description</li>
-<li><code>enterobacterales</code> - compare the listed SEQIDs to a set of reference sequences for species from the order Enterobacterales</li>
-<li><code>listeriaceae</code> - compare the listed SEQIDs to a set of reference sequences for species from the family Listeriaceae</li>
+<li>Default: <code>5000000</code></li>
+<li>Example: <code>genomesize=3000000</code></li>
 </ul>
-</li>
-</ul>
-<p>You must also include a list of SEQIDs one per line.</p>
-<p><strong>Optional Components</strong></p>
+<p>Choose a value appropriate for the organisms being compared.</p>
+<h4 id="mindepth"><code>mindepth</code></h4>
+<p>Sets the minimum k-mer depth. A value of <code>0</code> uses a smarter but slower method to discard lower-abundance k-mers.</p>
 <ul>
-<li>
-<p>genomesize: </p>
+<li>Default: <code>5</code></li>
+<li>Example: <code>mindepth=10</code></li>
+</ul>
+<h4 id="kmerlength"><code>kmerlength</code></h4>
+<p>Sets the Mash k-mer size.</p>
 <ul>
-<li>default is <code>5000000</code> </li>
-<li>If you want to use a genome size estimate, add a line to your description:<ul>
-<li><code>genomesize=3000000</code></li>
+<li>Default: <code>21</code></li>
+<li>Example: <code>kmerlength=30</code></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>mindepth - if mindepth is zero, then it will be chosen in a smart but slower method to discard lower-abundance kmers.</p>
+<p>Larger k-mers generally provide more specificity, while smaller k-mers provide more sensitivity. Larger genomes can require larger k-mers to reduce chance sharing.</p>
+<h4 id="sketch-size"><code>sketch-size</code></h4>
+<p>Sets the number of non-redundant MinHash values retained in each Mash sketch.</p>
 <ul>
-<li>default is <code>5</code> </li>
-<li>If you want to use a minimum depth, add a line to your description:<ul>
-<li><code>mindepth=10</code></li>
+<li>Default: <code>10000</code></li>
+<li>Example: <code>sketch-size=1000</code></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>kmerlength - <a href="https://mash.readthedocs.io/en/latest/sketches.html">Mash kmer size</a> "larger k-mers will provide more specificity while smaller k-mers will provide more sensitivity. (Larger genomes will also require larger k-mers to avoid k-mers that are shared by chance)."</p>
+<p>Larger sketches better represent each sequence but increase sketch size and comparison time.</p>
+<h3 id="example">Example</h3>
+<pre><code class="language-text">analysis=custom
+genomesize=5000000
+mindepth=5
+kmerlength=21
+sketch-size=10000
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/26206">issue 26206</a> for an example MashTree request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When MashTree finishes, it uploads a Newick-formatted tree file to the Redmine issue.</p>
+<p>Open the file in a Newick-compatible tree viewer. Branch lengths represent relationships derived from Mash distance estimates. Interpret them as rapid genome-distance comparisons rather than alignment-derived substitutions.</p>
+<p>For <code>enterobacterales</code> and <code>listeriaceae</code>, the tree also includes the workflow's reference genomes. The nearest reference can help place a query within the represented collection, but a nearest tree position alone is not a definitive taxonomic assignment.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Runtime depends mainly on the number and size of assemblies, sketch parameters, and selected reference set. Small requests can finish in a few minutes; large sketches or many genomes take longer.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable assemblies.</p>
+<p><strong>Likely cause:</strong> MashTree cannot locate an assembly for the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code> and confirm that its assembly is available.</p>
+<h3 id="the-selected-analysis-is-unsupported-or-misspelled">The selected analysis is unsupported or misspelled</h3>
+<p><strong>Symptom:</strong> The automator cannot choose a comparison set.</p>
+<p><strong>Likely cause:</strong> <code>analysis</code> is missing or is not one of <code>custom</code>, <code>enterobacterales</code>, and <code>listeriaceae</code>.</p>
+<p><strong>What to do:</strong> Use a supported analysis value exactly as documented.</p>
+<h3 id="genomes-are-too-dissimilar-for-a-useful-tree">Genomes are too dissimilar for a useful tree</h3>
+<p><strong>Symptom:</strong> The tree contains very long branches or relationships that are difficult to interpret.</p>
+<p><strong>Likely cause:</strong> The included genomes are too diverse, the reference set is inappropriate, or sketch settings are unsuitable.</p>
+<p><strong>What to do:</strong> Compare a more coherent genome set, select a better analysis mode, and review <code>genomesize</code>, <code>kmerlength</code>, <code>mindepth</code>, and <code>sketch-size</code>.</p>
+<h2 id="related-automators">Related automators</h2>
 <ul>
-<li>default is <code>21</code> </li>
-<li>If you want to change the k-mer size, add a line to your description:<ul>
-<li><code>kmerlength=30</code></li>
+<li><a href="../bcgtree/">bcgTree</a> — builds a bacterial phylogeny from essential single-copy core genes using a partitioned maximum-likelihood analysis.</li>
+<li><a href="../neartree/">NearTree</a> — ranks the closest strains to one query among a supplied comparison set.</li>
+<li><a href="../strainmash/">StrainMash</a> — identifies the closest represented RefSeq type strain for an assembly.</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>sketch-size - <a href="https://mash.readthedocs.io/en/latest/sketches.html">Mash sketch size</a> "corresponds to the number of (non-redundant) min-hashes that are kept. Larger sketches will better represent the sequence, but at the cost of larger sketch files and longer comparison times."</p>
-<ul>
-<li>default is <code>10000</code> </li>
-<li>If you want to change the mash sketch-size, add a line to your description:<ul>
-<li><code>sketch-size=1000</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="example">Example</h4>
-<p>For an example MashTree, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/26206">issue 26206</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>Upon completion, you'll be given a treefile.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>This depends largely on the number of strains you want to use to create the tree. It can often be as quick as a few minutes. </p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>A few things can go wrong with this process:</p>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<h3 id="version">Version</h3>
-<p>Version 0.35.4 is currently available at the OLC. (as of 2024-07-4)</p>
               
             </div>
           </div><footer>

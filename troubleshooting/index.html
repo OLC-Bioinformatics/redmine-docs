@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../analysis/downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../analysis/downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../analysis/drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../analysis/fastqc/">Fastqc</a>
@@ -104,6 +106,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../analysis/metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../analysis/metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../analysis/mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../analysis/mlst/">MLST</a>
@@ -121,6 +125,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../analysis/prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../analysis/psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../analysis/quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../analysis/resfinder/">ResFinder</a>
                   </li>
@@ -142,8 +148,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../analysis/unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../analysis/wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul>
@@ -155,11 +159,31 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Troubleshooting</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#error-messages">Error Messages</a>
+    <li class="toctree-l2"><a class="reference internal" href="#the-issue-does-not-start">The issue does not start</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#check-the-subject">Check the Subject</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#why-are-things-taking-so-long">Why are things taking so long?</a>
+    <li class="toctree-l3"><a class="reference internal" href="#check-project-access-and-issue-placement">Check project access and issue placement</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#contact-info">Contact Info</a>
+    <li class="toctree-l3"><a class="reference internal" href="#check-the-description-structure">Check the Description structure</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-issue-reports-unavailable-seqids">The issue reports unavailable SEQIDs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-job-is-taking-longer-than-expected">The job is taking longer than expected</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-analysis-completed-but-expected-samples-are-missing">The analysis completed but expected samples are missing</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#a-result-link-does-not-work">A result link does not work</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#an-attachment-is-rejected-or-ignored">An attachment is rejected or ignored</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results-look-biologically-unexpected">Results look biologically unexpected</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#information-to-include-when-requesting-help">Information to include when requesting help</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#requesting-a-new-tool-or-feature">Requesting a new tool or feature</a>
     </li>
     </ul>
                 </li>
@@ -204,16 +228,108 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="troubleshooting">Troubleshooting</h1>
-<h4 id="error-messages">Error Messages</h4>
-<p>If you get error messages that aren't covered by the descriptions of the tools available, please let us know by sending
-us an email.</p>
-<h4 id="why-are-things-taking-so-long">Why are things taking so long?</h4>
-<p>Our compute cluster does run into situations where all available resources are being used. If that's the case, your job
-will wait in queue until compute resources are freed up. This should be a fairly rare occurrence, but it does happen.</p>
-<h4 id="contact-info">Contact Info</h4>
-<p>If you're having issues or want a new tool implemented, email us! For quickest response times, email Ashley with Adam CC'd.</p>
-<p>Ashley Cooper: <code>ashley.cooper@inspection.gc.ca</code></p>
-<p>Adam Koziol: <code>adam.koziol@inspection.gc.ca</code></p>
+<p>Use this page for general Redmine Automator problems. For workflow-specific failures, first review the <strong>What can go wrong?</strong> section on the relevant analysis or data page.</p>
+<h2 id="the-issue-does-not-start">The issue does not start</h2>
+<h3 id="check-the-subject">Check the Subject</h3>
+<p>The Subject selects the automator. Verify its spelling, spaces, underscores, and punctuation against the documentation page. Although most Subjects are case-insensitive, use the documented form.</p>
+<h3 id="check-project-access-and-issue-placement">Check project access and issue placement</h3>
+<p>Confirm that the issue was created in the correct project and that your account has permission to submit requests.</p>
+<h3 id="check-the-description-structure">Check the Description structure</h3>
+<p>Some automators require a parameter on the first line, a specific <code>reference</code>/<code>compare</code> structure, or options before the <code>SEQID</code> list. Correct the structure and create a new request when required.</p>
+<h2 id="the-issue-reports-unavailable-seqids">The issue reports unavailable <code>SEQID</code>s</h2>
+<p>Verify that:</p>
+<ul>
+<li>every identifier is spelled correctly;</li>
+<li>the required data type exists;</li>
+<li>paired-end workflows have both R1 and R2 FASTQ files;</li>
+<li>assembly workflows have a FASTA assembly;</li>
+<li>older or external data have been imported to the expected storage location.</li>
+</ul>
+<p>Some automators process available samples and warn about missing ones; others stop. Read the workflow page and final issue comments.</p>
+<h2 id="the-job-is-taking-longer-than-expected">The job is taking longer than expected</h2>
+<p>Runtime estimates apply after accounting for input size and normal compute availability. Jobs can wait when cluster resources are fully used.</p>
+<p>Longer runtime can also result from:</p>
+<ul>
+<li>large sample counts;</li>
+<li>large FASTQ files or assemblies;</li>
+<li>database installation or update;</li>
+<li>high bootstrap counts;</li>
+<li>deep annotation modes;</li>
+<li>expensive secondary comparisons;</li>
+<li>large uploads to Dropbox or another transfer service.</li>
+</ul>
+<p>Do not submit duplicate issues solely because a valid job is queued. Check recent issue comments and the workflow's expected runtime before escalating.</p>
+<h2 id="the-analysis-completed-but-expected-samples-are-missing">The analysis completed but expected samples are missing</h2>
+<p>Review the issue for warnings about:</p>
+<ul>
+<li>missing <code>SEQID</code>s;</li>
+<li>unsupported genera or organisms;</li>
+<li>absent paired-read mates;</li>
+<li>divergence from the selected reference;</li>
+<li>no detected target or resistance result;</li>
+<li>malformed attachments;</li>
+<li>samples removed during filtering or tree cleanup.</li>
+</ul>
+<p>A sample absent from an output can mean “not processed,” “unsupported,” or “no result detected,” depending on the automator.</p>
+<h2 id="a-result-link-does-not-work">A result link does not work</h2>
+<p>Dropbox, FTP, or other transfer links can fail because of temporary connectivity, timeouts, or expiration.</p>
+<p>Try the following:</p>
+<ol>
+<li>retry after a short delay;</li>
+<li>check whether the link expired;</li>
+<li>split very large retrieval requests into smaller batches;</li>
+<li>preserve the issue number and exact upload error;</li>
+<li>contact the bioinformatics team if the problem persists.</li>
+</ol>
+<h2 id="an-attachment-is-rejected-or-ignored">An attachment is rejected or ignored</h2>
+<p>Check:</p>
+<ul>
+<li>filename and extension;</li>
+<li>file size;</li>
+<li>FASTA, CSV, TSV, Newick, or Excel formatting;</li>
+<li>exact required headers;</li>
+<li>whether the automator expects a specific filename;</li>
+<li>whether only one attachment is allowed;</li>
+<li>whether an attachment takes precedence over Description entries.</li>
+</ul>
+<p>Do not rename a CSV file to <code>.xlsx</code>; create a valid Excel workbook when <code>.xlsx</code> is required.</p>
+<h2 id="results-look-biologically-unexpected">Results look biologically unexpected</h2>
+<p>Before treating the result as a workflow error, review:</p>
+<ul>
+<li>organism identity and contamination;</li>
+<li>read and assembly quality;</li>
+<li>reference choice;</li>
+<li>database name and version;</li>
+<li>identity, coverage, and core-genome metrics;</li>
+<li>whether the method reports prediction, association, or direct evidence;</li>
+<li>known limitations documented on the workflow page.</li>
+</ul>
+<p>Computational predictions and associations require biological interpretation and may need an independent method.</p>
+<h2 id="information-to-include-when-requesting-help">Information to include when requesting help</h2>
+<p>Provide:</p>
+<ul>
+<li>Redmine issue number;</li>
+<li>automator Subject;</li>
+<li>relevant <code>SEQID</code>s;</li>
+<li>exact error text;</li>
+<li>submission and failure time;</li>
+<li>expected output;</li>
+<li>observed output;</li>
+<li>whether a retry produced the same result.</li>
+</ul>
+<p>Do not send corporate passwords, SRA passwords, or reusable credentials by email.</p>
+<h2 id="requesting-a-new-tool-or-feature">Requesting a new tool or feature</h2>
+<p>Contact the bioinformatics team with:</p>
+<ul>
+<li>the problem the tool should solve;</li>
+<li>expected input and output formats;</li>
+<li>source-code and publication links;</li>
+<li>approximate sample volume;</li>
+<li>required parameters;</li>
+<li>validation or regulatory considerations;</li>
+<li>whether the workflow should be standard-access or internal-only.</li>
+</ul>
+<p>Named contacts can become outdated, so this documentation refers to the responsible bioinformatics team rather than individual employees.</p>
               
             </div>
           </div><footer>

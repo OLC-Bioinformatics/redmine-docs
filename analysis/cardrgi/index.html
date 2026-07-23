@@ -75,16 +75,54 @@
     <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#isolate-assemblies">Isolate assemblies</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    <li class="toctree-l4"><a class="reference internal" href="#raw-fastq-data">Raw FASTQ data</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#loosehits">loosehits</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#partialgenes">partialgenes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#isolate-analysis">Isolate analysis</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#raw-read-analysis">Raw-read analysis</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#isolate-analysis_1">Isolate analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#metagenome-analysis">Metagenome analysis</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-analysis-mode-does-not-match-the-available-input">The analysis mode does not match the available input</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#loose-or-partial-hits-are-overinterpreted">Loose or partial hits are overinterpreted</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -101,6 +139,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
@@ -124,6 +164,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
@@ -141,6 +183,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -161,8 +205,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -217,66 +259,113 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="card-rgi">CARD-RGI</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>CARD-RGI (Comprehensive Antibiotic Resistance Database - Resistance Gene Identifier) is a program developed by the McMaster University to predict resistomes
-in draft genome assemblies. <a href="https://card.mcmaster.ca/analyze/rgi">CARD website</a></p>
-<p>For more information, see the <a href="https://pubmed.ncbi.nlm.nih.gov/31665441/">CARD publication</a>. If you publish data using this automator, don't forget to cite the authors of the tool <a href="https://pubmed.ncbi.nlm.nih.gov/31665441/">Alcock et al., 2020</a></p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>CARDRGI</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p><strong>Required Components</strong></p>
-<p>The first line of the description should be the analysis you would like to run (e.g. <code>analysis=isolate</code>). This will depend on the type of sequence data your are investigating.</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>CARD-RGI</strong> to predict the resistome of bacterial isolate assemblies or raw FASTQ data using the Comprehensive Antibiotic Resistance Database and Resistance Gene Identifier.</p>
+<p>CARD-RGI supports two analysis modes:</p>
 <ul>
-<li>The following options are currently supported:<ul>
-<li><code>isolate</code> - used for resistome analysis of bacterial isolate sequence assemblies</li>
-<li><code>metagenome</code> - used for resistome analysis of metagenome fastq-files. (This option can also be used to 'force' the tool to complete resistome analysis of isolate fastq-files). Currently, this metagenome redmine automator uses <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2336-6">KMA</a> for alignment of gene targets to the raw-read data. If you would like to try the other options (BWA or bowtie2), you can download the stand-alone tool from the <a href="https://github.com/arpcard/rgi#rgi-usage-documentation">CARD github</a>.</li>
+<li><code>isolate</code> — analyzes bacterial isolate sequence assemblies;</li>
+<li><code>metagenome</code> — analyzes metagenomic FASTQ files and can also be used to analyze isolate FASTQ files.</li>
 </ul>
-</li>
-</ul>
-<p>You must also include a list of SEQIDs one per line.</p>
-<p><strong>Optional Components</strong></p>
-<p>By default, CARD-RGI will run the analysis for isolate assemblies. In order to customise your CARD-RGI analyses, two additional settings can be optionally modified:</p>
+<p>The Redmine metagenome workflow uses KMA to align CARD targets to raw reads. The Redmine automator does not expose the alternative BWA or Bowtie 2 aligners available in the standalone CARD-RGI software.</p>
+<p>For background and output definitions, see the <a href="https://card.mcmaster.ca/analyze/rgi">CARD website</a>, <a href="https://github.com/arpcard/rgi#rgi-usage-documentation">CARD-RGI documentation</a>, and <a href="https://pubmed.ncbi.nlm.nih.gov/31665441/">Alcock et al. (2020)</a>. Cite the CARD authors when publishing results produced with this automator.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">CARDRGI
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>The <strong>Description</strong> field must contain:</p>
+<ol>
+<li>an analysis declaration as the first line; and</li>
+<li>one <code>SEQID</code> per line.</li>
+</ol>
+<h4 id="isolate-assemblies">Isolate assemblies</h4>
+<p>Use <code>analysis=isolate</code> for bacterial isolate sequence assemblies:</p>
+<pre><code class="language-text">analysis=isolate
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h4 id="raw-fastq-data">Raw FASTQ data</h4>
+<p>Use <code>analysis=metagenome</code> for metagenomic FASTQ files. This mode can also force resistome analysis of isolate FASTQ files:</p>
+<pre><code class="language-text">analysis=metagenome
+2026-SEQ-0001
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>The supplied documentation does not identify a required attachment for either supported analysis mode. CARD-RGI retrieves the requested sequence data using the listed <code>SEQID</code>s.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<h4 id="loosehits"><code>loosehits</code></h4>
+<p>Controls whether the results include CARD-RGI loose hits in addition to strict and perfect matches.</p>
 <ul>
-<li>
-<p>loosehits - the default analysis will only include strict and perfect resistance gene matches. Setting this to true will also include 'loose' hits, which may or may not be contributing to resistance.</p>
+<li>Default: <code>False</code></li>
+<li>Enable with: <code>loosehits=TRUE</code></li>
+</ul>
+<p>Loose hits may or may not contribute to resistance and require careful interpretation.</p>
+<h4 id="partialgenes"><code>partialgenes</code></h4>
+<p>Controls whether partial gene matches are included.</p>
 <ul>
-<li>default is <code>False</code> </li>
-<li>If you want to include loose hits, add a line to your description:<ul>
-<li><code>loosehits=TRUE</code></li>
+<li>Default: <code>False</code></li>
+<li>Enable with: <code>partialgenes=TRUE</code></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>partialgenes - the default analysis will only include full gene matches.</p>
+<h3 id="examples">Examples</h3>
+<h4 id="isolate-analysis">Isolate analysis</h4>
+<pre><code class="language-text">analysis=isolate
+loosehits=TRUE
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h4 id="raw-read-analysis">Raw-read analysis</h4>
+<pre><code class="language-text">analysis=metagenome
+2026-SEQ-0001
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/28111">issue 28111</a> for an example CARD-RGI request. The example uses <code>analysis=metagenome</code> with an isolate sequence rather than a true metagenome. Temporary result-download links associated with the issue may expire.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When CARD-RGI finishes, it uploads an archive named using the Redmine issue identifier:</p>
+<pre><code class="language-text">card-rgi_output_redmineID.zip
+</code></pre>
+<h3 id="isolate-analysis_1">Isolate analysis</h3>
+<p>The archive contains a combined CSV file:</p>
+<pre><code class="language-text">CARDRGI_output.csv
+</code></pre>
+<p>This file summarizes AMR gene results for all requested sample sequences. Review the <code>Best_Identities</code> column, which reports the percentage identity between the sequence and its top CARD hit.</p>
+<p>A result with <code>100</code> percent identity provides stronger evidence for the reported target, but identity alone does not establish a resistance phenotype. Efflux systems and point mutations may confer resistance only in particular genera or species. Interpret every result in its organism-specific context.</p>
+<p>The isolate archive also contains:</p>
 <ul>
-<li>default is <code>False</code> </li>
-<li>If you want to include partial gene hits, add a line to your description:<ul>
-<li><code>partialgenes=TRUE</code></li>
+<li>individual result files for each sequence; and</li>
+<li>an RGI heatmap file summarizing all isolate sequences in the request.</li>
 </ul>
-</li>
+<p>For detailed column definitions, consult the <strong>RGI main Tab-Delimited Output Details</strong> in the <a href="https://github.com/arpcard/rgi#rgi-usage-documentation">CARD-RGI documentation</a>.</p>
+<h3 id="metagenome-analysis">Metagenome analysis</h3>
+<p>The archive contains individual output files for each analyzed sequence and two combined mapping files:</p>
+<pre><code class="language-text">CARDRGI_gene_mapping_output.csv
+CARDRGI_allele_mapping_output.csv
+</code></pre>
+<ul>
+<li><code>CARDRGI_gene_mapping_output.csv</code> summarizes resistance-gene results detected in the raw FASTQ data.</li>
+<li><code>CARDRGI_allele_mapping_output.csv</code> reports the top allele hits for each sequence.</li>
 </ul>
-</li>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Runtime depends on the selected analysis mode, amount of sequence data, enabled options, and number of requested sequences. Expect approximately two to five minutes per sequence.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> CARD-RGI cannot locate the assembly or raw FASTQ files required for the selected analysis mode.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that the required sequence-data type is available, and submit a corrected request.</p>
+<h3 id="the-analysis-mode-does-not-match-the-available-input">The analysis mode does not match the available input</h3>
+<p><strong>Symptom:</strong> The automator cannot locate or process the expected data for one or more <code>SEQID</code>s.</p>
+<p><strong>Likely cause:</strong> <code>analysis=isolate</code> was requested for raw reads, or <code>analysis=metagenome</code> was requested when the intended input was an assembly.</p>
+<p><strong>What to do:</strong> Use <code>analysis=isolate</code> for bacterial isolate assemblies and <code>analysis=metagenome</code> for raw FASTQ data.</p>
+<h3 id="loose-or-partial-hits-are-overinterpreted">Loose or partial hits are overinterpreted</h3>
+<p><strong>Symptom:</strong> A reported hit appears weak, incomplete, or inconsistent with the organism's expected resistance profile.</p>
+<p><strong>Likely cause:</strong> <code>loosehits=TRUE</code> or <code>partialgenes=TRUE</code> included lower-confidence or incomplete matches.</p>
+<p><strong>What to do:</strong> Review identity, match category, gene completeness, organism context, and CARD documentation before drawing conclusions.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../resfinder/">ResFinder</a> — use to detect acquired AMR genes in draft genome assemblies; it does not detect resistance caused by chromosomal point mutations.</li>
+<li><a href="../staramr/">StarAMR</a> — combines acquired-gene detection with supported PointFinder mutation detection for <em>Campylobacter</em> and <em>Salmonella</em> assemblies.</li>
+<li><a href="../kma/">KMA</a> — use for the Redmine KMA automator's curated AMR, biocide, metal, verotoxin, or custom target databases in assemblies or raw reads.</li>
+<li><a href="../pointfinder/">PointFinder</a> — use for supported chromosomal resistance mutations.</li>
 </ul>
-<h4 id="example">Example</h4>
-<p>For an example using CARDRGI, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/28111">issue 28111</a>. The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks). Please note that 2017-SEQ-0054 is an isolate sequence, not actually a metagenome.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>CARD-RGI will upload a zipped folder called <code>card-rgi_output_redmineID.zip</code> to the ftp once it has completed. </p>
-<p><strong>Isolate Analysis</strong></p>
-<p>This folder will contain a <code>CARDRGI_output.csv</code> csv file which shows every AMR gene found in each
-sample-sequence. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
-to look at the <strong>Best_Identities</strong> column, which contains the percent identity of the gene/target match to the top hit in CARD. You can be pretty sure that anything with 100
-is actually there, but anything else requires further analysis to be sure. </p>
-<p>Also, some efflux and point-mutations may confer resistance in specific genera/species but not others, so it is important to consider this before coming to any conclusions even if they are a 100% match. Information about the output table can be found on the <a href="https://github.com/arpcard/rgi#rgi-usage-documentation">CARD-RGI github page</a> under <code>RGI main Tab-Delimited Output Details</code>.</p>
-<p>The isolate analysis will also output individual results files for each sequence, and a RGI-heatmap file including information about all of the isolate sequences in your analysis.</p>
-<p><strong>Metagenome Analysis</strong></p>
-<p>The zip folder will contain individual output files for each sequence analysed. It will also include <code>CARDRGI_gene_mapping_output.csv</code> and <code>CARDRGI_allele_mapping_output.csv</code> files. These contain the CARD-results of all resistance genes found in the raw fastq data for each sample-sequence. The <code>CARDRGI_allele_mapping_output.csv</code> allele file will include the data for the top allele hits for each sequence.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>CARD-RGI is pretty fast, however the time required for analysis will depend on the analysis type and number of sequences requested. Expect approximately 2-5 minutes per sequence.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
               
             </div>
           </div><footer>

@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -104,6 +106,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
@@ -122,6 +126,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
+                  </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">ResFinder</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
@@ -132,15 +138,29 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#point-mutation-resistance-is-missing-from-the-report">Point-mutation resistance is missing from the report</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-lower-identity-or-partially-covered-hit-is-difficult-to-interpret">A lower-identity or partially covered hit is difficult to interpret</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -161,8 +181,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -217,35 +235,71 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="resfinder">ResFinder</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>ResFinder is a program developed by the Danish Center for Genomic Epidemiology for detection of antibiotic resistance
-in draft genome assemblies. It is very important to note that the Redmine version will only look for acquired antibiotic
-resistance genes (generally plasmid-borne) and not chromosomally encoded AMR genes that are caused by point mutations.</p>
-<p>If you're interested in chromosomally encoded AMR genes, use the
- <a href="../pointfinder/">PointFinder automator</a>, using the <a href="../cardrgi/">CARDRGI automator</a>, or you can <a href="../../data/external_retrieve/">External Retrieve</a> your
-assemblies of interest and submit them to an alternate AMR predictor, such as McMaster's webportal <a href="https://card.mcmaster.ca/analyze/rgi">CARD</a>.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>ResFinder</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to detect AMR in, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example ResFinder, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12854">issue 12854</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>ResFinder will upload a file called <code>resfinder.xlsx</code> once it has completed, which shows every AMR gene found in each
-sample. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
-to look at the <strong>PercentIdentity</strong> and <strong>PercentCovered</strong> columns. You can be pretty sure that anything with 100 for both
-is actually there, but anything else requires further analysis to be sure.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>ResFinder is very fast - it should only take a few seconds to analyze each SEQID requested.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>ResFinder</strong> to detect acquired antibiotic-resistance genes in draft genome assemblies.</p>
+<p>The Redmine ResFinder automator detects acquired resistance genes, which are often plasmid-borne. It does <strong>not</strong> detect resistance caused by chromosomal point mutations. For supported mutation detection, use <a href="../pointfinder/">PointFinder</a>, <a href="../staramr/">StarAMR</a>, or <a href="../cardrgi/">CARD-RGI</a>, depending on the organism, input type, and desired analysis.</p>
+<p>ResFinder was developed by the Danish Center for Genomic Epidemiology.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">ResFinder
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>In the <strong>Description</strong> field, enter one <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>The requested <code>SEQID</code>s must have draft genome assemblies available.</p>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. ResFinder retrieves the draft assemblies associated with the requested <code>SEQID</code>s.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for the Redmine ResFinder automator.</p>
+<h3 id="example">Example</h3>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/12854">issue 12854</a> for an example ResFinder request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When ResFinder finishes, it uploads:</p>
+<pre><code class="language-text">resfinder.xlsx
+</code></pre>
+<p>The workbook lists acquired AMR genes detected in each sample. A listed gene or resistance does not by itself establish that the strain expresses the associated resistance phenotype.</p>
+<p>Review at least:</p>
+<ul>
+<li><code>PercentIdentity</code> — sequence identity between the detected gene and reference target;</li>
+<li><code>PercentCovered</code> — coverage of the reference target.</li>
+</ul>
+<p>A hit with <code>100</code> for both identity and coverage provides stronger evidence that the complete acquired gene is present. Hits with lower identity or coverage require further review.</p>
+<p>ResFinder does not report chromosomal point-mutation resistance in this Redmine workflow.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>ResFinder is generally fast and should take only a few seconds per requested <code>SEQID</code>. Total runtime also depends on the number of samples and service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> ResFinder cannot locate a draft genome assembly for the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that its assembly is available, and submit a corrected request.</p>
+<h3 id="point-mutation-resistance-is-missing-from-the-report">Point-mutation resistance is missing from the report</h3>
+<p><strong>Symptom:</strong> The ResFinder result does not include an expected chromosomal resistance mutation.</p>
+<p><strong>Likely cause:</strong> The Redmine ResFinder automator only detects acquired resistance genes.</p>
+<p><strong>What to do:</strong> Use <a href="../pointfinder/">PointFinder</a>, <a href="../staramr/">StarAMR</a>, or <a href="../cardrgi/">CARD-RGI</a> when mutation-based resistance must also be assessed.</p>
+<h3 id="a-lower-identity-or-partially-covered-hit-is-difficult-to-interpret">A lower-identity or partially covered hit is difficult to interpret</h3>
+<p><strong>Symptom:</strong> A result has less than <code>100</code> in <code>PercentIdentity</code>, <code>PercentCovered</code>, or both.</p>
+<p><strong>Likely cause:</strong> The detected sequence differs from or only partially covers the reference target.</p>
+<p><strong>What to do:</strong> Review the alignment evidence and organism context before concluding that the complete resistance gene is present.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../pointfinder/">PointFinder</a> — detects supported chromosomal mutations associated with antimicrobial resistance.</li>
+<li><a href="../staramr/">StarAMR</a> — combines ResFinder acquired-gene detection with PointFinder mutation detection for supported <em>Campylobacter</em> and <em>Salmonella</em> assemblies.</li>
+<li><a href="../cardrgi/">CARD-RGI</a> — predicts resistomes in isolate assemblies or raw FASTQ data and can include strict, perfect, loose, and partial CARD hits.</li>
+<li><a href="../geneseekr/">GeneSeekr</a> — provides <code>analysis=resfinder</code> for FASTA-formatted inputs.</li>
+<li><a href="../sipprverse/">Sipprverse</a> — provides <code>analysis=resfinder</code> for raw, paired-end FASTQ reads.</li>
+</ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../psortb/" class="btn btn-neutral float-left" title="PSORTb"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../quast/" class="btn btn-neutral float-left" title="QUAST"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../rmlst/" class="btn btn-neutral float-right" title="rMLST">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -273,7 +327,7 @@ message informing you of it.</p>
         </span>
     
     
-      <span><a href="../psortb/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../quast/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../rmlst/" style="color: #fcfcfc">Next &raquo;</a></span>

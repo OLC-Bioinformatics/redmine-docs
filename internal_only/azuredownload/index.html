@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/fastqc/">Fastqc</a>
@@ -104,6 +106,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/mlst/">MLST</a>
@@ -121,6 +125,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/resfinder/">ResFinder</a>
                   </li>
@@ -142,8 +148,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../analysis/unknownisolate/">Unknownisolate</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../analysis/wgsassembly/">WGS Assembly</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
               <ul class="current">
@@ -158,16 +162,38 @@
     <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#machine">machine</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#location">location</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#sequence_folder">sequence_folder</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-sequence-folder-cannot-be-found">The sequence folder cannot be found</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-foodport-assembly-folder-was-downloaded-manually">The FoodPort assembly folder was downloaded manually</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-machine-or-destination-category-is-invalid">The machine or destination category is invalid</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#access-and-navigation">Access and navigation</a>
     </li>
     </ul>
                   </li>
@@ -217,50 +243,80 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="azuredownload">Azuredownload</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>The azuredownload automator will download the raw read data, assembly files, and report files output by the foodport assembly pipeline. It then moves the files to the correct locations on the NAS (e.g. processed sequence data), so that users can use the files for analyses in other redmine automators.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>azuredownload</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>In the <code>Description</code> field, the required components are the following:</p>
-<p>First line: <code>machine=other</code><br />
-Next line: <code>location=ncbi</code><br />
-Next line: <code>sequence_folder=folder name</code></p>
-<p>The 'folder name' should be replaced with the name of the sequence folder used for assembly on <a href="http://10.148.57.4/">Foodport</a>. </p>
-<p><strong>Important note:</strong> even if you uploaded the run to Foodport using an underscore "_" in the name, do not use an underscore in the redmine automator. It must be a dash:</p>
-<p><code>sequence_folder=YYMMDD-lab</code></p>
-<p>You must also provide the requested/used machine type as follows <code>machine=miseq</code></p>
-<p>Azuredownload supports the following analyses:</p>
+<blockquote>
+<p><strong>Internal-only workflow:</strong> This page documents an operational data-ingestion automator. It must remain under <code>docs/internal_only/</code> and must not be linked from the standard user index.</p>
+</blockquote>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>Azuredownload</strong> to retrieve raw reads, assemblies, and reports produced by the FoodPort assembly pipeline and place them in the appropriate NAS locations for use by other Redmine automators.</p>
+<p>The workflow is intended for authorized internal data management. It uses the FoodPort sequence-folder name, sequencing-machine category, and destination category to locate and organize a completed assembly run.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">azuredownload
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Provide exactly one value for each required field:</p>
+<pre><code class="language-text">machine=MACHINE_TYPE
+location=DESTINATION
+sequence_folder=YYMMDD-lab
+</code></pre>
+<h4 id="machine"><code>machine</code></h4>
+<p>Select the source data category:</p>
 <ul>
-<li><code>miseq</code> - used for MiSeq sequencer runs assembled on Foodport</li>
-<li><code>nextseq</code> - used for NextSeq sequencer runs assembled on Foodport</li>
-<li><code>other</code> - used for any "other" data assembled on Foodport.<ul>
-<li>For example data downloaded from NCBI and uploaded to Foodport to be assembled with our pipeline. Or random research assemblies done through Foodport.</li>
-<li>The user must also add the <code>flag location=</code> and the name of the location the sequence assemblies are to be stored on the nas</li>
+<li><code>machine=miseq</code> — MiSeq runs assembled through FoodPort;</li>
+<li><code>machine=nextseq</code> — NextSeq runs assembled through FoodPort;</li>
+<li><code>machine=other</code> — other data assembled through FoodPort, including research assemblies or data obtained from NCBI and processed through the pipeline.</li>
 </ul>
-</li>
-</ul>
-<p>Possible flag locations include:</p>
+<h4 id="location"><code>location</code></h4>
+<p>Select the NAS destination category:</p>
 <ul>
-<li><code>atcc</code> - for ATCC assemblies </li>
-<li><code>enterobase</code> - for enterobase sequences</li>
-<li><code>ncbi</code> - raw data from SRA or NCBI</li>
-<li><code>merged</code> - any merged sequence data</li>
-<li><code>refseq</code> - refseq sequences</li>
-<li><code>other</code> - anything that does not fit in these categories (eg. research samples)</li>
+<li><code>location=atcc</code> — ATCC assemblies;</li>
+<li><code>location=enterobase</code> — EnteroBase sequences;</li>
+<li><code>location=ncbi</code> — raw data obtained from SRA or NCBI;</li>
+<li><code>location=merged</code> — merged sequence data;</li>
+<li><code>location=refseq</code> — RefSeq sequences;</li>
+<li><code>location=other</code> — research or other data that do not fit the listed categories.</li>
 </ul>
-<p>An example file can be found with the example issue below.</p>
-<h4 id="example">Example</h4>
-<p>For an example Azuredownload, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/34137">issue 34137</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>A file named <code>legacy_combinedMetadata.csv</code> will be returned containing a table of information about each equence in the assembly folder.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>Az will take quite a while, depending on how many samples you have. Probably roughly half an hour per sample.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Sequence folder cannot be found. Check spelling of the file in description and ensure that you are using dashes instead of underscores. </p>
-<p>2) Sequence folder cannot be found. Do not download the assembly folder from Foodport. After the COWBAT run is finished it will automatically be placed in the correct location on the NAS for azuredownload. If you download it manually a replicate an error may occur.</p>
-<p>If the upload is not done correctly you will get a warning message informing you of it.</p>
+<h4 id="sequence_folder"><code>sequence_folder</code></h4>
+<p>Use the sequence-folder name associated with the completed FoodPort assembly run.</p>
+<p>Use dashes, not underscores:</p>
+<pre><code class="language-text">sequence_folder=YYMMDD-lab
+</code></pre>
+<p>Even when the original FoodPort upload name contained an underscore, the Redmine request must use the corresponding dashed form.</p>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. The automator locates the completed FoodPort output using <code>sequence_folder</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters.</p>
+<h3 id="example">Example</h3>
+<pre><code class="language-text">machine=other
+location=ncbi
+sequence_folder=260717-research
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/34137">issue 34137</a> for an example Azuredownload request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>Azuredownload returns:</p>
+<pre><code class="language-text">legacy_combinedMetadata.csv
+</code></pre>
+<p>This CSV contains metadata for the sequences found in the assembly folder. The workflow also moves the retrieved raw reads, assemblies, and reports into the configured NAS locations so downstream automators can resolve the resulting sequence records.</p>
+<p>Verify that the expected sequences appear in the metadata report and that the selected <code>machine</code> and <code>location</code> categories match the source and intended destination.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Runtime depends on sample count, file sizes, and storage-transfer performance. The supplied documentation estimates approximately 30 minutes per sample.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="the-sequence-folder-cannot-be-found">The sequence folder cannot be found</h3>
+<p><strong>Symptom:</strong> The issue reports that the assembly folder is unavailable.</p>
+<p><strong>Likely cause:</strong> <code>sequence_folder</code> is misspelled, uses underscores instead of dashes, or does not correspond to a completed FoodPort run.</p>
+<p><strong>What to do:</strong> Verify the exact folder identifier and use the dashed form.</p>
+<h3 id="the-foodport-assembly-folder-was-downloaded-manually">The FoodPort assembly folder was downloaded manually</h3>
+<p><strong>Symptom:</strong> The workflow cannot find the expected pipeline output or encounters duplicate/replication errors.</p>
+<p><strong>Likely cause:</strong> The assembly folder was manually downloaded instead of being left for the completed COWBAT/FoodPort process to place in the expected location.</p>
+<p><strong>What to do:</strong> Do not manually download or relocate the assembly folder. Allow the completed pipeline to place it in the location used by Azuredownload.</p>
+<h3 id="the-machine-or-destination-category-is-invalid">The machine or destination category is invalid</h3>
+<p><strong>Symptom:</strong> The automator cannot route or store the retrieved data correctly.</p>
+<p><strong>Likely cause:</strong> <code>machine</code> or <code>location</code> is missing, misspelled, or unsupported.</p>
+<p><strong>What to do:</strong> Use one documented value for each required field.</p>
+<h2 id="access-and-navigation">Access and navigation</h2>
+<p>Keep this page out of standard-access navigation and retrieval. Link it only from explicitly internal operational documentation.</p>
               
             </div>
           </div><footer>

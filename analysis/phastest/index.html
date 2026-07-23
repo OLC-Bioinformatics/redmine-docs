@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -104,6 +106,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
@@ -120,15 +124,41 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#annotation-mode">Annotation mode</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#phage-only">phage-only</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#lite-mode">Lite mode</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#deep-phage-only-analysis">Deep, phage-only analysis</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#deep-mode-takes-longer-than-expected">Deep mode takes longer than expected</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-prophage-region-is-incomplete-or-fragmented">A prophage region is incomplete or fragmented</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -141,6 +171,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -161,8 +193,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -216,48 +246,93 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="phastest">PHASTEST</h2>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>PHASTEST (PHAge Search Tool with Enhanced Sequence Translation) performs identification, annotation and visualization of prophage sequences within bacterial genomes and plasmids. PHASTEST also supports extensive annotation and interactive visualization of all other genes (protein coding regions, tRNA sequences and rRNA sequences) in those same genomes.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>phastest</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p><strong>Required Components</strong></p>
-<p>In the <code>Description</code> field, you must provide:</p>
-<ol>
-<li>a list of SEQIDs (one per line)</li>
-</ol>
-<p><strong>Optional Components</strong></p>
-<p>In order to customise your PHASTEST analyses, two settings can be optionally modified</p>
+                <h1 id="phastest">PHASTEST</h1>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>PHASTEST</strong> to identify, annotate, and visualize prophage regions in bacterial genomes and plasmids.</p>
+<p>A prophage is phage or bacteriophage sequence integrated into a bacterial genome or plasmid. PHASTEST can also annotate and visualize other genomic features, including protein-coding regions, tRNA genes, and rRNA genes.</p>
+<p>Use <code>phage-only</code> when only prophage-region annotation is required. Choose <code>deep</code> mode when the additional databases used by that mode are needed and the longer runtime is acceptable.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">phastest
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Enter optional mode lines first, followed by one assembly <code>SEQID</code> per line.</p>
+<p>Minimal request using the default lite annotation mode:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. PHASTEST retrieves the sequence assembly associated with each requested <code>SEQID</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<h4 id="annotation-mode">Annotation mode</h4>
+<p>PHASTEST supports two documented annotation modes:</p>
 <ul>
-<li>Annotation mode. <code>deep</code> uses Prophage Database and PHAST-BSD Bacterial Database. <code>lite</code> uses Prophage Database and Swissprot. (Note: 'deep' mode may take significantly longer to complete.)<ul>
-<li>default is <code>lite</code></li>
-<li>modify as follows:<ul>
-<li><code>deep</code></li>
+<li><code>lite</code> — uses the Prophage Database and Swiss-Prot;</li>
+<li><code>deep</code> — uses the Prophage Database and PHAST-BSD Bacterial Database.</li>
 </ul>
-</li>
+<p>The default is <code>lite</code>.</p>
+<p>Enable deep mode by adding this line:</p>
+<pre><code class="language-text">deep
+</code></pre>
+<p>Deep mode can take significantly longer.</p>
+<h4 id="phage-only"><code>phage-only</code></h4>
+<p>Restricts annotation to phage regions.</p>
+<ul>
+<li>Default: disabled</li>
+<li>Enable with:</li>
 </ul>
-</li>
-<li>Only annotate phage region.<ul>
-<li>default is <code>disabled</code></li>
-<li>modify as follows:<ul>
-<li><code>phage-only</code></li>
+<pre><code class="language-text">phage-only
+</code></pre>
+<h3 id="examples">Examples</h3>
+<h4 id="lite-mode">Lite mode</h4>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h4 id="deep-phage-only-analysis">Deep, phage-only analysis</h4>
+<pre><code class="language-text">deep
+phage-only
+2026-SEQ-0001
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/35681">issue 35681</a> for a historical PHASTEST request. Its output predates the current issue-number naming convention.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When PHASTEST finishes, it uploads:</p>
+<pre><code class="language-text">phastest_output_&lt;issue number&gt;.zip
+</code></pre>
+<p>The archive contains all outputs generated for the request.</p>
+<p>Review predicted prophage regions in the context of their completeness, genomic coordinates, supporting annotations, and the assembly. Prophage predictions are computational results and can be affected by fragmented contigs or incomplete assemblies.</p>
+<p>When full annotation is enabled, distinguish prophage-region output from the additional protein-coding, tRNA, and rRNA annotations. When <code>phage-only</code> is used, expect the output to focus on prophage regions.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>A PHASTEST analysis takes approximately one hour per sample. The automator processes samples concurrently, with up to 20 CPUs allocated.</p>
+<p>Approximate batch behavior from the documented configuration:</p>
+<ul>
+<li>1–20 <code>SEQID</code>s: approximately one hour;</li>
+<li>21–40 <code>SEQID</code>s: approximately two hours;</li>
+<li>41–60 <code>SEQID</code>s: approximately three hours.</li>
 </ul>
-</li>
+<p>Deep mode may take significantly longer. Runtime can also vary with input size and service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The issue warns that one or more requested sequences cannot be found.</p>
+<p><strong>Likely cause:</strong> The identifier is incorrect or its assembly is unavailable.</p>
+<p><strong>What to do:</strong> Verify every <code>SEQID</code> and confirm that the required assembly exists.</p>
+<p>Available sequences can still be analyzed when some requested identifiers are missing.</p>
+<h3 id="deep-mode-takes-longer-than-expected">Deep mode takes longer than expected</h3>
+<p><strong>Symptom:</strong> The request remains active longer than the normal lite-mode estimate.</p>
+<p><strong>Likely cause:</strong> Deep mode uses additional database resources and can take significantly longer.</p>
+<p><strong>What to do:</strong> Allow additional time. Use the default lite mode for future requests when deep annotation is unnecessary.</p>
+<h3 id="a-prophage-region-is-incomplete-or-fragmented">A prophage region is incomplete or fragmented</h3>
+<p><strong>Symptom:</strong> A predicted region spans a contig boundary or lacks expected phage features.</p>
+<p><strong>Likely cause:</strong> The draft assembly is fragmented or does not contain the complete integrated phage sequence.</p>
+<p><strong>What to do:</strong> Review assembly quality, region coordinates, and supporting annotations before interpreting completeness.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../mobsuite/">MobSuite</a> — detects, reconstructs, and types predicted
+  plasmids. Use PHASTEST for prophage regions and MobSuite for plasmids when
+  both types of mobile genetic element must be investigated in an assembly.</li>
+<li><a href="../prokka/">Prokka</a> — performs general genome annotation without PHASTEST's prophage-focused detection and visualization.</li>
 </ul>
-</li>
-</ul>
-<h4 id="example">Example</h4>
-<p>For an example PHASTEST issue, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/35681">issue 35681</a>. NOTE: this is an older example, and the output file is missing the issue number.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>The PHASTEST automator will upload a file called <code>phastest_output_$ISSUENUMBER.zip</code> once it has completed. This file will contain all the outputs generated.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>It depends on the number of SEQIDs requested. The PHASTEST pipeline doesn't seem to be multi-threaded, so it takes about an hour per sample. I have added some parallelization, but this simply processes multiple SEQIDs concurrently. There is a limit of 20 CPUs allocated to this automator, so if you specify 20 or fewer SEQIDs, the analysis will take an hour, 21-40 SEQIDs will take two hours, etc.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it (NOTE: this does not mean that the analysis is not going to occur).</li>
-</ol>
               
             </div>
           </div><footer>

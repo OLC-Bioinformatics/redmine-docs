@@ -70,15 +70,37 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#resfinder_blastnxlsx">resfinder_blastn.xlsx</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mob_recon_summarycsv">mob_recon_summary.csv</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#amr_summarycsv">amr_summary.csv</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#expected-mutation-based-resistance-is-absent">Expected mutation-based resistance is absent</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#an-amr-gene-has-an-uncertain-predicted-location">An AMR gene has an uncertain predicted location</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -102,6 +124,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -124,6 +148,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
@@ -141,6 +167,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -161,8 +189,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -217,41 +243,83 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="amrsummary">AMRsummary</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>AMRsummary performs ResFinder and MOB-suite analyses on FASTA files, and creates a report combining and summarising the outputs.</p>
-<p>ResFinder is a program developed by the Danish Center for Genomic Epidemiology for detection of antibiotic resistance
-in draft genome assemblies. It is very important to note that the Redmine version will only look for acquired antibiotic
-resistance genes (generally plasmid-borne) and not chromosomally encoded AMR genes that are caused by point mutations.</p>
-<p>MobSuite is a set of tools developed by the Public Health Agency of Canada for detecting plasmids in draft genome
-assemblies. This tool runs the <code>mob_recon</code> part of the suite, which first detects plasmids in the assemblies, and then
-performs typing on the plasmids. More details on MobSuite, including fairly extensive details on the output files
-produced, can be found at the <a href="https://github.com/phac-nml/mob-suite">MobSuite GitHub repository</a>).</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>amr summary</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to process, one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example AMRsummary, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/14100">issue 14100</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>AMRSummary will upload three separate reports once it is complete</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>AMRsummary</strong> to detect acquired antimicrobial-resistance genes in FASTA-formatted draft genome assemblies, predict plasmid contigs, and summarize whether detected AMR genes are located on a predicted plasmid or chromosome.</p>
+<p>AMRsummary combines:</p>
 <ul>
-<li><code>resfinder_blastn.xlsx</code> shows every AMR gene found in each sample. Just because a gene/resistance is listed here does not necessarily mean the strain carries that resistance - it's important
-to look at the <strong>PercentIdentity</strong> and <strong>PercentCovered</strong> columns. You can be pretty sure that anything with 100 for both
-is actually there, but anything else requires further analysis to be sure.</li>
-<li><code>mob_recon_summary.csv</code> shows any contigs that are predicted to be plasmids - note that all contigs calculated to be chromosomal are ignored. <strong>Location</strong> is the name of the predicted plasmid,
-while <strong>Contig</strong> is the name contig predicted to contain plasmid sequence. One plasmid can be composed of several contigs if it could not be circularised.</li>
-<li><code>amr_summary.csv</code> combines the two previous reports. The contigs of all predicted AMR genes from the <code>resfinder_assembled</code> report are used to search the <code>mob_recon_summary</code> report.
-The plasmid predictions, and well as all the incompatibility types for that plasmid are extracted, and used in the report. <strong>Location</strong> will specify either <code>chromosome</code> or
-the name of the predicted plasmid.</li>
+<li><strong>ResFinder</strong> — detects acquired AMR genes in draft genome assemblies;</li>
+<li><strong>MOB-suite <code>mob_recon</code></strong> — reconstructs and types predicted plasmids from draft genome assemblies.</li>
 </ul>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>ResFinder is very fast, while MOB-suite is relatively slow - it should take a few minutes to analyze each SEQID requested.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</li>
-</ol>
+<p>The Redmine ResFinder workflow does not detect resistance caused by chromosomal point mutations. Use <a href="../pointfinder/">PointFinder</a>, <a href="../staramr/">StarAMR</a>, or <a href="../cardrgi/">CARD-RGI</a> when mutation-based resistance must also be assessed.</p>
+<p>For additional MOB-suite output details, see the <a href="https://github.com/phac-nml/mob-suite">MOB-suite repository</a>.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">amr summary
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>In the <strong>Description</strong> field, enter one <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>Each requested <code>SEQID</code> must have a FASTA-formatted draft genome assembly available.</p>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. AMRsummary retrieves the assemblies associated with the requested <code>SEQID</code>s.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for the Redmine AMRsummary automator.</p>
+<h3 id="example">Example</h3>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/14100">issue 14100</a> for an example AMRsummary request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>AMRsummary uploads three reports.</p>
+<h3 id="resfinder_blastnxlsx"><code>resfinder_blastn.xlsx</code></h3>
+<p>This workbook lists acquired AMR genes detected in each sample. Review:</p>
+<ul>
+<li><code>PercentIdentity</code> — sequence identity between the detected gene and reference target;</li>
+<li><code>PercentCovered</code> — coverage of the reference target.</li>
+</ul>
+<p>A hit with <code>100</code> for both identity and coverage provides stronger evidence that the complete acquired gene is present. Lower-identity or partially covered hits require further review. A listed gene does not by itself establish an expressed resistance phenotype.</p>
+<h3 id="mob_recon_summarycsv"><code>mob_recon_summary.csv</code></h3>
+<p>This report lists contigs that MOB-suite predicts to be plasmid-derived. Contigs predicted to be chromosomal are omitted.</p>
+<p>Important fields include:</p>
+<ul>
+<li><code>Location</code> — the predicted plasmid name;</li>
+<li><code>Contig</code> — the contig predicted to contain plasmid sequence.</li>
+</ul>
+<p>A predicted plasmid can contain several contigs when it could not be circularized.</p>
+<h3 id="amr_summarycsv"><code>amr_summary.csv</code></h3>
+<p>This combined report maps the contigs containing acquired AMR-gene hits to the MOB-suite plasmid predictions. It includes the predicted location and plasmid incompatibility types when available.</p>
+<p>The <code>Location</code> field reports either:</p>
+<ul>
+<li><code>chromosome</code>; or</li>
+<li>the name of a predicted plasmid.</li>
+</ul>
+<p>The location is a computational prediction and should be interpreted with the underlying ResFinder and MOB-suite evidence.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>ResFinder is fast, while MOB-suite is comparatively slower. Expect AMRsummary to take a few minutes per requested <code>SEQID</code>, depending on assembly size, sample count, and service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> AMRsummary cannot locate a draft genome assembly for the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that its FASTA assembly is available, and submit a corrected request.</p>
+<h3 id="expected-mutation-based-resistance-is-absent">Expected mutation-based resistance is absent</h3>
+<p><strong>Symptom:</strong> The report contains acquired-gene findings but not an expected chromosomal resistance mutation.</p>
+<p><strong>Likely cause:</strong> AMRsummary uses the Redmine ResFinder workflow, which does not detect resistance caused by chromosomal point mutations.</p>
+<p><strong>What to do:</strong> Use <a href="../pointfinder/">PointFinder</a>, <a href="../staramr/">StarAMR</a>, or <a href="../cardrgi/">CARD-RGI</a>, as appropriate.</p>
+<h3 id="an-amr-gene-has-an-uncertain-predicted-location">An AMR gene has an uncertain predicted location</h3>
+<p><strong>Symptom:</strong> A detected gene cannot be confidently assigned to a predicted plasmid or chromosome.</p>
+<p><strong>Likely cause:</strong> Draft assemblies can fragment plasmids across contigs, and plasmid reconstruction is predictive.</p>
+<p><strong>What to do:</strong> Review <code>resfinder_blastn.xlsx</code>, <code>mob_recon_summary.csv</code>, and the underlying assembly evidence together before drawing conclusions.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../resfinder/">ResFinder</a> — detects acquired AMR genes in draft genome assemblies without plasmid-location summarization.</li>
+<li><a href="../mobsuite/">MobSuite</a> — detects, reconstructs, and types predicted plasmids in draft genome assemblies.</li>
+<li><a href="../plasmidborneidentity/">Plasmid-Borne Identity</a> — searches assemblies for user-supplied target genes and predicts whether matching targets are plasmid-borne.</li>
+<li><a href="../pointfinder/">PointFinder</a> — detects supported chromosomal resistance mutations.</li>
+</ul>
               
             </div>
           </div><footer>

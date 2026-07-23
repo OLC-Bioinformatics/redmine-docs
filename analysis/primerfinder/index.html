@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -103,6 +105,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
@@ -126,21 +130,73 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#inclusivity-and-exclusivity-panels">Inclusivity and exclusivity panels</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#use-a-fasta-database-from-the-nas">Use a FASTA database from the NAS</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#mismatches">mismatches</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#minimum_amplicon_size">minimum_amplicon_size</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#maximum_amplicon_size">maximum_amplicon_size</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#contig_breaks">contig_breaks</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#probe">probe</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#vtyper-analysis-with-default-inclusivity-panel">VTyper analysis with default inclusivity panel</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#vtyper-analysis-with-inclusivity-and-exclusivity-panels">VTyper analysis with inclusivity and exclusivity panels</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#custom-primer-analysis">Custom-primer analysis</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#custom-analysis-with-a-probe">Custom analysis with a probe</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#analysis-using-an-existing-nas-database">Analysis using an existing NAS database</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#required-analysis-is-missing-or-unsupported">Required analysis is missing or unsupported</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-required-program-setting-is-reported-missing">A required program setting is reported missing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-custom-primer-file-is-missing-or-malformed">A custom primer file is missing or malformed</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-mismatch-value-is-unsupported">The mismatch value is unsupported</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#amplicon-size-limits-are-invalid">Amplicon-size limits are invalid</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-database-path-is-unavailable">A database path is unavailable</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -161,8 +217,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -217,182 +271,191 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="primerfinder">PrimerFinder</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>The PrimerFinder performs <em>in silico</em> PCR analyses on FASTA files.</p>
-<p><img alt="PrimerFinder Legacy" src="../../img/primer_finder_legacy.png" /></p>
-<p><strong>PrimerFinder Legacy</strong> computes primer binding and amplicon statistics on FASTA formatted files using the now retired ePCR suite of tools from NCBI. </p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>primer_finder</code>. Spelling counts, but case sensitivity does not.</p>
-<h4 id="description">Description</h4>
-<p>In the <code>Description</code> field, you must provide:</p>
-<p><strong>Required Components</strong></p>
-<ol>
-<li>
-<p><code>analysis=requested_analysis</code></p>
+<p><img alt="PrimerFinder Legacy workflow" src="../../img/primer_finder_legacy.png" /></p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>PrimerFinder</strong> to perform <em>in silico</em> PCR on FASTA-formatted sequence data.</p>
+<p>PrimerFinder supports:</p>
 <ul>
-<li>
-<p>acceptable analyses are <code>custom</code> and <code>vtyper</code></p>
-<ul>
-<li>
-<p><code>custom</code> analyses require a FASTA-formatted file of primers you wish to use (see Attachments section for 
-additional details)</p>
-</li>
-<li>
-<p><code>vtyper</code> analyses will use the primer set from the vtyper tool</p>
-</li>
+<li><code>vtyper</code> — uses the primer set supplied by the VTyper workflow;</li>
+<li><code>custom</code> — uses a FASTA-formatted primer file attached to the Redmine issue.</li>
 </ul>
-</li>
+<p>The legacy workflow computes primer-binding and amplicon statistics with the retired NCBI e-PCR suite. The current documented analysis also refers to <code>ipcress</code> for <em>in silico</em> PCR, particularly when discussing degenerate bases and contig-break behavior. Confirm the deployed backend and output format before removing this implementation note.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">primer_finder
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>The Description must contain an analysis declaration:</p>
+<pre><code class="language-text">analysis=vtyper
+</code></pre>
+<p>or:</p>
+<pre><code class="language-text">analysis=custom
+</code></pre>
+<p>It must also specify at least one sequence source:</p>
+<ul>
+<li>one or more <code>SEQID</code>s; or</li>
+<li>a NAS path to a multi-FASTA database using <code>database=/path/to/database.fasta</code>.</li>
 </ul>
-</li>
-</ol>
-<p><strong>And <em>AT LEAST ONE</em> of the following:</strong></p>
-<ol>
-<li>
-<p>a list of SEQIDs (one per line) - this must be after any other supplied parameters</p>
-<ul>
-<li>
-<p><strong>IMPORTANT:</strong> You can set optionally <code>inclusivity</code> and <code>exclusivity</code> panels</p>
-<ul>
-<li>example:
-<code>inclusivity
+<p>Enter all parameters before the <code>SEQID</code> list.</p>
+<h3 id="inclusivity-and-exclusivity-panels">Inclusivity and exclusivity panels</h3>
+<p>Use <code>inclusivity</code> and <code>exclusivity</code> headings to assign requested <code>SEQID</code>s to panels:</p>
+<pre><code class="language-text">analysis=vtyper
+inclusivity
 2014-SEQ-0276
 exclusivity
 2025-SEQ-0791
-2025-SEQ-0799</code></li>
-</ul>
-</li>
-<li>
-<p>If you do not specify a panel, it will default to <code>inclusivity</code>
-    -example:
-    <code>2014-SEQ-0276
-    2025-SEQ-0791
-    2025-SEQ-0799</code></p>
-</li>
-</ul>
-</li>
-<li>
-<p>A path to a (multi-)FASTA database to use instead of SEQIDs</p>
-<ul>
-<li>example: <code>database=/path/to/database.fasta</code></li>
-<li>the file must be present on the NAS</li>
-<li>sequences will extracted from the database and saved into individual files with names taken from the FASTA headers<ul>
-<li>e.g. gb|CAJ32491.1|ARO:3002622|aadA6/aadA10 [Pseudomonas aeruginosa] -&gt; gb_CAJ32491_1_ARO_3002622_aadA6_aadA10__Pseudomonas_aeruginosa_<ul>
-<li>Note that the following characters will be substituted for underscores: <code>"/", ".", "|", " ", "[", "]", "(", ")", ":", and "'"</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p><strong>Optional Components</strong></p>
-<p>In order to customise your PrimerFinder analyses, several settings can be optionally modified</p>
-<ul>
-<li>Number of mismatches allowed.<ul>
-<li>default is <code>2</code></li>
-<li>options are <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>. Anything else will return an error</li>
-<li>modify as follows:<ul>
-<li><code>mismatches=1</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Minimum Amplicon size<ul>
-<li>Default is 0 (no minimum size)</li>
-<li>Maximum is 10000</li>
-<li>Must be smaller than <code>maximum amplicon size</code></li>
-<li>modify as follows:<ul>
-<li><code>minimum_amplicon_size=150</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Maximum Amplicon size<ul>
-<li>Default is 1500</li>
-<li>Maximum is 10000</li>
-<li>Must be larger than <code>minimum amplicon size</code></li>
-<li>modify as follows:<ul>
-<li><code>maximum_amplicon_size=1750</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Contig breaks<ul>
-<li>If ipcress cannot find an amplicon, search the genome for the primers and return a positive result if they are found on separate contigs</li>
-<li>default is False</li>
-<li>modify as follows:<ul>
-<li><code>contig_breaks=True</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Probe<ul>
-<li>Probe sequence to be searched against amplicons generated from primer pairs</li>
-<li>this can be supplied more than once</li>
-<li>modify as follows:<ul>
-<li><code>probe=CGCGTTATCATCACTGTTACCGATAGCG</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="attachments">Attachments</h4>
-<p>For <code>custom</code> analyses, you are required to attach a FASTA-formatted file containing the primer set(s) you wish analysed. 
-The file must have the following format:</p>
-<pre><code>&gt;gene1-F
-seq
-&gt;gene1-R
-seq
-&gt;gene2-F1
-seq
-&gt;gene2-R1
-seq
-&gt;gene2-F2
-seq
-&gt;gene2-R2
-seq
-.....
+2025-SEQ-0799
 </code></pre>
-<p>You are allowed to use IUPAC degenerate bases in this file. 
-<strong>Ipcress (the program that runs the <em>in silico PCR</em> reactions) seems to have the limitation of being able to acceept degenerate bases, but not handling them properly e.g. if there are degenerate bases in a sequence, no matter the number they will count as a single mismatch (even if they shoud return a match e.g. an R should be a match if the query sequence is an 'A' or a 'G'). Therefore, if you actually want to a maximum of two mismatches in a primer pair that contains one or more degenerate bases, you must specify the number of mismatches to be three.</strong></p>
-<pre><code># Dictionary of degenerate IUPAC codes
-iupac = {
-    'R': ['A', 'G'],
-    'Y': ['C', 'T'],
-    'S': ['C', 'G'],
-    'W': ['A', 'T'],
-    'K': ['G', 'T'],
-    'M': ['A', 'C'],
-    'B': ['C', 'G', 'T'],
-    'D': ['A', 'G', 'T'],
-    'H': ['A', 'C', 'T'],
-    'V': ['A', 'C', 'G'],
-    'N': ['A', 'C', 'G', 'T'],
-    '-': ['-']
-}
+<p>If no panel heading is supplied, requested <code>SEQID</code>s default to the inclusivity panel:</p>
+<pre><code class="language-text">analysis=vtyper
+2014-SEQ-0276
+2025-SEQ-0791
+2025-SEQ-0799
 </code></pre>
-<h4 id="examples">Examples</h4>
-<p>Example PrimerFinder analyses:</p>
-<p>vtyper analyses <a href="https://redmine.biodiversity.agr.gc.ca/issues/37405">issue 37405</a></p>
-<p>custom analyses <a href="https://redmine.biodiversity.agr.gc.ca/issues/37407">issue 37407</a></p>
-<p>vtyper analyses, no inclusivity/exclusivity defined, custom mismatches <a href="https://redmine.biodiversity.agr.gc.ca/issues/37408">issue 37408</a></p>
-<p>custom analyses with probe <a href="https://redmine.biodiversity.agr.gc.ca/issues/37409">issue 37409</a></p>
-<p>custom analysis with database option <a href="https://redmine.biodiversity.agr.gc.ca/issues/37415">Issue 37415</a></p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>PrimerFinder is very fast (seconds per sample)</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. </li>
-<li>Not including the <code>program=requested_program</code> component, or requesting an unsupported program</li>
-<li>Not including the <code>analysis=requested_analysis</code> component, or requesting an unsupported analysis</li>
-<li>Specifying an unsupported number of <code>mismatches</code></li>
-<li>Incorrectly formatted <code>kmersize</code></li>
-<li>Providing a <code>minimum_amplicon_size</code> and/or <code>maximum_amplicon_size</code> with a value that is either too large or to small</li>
-<li>Attaching an incorrectly formatted primer file, or not including a primer file for <code>custom</code> analyses</li>
-<li>?</li>
-</ol>
-<p>If anything goes wrong, an error message explaining the error should be returned.</p>
+<h3 id="use-a-fasta-database-from-the-nas">Use a FASTA database from the NAS</h3>
+<p>Instead of listing <code>SEQID</code>s, provide a path to an existing multi-FASTA database:</p>
+<pre><code class="language-text">analysis=vtyper
+database=/path/to/database.fasta
+</code></pre>
+<p>The database file must already exist on the NAS. PrimerFinder extracts each FASTA record into an individual file and derives its filename from the FASTA header.</p>
+<p>The following header characters are replaced with underscores:</p>
+<pre><code class="language-text">/ . | space [ ] ( ) : '
+</code></pre>
+<p>For example, a header resembling:</p>
+<pre><code class="language-text">gbCAJ32491.1ARO:3002622aadA6/aadA10 [Pseudomonas aeruginosa]
+</code></pre>
+<p>is converted to a sanitized filename resembling:</p>
+<pre><code class="language-text">gb_CAJ32491_1_ARO_3002622_aadA6_aadA10__Pseudomonas_aeruginosa_
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>For <code>analysis=custom</code>, attach a FASTA-formatted file containing the primer pairs to test.</p>
+<p>The supplied documentation says the primer file must follow a required format but does not show that format. Consult a known working custom request or the current implementation before publishing a complete primer-file example.</p>
+<p>IUPAC degenerate bases are accepted, but the documented <code>ipcress</code> behavior may count the presence of degenerate bases as a mismatch even when a degenerate symbol should match the query base. If a primer pair contains one or more degenerate bases and the intended limit is two true mismatches, the existing guidance recommends setting:</p>
+<pre><code class="language-text">mismatches=3
+</code></pre>
+<p>Verify this behavior against the deployed implementation because it materially affects assay interpretation.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<h4 id="mismatches"><code>mismatches</code></h4>
+<p>Sets the allowed number of mismatches.</p>
+<ul>
+<li>Default: <code>2</code></li>
+<li>Accepted values: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code></li>
+<li>Example: <code>mismatches=1</code></li>
+</ul>
+<p>Any other value produces an error.</p>
+<h4 id="minimum_amplicon_size"><code>minimum_amplicon_size</code></h4>
+<p>Sets the minimum accepted amplicon length.</p>
+<ul>
+<li>Default: <code>0</code> (no minimum)</li>
+<li>Maximum accepted value: <code>10000</code></li>
+<li>Must be less than <code>maximum_amplicon_size</code></li>
+<li>Example: <code>minimum_amplicon_size=150</code></li>
+</ul>
+<h4 id="maximum_amplicon_size"><code>maximum_amplicon_size</code></h4>
+<p>Sets the maximum accepted amplicon length.</p>
+<ul>
+<li>Default: <code>1500</code></li>
+<li>Maximum accepted value: <code>10000</code></li>
+<li>Must be greater than <code>minimum_amplicon_size</code></li>
+<li>Example: <code>maximum_amplicon_size=1750</code></li>
+</ul>
+<h4 id="contig_breaks"><code>contig_breaks</code></h4>
+<p>When no complete amplicon is found, controls whether PrimerFinder searches for the two primers on separate contigs and reports a positive result when both are found.</p>
+<ul>
+<li>Default: <code>False</code></li>
+<li>Example: <code>contig_breaks=True</code></li>
+</ul>
+<p>A positive result produced across separate contigs does not demonstrate that the primers bound within one contiguous amplicon. Interpret these results separately from complete amplicons.</p>
+<h4 id="probe"><code>probe</code></h4>
+<p>Supplies a probe sequence to search within predicted amplicons. This option can be provided more than once.</p>
+<pre><code class="language-text">probe=CGCGTTATCATCACTGTTACCGATAGCG
+</code></pre>
+<h3 id="examples">Examples</h3>
+<h4 id="vtyper-analysis-with-default-inclusivity-panel">VTyper analysis with default inclusivity panel</h4>
+<pre><code class="language-text">analysis=vtyper
+2014-SEQ-0276
+2025-SEQ-0791
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/37408">issue 37408</a> for a VTyper request with no explicit panel headings and a custom mismatch setting.</p>
+<h4 id="vtyper-analysis-with-inclusivity-and-exclusivity-panels">VTyper analysis with inclusivity and exclusivity panels</h4>
+<pre><code class="language-text">analysis=vtyper
+inclusivity
+2014-SEQ-0276
+exclusivity
+2025-SEQ-0791
+2025-SEQ-0799
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/37405">issue 37405</a>.</p>
+<h4 id="custom-primer-analysis">Custom-primer analysis</h4>
+<pre><code class="language-text">analysis=custom
+mismatches=2
+minimum_amplicon_size=150
+maximum_amplicon_size=1750
+2014-SEQ-0276
+</code></pre>
+<p>Attach the required FASTA-formatted primer file. See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/37407">issue 37407</a>.</p>
+<h4 id="custom-analysis-with-a-probe">Custom analysis with a probe</h4>
+<pre><code class="language-text">analysis=custom
+probe=CGCGTTATCATCACTGTTACCGATAGCG
+2014-SEQ-0276
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/37409">issue 37409</a>.</p>
+<h4 id="analysis-using-an-existing-nas-database">Analysis using an existing NAS database</h4>
+<pre><code class="language-text">analysis=custom
+database=/path/to/database.fasta
+</code></pre>
+<p>Attach the custom primer file. See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/37415">issue 37415</a>.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>The supplied documentation does not identify the exact output archive or report filenames for the current PrimerFinder workflow.</p>
+<p>Interpret results according to:</p>
+<ul>
+<li>inclusivity or exclusivity panel membership;</li>
+<li>selected mismatch allowance;</li>
+<li>minimum and maximum amplicon sizes;</li>
+<li>whether a complete amplicon was found on one contig;</li>
+<li>whether <code>contig_breaks=True</code> produced a split-contig result;</li>
+<li>whether each supplied probe was found in the predicted amplicon.</li>
+</ul>
+<p>Do not interpret a split-contig primer result as equivalent to a complete contiguous amplicon. Review degenerate-primer results carefully because of the documented mismatch-counting limitation.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>PrimerFinder is generally fast and commonly requires only seconds per sample. Runtime increases with sample count, database size, primer-pair count, probes, and broader amplicon or mismatch settings.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="required-analysis-is-missing-or-unsupported">Required analysis is missing or unsupported</h3>
+<p><strong>Symptom:</strong> PrimerFinder rejects the request and reports an analysis error.</p>
+<p><strong>Likely cause:</strong> <code>analysis=...</code> is absent, misspelled, or not one of <code>custom</code> and <code>vtyper</code>.</p>
+<p><strong>What to do:</strong> Add <code>analysis=custom</code> or <code>analysis=vtyper</code>.</p>
+<h3 id="a-required-program-setting-is-reported-missing">A required program setting is reported missing</h3>
+<p><strong>Symptom:</strong> The issue reports a missing <code>program=requested_program</code> component.</p>
+<p><strong>Likely cause:</strong> The legacy error list refers to a required program parameter that is not otherwise documented on the page.</p>
+<p><strong>What to do:</strong> Check a current known-good issue or the deployed implementation before adding a <code>program</code> value. This requirement needs technical clarification.</p>
+<h3 id="a-custom-primer-file-is-missing-or-malformed">A custom primer file is missing or malformed</h3>
+<p><strong>Symptom:</strong> A custom analysis fails before <em>in silico</em> PCR begins.</p>
+<p><strong>Likely cause:</strong> The FASTA-formatted primer file was not attached or does not follow the required primer-pair format.</p>
+<p><strong>What to do:</strong> Use the format from a current known-good custom request and validate the FASTA file before resubmitting.</p>
+<h3 id="the-mismatch-value-is-unsupported">The mismatch value is unsupported</h3>
+<p><strong>Symptom:</strong> The request returns an error for <code>mismatches</code>.</p>
+<p><strong>Likely cause:</strong> The value is outside <code>0</code>–<code>3</code> or is not an integer.</p>
+<p><strong>What to do:</strong> Select <code>0</code>, <code>1</code>, <code>2</code>, or <code>3</code>, accounting for the documented degenerate-base behavior.</p>
+<h3 id="amplicon-size-limits-are-invalid">Amplicon-size limits are invalid</h3>
+<p><strong>Symptom:</strong> PrimerFinder reports that a minimum or maximum amplicon size is invalid.</p>
+<p><strong>Likely cause:</strong> A value exceeds <code>10000</code>, is not numeric, or the minimum is not smaller than the maximum.</p>
+<p><strong>What to do:</strong> Use valid numeric limits with <code>minimum_amplicon_size &lt; maximum_amplicon_size</code>.</p>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The issue reports that one or more requested sequences cannot be found.</p>
+<p><strong>Likely cause:</strong> The <code>SEQID</code> is incorrect or its FASTA assembly is unavailable.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code> and confirm that its assembly exists.</p>
+<h3 id="a-database-path-is-unavailable">A database path is unavailable</h3>
+<p><strong>Symptom:</strong> PrimerFinder cannot load the supplied multi-FASTA database.</p>
+<p><strong>Likely cause:</strong> The path is incorrect or the file is not present on the NAS.</p>
+<p><strong>What to do:</strong> Verify the complete path and file permissions before resubmitting.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../geneseekr/">GeneSeekr</a> — searches assemblies for attached custom gene targets using BLAST-based analysis.</li>
+<li><a href="../intimintyper/">IntiminTyper</a> — subtypes detected <code>eae</code> genes in <em>E. coli</em> assemblies.</li>
+<li><a href="../ectyper/">ECTyper</a> — predicts <em>E. coli</em> O- and H-antigen serotypes.</li>
+</ul>
               
             </div>
           </div><footer>

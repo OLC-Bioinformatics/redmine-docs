@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/metaquast/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>MetaQUAST - OLC Redmine Automator</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "MetaQUAST";
+        var mkdocs_page_input_path = "analysis/metaquast.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/metaquast/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OLC Redmine Automator
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/external_retrieve/">External Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/report_retrieve/">Report Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_upload/">SRA Upload</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_download/">SRA Download</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Analysis</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../amrsummary/">AMRsummary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../autoclark/">AutoCLARK</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cardrgi/">CARD-RGI (AMR)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gfa_retrieve/">GFA Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pyseer/">GWAS-pyseer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kma/">KMA - Gene Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kraken2/">Kraken2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">MetaQUAST</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#when-to-use-this-analysis">When to Use This Analysis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#redmine-issue-format">Redmine Issue Format</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#basic-analysis">Basic analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#formatting-requirements">Formatting requirements</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#arguments">Arguments</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#analysis-workflow">Analysis Workflow</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-initialize-the-automator">1. Initialize the automator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-determine-the-thread-count">2. Determine the thread count</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-parse-the-issue-description">3. Parse the issue description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-create-the-sequence-directory">4. Create the sequence directory</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-retrieve-assemblies">5. Retrieve assemblies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6-check-for-missing-fasta-files">6. Check for missing FASTA files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#7-identify-the-input-assemblies">7. Identify the input assemblies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#8-construct-the-metaquast-command">8. Construct the MetaQUAST command</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#9-activate-the-quast-environment">9. Activate the QUAST environment</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#10-create-the-metaquast-shell-script">10. Create the MetaQUAST shell script</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#11-run-metaquast">11. Run MetaQUAST</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12-validate-the-metaquast-report">12. Validate the MetaQUAST report</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13-convert-the-report-to-excel">13. Convert the report to Excel</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#14-determine-the-metaquast-version">14. Determine the MetaQUAST version</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#15-compress-the-complete-results">15. Compress the complete results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#16-upload-the-complete-output-to-dropbox">16. Upload the complete output to Dropbox</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#17-complete-the-issue">17. Complete the issue</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#outputs">Outputs</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#excel-report">Excel report</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#complete-output-archive">Complete output archive</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generated-shell-script">Generated shell script</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#redmine-updates">Redmine updates</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-common-metaquast-metrics">Interpreting Common MetaQUAST Metrics</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#number-of-contigs">Number of contigs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#largest-contig">Largest contig</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#total-length">Total length</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#n50">N50</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#l50">L50</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gc-content">GC content</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reference-associated-results">Reference-associated results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#misassemblies">Misassemblies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#unaligned-contigs">Unaligned contigs</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#no-seqids-provided">No SEQIDs provided</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#one-or-more-fasta-files-could-not-be-found">One or more FASTA files could not be found</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#no-requested-fasta-assemblies-were-found">No requested FASTA assemblies were found</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#metaquast-command-failed">MetaQUAST command failed</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#expected-transposed-report-was-not-generated">Expected transposed report was not generated</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#excel-report-was-not-generated">Excel report was not generated</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#metaquast-version-could-not-be-determined">MetaQUAST version could not be determined</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#zip-archive-was-not-generated">ZIP archive was not generated</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dropbox-upload-failed">Dropbox upload failed</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#slurm-job-used-an-unexpected-number-of-threads">SLURM job used an unexpected number of threads</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#invalid-slurm-thread-allocation">Invalid SLURM thread allocation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#unexpected-automator-error">Unexpected automator error</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#slurm-resources">SLURM Resources</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#temporary-files-and-cleanup">Temporary Files and Cleanup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementation-notes">Implementation Notes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#maintainer-warnings">Maintainer Warnings</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pointfinder/">PointFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../primerfinder/">PrimerFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rmlst/">rMLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sequence_extractor/">SequenceExtractor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snvphyl/">SNVPhyl</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snippy/">Snippy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../staramr/">staramr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Internal Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/merge/">Merge</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/azuredownload/">AzureDownload</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/">Troubleshooting</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_pages/">Create Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/edit_pages/">Edit Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/publish_changes/">Publish Changes</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OLC Redmine Automator</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Analysis</li>
+      <li class="breadcrumb-item active">MetaQUAST</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/metaquast.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="metaquast-redmine-automator">MetaQUAST Redmine Automator</h1>
+<h2 id="overview">Overview</h2>
+<p>The MetaQUAST Redmine Automator runs a MetaQUAST assembly-quality analysis using FASTA assemblies stored on the OLC NAS.</p>
+<p>The automator:</p>
+<ol>
+<li>Reads SEQIDs from a Redmine issue.</li>
+<li>Retrieves the requested FASTA assemblies from the NAS.</li>
+<li>Runs MetaQUAST on the available assemblies.</li>
+<li>Converts the transposed MetaQUAST report to Excel format.</li>
+<li>Attaches the Excel report to the Redmine issue.</li>
+<li>Compresses the complete MetaQUAST output.</li>
+<li>Uploads the compressed results to Dropbox.</li>
+<li>Updates and closes the Redmine issue.</li>
+</ol>
+<hr />
+<h2 id="when-to-use-this-analysis">When to Use This Analysis</h2>
+<p>Use the MetaQUAST automator to:</p>
+<ul>
+<li>Evaluate one or more metagenomic assemblies.</li>
+<li>Compare metagenomic assemblies generated using different methods.</li>
+<li>Review assembly statistics across multiple assemblies.</li>
+<li>Assess metrics such as:</li>
+<li>Total assembly length</li>
+<li>Number of contigs</li>
+<li>N50</li>
+<li>L50</li>
+<li>GC content</li>
+<li>Largest contig</li>
+<li>Produce MetaQUAST reports and visualizations.</li>
+<li>Identify potential quality differences among metagenomic assemblies.</li>
+</ul>
+<p>MetaQUAST evaluates assembled sequence data. It does not assemble raw sequencing reads.</p>
+<p>For non-metagenomic isolate assemblies, use the standard QUAST automator instead.</p>
+<hr />
+<h2 id="redmine-issue-format">Redmine Issue Format</h2>
+<p>Enter one SEQID per line in the issue description.</p>
+<h3 id="basic-analysis">Basic analysis</h3>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<p>This runs MetaQUAST on the listed assemblies.</p>
+<h3 id="formatting-requirements">Formatting requirements</h3>
+<ul>
+<li>Enter one SEQID per line.</li>
+<li>Do not separate SEQIDs with commas.</li>
+<li>Blank lines are ignored.</li>
+<li>Duplicate SEQIDs are removed automatically.</li>
+<li>SEQIDs are processed in the order in which they appear.</li>
+<li>Do not include QUAST or MetaQUAST command-line arguments.</li>
+<li>Do not include a <code>reference=</code> setting.</li>
+<li>Every non-empty line is treated as a SEQID.</li>
+</ul>
+<hr />
+<h2 id="arguments">Arguments</h2>
+<p>The MetaQUAST automator does not currently support user-supplied analysis arguments through the Redmine issue description.</p>
+<p>The automator determines the number of threads from the SLURM allocation and supplies the following options automatically:</p>
+<pre><code class="language-text">-t &lt;threads&gt;
+-o &lt;output_directory&gt;
+</code></pre>
+<p>The input assemblies are added to the command automatically after they are retrieved from the OLC NAS.</p>
+<hr />
+<h2 id="analysis-workflow">Analysis Workflow</h2>
+<h3 id="1-initialize-the-automator">1. Initialize the automator</h3>
+<p>The automator:</p>
+<ul>
+<li>Disables <code>urllib3</code> warnings.</li>
+<li>Initializes Sentry error reporting.</li>
+<li>Unpickles the Redmine API instance.</li>
+<li>Unpickles the Redmine issue.</li>
+<li>Unpickles the parsed issue description.</li>
+</ul>
+<p>The Redmine automation framework supplies the pickle paths using:</p>
+<pre><code class="language-text">--redmine_instance
+--issue
+--work_dir
+--description
+</code></pre>
+<p>These command-line options are mapped internally to variables that identify the corresponding pickle files.</p>
+<h3 id="2-determine-the-thread-count">2. Determine the thread count</h3>
+<p>The automator obtains its thread count from the SLURM environment variable:</p>
+<pre><code class="language-text">SLURM_CPUS_PER_TASK
+</code></pre>
+<p>For example, if the SLURM script contains:</p>
+<pre><code class="language-bash">#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+</code></pre>
+<p>the automator runs MetaQUAST with:</p>
+<pre><code class="language-text">-t 16
+</code></pre>
+<p>If <code>SLURM_CPUS_PER_TASK</code> is unavailable, the automator uses its configured default thread count.</p>
+<p>The thread count must be a positive integer.</p>
+<h3 id="3-parse-the-issue-description">3. Parse the issue description</h3>
+<p>Every non-empty line in the issue description is interpreted as a SEQID.</p>
+<p>For example:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+
+2026-SEQ-0003
+2026-SEQ-0001
+</code></pre>
+<p>is interpreted as:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<p>Blank lines are ignored, and duplicate SEQIDs are removed while preserving their original order.</p>
+<p>If no SEQIDs are supplied, the automator updates the issue with:</p>
+<pre><code class="language-text">WARNING: No SEQIDs provided!
+</code></pre>
+<p>The issue is then assigned status ID <code>4</code>, and MetaQUAST is not run.</p>
+<h3 id="4-create-the-sequence-directory">4. Create the sequence directory</h3>
+<p>The automator creates the following directory:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/sequences
+</code></pre>
+<p>The directory is created automatically if it does not already exist.</p>
+<h3 id="5-retrieve-assemblies">5. Retrieve assemblies</h3>
+<p>The automator uses <code>nastools.retrieve_nas_files()</code> to retrieve the requested FASTA assemblies from the OLC NAS:</p>
+<pre><code class="language-python">retrieve_nas_files(
+    seqids=seqids,
+    outdir=str(sequence_directory),
+    filetype=&quot;fasta&quot;,
+    copyflag=False,
+)
+</code></pre>
+<p>Because <code>copyflag</code> is set to <code>False</code>, the retrieval utility may create links to the assemblies rather than copying the original files, depending on the implementation of <code>nastools</code>.</p>
+<h3 id="6-check-for-missing-fasta-files">6. Check for missing FASTA files</h3>
+<p>For each requested SEQID, the automator searches for a matching FASTA file using the following pattern:</p>
+<pre><code class="language-text">&lt;SEQID&gt;*fasta*
+</code></pre>
+<p>If one or more requested assemblies cannot be found, the Redmine issue is updated with a warning resembling:</p>
+<pre><code class="language-text">WARNING: Could not find the following requested SEQIDs on the OLC NAS:
+['2026-SEQ-0002', '2026-SEQ-0003']
+</code></pre>
+<p>The current implementation reports missing assemblies but does not stop the analysis if at least one requested assembly was found.</p>
+<p>MetaQUAST continues using the available assemblies.</p>
+<p>If none of the requested assemblies can be found, the automator raises an error and does not run MetaQUAST.</p>
+<h3 id="7-identify-the-input-assemblies">7. Identify the input assemblies</h3>
+<p>The automator collects files associated with the requested SEQIDs using:</p>
+<pre><code class="language-text">&lt;SEQID&gt;*fasta*
+</code></pre>
+<p>Only FASTA files associated with the requested SEQIDs are included in the MetaQUAST command.</p>
+<p>This prevents unrelated FASTA files that may be present in the sequence directory from being analysed accidentally.</p>
+<p>Duplicate file paths are removed while preserving the original SEQID order.</p>
+<h3 id="8-construct-the-metaquast-command">8. Construct the MetaQUAST command</h3>
+<p>The command uses the Python interpreter and <code>metaquast.py</code> installed in the QUAST virtual environment:</p>
+<pre><code class="language-text">/mnt/nas2/virtual_environments/quast/bin/python
+/mnt/nas2/virtual_environments/quast/bin/metaquast.py
+</code></pre>
+<p>A generated command resembles:</p>
+<pre><code class="language-bash">/mnt/nas2/virtual_environments/quast/bin/python \
+  /mnt/nas2/virtual_environments/quast/bin/metaquast.py \
+  &lt;work_dir&gt;/sequences/2026-SEQ-0001.fasta \
+  &lt;work_dir&gt;/sequences/2026-SEQ-0002.fasta \
+  &lt;work_dir&gt;/sequences/2026-SEQ-0003.fasta \
+  -t 16 \
+  -o &lt;work_dir&gt;/metaquast_output_&lt;issue_id&gt;
+</code></pre>
+<p>All command arguments are shell-quoted before the command is written to the generated shell script.</p>
+<p>No user-supplied reference argument is added by the automator.</p>
+<p>The complete generated command is added to the Redmine issue before MetaQUAST is executed.</p>
+<h3 id="9-activate-the-quast-environment">9. Activate the QUAST environment</h3>
+<p>The automator activates the QUAST Conda environment using:</p>
+<pre><code class="language-bash">source /home/ubuntu/miniconda3/etc/profile.d/conda.sh &amp;&amp;
+conda activate /mnt/nas2/virtual_environments/quast
+</code></pre>
+<p>MetaQUAST is distributed with QUAST and is run from the same virtual environment.</p>
+<h3 id="10-create-the-metaquast-shell-script">10. Create the MetaQUAST shell script</h3>
+<p>The environment activation and MetaQUAST command are written to:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/run_metaquast.sh
+</code></pre>
+<p>The generated script:</p>
+<ul>
+<li>Uses <code>#!/bin/bash</code>.</li>
+<li>Activates the QUAST Conda environment.</li>
+<li>Runs the shell-quoted MetaQUAST command.</li>
+<li>Is made executable automatically.</li>
+</ul>
+<h3 id="11-run-metaquast">11. Run MetaQUAST</h3>
+<p>The generated shell script is executed using <code>subprocess.run()</code>:</p>
+<pre><code class="language-python">subprocess.run(
+    [str(script_path)],
+    check=True,
+)
+</code></pre>
+<p>The <code>check=True</code> setting causes Python to raise an exception if the MetaQUAST shell script returns a nonzero exit status.</p>
+<p>This prevents the automator from treating a failed MetaQUAST run as successful.</p>
+<h3 id="12-validate-the-metaquast-report">12. Validate the MetaQUAST report</h3>
+<p>The automator expects MetaQUAST to create:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/metaquast_output_&lt;issue_id&gt;/transposed_report.tsv
+</code></pre>
+<p>If this report is not present after the shell script finishes, the automator raises an error.</p>
+<p>This validation helps detect cases where MetaQUAST exited without producing the expected result, even if the failure was not otherwise detected.</p>
+<h3 id="13-convert-the-report-to-excel">13. Convert the report to Excel</h3>
+<p>The MetaQUAST transposed report is converted from TSV format to Excel format.</p>
+<p>Input:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/metaquast_output_&lt;issue_id&gt;/transposed_report.tsv
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/metaquast_output_&lt;issue_id&gt;/MetaQUAST_results_redmine&lt;issue_id&gt;.xlsx
+</code></pre>
+<p>The Excel file is then copied to:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/MetaQUAST_results_redmine&lt;issue_id&gt;.xlsx
+</code></pre>
+<p>The copy in the issue work directory is prepared as a Redmine attachment.</p>
+<p>Because the shared TSV-to-XLSX conversion method reports some errors without raising an exception, the automator explicitly verifies that the Excel file was created.</p>
+<p>If the Excel file does not exist after conversion, the analysis is treated as failed.</p>
+<h3 id="14-determine-the-metaquast-version">14. Determine the MetaQUAST version</h3>
+<p>The automator determines the installed MetaQUAST version using:</p>
+<pre><code class="language-bash">/mnt/nas2/virtual_environments/quast/bin/python \
+  /mnt/nas2/virtual_environments/quast/bin/metaquast.py \
+  --version
+</code></pre>
+<p>The detected version is included in the final Redmine update.</p>
+<p>If the version cannot be determined, the shared version-detection method returns an explanatory message rather than stopping the analysis.</p>
+<h3 id="15-compress-the-complete-results">15. Compress the complete results</h3>
+<p>The complete MetaQUAST output directory is compressed as:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/metaquast_output_&lt;issue_id&gt;.zip
+</code></pre>
+<p>The automator verifies that the ZIP archive exists before attempting the Dropbox upload.</p>
+<p>If the ZIP archive cannot be created, the analysis is treated as failed.</p>
+<h3 id="16-upload-the-complete-output-to-dropbox">16. Upload the complete output to Dropbox</h3>
+<p>The ZIP archive is uploaded to Dropbox using the configured application credentials.</p>
+<p>The upload uses:</p>
+<ul>
+<li>Dropbox access token</li>
+<li>Dropbox refresh token</li>
+<li>Dropbox application key</li>
+<li>Dropbox application secret</li>
+</ul>
+<p>If the upload succeeds, the resulting download URL is added to the final Redmine update.</p>
+<h3 id="17-complete-the-issue">17. Complete the issue</h3>
+<p>When the analysis and Dropbox upload succeed, the automator:</p>
+<ul>
+<li>Attaches the Excel report.</li>
+<li>Reports the MetaQUAST version.</li>
+<li>Provides the Dropbox download URL.</li>
+<li>Assigns the issue status ID <code>4</code>.</li>
+</ul>
+<p>The final Redmine message resembles:</p>
+<pre><code class="language-text">MetaQUAST analysis complete!
+MetaQUAST version is &lt;version&gt;
+
+The report file has been attached to this issue.
+Full results are available at the following URL:
+&lt;Dropbox URL&gt;
+</code></pre>
+<p>If MetaQUAST completes but the Dropbox upload fails, the Excel report is still attached and the issue is updated with a message resembling:</p>
+<pre><code class="language-text">The MetaQUAST analysis completed, but the upload of the full results
+to Dropbox was unsuccessful. The Excel report has been attached to
+this issue. Please try the full-results upload again later.
+</code></pre>
+<hr />
+<h2 id="outputs">Outputs</h2>
+<h3 id="excel-report">Excel report</h3>
+<pre><code class="language-text">MetaQUAST_results_redmine&lt;issue_id&gt;.xlsx
+</code></pre>
+<p>This file is generated from MetaQUAST's <code>transposed_report.tsv</code> and attached directly to the Redmine issue.</p>
+<h3 id="complete-output-archive">Complete output archive</h3>
+<pre><code class="language-text">metaquast_output_&lt;issue_id&gt;.zip
+</code></pre>
+<p>This archive contains the complete MetaQUAST output and is uploaded to Dropbox.</p>
+<p>Depending on the MetaQUAST version, input assemblies, and analysis results, the archive may include:</p>
+<ul>
+<li>HTML reports</li>
+<li>Text reports</li>
+<li>TSV reports</li>
+<li>Transposed reports</li>
+<li>PDF reports</li>
+<li>Assembly statistics</li>
+<li>Per-assembly reports</li>
+<li>Combined reports</li>
+<li>Contig statistics</li>
+<li>Alignment-related output</li>
+<li>Interactive visualizations</li>
+<li>Reference-search-related files</li>
+<li>MetaQUAST intermediate files</li>
+<li>Log files</li>
+</ul>
+<h3 id="generated-shell-script">Generated shell script</h3>
+<p>During the analysis, the automator creates:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/run_metaquast.sh
+</code></pre>
+<p>This script contains the environment activation and complete MetaQUAST command.</p>
+<p>It is removed after successful completion but retained if an error occurs.</p>
+<h3 id="redmine-updates">Redmine updates</h3>
+<p>The issue may receive updates containing:</p>
+<ul>
+<li>Missing SEQID warnings</li>
+<li>The complete MetaQUAST command</li>
+<li>Successful completion</li>
+<li>MetaQUAST version</li>
+<li>Dropbox download URL</li>
+<li>Dropbox upload failure</li>
+<li>Unexpected processing errors</li>
+<li>Python traceback information</li>
+</ul>
+<hr />
+<h2 id="interpreting-common-metaquast-metrics">Interpreting Common MetaQUAST Metrics</h2>
+<h3 id="number-of-contigs">Number of contigs</h3>
+<p>The total number of contigs in an assembly.</p>
+<p>A lower number may indicate a more contiguous assembly, but the expected number depends on:</p>
+<ul>
+<li>Community complexity</li>
+<li>Sequencing depth</li>
+<li>Sequencing technology</li>
+<li>Assembly method</li>
+<li>Organism abundance</li>
+<li>Repeat content</li>
+</ul>
+<p>Metagenomic assemblies usually contain substantially more contigs than individual isolate assemblies.</p>
+<h3 id="largest-contig">Largest contig</h3>
+<p>The length of the longest contig in the assembly.</p>
+<p>A longer largest contig may indicate improved assembly continuity, but this metric should not be interpreted by itself.</p>
+<h3 id="total-length">Total length</h3>
+<p>The combined length of all contigs in the assembly.</p>
+<p>For a metagenomic assembly, total length depends on:</p>
+<ul>
+<li>Community complexity</li>
+<li>Sequencing depth</li>
+<li>Organism abundance</li>
+<li>Assembly parameters</li>
+<li>Contig-length filtering</li>
+<li>Contamination</li>
+<li>Unassembled sequence</li>
+</ul>
+<p>A larger total length does not necessarily indicate a better assembly.</p>
+<h3 id="n50">N50</h3>
+<p>The contig length at which at least 50% of the total assembly length is contained in contigs of that length or longer.</p>
+<p>A larger N50 generally indicates a more contiguous assembly.</p>
+<p>However, N50 should not be interpreted by itself because:</p>
+<ul>
+<li>Misassembled contigs may increase N50.</li>
+<li>Highly abundant organisms may dominate the calculation.</li>
+<li>Low-abundance organisms may remain fragmented.</li>
+<li>Assemblies with different total lengths may not be directly comparable.</li>
+</ul>
+<h3 id="l50">L50</h3>
+<p>The minimum number of the largest contigs required to account for at least 50% of the total assembly length.</p>
+<p>A lower L50 generally indicates that a smaller number of contigs accounts for a larger portion of the assembly.</p>
+<h3 id="gc-content">GC content</h3>
+<p>The percentage of assembled bases that are guanine or cytosine.</p>
+<p>Metagenomic assemblies may contain organisms with substantially different GC contents. Therefore, the overall GC percentage represents a mixture of the organisms and sequences present in the assembly.</p>
+<p>Unexpected GC distributions may indicate:</p>
+<ul>
+<li>Contamination</li>
+<li>Assembly bias</li>
+<li>Unexpected organisms</li>
+<li>Uneven organism abundance</li>
+<li>Incomplete representation of the community</li>
+</ul>
+<h3 id="reference-associated-results">Reference-associated results</h3>
+<p>When MetaQUAST identifies or obtains appropriate references, it may generate additional results associated with those references.</p>
+<p>Reference-associated results depend heavily on:</p>
+<ul>
+<li>The availability of suitable reference genomes</li>
+<li>The relatedness of the references to organisms in the sample</li>
+<li>Database availability</li>
+<li>Network availability</li>
+<li>The completeness of the reference-search process</li>
+<li>The complexity of the metagenomic community</li>
+</ul>
+<p>A lack of reference-associated results does not necessarily mean that the assembly failed. It may indicate that suitable references were not available or could not be identified.</p>
+<h3 id="misassemblies">Misassemblies</h3>
+<p>A misassembly is a contig structure that conflicts with the expected structure based on an available reference.</p>
+<p>Potential misassemblies may include:</p>
+<ul>
+<li>Relocations</li>
+<li>Inversions</li>
+<li>Translocations</li>
+<li>Interspecies misassemblies</li>
+</ul>
+<p>Misassembly counts should be interpreted together with reference quality, organism relatedness, and assembly continuity.</p>
+<h3 id="unaligned-contigs">Unaligned contigs</h3>
+<p>Unaligned contigs are contigs that could not be aligned to the references used during the analysis.</p>
+<p>They may represent:</p>
+<ul>
+<li>Organisms without suitable references</li>
+<li>Novel sequence</li>
+<li>Contamination</li>
+<li>Low-quality contigs</li>
+<li>Incorrectly assembled sequence</li>
+<li>Mobile genetic elements</li>
+<li>Plasmid sequence</li>
+<li>Phage sequence</li>
+</ul>
+<p>Unaligned contigs are not automatically erroneous.</p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="no-seqids-provided">No SEQIDs provided</h3>
+<p><strong>Redmine message:</strong></p>
+<pre><code class="language-text">WARNING: No SEQIDs provided!
+</code></pre>
+<p><strong>Cause:</strong> The issue description did not contain any non-empty lines that could be interpreted as SEQIDs.</p>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>Add at least one SEQID.</li>
+<li>Enter one SEQID per line.</li>
+<li>Do not separate SEQIDs with commas.</li>
+<li>Confirm that the issue description was saved correctly.</li>
+</ul>
+<hr />
+<h3 id="one-or-more-fasta-files-could-not-be-found">One or more FASTA files could not be found</h3>
+<p><strong>Redmine message:</strong></p>
+<pre><code class="language-text">WARNING: Could not find the following requested SEQIDs on the OLC NAS:
+[...]
+</code></pre>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>A SEQID is incorrect.</li>
+<li>The assembly has not yet been generated.</li>
+<li>The assembly is not stored in the expected NAS location.</li>
+<li>The assembly filename does not match the expected <code>&lt;SEQID&gt;*fasta*</code> pattern.</li>
+<li>The NAS is unavailable.</li>
+<li>A link to the assembly could not be created.</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ol>
+<li>Verify the spelling of each SEQID.</li>
+<li>Confirm that each assembly exists on the OLC NAS.</li>
+<li>Confirm that the assembly filename begins with the requested SEQID.</li>
+<li>Confirm that the filename contains <code>fasta</code>.</li>
+<li>Confirm that the NAS is mounted and accessible.</li>
+<li>Retry the analysis after correcting any missing assemblies.</li>
+</ol>
+<p>The current automator continues with the assemblies that were found.</p>
+<hr />
+<h3 id="no-requested-fasta-assemblies-were-found">No requested FASTA assemblies were found</h3>
+<p><strong>Possible error:</strong></p>
+<pre><code class="language-text">None of the requested FASTA assemblies could be found on the OLC NAS.
+</code></pre>
+<p><strong>Cause:</strong> The NAS retrieval completed without making any requested assembly available in the sequence directory.</p>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>Verify all requested SEQIDs.</li>
+<li>Confirm that assemblies have been generated.</li>
+<li>Confirm the expected NAS location.</li>
+<li>Confirm the expected filename pattern.</li>
+<li>Confirm that the automator host can access the NAS.</li>
+<li>Review the retained sequence directory and traceback.</li>
+</ul>
+<p>MetaQUAST is not run when no input assemblies are available.</p>
+<hr />
+<h3 id="metaquast-command-failed">MetaQUAST command failed</h3>
+<p><strong>Possible symptoms:</strong></p>
+<ul>
+<li>The SLURM job is marked as failed.</li>
+<li>The Redmine issue contains a Python traceback.</li>
+<li><code>subprocess.CalledProcessError</code> appears in the traceback.</li>
+<li>The expected MetaQUAST report is missing.</li>
+</ul>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>One or more FASTA files are invalid.</li>
+<li>The QUAST environment could not be activated.</li>
+<li><code>metaquast.py</code> is unavailable.</li>
+<li>A MetaQUAST dependency is unavailable.</li>
+<li>The job exceeded its memory allocation.</li>
+<li>The job exceeded its wall-time allocation.</li>
+<li>The output directory is not writable.</li>
+<li>Automatic reference discovery failed.</li>
+<li>Network or external database access failed.</li>
+<li>MetaQUAST returned a nonzero exit status.</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ol>
+<li>Review the MetaQUAST command posted to the Redmine issue.</li>
+<li>Review the SLURM standard-output file.</li>
+<li>Review the SLURM standard-error file.</li>
+<li>Review the traceback posted to Redmine.</li>
+<li>Confirm that the QUAST environment exists.</li>
+<li>Confirm that <code>metaquast.py</code> exists in the configured environment.</li>
+<li>Confirm that the FASTA files are readable.</li>
+<li>Check the SLURM job state and resource usage.</li>
+<li>Check whether the job exceeded its memory or time allocation.</li>
+<li>Retry after correcting the underlying problem.</li>
+</ol>
+<hr />
+<h3 id="expected-transposed-report-was-not-generated">Expected transposed report was not generated</h3>
+<p><strong>Possible error:</strong></p>
+<pre><code class="language-text">MetaQUAST completed without producing the expected report:
+&lt;work_dir&gt;/metaquast_output_&lt;issue_id&gt;/transposed_report.tsv
+</code></pre>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>MetaQUAST failed before report generation.</li>
+<li>MetaQUAST produced output in an unexpected location.</li>
+<li>The installed MetaQUAST version uses a different output structure.</li>
+<li>Automatic reference discovery did not finish.</li>
+<li>The job was interrupted.</li>
+<li>The output directory was not writable.</li>
+<li>Input assemblies were invalid or empty.</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ol>
+<li>Inspect the retained MetaQUAST output directory.</li>
+<li>Review MetaQUAST log files.</li>
+<li>Review the SLURM output and error files.</li>
+<li>Confirm the installed MetaQUAST version.</li>
+<li>Confirm the expected report location for that version.</li>
+<li>Confirm that the input FASTA files contain valid sequence data.</li>
+</ol>
+<hr />
+<h3 id="excel-report-was-not-generated">Excel report was not generated</h3>
+<p><strong>Possible error:</strong></p>
+<pre><code class="language-text">The MetaQUAST TSV report was not successfully converted to an Excel
+workbook.
+</code></pre>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li><code>transposed_report.tsv</code> could not be read.</li>
+<li>The report is empty or malformed.</li>
+<li>The output directory is not writable.</li>
+<li><code>pandas</code> encountered a parsing problem.</li>
+<li>The <code>openpyxl</code> package is unavailable.</li>
+<li>The filesystem is full.</li>
+<li>An existing output file could not be overwritten.</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ol>
+<li>Confirm that <code>transposed_report.tsv</code> exists.</li>
+<li>Confirm that the TSV file contains tab-separated data.</li>
+<li>Confirm that the issue work directory is writable.</li>
+<li>Confirm that sufficient disk space is available.</li>
+<li>Confirm that <code>pandas</code> and <code>openpyxl</code> are installed.</li>
+<li>Review the SLURM output for TSV-to-XLSX conversion messages.</li>
+</ol>
+<hr />
+<h3 id="metaquast-version-could-not-be-determined">MetaQUAST version could not be determined</h3>
+<p><strong>Possible final message:</strong></p>
+<pre><code class="language-text">MetaQUAST version is Could not determine version: ...
+</code></pre>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>The configured Python executable is missing.</li>
+<li><code>metaquast.py</code> is missing.</li>
+<li>The installed version does not support <code>--version</code>.</li>
+<li>The version command produced no output.</li>
+<li>The environment is incomplete.</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<p>Run the following command manually:</p>
+<pre><code class="language-bash">/mnt/nas2/virtual_environments/quast/bin/python \
+  /mnt/nas2/virtual_environments/quast/bin/metaquast.py \
+  --version
+</code></pre>
+<p>Confirm that the command prints a version.</p>
+<p>A version-detection failure does not necessarily mean that the analysis itself failed.</p>
+<hr />
+<h3 id="zip-archive-was-not-generated">ZIP archive was not generated</h3>
+<p><strong>Possible error:</strong></p>
+<pre><code class="language-text">The MetaQUAST output archive was not created:
+&lt;work_dir&gt;/metaquast_output_&lt;issue_id&gt;.zip
+</code></pre>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>The output directory does not exist.</li>
+<li>The filesystem is not writable.</li>
+<li>The filesystem is full.</li>
+<li>The output files were removed unexpectedly.</li>
+<li>Archive creation failed.</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>Confirm that the MetaQUAST output directory exists.</li>
+<li>Confirm that the work directory is writable.</li>
+<li>Confirm that sufficient disk space is available.</li>
+<li>Review the traceback and SLURM error file.</li>
+<li>Attempt to compress the retained output directory manually.</li>
+</ul>
+<hr />
+<h3 id="dropbox-upload-failed">Dropbox upload failed</h3>
+<p><strong>Redmine message resembles:</strong></p>
+<pre><code class="language-text">The MetaQUAST analysis completed, but the upload of the full results
+to Dropbox was unsuccessful. The Excel report has been attached to
+this issue. Please try the full-results upload again later.
+</code></pre>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>Network connectivity problems</li>
+<li>Expired or invalid Dropbox credentials</li>
+<li>Dropbox API availability problems</li>
+<li>Insufficient Dropbox storage</li>
+<li>A missing or unreadable ZIP archive</li>
+<li>Authentication failure</li>
+<li>Upload-size restrictions</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>Confirm that the ZIP archive was created.</li>
+<li>Verify the configured Dropbox credentials.</li>
+<li>Check network connectivity from the automator host.</li>
+<li>Confirm that sufficient Dropbox storage is available.</li>
+<li>Retry the upload later.</li>
+<li>Review application and SLURM logs for Dropbox errors.</li>
+</ul>
+<p>The Excel summary report should still be attached to the Redmine issue.</p>
+<hr />
+<h3 id="slurm-job-used-an-unexpected-number-of-threads">SLURM job used an unexpected number of threads</h3>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li><code>SLURM_CPUS_PER_TASK</code> was not set.</li>
+<li>The SLURM script used <code>--ntasks</code> instead of <code>--cpus-per-task</code>.</li>
+<li>The job was run manually outside SLURM.</li>
+<li>The configured fallback thread count was used.</li>
+<li>The environment variable contained an invalid value.</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<p>Confirm that the SLURM script contains:</p>
+<pre><code class="language-bash">#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=&lt;thread_count&gt;
+</code></pre>
+<p>Inside the job, inspect:</p>
+<pre><code class="language-bash">echo &quot;$SLURM_CPUS_PER_TASK&quot;
+</code></pre>
+<p>The MetaQUAST command posted to Redmine should contain the same value:</p>
+<pre><code class="language-text">-t &lt;thread_count&gt;
+</code></pre>
+<hr />
+<h3 id="invalid-slurm-thread-allocation">Invalid SLURM thread allocation</h3>
+<p><strong>Possible error:</strong></p>
+<pre><code class="language-text">SLURM_CPUS_PER_TASK must be an integer
+</code></pre>
+<p>or:</p>
+<pre><code class="language-text">SLURM_CPUS_PER_TASK must be at least one
+</code></pre>
+<p><strong>Cause:</strong> The SLURM environment variable contained an invalid value.</p>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>Confirm that <code>--cpus-per-task</code> is a positive integer.</li>
+<li>Review the generated SLURM script.</li>
+<li>Do not manually assign a nonnumeric value to <code>SLURM_CPUS_PER_TASK</code>.</li>
+<li>Retry the job with a valid CPU allocation.</li>
+</ul>
+<hr />
+<h3 id="unexpected-automator-error">Unexpected automator error</h3>
+<p><strong>Redmine message begins with:</strong></p>
+<pre><code class="language-text">Something went wrong! Please contact a bioinformatician to investigate:
+</code></pre>
+<p>The remainder of the update contains the Python traceback.</p>
+<p>The exception is also sent to Sentry.</p>
+<p>Because the exception is re-raised after the Redmine update, SLURM should record the job as failed rather than successfully completed.</p>
+<p><strong>Resolution:</strong></p>
+<p>Provide the following information to a bioinformatician:</p>
+<ul>
+<li>Redmine issue number</li>
+<li>SLURM job ID</li>
+<li>Full Python traceback</li>
+<li>MetaQUAST command posted to the issue</li>
+<li>Requested SEQIDs</li>
+<li>SLURM standard-output file</li>
+<li>SLURM standard-error file</li>
+<li>MetaQUAST output directory</li>
+<li>CPU and memory allocation</li>
+<li>MetaQUAST version, if available</li>
+</ul>
+<hr />
+<h2 id="slurm-resources">SLURM Resources</h2>
+<p>The automator is intended to run as one multithreaded SLURM task.</p>
+<p>A typical SLURM resource request resembles:</p>
+<pre><code class="language-bash">#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=32000
+#SBATCH --time=4-00:00
+</code></pre>
+<p>The automator reads:</p>
+<pre><code class="language-text">SLURM_CPUS_PER_TASK
+</code></pre>
+<p>and supplies the value to MetaQUAST using:</p>
+<pre><code class="language-text">-t &lt;SLURM_CPUS_PER_TASK&gt;
+</code></pre>
+<p>The number of CPUs requested from SLURM and the number of threads supplied to MetaQUAST should therefore remain synchronized.</p>
+<p>MetaQUAST resource requirements can vary depending on:</p>
+<ul>
+<li>Number of assemblies</li>
+<li>Total assembly size</li>
+<li>Number of contigs</li>
+<li>Metagenomic complexity</li>
+<li>Reference-search behaviour</li>
+<li>Network connectivity</li>
+<li>MetaQUAST version</li>
+<li>Enabled internal analyses</li>
+</ul>
+<p>Resource usage should be reviewed using SLURM accounting tools after representative jobs.</p>
+<p>For example:</p>
+<pre><code class="language-bash">sacct \
+  -j &lt;job_id&gt; \
+  --format=JobID,JobName,State,Elapsed,AllocCPUS,TotalCPU,MaxRSS,ReqMem
+</code></pre>
+<p>If available, the following may also be used:</p>
+<pre><code class="language-bash">seff &lt;job_id&gt;
+</code></pre>
+<hr />
+<h2 id="temporary-files-and-cleanup">Temporary Files and Cleanup</h2>
+<p>After successful completion, the automator removes:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/sequences
+&lt;work_dir&gt;/metaquast_output_&lt;issue_id&gt;
+&lt;work_dir&gt;/metaquast_output_&lt;issue_id&gt;.zip
+&lt;work_dir&gt;/run_metaquast.sh
+</code></pre>
+<p>The Excel report copied to the issue work directory is retained:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/MetaQUAST_results_redmine&lt;issue_id&gt;.xlsx
+</code></pre>
+<p>If an exception occurs before successful completion, temporary files are retained for troubleshooting.</p>
+<p>Retained files may include:</p>
+<ul>
+<li>Retrieved FASTA links or files</li>
+<li>Partial MetaQUAST output</li>
+<li>MetaQUAST logs</li>
+<li>Generated shell script</li>
+<li>ZIP archive, if archive creation completed</li>
+<li>Partially generated reports</li>
+</ul>
+<hr />
+<h2 id="implementation-notes">Implementation Notes</h2>
+<p>Maintainers should be aware of the following implementation details:</p>
+<ul>
+<li>The automator runs as one SLURM task with multiple CPUs.</li>
+<li>The thread count is obtained from <code>SLURM_CPUS_PER_TASK</code>.</li>
+<li>A configured fallback is used when the automator runs outside SLURM.</li>
+<li>The MetaQUAST executable is invoked through the Python interpreter in the QUAST environment.</li>
+<li>No user-supplied reference argument is supported.</li>
+<li>Blank description lines are ignored.</li>
+<li>Duplicate SEQIDs are removed while preserving order.</li>
+<li>Missing FASTA files generate a warning but do not stop the analysis if other requested assemblies were found.</li>
+<li>MetaQUAST does not run if no requested assemblies are available.</li>
+<li>Only FASTA files associated with requested SEQIDs are included.</li>
+<li>Command arguments are shell-quoted using <code>shlex.join()</code>.</li>
+<li>The generated shell script is made executable.</li>
+<li>The shell script is run using <code>subprocess.run(..., check=True)</code>.</li>
+<li>A nonzero MetaQUAST exit status raises an exception.</li>
+<li>The expected <code>transposed_report.tsv</code> file is explicitly validated.</li>
+<li>Successful Excel conversion is explicitly validated.</li>
+<li>Successful ZIP archive creation is explicitly validated.</li>
+<li>Failed runs preserve intermediate files.</li>
+<li>Successful runs remove temporary sequences, output, ZIP, and shell-script files.</li>
+<li>The Excel attachment remains in the issue work directory.</li>
+<li>Exceptions are reported to both Sentry and Redmine.</li>
+<li>Exceptions are re-raised so that SLURM records failed analyses correctly.</li>
+<li>The Redmine issue is assigned status ID <code>4</code> after successful completion.</li>
+<li>The shared exception handler also assigns status ID <code>4</code> after an error.</li>
+<li>Dropbox credentials are imported from the local <code>tokens</code> module.</li>
+<li>The traceback posted to Redmine may contain internal paths and command details.</li>
+</ul>
+<hr />
+<h2 id="maintainer-warnings">Maintainer Warnings</h2>
+<p>The following behaviours should be considered during future maintenance:</p>
+<ul>
+<li>The shared <code>tsv_to_xlsx()</code> method reports conversion errors without raising them. The automator therefore verifies that the Excel output exists.</li>
+<li>The filename matching pattern is broad:</li>
+</ul>
+<pre><code class="language-text">&lt;SEQID&gt;*fasta*
+</code></pre>
+<p>A SEQID could match more than one FASTA file. All matching files are currently added to the MetaQUAST command.</p>
+<ul>
+<li>Missing FASTA files do not stop the analysis when at least one assembly remains.</li>
+<li>The automator assumes that MetaQUAST creates a top-level <code>transposed_report.tsv</code>.</li>
+<li>Output structure may differ between MetaQUAST versions.</li>
+<li>Reference-free MetaQUAST behaviour may depend on reference-search resources, databases, and network availability.</li>
+<li>The Dropbox failure message may represent connectivity, authentication, storage, or API problems.</li>
+<li>Cleanup is performed only after the final Redmine update succeeds.</li>
+<li>A cleanup filesystem error could affect the final SLURM state unless cleanup errors are handled separately.</li>
+<li>Status ID <code>4</code> is used for successful analyses, missing-SEQID requests, and exceptions through the shared exception handler.</li>
+<li>The default thread count is used only when <code>SLURM_CPUS_PER_TASK</code> is unavailable.</li>
+<li>The automator requires Python 3.10 or newer because it uses modern type-annotation syntax such as:</li>
+</ul>
+<pre><code class="language-python">Path | None
+</code></pre>
+<ul>
+<li>The Redmine launcher must continue using the supported external options:</li>
+</ul>
+<pre><code class="language-text">--redmine_instance
+--issue
+--work_dir
+--description
+</code></pre>
+<p>These are mapped internally to variables named:</p>
+<pre><code class="language-text">redmine_instance_pickle
+issue_pickle
+work_dir
+description_pickle
+</code></pre>
+<p>These implementation details do not necessarily prevent normal operation, but they should be considered when modifying, deploying, or troubleshooting the MetaQUAST automator.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../metaphlan/" class="btn btn-neutral float-left" title="Metaphlan4"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../mobsuite/" class="btn btn-neutral float-right" title="MobSuite">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../metaphlan/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../mobsuite/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

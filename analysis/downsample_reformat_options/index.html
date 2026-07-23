@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/downsample_reformat_options/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Downsample Options - OLC Redmine Automator</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Downsample Options";
+        var mkdocs_page_input_path = "analysis/downsample_reformat_options.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/downsample_reformat_options/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OLC Redmine Automator
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/external_retrieve/">External Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/report_retrieve/">Report Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_upload/">SRA Upload</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_download/">SRA Download</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Analysis</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../amrsummary/">AMRsummary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../autoclark/">AutoCLARK</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cardrgi/">CARD-RGI (AMR)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Downsample Options</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#input-and-output-options">Input and output options</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ow">ow</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#app">app</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#zl">zl</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#int">int</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fastawrap">fastawrap</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fastareadlen">fastareadlen</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fastaminlen">fastaminlen</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#qin">qin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#qout">qout</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#read-validation-and-transformation">Read validation and transformation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#verifypaired">verifypaired</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#verifyinterleaved">verifyinterleaved</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tossbrokenreads">tossbrokenreads</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ignorebadquality">ignorebadquality</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rcomp">rcomp</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rcompmate">rcompmate</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tuc">tuc</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sampling-options">Sampling options</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#reads">reads</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#skipreads">skipreads</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#samplerate">samplerate</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sampleseed">sampleseed</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#samplereadstarget">samplereadstarget</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#samplebasestarget">samplebasestarget</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#upsample">upsample</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#prioritizelength">prioritizelength</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#trimming-and-filtering-options">Trimming and filtering options</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#qtrim">qtrim</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#trimq">trimq</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#minlength">minlength</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#maxlength">maxlength</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#minavgquality">minavgquality</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#maxns">maxns</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mingc">mingc</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#maxgc">maxgc</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#k-mer-and-cardinality-options">K-mer and cardinality options</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#k">k</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cardinality">cardinality</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#loglogbuckets">loglogbuckets</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example-advanced-request">Example advanced request</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gfa_retrieve/">GFA Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pyseer/">GWAS-pyseer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kma/">KMA - Gene Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kraken2/">Kraken2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pointfinder/">PointFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../primerfinder/">PrimerFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rmlst/">rMLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sequence_extractor/">SequenceExtractor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snvphyl/">SNVPhyl</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snippy/">Snippy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../staramr/">staramr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Internal Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/merge/">Merge</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/azuredownload/">AzureDownload</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/">Troubleshooting</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_pages/">Create Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/edit_pages/">Edit Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/publish_changes/">Publish Changes</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OLC Redmine Automator</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Analysis</li>
+      <li class="breadcrumb-item active">Downsample Options</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/downsample_reformat_options.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="downsample-supported-reformatsh-options">Downsample: Supported <code>reformat.sh</code> Options</h1>
+<p>This page is an advanced reference for BBMap <code>reformat.sh</code> options accepted by the <a href="../downsample/">Downsample automator</a>.</p>
+<p>Use the main Downsample page for Subject, Description, examples, result interpretation, runtime, and troubleshooting. Supply options in the Redmine issue Description using <code>KEY=VALUE</code> syntax. The automator treats parameter names case-insensitively.</p>
+<p>The values below are documented defaults from the supported option reference. An option may interact with other sampling, trimming, filtering, or pairing settings; review the <a href="../downsample/">Downsample documentation</a> before combining options.</p>
+<h2 id="input-and-output-options">Input and output options</h2>
+<h3 id="ow"><code>ow</code></h3>
+<p>Overwrite output files that already exist.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>ow=true</code></li>
+</ul>
+<h3 id="app"><code>app</code></h3>
+<p>Append to output files that already exist.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>app=true</code></li>
+</ul>
+<h3 id="zl"><code>zl</code></h3>
+<p>Set the compression level from <code>1</code> to <code>9</code>.</p>
+<ul>
+<li>Default: <code>4</code></li>
+<li>Example: <code>zl=6</code></li>
+</ul>
+<h3 id="int"><code>int</code></h3>
+<p>Treat the input as interleaved.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>int=true</code></li>
+</ul>
+<h3 id="fastawrap"><code>fastawrap</code></h3>
+<p>Set the output line length for FASTA files.</p>
+<ul>
+<li>Default: <code>70</code></li>
+<li>Example: <code>fastawrap=80</code></li>
+</ul>
+<h3 id="fastareadlen"><code>fastareadlen</code></h3>
+<p>Break FASTA sequences into reads with this maximum length. A value of <code>0</code> disables this behavior.</p>
+<ul>
+<li>Default: <code>0</code></li>
+<li>Example: <code>fastareadlen=1000</code></li>
+</ul>
+<h3 id="fastaminlen"><code>fastaminlen</code></h3>
+<p>Ignore FASTA reads shorter than this length.</p>
+<ul>
+<li>Default: <code>1</code></li>
+<li>Example: <code>fastaminlen=100</code></li>
+</ul>
+<h3 id="qin"><code>qin</code></h3>
+<p>Set the input quality-score offset.</p>
+<ul>
+<li>Default: <code>auto</code></li>
+<li>Example: <code>qin=33</code></li>
+</ul>
+<h3 id="qout"><code>qout</code></h3>
+<p>Set the output quality-score offset.</p>
+<ul>
+<li>Default: <code>auto</code></li>
+<li>Example: <code>qout=33</code></li>
+</ul>
+<h2 id="read-validation-and-transformation">Read validation and transformation</h2>
+<h3 id="verifypaired"><code>verifypaired</code></h3>
+<p>Verify that paired-read names appear to be paired.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>verifypaired=true</code></li>
+</ul>
+<h3 id="verifyinterleaved"><code>verifyinterleaved</code></h3>
+<p>Enable paired-read verification for interleaved input.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>verifyinterleaved=true</code></li>
+</ul>
+<h3 id="tossbrokenreads"><code>tossbrokenreads</code></h3>
+<p>Discard reads with inconsistent base and quality counts.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>tossbrokenreads=true</code></li>
+</ul>
+<h3 id="ignorebadquality"><code>ignorebadquality</code></h3>
+<p>Repair out-of-range quality values instead of stopping.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>ignorebadquality=true</code></li>
+</ul>
+<h3 id="rcomp"><code>rcomp</code></h3>
+<p>Reverse-complement reads.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>rcomp=true</code></li>
+</ul>
+<h3 id="rcompmate"><code>rcompmate</code></h3>
+<p>Reverse-complement read 2 only.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>rcompmate=true</code></li>
+</ul>
+<h3 id="tuc"><code>tuc</code></h3>
+<p>Convert lowercase bases to uppercase.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>tuc=true</code></li>
+</ul>
+<h2 id="sampling-options">Sampling options</h2>
+<h3 id="reads"><code>reads</code></h3>
+<p>Process no more than this many input reads or read pairs. A value of <code>-1</code> means no limit.</p>
+<ul>
+<li>Default: <code>-1</code></li>
+<li>Example: <code>reads=1000000</code></li>
+</ul>
+<h3 id="skipreads"><code>skipreads</code></h3>
+<p>Discard this many reads before processing. A value of <code>-1</code> uses the documented default behavior.</p>
+<ul>
+<li>Default: <code>-1</code></li>
+<li>Example: <code>skipreads=1000</code></li>
+</ul>
+<h3 id="samplerate"><code>samplerate</code></h3>
+<p>Set the random fraction of reads to retain.</p>
+<ul>
+<li>Default: <code>1</code></li>
+<li>Example: <code>samplerate=0.25</code></li>
+</ul>
+<h3 id="sampleseed"><code>sampleseed</code></h3>
+<p>Set the sampling seed. Supply a fixed integer for reproducible random sampling.</p>
+<ul>
+<li>Default: <code>-1</code></li>
+<li>Example: <code>sampleseed=42</code></li>
+</ul>
+<h3 id="samplereadstarget"><code>samplereadstarget</code></h3>
+<p>Set the desired number of output reads or read pairs. A value of <code>0</code> disables this target.</p>
+<ul>
+<li>Default: <code>0</code></li>
+<li>Example: <code>samplereadstarget=1000000</code></li>
+</ul>
+<h3 id="samplebasestarget"><code>samplebasestarget</code></h3>
+<p>Set the desired number of output bases. A value of <code>0</code> disables this target.</p>
+<ul>
+<li>Default: <code>0</code></li>
+<li>Example: <code>samplebasestarget=100000000</code></li>
+</ul>
+<h3 id="upsample"><code>upsample</code></h3>
+<p>Permit read duplication when the requested target exceeds the input.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>upsample=true</code></li>
+</ul>
+<h3 id="prioritizelength"><code>prioritizelength</code></h3>
+<p>Prioritize reads based on length during sampling.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>prioritizelength=true</code></li>
+</ul>
+<h2 id="trimming-and-filtering-options">Trimming and filtering options</h2>
+<h3 id="qtrim"><code>qtrim</code></h3>
+<p>Select whether quality trimming is applied to read ends.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>qtrim=rl</code></li>
+</ul>
+<h3 id="trimq"><code>trimq</code></h3>
+<p>Set the trimming quality threshold.</p>
+<ul>
+<li>Default: <code>6</code></li>
+<li>Example: <code>trimq=10</code></li>
+</ul>
+<h3 id="minlength"><code>minlength</code></h3>
+<p>Discard reads shorter than this length after trimming. A value of <code>0</code> disables the minimum.</p>
+<ul>
+<li>Default: <code>0</code></li>
+<li>Example: <code>minlength=50</code></li>
+</ul>
+<h3 id="maxlength"><code>maxlength</code></h3>
+<p>Discard reads longer than this threshold. A value of <code>0</code> disables the maximum.</p>
+<ul>
+<li>Default: <code>0</code></li>
+<li>Example: <code>maxlength=300</code></li>
+</ul>
+<h3 id="minavgquality"><code>minavgquality</code></h3>
+<p>Discard reads below this average quality. A value of <code>0</code> disables the threshold.</p>
+<ul>
+<li>Default: <code>0</code></li>
+<li>Example: <code>minavgquality=20</code></li>
+</ul>
+<h3 id="maxns"><code>maxns</code></h3>
+<p>Discard reads containing more than this number of <code>N</code> bases. A value of <code>-1</code> disables the threshold.</p>
+<ul>
+<li>Default: <code>-1</code></li>
+<li>Example: <code>maxns=0</code></li>
+</ul>
+<h3 id="mingc"><code>mingc</code></h3>
+<p>Set the minimum accepted GC fraction.</p>
+<ul>
+<li>Default: <code>0</code></li>
+<li>Example: <code>mingc=0.30</code></li>
+</ul>
+<h3 id="maxgc"><code>maxgc</code></h3>
+<p>Set the maximum accepted GC fraction.</p>
+<ul>
+<li>Default: <code>1</code></li>
+<li>Example: <code>maxgc=0.70</code></li>
+</ul>
+<h2 id="k-mer-and-cardinality-options">K-mer and cardinality options</h2>
+<h3 id="k"><code>k</code></h3>
+<p>Count k-mers when set to a positive value. A value of <code>0</code> disables k-mer counting.</p>
+<ul>
+<li>Default: <code>0</code></li>
+<li>Example: <code>k=31</code></li>
+</ul>
+<h3 id="cardinality"><code>cardinality</code></h3>
+<p>Estimate unique k-mers using the LogLog algorithm.</p>
+<ul>
+<li>Default: <code>false</code></li>
+<li>Example: <code>cardinality=true</code></li>
+</ul>
+<h3 id="loglogbuckets"><code>loglogbuckets</code></h3>
+<p>Set the number of buckets used for cardinality estimation.</p>
+<ul>
+<li>Default: <code>1999</code></li>
+<li>Example: <code>loglogbuckets=4000</code></li>
+</ul>
+<h2 id="example-advanced-request">Example advanced request</h2>
+<pre><code class="language-text">samplerate=0.25
+sampleseed=42
+qtrim=rl
+trimq=10
+minlength=50
+2026-SEQ-0001
+</code></pre>
+<p>This example retains a random quarter of the input reads using a fixed seed, trims both read ends at the selected quality threshold, and discards reads shorter than 50 bases after trimming.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../downsample/" class="btn btn-neutral float-left" title="Downsample"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../drep/" class="btn btn-neutral float-right" title="dRep-ANI">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../downsample/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../drep/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

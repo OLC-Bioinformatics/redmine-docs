@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -104,6 +106,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
@@ -122,6 +126,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../rmlst/">rMLST</a>
@@ -137,16 +143,38 @@
     <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#extract-an-entire-contig">Extract an entire contig</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    <li class="toctree-l4"><a class="reference internal" href="#reversed-coordinates">Reversed coordinates</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-contig-name-does-not-match">The contig name does not match</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-coordinate-is-outside-the-contig">A coordinate is outside the contig</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#description-entries-are-unexpectedly-ignored">Description entries are unexpectedly ignored</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -161,8 +189,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -217,47 +243,64 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="sequenceextractor">SequenceExtractor</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>SequenceExtractor extracts the sequence data from a supplied contig at designated start and stop positions</p>
-<p>Check out the source code: <a href="https://github.com/OLC-LOC-Bioinformatics/genemethods/tree/main/genemethods/SequenceExtractor">github</a></p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>sequence_extractor</code>. Spelling counts, but case sensitivity does not.</p>
-<h4 id="description">Description</h4>
-<p>There are two ways to use SequenceExtractor</p>
-<p>You must provide a list of (one per line):</p>
-<p><code>SEQID;contig name;start coordinates; stop coordinates</code></p>
-<p>e.g. </p>
-<pre><code>2019-SEQ-0848;Contig_1_149.079_Circ;1;50
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>SequenceExtractor</strong> to extract a requested nucleotide interval—or an entire contig—from a specific contig in a sequence assembly.</p>
+<p>Each extraction identifies:</p>
+<ul>
+<li>the assembly <code>SEQID</code>;</li>
+<li>the exact contig name;</li>
+<li>the start coordinate; and</li>
+<li>the stop coordinate.</li>
+</ul>
+<p>The source code is available in the <a href="https://github.com/OLC-LOC-Bioinformatics/genemethods/tree/main/genemethods/SequenceExtractor">SequenceExtractor directory of the genemethods repository</a>.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">sequence_extractor
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Provide one extraction request per line using four semicolon-separated fields:</p>
+<pre><code class="language-text">SEQID;contig name;start coordinate;stop coordinate
+</code></pre>
+<p>Example:</p>
+<pre><code class="language-text">2019-SEQ-0848;Contig_1_149.079_Circ;1;50
 2019-SEQ-1019;Contig_1_388.862_Circ;14;77
 2019-SEQ-0848;Contig_2_392.879_Circ;2;39
 2019-SEQ-1019;Contig_3_52.4575;5;22
 </code></pre>
-<p>Notes: </p>
+<p>This example requests:</p>
 <ul>
-<li>If you want an entire contig, supply the start and stop positions as 0</li>
-<li>The stop base can be lower than the start base. The script will change them, so that the start base is always lower</li>
+<li>bases 1–50 from <code>Contig_1_149.079_Circ</code> in <code>2019-SEQ-0848</code>;</li>
+<li>bases 14–77 from <code>Contig_1_388.862_Circ</code> in <code>2019-SEQ-1019</code>;</li>
+<li>bases 2–39 from <code>Contig_2_392.879_Circ</code> in <code>2019-SEQ-0848</code>;</li>
+<li>bases 5–22 from <code>Contig_3_52.4575</code> in <code>2019-SEQ-1019</code>.</li>
 </ul>
-<p>The above example performs four extractions:</p>
-<ol>
-<li>bases <code>1-50</code> from <code>Contig_1_149.079_Circ</code> in the assembly for SEQID <code>2019-SEQ-0848</code></li>
-<li>bases <code>14-77</code> from <code>Contig_1_388.862_Circ</code> in the assembly for SEQID <code>2019-SEQ-1019</code></li>
-<li>bases <code>2-39</code> from <code>Contig_2_392.879_Circ</code> in the assembly for SEQID <code>2019-SEQ-0848</code></li>
-<li>bases <code>5-22</code> from <code>Contig_3_52.4575</code> in the assembly for SEQID <code>2019-SEQ-1019</code></li>
-</ol>
-<p>This list can be supplied in two possible ways:</p>
-<ol>
-<li>In the Description</li>
-<li>In an attached file (the name of the file doesn't matter, but please try to avoid empty lines)</li>
-</ol>
-<p>You cannot supply the list both ways; if you provide an attachment, any entries in the Description will be ignored.</p>
-<h4 id="example">Example</h4>
-<p>For an example SequenceExtractor analysis with the fasta details provided as an attachment, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/28104">issue 28104</a>.</p>
-<p>This example has SEQIDs in the Description, but it's not necessary.</p>
-<p>For an example SequenceExtractor analysis with the fasta details provided in the description, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/28181">issue 28181</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>SequenceExtractor will output a FASTA-formatted file, <code>extracted_sequences.fasta</code> ,that should look like the following if you used the example list above:</p>
-<pre><code>&gt;2019-SEQ-0848_Contig_1_149.079_Circ_1_50
+<h4 id="extract-an-entire-contig">Extract an entire contig</h4>
+<p>Set both coordinates to <code>0</code>:</p>
+<pre><code class="language-text">2019-SEQ-0848;Contig_1_149.079_Circ;0;0
+</code></pre>
+<h4 id="reversed-coordinates">Reversed coordinates</h4>
+<p>The stop coordinate may be lower than the start coordinate. SequenceExtractor reorders the two values so the lower coordinate is used as the start.</p>
+<h3 id="attachments">Attachments</h3>
+<p>You can supply the extraction list either:</p>
+<ul>
+<li>directly in the Description field; or</li>
+<li>in one attached text file.</li>
+</ul>
+<p>Do not use both methods. If an attachment is present, entries in the Description are ignored.</p>
+<p>The attachment filename does not matter. Avoid empty lines and use the same semicolon-separated format as the Description.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters beyond the coordinate conventions described above.</p>
+<h3 id="examples">Examples</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/28104">issue 28104</a> for an example that supplies extraction details in an attachment. <code>SEQID</code>s appearing in that issue's Description are not required when the attachment contains the extraction list.</p>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/28181">issue 28181</a> for an example that supplies extraction details directly in the Description.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>SequenceExtractor uploads:</p>
+<pre><code class="language-text">extracted_sequences.fasta
+</code></pre>
+<p>Each FASTA header identifies the source <code>SEQID</code>, contig, and requested coordinates. For example:</p>
+<pre><code class="language-fasta">&gt;2019-SEQ-0848_Contig_1_149.079_Circ_1_50
 AAAAAAAACAAATATATACTTTGATGATAACTTTCTAAATATCTACAAAA
 &gt;2019-SEQ-0848_Contig_2_392.879_Circ_2_39
 AAAAAAACAATAAAAAACACCGCAAAAATGGATTGTTA
@@ -267,15 +310,31 @@ CCTT
 &gt;2019-SEQ-1019_Contig_3_52.4575_5_22
 ATATCATCAGATGGCTGC
 </code></pre>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>SequenceExtractor is pretty fast - expect it to take a few seconds per entry you give it.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, 
-you will get a warning message informing you of it.</li>
-<li>The contig name must be provided exactly as it is written in the assembly.</li>
-<li>The start or stop position provided is invalid e.g. if you ask for positions 789-882 in a contig that is only 500bp long, nothing will be returned.</li>
-</ol>
+<p>Confirm that each expected extraction has a FASTA record and that the header contains the intended assembly, contig, and coordinates.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>SequenceExtractor is generally fast. Expect each extraction entry to take a few seconds, with total runtime depending on the number of entries and current service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable assemblies.</p>
+<p><strong>Likely cause:</strong> SequenceExtractor cannot locate the assembly associated with the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify the <code>SEQID</code> and confirm that its assembly is available.</p>
+<h3 id="the-contig-name-does-not-match">The contig name does not match</h3>
+<p><strong>Symptom:</strong> No sequence is returned for an otherwise valid assembly and coordinate range.</p>
+<p><strong>Likely cause:</strong> The contig name does not exactly match the name in the assembly.</p>
+<p><strong>What to do:</strong> Copy the complete contig name exactly, including capitalization, punctuation, underscores, and any <code>_Circ</code> suffix.</p>
+<h3 id="a-coordinate-is-outside-the-contig">A coordinate is outside the contig</h3>
+<p><strong>Symptom:</strong> No sequence is returned for the requested interval.</p>
+<p><strong>Likely cause:</strong> The start or stop coordinate exceeds the contig length, for example requesting bases 789–882 from a 500-base contig.</p>
+<p><strong>What to do:</strong> Check the contig length and submit coordinates within its valid range. Use <code>0;0</code> when the entire contig is required.</p>
+<h3 id="description-entries-are-unexpectedly-ignored">Description entries are unexpectedly ignored</h3>
+<p><strong>Symptom:</strong> The automator processes the attachment but not the extraction lines in the Description.</p>
+<p><strong>Likely cause:</strong> SequenceExtractor gives the attachment precedence whenever an attachment is present.</p>
+<p><strong>What to do:</strong> Supply the extraction list in only one place: either the Description or one attachment.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../gfa_retrieve/">GFA Retrieve</a> — retrieves assembly graph files for supported hybrid assemblies rather than extracting a nucleotide interval.</li>
+<li><a href="../../data/external_retrieve/">External Retrieve</a> — exports complete sequence data when a larger data package is required.</li>
+</ul>
               
             </div>
           </div><footer>

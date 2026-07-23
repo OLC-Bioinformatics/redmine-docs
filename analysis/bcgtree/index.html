@@ -74,15 +74,45 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#bootstraps">bootstraps</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#min_proteomes">min_proteomes</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#aa_substitution_model">aa_substitution_model</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#prokka_outputzip">prokka_output.zip</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bcgtree_outputzip">bcgtree_output.zip</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-substitution-model-is-unsupported-or-misspelled">The substitution model is unsupported or misspelled</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#too-few-core-genes-are-retained">Too few core genes are retained</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#runtime-is-much-longer-than-expected">Runtime is much longer than expected</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -101,6 +131,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
@@ -124,6 +156,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
@@ -141,6 +175,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -161,8 +197,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -217,71 +251,138 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="bcgtree">bcgTree</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>bcgTree is a an automated phylogenetic tree building pipeline that builds trees from bacterial core genomes. The pipeline "automatically extracts 107 essential single-copy core genes, found in a majority of bacteria" (these genes were statistically determined, see <a href="https://cdnsciencepub.com/doi/10.1139/gen-2015-0175?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">bcgTree publication</a>). It then uses hidden Markov models and performs a partitioned maximum-likelihood analysis. If you want to 
-learn more about it, check out the <a href="https://cdnsciencepub.com/doi/10.1139/gen-2015-0175?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">bcgTree publication</a>. Dont forget to cite Ankenbrand and Keller, 2016!</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>bcgtree</code>. Spelling counts, but case sensitivity doesnt.</p>
-<h4 id="description">Description</h4>
-<p><strong>Required Components</strong></p>
-<p>In the <code>Description</code> field, you must include a list of SEQIDs one per line.</p>
-<p><strong>Optional Components</strong></p>
-<p>In order to customise your bcgTree analysis, several settings can be optionally modified.</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>bcgTree</strong> to build a bacterial phylogeny from conserved single-copy core genes.</p>
+<p>The pipeline automatically extracts 107 essential single-copy genes found across a broad range of bacteria, identifies homologues with hidden Markov models, aligns the selected protein sequences, and performs a partitioned maximum-likelihood analysis with RAxML.</p>
+<p>bcgTree is intended for bacterial assemblies. Unlike MashTree, its primary tree is based on aligned core-gene protein sequences rather than only estimated whole-genome Mash distances.</p>
+<p>For background, see the <a href="https://cdnsciencepub.com/doi/10.1139/gen-2015-0175">bcgTree publication</a>. Cite Ankenbrand and Keller (2016) when publishing results produced with this workflow.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">bcgtree
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Enter optional parameters first, followed by one bacterial assembly <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>The supplied documentation does not identify support for attached assemblies. Use available <code>SEQID</code>s unless attachment support has been verified in the current implementation.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<h4 id="bootstraps"><code>bootstraps</code></h4>
+<p>Sets the number of bootstrap replicates.</p>
 <ul>
-<li>If you would like to change the number of bootstraps performed, add the following line to the description before the list of SEQIDs:<ul>
-<li>default is <code>100</code></li>
-<li>modify as follows:<ul>
-<li><code>bootstraps=1000</code></li>
+<li>Default: <code>100</code></li>
+<li>Example: <code>bootstraps=1000</code></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>If you would like to change the minimum number of proteomes in which a gene must occur in order to be kept:<ul>
-<li>default is <code>2</code></li>
-<li>modify as follows:<ul>
-<li><code>min_proteomes=5</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>If you would like to change the amino acid substitution model used for the partitions by RAxML:<ul>
-<li>default is <code>AUTO</code></li>
-<li>modify as follows:<ul>
-<li><code>aa_substitution_model=GTR</code></li>
-</ul>
-</li>
-<li>you can select one of the following amino acid substitution models to use:<ul>
-<li>AUTO, DAYHOFF, DCMUT, JTT, MTREV, WAG,RTREV, CPREV, VT, BLOSUM62, MTMAM, LG,
-  MTART, MTZOA, PMB, HIVB,HIVW, JTTDCMUT, FLU, STMTREV, DUMMY, DUMMY2,
-  LG4M, LG4X, PROT_FILE, GTR_UNLINKED, GTR</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="example">Example</h4>
-<p>For an example bcgtree issue see <a href="https://redmine.biodiversity.agr.gc.ca/issues/25083">issue 25083</a>. <strong>NOTE</strong>: the output files for these issues no longer exist on the ftp server.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>The bcgTree automator will upload links to the ftp for files called <code>prokka_output.zip</code> and <code>bcgtree_output.zip</code> once it has completed. </p>
-<p>The <code>prokka_output.zip</code> contains all of the outputs from prokka. Prokka will output a lot of files for each genome you give it - you can find a quick description of
-each file <a href="https://github.com/tseemann/prokka#output-files">here</a>. Of particular interest are the <code>.faa</code> files, which bcgTree uses for analysis.</p>
-<p>The <code>bcgtree_output.zip</code> file contains all of the outputs from bcgTree. The alignment files, and gene-id files output by bcgtree can be found in subfolders in the zip file. The most interesting outputs from bcgtree are the RAxML files. These files conaint the phylogenetic trees output by bcgTree: </p>
+<p>More bootstrap replicates increase runtime.</p>
+<h4 id="min_proteomes"><code>min_proteomes</code></h4>
+<p>Sets the minimum number of proteomes in which a gene must occur to be retained.</p>
 <ul>
-<li>RAxML_bestTree.final</li>
-<li>RAxML_bipartitionsBranchLabels.final</li>
-<li>RAxML_bipartitions.final</li>
-<li>RAxML_bootstrap.final</li>
+<li>Default: <code>2</code></li>
+<li>Example: <code>min_proteomes=5</code></li>
 </ul>
-<p>These files can be opened using a phylogenetic tree viewer of your choice.</p>
-<p>There will also be the <code>config.txt</code> file containing the command(s) passed to bcgTree, as well as a <code>bcgtree.log</code> file containing all of the executed commands and their output(s) (including the random seed values used by RAxML).</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>Prokka isnt the quickest thing around - expect it to take 2 to 3 minutes for each genome you give it. After prokka is finished the bcgTree pipeline time will depend on the number of sequences and bootstraps requested. </p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. If we cant find some of the SEQIDs that you request, you will get a warning message informing you of it.</li>
-<li>There was an issue with the requested amino acid substitution model: there was a typo, or you requested a currently-unsupported substitution model. An error message detailing the problem will be added to the issue.</li>
-</ol>
+<p>Increasing this value can reduce the number of genes retained when taxa are diverse or assemblies are incomplete.</p>
+<h4 id="aa_substitution_model"><code>aa_substitution_model</code></h4>
+<p>Selects the amino-acid substitution model used for RAxML partitions.</p>
+<ul>
+<li>Default: <code>AUTO</code></li>
+<li>Example: <code>aa_substitution_model=GTR</code></li>
+</ul>
+<p>Supported values from the supplied documentation are:</p>
+<pre><code class="language-text">AUTO
+DAYHOFF
+DCMUT
+JTT
+MTREV
+WAG
+RTREV
+CPREV
+VT
+BLOSUM62
+MTMAM
+LG
+MTART
+MTZOA
+PMB
+HIVB
+HIVW
+JTTDCMUT
+FLU
+STMTREV
+DUMMY
+DUMMY2
+LG4M
+LG4X
+PROT_FILE
+GTR_UNLINKED
+GTR
+</code></pre>
+<p>Copy the model name exactly. Confirm this allowlist against the deployed RAxML/bcgTree version before final publication.</p>
+<h3 id="example">Example</h3>
+<pre><code class="language-text">bootstraps=100
+min_proteomes=2
+aa_substitution_model=AUTO
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/25083">issue 25083</a> for an example bcgTree request. The historical result files associated with that issue have been purged.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When bcgTree finishes, it provides Dropbox links for two archives:</p>
+<pre><code class="language-text">prokka_output.zip
+bcgtree_output.zip
+</code></pre>
+<h3 id="prokka_outputzip"><code>prokka_output.zip</code></h3>
+<p>Contains Prokka annotation output for each genome. The <code>.faa</code> protein FASTA files are used as inputs to bcgTree. See the <a href="https://github.com/tseemann/prokka#output-files">Prokka output documentation</a> for descriptions of the other files.</p>
+<h3 id="bcgtree_outputzip"><code>bcgtree_output.zip</code></h3>
+<p>Contains bcgTree alignments, gene-identifier files, configuration, logs, and RAxML outputs.</p>
+<p>Important tree files include:</p>
+<pre><code class="language-text">RAxML_bestTree.final
+RAxML_bipartitionsBranchLabels.final
+RAxML_bipartitions.final
+RAxML_bootstrap.final
+</code></pre>
+<ul>
+<li><code>RAxML_bestTree.final</code> contains the best-scoring maximum-likelihood tree.</li>
+<li><code>RAxML_bipartitions.final</code> contains a tree with bootstrap support values mapped to branches.</li>
+<li><code>RAxML_bipartitionsBranchLabels.final</code> contains bootstrap support represented as branch labels.</li>
+<li><code>RAxML_bootstrap.final</code> contains the bootstrap replicate trees.</li>
+</ul>
+<p>Open these files in a RAxML/Newick-compatible tree viewer. Use a supported tree file, alignment, model, and bootstrap evidence together when interpreting relationships.</p>
+<p>The archive also contains:</p>
+<ul>
+<li><code>config.txt</code> — commands and settings passed to bcgTree;</li>
+<li><code>bcgtree.log</code> — executed commands, output, and RAxML random seed values.</li>
+</ul>
+<p>Keep these files when reproducibility is important.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Prokka generally takes approximately two to three minutes per genome. After annotation, bcgTree runtime depends on sample count, retained genes, selected substitution model, and number of bootstrap replicates.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The issue warns that one or more assemblies cannot be found.</p>
+<p><strong>Likely cause:</strong> The requested <code>SEQID</code> has no available assembly.</p>
+<p><strong>What to do:</strong> Verify each identifier and confirm that its assembly exists.</p>
+<h3 id="the-substitution-model-is-unsupported-or-misspelled">The substitution model is unsupported or misspelled</h3>
+<p><strong>Symptom:</strong> The issue reports an invalid amino-acid substitution model.</p>
+<p><strong>Likely cause:</strong> <code>aa_substitution_model</code> contains a typo or a value not accepted by the deployed workflow.</p>
+<p><strong>What to do:</strong> Copy a supported model exactly and resubmit the request.</p>
+<h3 id="too-few-core-genes-are-retained">Too few core genes are retained</h3>
+<p><strong>Symptom:</strong> The workflow produces limited alignment data or fails during tree construction.</p>
+<p><strong>Likely cause:</strong> The assemblies are incomplete, the organisms are too diverse, or <code>min_proteomes</code> is too restrictive.</p>
+<p><strong>What to do:</strong> Review assembly quality and taxonomic scope, then use the default <code>min_proteomes</code> or analyze a more coherent bacterial set.</p>
+<h3 id="runtime-is-much-longer-than-expected">Runtime is much longer than expected</h3>
+<p><strong>Symptom:</strong> Annotation or tree inference takes substantially longer than a small default request.</p>
+<p><strong>Likely cause:</strong> The request contains many genomes, a high bootstrap count, or computationally demanding settings.</p>
+<p><strong>What to do:</strong> Reduce the dataset or bootstrap count when methodologically appropriate.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../mashtree/">MashTree</a> — builds a rapid distance-based whole-genome tree from Mash estimates.</li>
+<li><a href="../neartree/">NearTree</a> — ranks the closest strains to one query among a supplied set.</li>
+<li><a href="../prokka/">Prokka</a> — annotates assemblies without running the bcgTree phylogeny workflow.</li>
+</ul>
               
             </div>
           </div><footer>

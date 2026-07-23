@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -104,6 +106,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
@@ -122,6 +126,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../rmlst/">rMLST</a>
@@ -129,12 +135,6 @@
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Roary</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#roary">Roary</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#scoary">Scoary</a>
-    </li>
-        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
         <ul>
@@ -142,17 +142,53 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-analyses">Supported analyses</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#union">union</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    <li class="toctree-l4"><a class="reference internal" href="#intersection">intersection</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#complement">complement</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#gene_multifasta">gene_multifasta</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#difference">difference</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments-and-scoary-analysis">Attachments and Scoary analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#prokka_outputzip">prokka_output.zip</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#roary_outputzip">roary_output.zip</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    <li class="toctree-l3"><a class="reference internal" href="#the-analysis-type-is-missing-or-unsupported">The analysis type is missing or unsupported</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gene_multifasta-does-not-produce-the-expected-genes">gene_multifasta does not produce the expected genes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scoary-output-is-absent">Scoary output is absent</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-genome-set-is-too-diverse">The genome set is too diverse</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -169,8 +205,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -224,95 +258,133 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="roaryscoary">RoaryScoary</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<h4 id="roary">Roary</h4>
-<p>Roary is a pipeline for calculating pan genomes. Roary is not intended for metagenomics or for comparing extremely diverse sets of genomes. If you want to 
-learn more about it, check out the <a href="https://academic.oup.com/bioinformatics/article/31/22/3691/240757">Roary publication</a>.</p>
-<h4 id="scoary">Scoary</h4>
-<p>Scoary takes the <code>gene_presence_absence.csv</code> file output from Roary and a traits file created by the user, and calculates the associations between the given traits and all genes in the accessory genome. For more information, check out the <a href="https://github.com/AdmiralenOla/Scoary">Scoary github</a> or <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1108-8">Scoary publication</a>.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>roary</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p><strong>Required Components</strong></p>
-<p>In the <code>Description</code> field, you must provide the requested analysis type as follows:</p>
-<p><code>analysistype=requested_analysis</code></p>
-<p>The Roary automator supports the following analyses which perform operations on the pan genome of isolate sequences (again, spelling counts, but case sensitivity doesn't):</p>
+                <h1 id="roaryscoary">Roary/Scoary</h1>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>Roary</strong> to calculate the bacterial pan-genome of a set of related isolate assemblies. Roary identifies core genes, accessory genes, and gene-presence/absence patterns across the submitted genomes.</p>
+<p>Use <strong>Scoary</strong> to test associations between binary traits and genes in the Roary accessory genome. Scoary uses the <code>gene_presence_absence.csv</code> output produced by Roary together with a user-supplied traits file.</p>
+<p>Roary is intended for related bacterial isolate genomes. It is not intended for metagenomic data or extremely diverse genome sets.</p>
+<p>For background, see the <a href="https://academic.oup.com/bioinformatics/article/31/22/3691/240757">Roary publication</a>, the <a href="https://github.com/AdmiralenOla/Scoary">Scoary repository</a>, and the <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1108-8">Scoary publication</a>.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">roary
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>The first line must select an analysis:</p>
+<pre><code class="language-text">analysistype=REQUESTED_ANALYSIS
+</code></pre>
+<p>Enter analysis-specific parameters next, followed by one assembly <code>SEQID</code> per line.</p>
+<h3 id="supported-analyses">Supported analyses</h3>
+<h4 id="union"><code>union</code></h4>
+<p>Reports the union of genes found across all submitted isolates.</p>
+<pre><code class="language-text">analysistype=union
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<h4 id="intersection"><code>intersection</code></h4>
+<p>Reports genes shared by the submitted isolates—the core-gene intersection.</p>
+<pre><code class="language-text">analysistype=intersection
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<h4 id="complement"><code>complement</code></h4>
+<p>Reports accessory genes that are not shared by every submitted isolate.</p>
+<pre><code class="language-text">analysistype=complement
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<h4 id="gene_multifasta"><code>gene_multifasta</code></h4>
+<p>Extracts aligned protein sequences for requested genes and creates one multi-FASTA file per gene.</p>
+<p>Also include a comma-separated <code>genes</code> line. Gene names are case-sensitive:</p>
+<pre><code class="language-text">analysistype=gene_multifasta
+genes=fliC,gyrA
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<h4 id="difference"><code>difference</code></h4>
+<p>Reports gene differences between two isolate sets. Put <code>set_two</code> immediately before the second group:</p>
+<pre><code class="language-text">analysistype=difference
+2026-SEQ-0001
+2026-SEQ-0002
+set_two
+2026-SEQ-0003
+2026-SEQ-0004
+</code></pre>
+<h3 id="attachments-and-scoary-analysis">Attachments and Scoary analysis</h3>
+<p>To run Scoary automatically, attach a CSV file named:</p>
+<pre><code class="language-text">traits.csv
+</code></pre>
+<p>The traits file must follow these rules:</p>
 <ul>
-<li>union - reports the union of genes found in sequences</li>
-<li>intersection - reports the intersection of genes found in isolate sequences (core genes)</li>
-<li>complement - reports the complement of genes found in isolates (accessory genes)</li>
-<li>gene_multifasta - extracts the sequence of each gene listed and creates multi-fasta files for each gene listed (outputs protein multi-fastas). <strong>NOTE</strong>: you must provide an additional line: <code>genes=gene1,gene2,geneN</code> which is a comma-separated list of genes you would like multi-fasta files for (eg. <code>genes=fliC,gyrA</code>). <strong>Case sensitivity counts for gene names</strong></li>
-<li>difference - reports the gene differences between sets of isolates. You must differentiate between sequence sets by adding the line <code>set_two</code> above your second set of sequences in the description (sequences you want compared).</li>
+<li>each row represents one isolate <code>SEQID</code>;</li>
+<li>the upper-left cell is blank;</li>
+<li>each remaining column represents one uniquely named trait;</li>
+<li>trait values are binary: <code>0</code> for absent and <code>1</code> for present;</li>
+<li>all <code>SEQID</code>s and trait names must be unique;</li>
+<li>avoid characters such as <code>%</code>, <code>;</code>, <code>,</code>, <code>/</code>, <code>&amp;</code>, <code>[</code>, <code>]</code>, <code>@</code>, and <code>?</code>.</li>
 </ul>
-<p>You must also include a list of SEQIDs one per line.</p>
-<p><strong>Optional Components - Scoary</strong></p>
-<p>If you would like scoary analysis to be completed, calculating the associations between traits and all genes in the accessory genome <strong>you must attach a csv file of traits (traits.csv) to the issue</strong>. Attaching a <code>traits.csv</code> file will automatically result in scoary analysis being conducted.</p>
-<p><strong>This traits file must be formatted in a specific way</strong>.</p>
+<p>Example:</p>
+<pre><code class="language-csv">,Trait 1,Trait 2,Trait N
+2026-SEQ-0001,1,0,1
+2026-SEQ-0002,0,0,1
+2026-SEQ-0003,1,0,1
+</code></pre>
+<p>Attaching a correctly formatted <code>traits.csv</code> causes Scoary to test associations between every trait column and accessory-gene presence/absence.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify other user-configurable Roary or Scoary parameters.</p>
+<h3 id="examples">Examples</h3>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/24968">issue 24968</a> for an example Roary/Scoary request.</p>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/25013">issue 25013</a> for a <code>gene_multifasta</code> request. Historical Dropbox files for these issues are no longer available.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>The automator provides Dropbox links for:</p>
+<pre><code class="language-text">prokka_output.zip
+roary_output.zip
+</code></pre>
+<h3 id="prokka_outputzip"><code>prokka_output.zip</code></h3>
+<p>Contains Prokka annotation output for every submitted genome. Roary uses the <code>.gff</code> files from these annotations. See the <a href="https://github.com/tseemann/prokka#output-files">Prokka output documentation</a> for descriptions of the other files.</p>
+<h3 id="roary_outputzip"><code>roary_output.zip</code></h3>
+<p>Contains standard Roary pan-genome outputs and analysis-specific files.</p>
+<p>For <code>gene_multifasta</code>, the archive contains one protein multi-FASTA per requested gene, for example:</p>
+<pre><code class="language-text">gene_multifasta_fliC.fa
+gene_multifasta_gyrA.fa
+</code></pre>
+<p>These files contain aligned protein sequences for the requested genes. They can be used for appropriate downstream protein-sequence analysis.</p>
+<p>When a valid <code>traits.csv</code> is attached, the archive includes one or more Scoary CSV results corresponding to the supplied trait columns.</p>
+<p>Interpret Scoary associations as statistical associations, not proof that a gene causes the trait. Review population structure, sample size, trait balance, multiple-testing results, gene annotation, and biological plausibility before drawing conclusions.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Prokka generally takes approximately two to three minutes per genome. Roary runtime then depends on genome count and analysis type. <code>gene_multifasta</code> and Scoary requests also scale with the number of requested genes or traits.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The issue warns that one or more assemblies cannot be found.</p>
+<p><strong>Likely cause:</strong> An identifier is incorrect or its assembly is unavailable.</p>
+<p><strong>What to do:</strong> Verify every <code>SEQID</code> and confirm that its assembly exists.</p>
+<h3 id="the-analysis-type-is-missing-or-unsupported">The analysis type is missing or unsupported</h3>
+<p><strong>Symptom:</strong> The issue reports an <code>analysistype</code> error.</p>
+<p><strong>Likely cause:</strong> <code>analysistype</code> is absent, misspelled, or not one of the documented values.</p>
+<p><strong>What to do:</strong> Use <code>union</code>, <code>intersection</code>, <code>complement</code>, <code>gene_multifasta</code>, or <code>difference</code> exactly as documented.</p>
+<h3 id="gene_multifasta-does-not-produce-the-expected-genes"><code>gene_multifasta</code> does not produce the expected genes</h3>
+<p><strong>Symptom:</strong> One or more requested gene FASTA files are absent.</p>
+<p><strong>Likely cause:</strong> The <code>genes</code> line is missing, a gene name has incorrect capitalization, or the gene is not represented in the pan-genome results.</p>
+<p><strong>What to do:</strong> Add a comma-separated <code>genes=</code> line and copy gene names with exact case.</p>
+<h3 id="scoary-output-is-absent">Scoary output is absent</h3>
+<p><strong>Symptom:</strong> Roary completes, but no trait-specific Scoary CSV files appear.</p>
+<p><strong>Likely cause:</strong> <code>traits.csv</code> was missing, named incorrectly, malformed, or inconsistent with the submitted <code>SEQID</code>s. The legacy workflow may not report this as an explicit error.</p>
+<p><strong>What to do:</strong> Correct the filename and CSV structure, then submit the complete analysis again.</p>
+<h3 id="the-genome-set-is-too-diverse">The genome set is too diverse</h3>
+<p><strong>Symptom:</strong> Annotation, clustering, or pan-genome results are unstable or difficult to interpret.</p>
+<p><strong>Likely cause:</strong> Roary was applied to genomes that are not sufficiently related.</p>
+<p><strong>What to do:</strong> Restrict the request to a coherent related isolate set and reassess organism identity and assembly quality.</p>
+<h2 id="related-automators">Related automators</h2>
 <ul>
-<li>the rows should correspond to your isolate sequence IDs</li>
-<li>the top right cell should be left blank</li>
-<li>the trait(s) data must be binary (0 for trait absent, 1 for trait present)</li>
-<li>all SEQ-IDs and traits should be uniquely named and not contain any weird characters (e.g. %;,/&amp;[]@? etc) </li>
+<li><a href="../pyseer/">Pyseer</a> — performs microbial genome-wide association using k-mers or a previous Roary gene-presence/absence matrix while accounting for population structure.</li>
+<li><a href="../prokka/">Prokka</a> — produces standalone genome annotations without pan-genome analysis.</li>
+<li><a href="../drep/">dRep</a> — compares genomes by ANI or dereplicates a genome set before downstream analysis.</li>
 </ul>
-<p>The below table is an example from the Scoary github:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;"></th>
-<th style="text-align: center;">Trait 1</th>
-<th style="text-align: center;">Trait 2</th>
-<th style="text-align: center;">...</th>
-<th style="text-align: center;">Trait N</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">YYYY-SEQ-0001</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">...</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr>
-<td style="text-align: center;">YYYY-SEQ-0002</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">...</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr>
-<td style="text-align: center;">YYYY-SEQ-0003</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">...</td>
-<td style="text-align: center;">1</td>
-</tr>
-</tbody>
-</table>
-<p>For more information, check out the <a href="https://github.com/AdmiralenOla/Scoary">Scoary github</a></p>
-<h4 id="example">Example</h4>
-<p>For an example Roary/Scoary issue see <a href="https://redmine.biodiversity.agr.gc.ca/issues/24968">issue 24968</a>, for an example Roary <code>analysistype=gene_multifasta</code> issue see <a href="https://redmine.biodiversity.agr.gc.ca/issues/25013">issue 25013</a>. (<strong>NOTE</strong>: the output files for these issues no longer exist on the ftp server.)</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>The Roary automator will upload links to the ftp for files called <code>prokka_output.zip</code> and <code>roary_output.zip</code> once it has completed. </p>
-<p>The <code>prokka_output.zip</code> contains all of the outputs from prokka. Prokka will output a lot of files for each genome you give it - you can find a quick description of
-each file <a href="https://github.com/tseemann/prokka#output-files">here</a>. Of particular interest are the <code>.gff</code> files, which Roary uses for analysis.</p>
-<p>The <code>roary_output.zip</code> file contains all of the outputs from roary. Some additional files will be present depending on the analysis type chosen:</p>
-<ul>
-<li>gene_multifasta - the zip file will include <code>.fa</code> files that contain the aligned protein sequences for the requested gene(s) (one for file each gene included in the analysis, eg. <code>gene_multifasta_fliC.fa</code> and <code>gene_multifasta_gyrA.fa</code>). If you'd like, these sequences can be further analysed using NCBI protein blast.</li>
-<li>scoary - the zip file will include <code>.csv</code> file(s) for each of the traits (column headers) provided in the attached <code>traits.csv</code> file.</li>
-</ul>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>Prokka isn't the quickest thing around - expect it to take 2 to 3 minutes for each genome you give it. After prokka is finished the Roary pipeline time will depend on the analysis type, and the number of genes/traits requested (in the case of gene_multifasta and scoary). </p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<ol>
-<li>Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</li>
-<li>There was an issue with the requested analysistype: either one was not supplied, the was a typo, or you requested a currently-unsupported analysis. An error message detailing the problem will be added to the issue.</li>
-<li><strong>Scoary</strong> You will not get an error if the traits.csv file is not attached or formatted correctly. Roary will complete, but no <code>.csv</code> files for each of the traits will be included in the zip file. Unfortunately, you will have to submit the analysis request again with the correct <code>traits.csv</code> formatting.</li>
-</ol>
-<h3 id="version">Version</h3>
-<p>Roary version 3.13.0 is currently available at the OLC. (as of 2024-07-4)</p>
               
             </div>
           </div><footer>

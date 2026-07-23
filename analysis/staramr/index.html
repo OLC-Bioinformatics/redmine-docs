@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -104,6 +106,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
@@ -121,6 +125,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -146,23 +152,35 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-sequence-belongs-to-an-unsupported-genus">A requested sequence belongs to an unsupported genus</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gene-and-mutation-evidence-are-confused">Gene and mutation evidence are confused</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -217,35 +235,66 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="staramr">StarAMR</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>StarAMR is a program from Canada's National Microbiology Laboratory that combines the ResFinder
-and PointFinder programs for detecting antibiotic resistance from the <a href="http://www.genomicepidemiology.org/">Danish Center for Genomic Epidemiology</a>.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>staramr</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>All you need to put in the description is a list of SEQIDs you want to detect AMR in, one per line.
-Note that StarAMR is limited to detecting mutations in a few genera:</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>StarAMR</strong> to detect acquired antibiotic-resistance genes and supported resistance-associated point mutations in draft genome assemblies.</p>
+<p>StarAMR combines ResFinder gene detection with PointFinder mutation detection. In this Redmine workflow, mutation analysis is limited to:</p>
 <ul>
-<li>Campylobacter</li>
-<li>Salmonella</li>
+<li><em>Campylobacter</em>;</li>
+<li><em>Salmonella</em>.</li>
 </ul>
-<p>Our StarAMR automator will automatically determine the genus of your requested SEQIDs, and will not attempt to
-analyze any SEQIDs that are not from one of these genera.</p>
-<h4 id="example">Example</h4>
-<p>For an example StarAMR, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/15625">issue 15625</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>StarAMR will upload a zip file called <code>staramr_output.zip</code>. Within this folder, you will find a few files for each genus:</p>
-<p><strong><em>Note: Any SEQIDs from genera that are not Campylobacter or Salmonella not have any files uploaded</em></strong></p>
-<p>The most important file for each genus is <code>results.xlsx</code> - this shows what AMR genes were found in each
-SeqID, and also lets you see if the resistance is conferred by a gene or a point mutation.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>StarAMR should take 30 seconds to 1 minutes for analysis of each sample.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available: If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) Can't run on requested genera: If the SEQIDs you request are not one of the genera that PointFinder works on,
-you will get a message saying so. PointFinder will still run on any SEQIDs specified that are from the correct genera.</p>
+<p>The automator determines the genus of each requested sequence and analyzes only sequences belonging to a supported genus. Sequences from other genera do not receive StarAMR result files.</p>
+<p>StarAMR was developed by Canada's National Microbiology Laboratory and uses ResFinder and PointFinder resources from the Danish Center for Genomic Epidemiology.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">staramr
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>In the <strong>Description</strong> field, enter one <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>The requested <code>SEQID</code>s must have draft genome assemblies available. The automator determines each sequence's genus before running the supported analysis.</p>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. StarAMR retrieves the assemblies associated with the requested <code>SEQID</code>s.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for the Redmine StarAMR automator.</p>
+<h3 id="example">Example</h3>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/15625">issue 15625</a> for an example StarAMR request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When StarAMR finishes, it uploads:</p>
+<pre><code class="language-text">staramr_output.zip
+</code></pre>
+<p>The archive contains genus-specific files. The most important file for each supported genus is:</p>
+<pre><code class="language-text">results.xlsx
+</code></pre>
+<p><code>results.xlsx</code> reports AMR findings for each analyzed <code>SEQID</code> and indicates whether the evidence is an acquired gene or a point mutation.</p>
+<p>Sequences that are not identified as <em>Campylobacter</em> or <em>Salmonella</em> do not receive StarAMR result files in this Redmine workflow.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>StarAMR generally takes approximately 30 seconds to one minute per analyzed sample. Total runtime depends on the number of samples and service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> StarAMR cannot locate a draft genome assembly for the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that its assembly is available, and submit a corrected request.</p>
+<h3 id="a-requested-sequence-belongs-to-an-unsupported-genus">A requested sequence belongs to an unsupported genus</h3>
+<p><strong>Symptom:</strong> The Redmine issue reports that StarAMR cannot analyze one or more requested sequences, and those sequences have no result files.</p>
+<p><strong>Likely cause:</strong> The automator identified the sequence as a genus other than <em>Campylobacter</em> or <em>Salmonella</em>.</p>
+<p><strong>What to do:</strong> Use a different AMR automator appropriate for the organism and desired evidence. Supported sequences in the same request can still be analyzed.</p>
+<h3 id="gene-and-mutation-evidence-are-confused">Gene and mutation evidence are confused</h3>
+<p><strong>Symptom:</strong> A resistance result is interpreted without distinguishing an acquired gene from a point mutation.</p>
+<p><strong>Likely cause:</strong> The result type in <code>results.xlsx</code> was not considered.</p>
+<p><strong>What to do:</strong> Review whether each result is gene-based or mutation-based and interpret it in the relevant organism context.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../resfinder/">ResFinder</a> — detects acquired AMR genes in draft genome assemblies but does not report chromosomal point mutations.</li>
+<li><a href="../pointfinder/">PointFinder</a> — focuses on supported chromosomal resistance mutations.</li>
+<li><a href="../cardrgi/">CARD-RGI</a> — predicts resistomes in isolate assemblies or raw FASTQ data and supports broader CARD match categories.</li>
+</ul>
               
             </div>
           </div><footer>

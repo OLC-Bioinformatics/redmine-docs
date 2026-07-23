@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -108,23 +110,53 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#seqtype">seqtype</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#database">database</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#paired-end-metagenomic-reads">Paired-end metagenomic reads</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#nanopore-metagenomic-reads-with-pluspf">Nanopore metagenomic reads with PlusPF</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#assembly-classification">Assembly classification</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    <li class="toctree-l3"><a class="reference internal" href="#the-request-runs-out-of-memory">The request runs out of memory</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-selected-database-is-inappropriate">The selected database is inappropriate</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-selected-input-type-is-incorrect">The selected input type is incorrect</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
@@ -143,6 +175,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -163,8 +197,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -218,56 +250,102 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="kraken2">Kraken2</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>Kraken2 is a program for taxonomic sequence classification.</p>
-<p>For more information, see the <a href="https://github.com/DerrickWood/kraken2">Kraken2 github</a>, and/or the protocol paper describing use of <a href="https://www.nature.com/articles/s41596-022-00738-y">Kraken2</a>.</p>
-<p>If you publish data using this automator, don't forget to cite the authors of the tool <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2014-15-3-r46">Wood and Salzberg, 2014</a> and the Kraken2 paper <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0">Wood et al., 2019</a></p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>kraken2</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p><strong>Required Components</strong></p>
-<p>You must include a list of SEQIDs one per line.</p>
-<p><strong>Optional Components</strong></p>
-<p>In order to customise your analyses, additional settings can be optionally modified:</p>
+                <h1 id="kraken2bracken">Kraken2/Bracken</h1>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>Kraken2/Bracken</strong> to classify sequence data taxonomically and estimate the organisms represented in a sample.</p>
+<p>The workflow runs:</p>
 <ul>
-<li>
-<p><strong>seqtype</strong> - By default, the Kraken2 will assume you are running an analysis on paired-end raw sequence data.</p>
-<ul>
-<li>default is <code>paired</code> </li>
-<li>If you want to analyse long-read nanopore or assembly data, add the following line:<ul>
-<li><code>seqtype=nanopore</code></li>
-<li><code>seqtype=assembly</code></li>
+<li><strong>Kraken2</strong> — assigns sequencing reads or assembly sequences to taxonomic groups using a selected reference database;</li>
+<li><strong>Bracken</strong> — refines abundance estimates from Kraken2 classifications.</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>database</strong> - the default analysis will utilize the Kraken2 standard database (9/26/2022) from <a href="https://benlangmead.github.io/aws-indexes/k2">Kraken2 index zone</a>.</p>
+<p>The automator supports paired-end raw reads, Nanopore reads, and assemblies. Database choice is important because the standard Kraken2 and PlusPF databases are intended for metagenomic analysis, while the Greengenes, RDP, and SILVA options are 16S-oriented databases.</p>
+<p>For background, see the <a href="https://github.com/DerrickWood/kraken2">Kraken2 repository</a>, the <a href="https://www.nature.com/articles/s41596-022-00738-y">Kraken2 protocol</a>, Wood and Salzberg (2014), and Wood et al. (2019). Cite the appropriate tool authors when publishing results produced with this automator.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">kraken2
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Enter optional settings first, followed by one <code>SEQID</code> per line.</p>
+<p>Minimal request using paired-end raw reads and the standard database:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. The automator retrieves the sequence data associated with each requested <code>SEQID</code> according to <code>seqtype</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<h4 id="seqtype"><code>seqtype</code></h4>
+<p>Selects the input data type.</p>
 <ul>
-<li>default is <code>kraken2</code> </li>
-<li>If you want to analyse using a different database, the following options are currently supported:<ul>
-<li><code>database=greengenes</code></li>
+<li>Default: <code>paired</code></li>
+<li>Paired-end raw reads: <code>seqtype=paired</code></li>
+<li>Nanopore reads: <code>seqtype=nanopore</code></li>
+<li>Assembly data: <code>seqtype=assembly</code></li>
+</ul>
+<h4 id="database"><code>database</code></h4>
+<p>Selects the taxonomic reference database.</p>
+<ul>
+<li>Default: <code>kraken2</code></li>
+<li>Supported values:</li>
+<li><code>database=kraken2</code></li>
 <li><code>database=plusPF</code></li>
+<li><code>database=greengenes</code></li>
 <li><code>database=rdp</code></li>
 <li><code>database=silva</code></li>
 </ul>
-</li>
+<p>The default <code>kraken2</code> database is documented as the standard database dated September 26, 2022, obtained from the <a href="https://benlangmead.github.io/aws-indexes/k2">Kraken2 Index Zone</a>.</p>
+<p>Use <code>kraken2</code> or <code>plusPF</code> for metagenomic classification. The <code>greengenes</code>, <code>rdp</code>, and <code>silva</code> options are 16S-based databases and should be selected only when appropriate for the input and analysis goal.</p>
+<h3 id="examples">Examples</h3>
+<h4 id="paired-end-metagenomic-reads">Paired-end metagenomic reads</h4>
+<pre><code class="language-text">database=kraken2
+2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<h4 id="nanopore-metagenomic-reads-with-pluspf">Nanopore metagenomic reads with PlusPF</h4>
+<pre><code class="language-text">seqtype=nanopore
+database=plusPF
+2026-MIN-0001
+</code></pre>
+<h4 id="assembly-classification">Assembly classification</h4>
+<pre><code class="language-text">seqtype=assembly
+database=kraken2
+2026-SEQ-0001
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/29355">issue 29355</a> for an example Kraken2 request. Temporary result-download links associated with the issue may expire.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When Kraken2/Bracken finishes, it uploads an archive named using the Redmine issue identifier:</p>
+<pre><code class="language-text">kraken2_output_redmineID.zip
+</code></pre>
+<p>The archive contains Kraken2 and Bracken report files.</p>
+<p>Use Kraken2 output to review taxonomic classifications and Bracken output to review refined abundance estimates. Interpret low-abundance or closely related taxa cautiously because classification accuracy depends on sequence quality, database composition, and similarity among represented organisms.</p>
+<p>Results produced with a 16S-oriented database are not directly equivalent to results produced with a metagenomic database. Record the selected database when reporting or comparing results.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Runtime depends on the selected input type, database, amount of sequence data, and number of requested samples. Kraken2 is faster than the original Kraken workflow, but large requests can require substantial memory.</p>
+<p>Limit metagenomic requests to approximately 10 samples at a time to reduce the risk of memory exhaustion.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> The automator cannot locate the data required for the requested <code>SEQID</code> and <code>seqtype</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that the selected input type exists, and submit a corrected request.</p>
+<h3 id="the-request-runs-out-of-memory">The request runs out of memory</h3>
+<p><strong>Symptom:</strong> The job fails while processing a large metagenomic batch.</p>
+<p><strong>Likely cause:</strong> Too many samples or a memory-intensive database was requested at once.</p>
+<p><strong>What to do:</strong> Split the request into batches of no more than approximately 10 metagenomes and resubmit them separately.</p>
+<h3 id="the-selected-database-is-inappropriate">The selected database is inappropriate</h3>
+<p><strong>Symptom:</strong> Results are sparse, misleading, or difficult to compare with prior analyses.</p>
+<p><strong>Likely cause:</strong> A 16S-oriented database was selected for metagenomic data, or a metagenomic database was selected for an analysis intended to use a 16S reference collection.</p>
+<p><strong>What to do:</strong> Choose <code>kraken2</code> or <code>plusPF</code> for metagenomic classification and use <code>greengenes</code>, <code>rdp</code>, or <code>silva</code> only for an appropriate 16S-based analysis.</p>
+<h3 id="the-selected-input-type-is-incorrect">The selected input type is incorrect</h3>
+<p><strong>Symptom:</strong> The automator cannot locate or process the expected sequence files.</p>
+<p><strong>Likely cause:</strong> <code>seqtype</code> does not match the available paired-end reads, Nanopore reads, or assembly data.</p>
+<p><strong>What to do:</strong> Correct <code>seqtype</code> and resubmit the request.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../metaphlan/">MetaPhlAn4</a> — profiles microbial communities using marker genes and supports raw reads and assemblies.</li>
+<li><a href="../autoclark/">AutoCLARK</a> — reports species represented in raw reads or draft assemblies using CLARK.</li>
+<li><a href="../strainmash/">StrainMash</a> — compares an assembly with RefSeq type strains to identify its closest reference.</li>
 </ul>
-<p>-<strong>The kraken2 and plusPF databases are meant for metagenomes, all others are 16S based databases</strong></p>
-</li>
-</ul>
-<h4 id="example">Example</h4>
-<p>For an example kraken2 analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/29355">issue 29355</a>. The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks).</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>Kraken2 will upload a zipped folder called <code>kraken2_output_redmineID.zip</code> to the ftp once it has completed. This will contain report files for kraken2 and bracken analyses.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>Kraken2 is much faster than the original kraken, however the time required for analysis will depend on the analysis type and number of sequences requested. If too many sequences are requested at once, the automator may run out of memory and fail. Please try to keep it to 10 metagenomes maximum.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</p>
-<h3 id="version">Version</h3>
-<p>Version 2.1.2 is currently available at the OLC. (as of 2024-07-4)</p>
               
             </div>
           </div><footer>

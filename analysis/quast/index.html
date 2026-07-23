@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://olc-bioinformatics.github.io/redmine-docs/analysis/quast/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>QUAST - OLC Redmine Automator</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "QUAST";
+        var mkdocs_page_input_path = "analysis/quast.md";
+        var mkdocs_page_url = "/redmine-docs/analysis/quast/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OLC Redmine Automator
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/external_retrieve/">External Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/report_retrieve/">Report Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_upload/">SRA Upload</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../data/sra_download/">SRA Download</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Analysis</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../amrsummary/">AMRsummary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../autoclark/">AutoCLARK</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bcgtree/">bcgTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cardrgi/">CARD-RGI (AMR)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../confindr/">ConFindr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cowsnphr/">COWSNPhR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../closerelatives/">CloseRelatives</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../eCGF/">eCGF</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ectyper/">ECTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../diversitree/">DiversiTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fastqmerge/">fastqmerge</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../geneseekr/">GeneSeekr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gfa_retrieve/">GFA Retrieve</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pyseer/">GWAS-pyseer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intimintyper/">IntiminTyper</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kma/">KMA - Gene Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../kraken2/">Kraken2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../neartree/">NearTree</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../phastest/">Phastest</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../plasmidborneidentity/">PlasmidBorneIdentity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pointfinder/">PointFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../primerfinder/">PrimerFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">QUAST</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#when-to-use-this-analysis">When to Use This Analysis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#redmine-issue-format">Redmine Issue Format</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#basic-analysis">Basic analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#analysis-with-circos-output">Analysis with Circos output</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#formatting-requirements">Formatting requirements</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#arguments">Arguments</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#circos">circos</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#analysis-workflow">Analysis Workflow</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-initialize-the-automator">1. Initialize the automator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-parse-the-issue-description">2. Parse the issue description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-retrieve-assemblies">3. Retrieve assemblies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-check-for-missing-fasta-files">4. Check for missing FASTA files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-construct-the-quast-command">5. Construct the QUAST command</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6-run-quast">6. Run QUAST</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#7-convert-the-report-to-excel">7. Convert the report to Excel</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#8-determine-the-quast-version">8. Determine the QUAST version</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#9-compress-and-upload-the-complete-results">9. Compress and upload the complete results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#10-complete-the-issue">10. Complete the issue</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#outputs">Outputs</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#excel-report">Excel report</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#complete-output-archive">Complete output archive</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#redmine-updates">Redmine updates</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-common-quast-metrics">Interpreting Common QUAST Metrics</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#number-of-contigs">Number of contigs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#largest-contig">Largest contig</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#total-length">Total length</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#n50">N50</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#l50">L50</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gc-content">GC content</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#no-seqids-provided">No SEQIDs provided</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#one-or-more-fasta-files-could-not-be-found">One or more FASTA files could not be found</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#circos-output-is-missing">Circos output is missing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#excel-report-was-not-generated">Excel report was not generated</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dropbox-upload-failed">Dropbox upload failed</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#unexpected-automator-error">Unexpected automator error</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#temporary-files-and-cleanup">Temporary Files and Cleanup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementation-notes">Implementation Notes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#maintainer-warnings">Maintainer Warnings</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rmlst/">rMLST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../roary/">Roary</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sequence_extractor/">SequenceExtractor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sipprverse/">sipprverse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snvphyl/">SNVPhyl</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snippy/">Snippy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../staramr/">staramr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Internal Use</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/merge/">Merge</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../internal_only/azuredownload/">AzureDownload</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/">Troubleshooting</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/adding_documentation/">Adding Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_environment/">Create Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/open_environment/">Open Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/create_pages/">Create Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/edit_pages/">Edit Pages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/publish_changes/">Publish Changes</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OLC Redmine Automator</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Analysis</li>
+      <li class="breadcrumb-item active">QUAST</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator/edit/master/docs/analysis/quast.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="quast-redmine-automator">QUAST Redmine Automator</h1>
+<h2 id="overview">Overview</h2>
+<p>The QUAST Redmine Automator runs a https://quast.sourceforge.net/ assembly-quality analysis using FASTA assemblies stored on the OLC NAS.</p>
+<p>The automator:</p>
+<ol>
+<li>Reads SEQIDs and optional settings from a Redmine issue.</li>
+<li>Retrieves the requested FASTA assemblies from the NAS.</li>
+<li>Runs QUAST on the assemblies.</li>
+<li>Converts the transposed QUAST report to Excel format.</li>
+<li>Attaches the Excel report to the Redmine issue.</li>
+<li>Compresses the complete QUAST output.</li>
+<li>Uploads the compressed results to Dropbox.</li>
+<li>Updates and closes the Redmine issue.</li>
+</ol>
+<hr />
+<h2 id="when-to-use-this-analysis">When to Use This Analysis</h2>
+<p>Use the QUAST automator to:</p>
+<ul>
+<li>Compare assembly statistics for one or more isolates.</li>
+<li>Assess assembly quality.</li>
+<li>Review metrics such as:</li>
+<li>Total assembly length</li>
+<li>Number of contigs</li>
+<li>N50</li>
+<li>L50</li>
+<li>GC content</li>
+<li>Largest contig</li>
+<li>Generate QUAST Circos plots.</li>
+</ul>
+<p>QUAST evaluates assembled genomes. It does not assemble raw sequencing reads.</p>
+<hr />
+<h2 id="redmine-issue-format">Redmine Issue Format</h2>
+<p>Enter one SEQID per line in the issue description.</p>
+<h3 id="basic-analysis">Basic analysis</h3>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<p>This runs QUAST on the listed assemblies without a reference genome.</p>
+<h3 id="analysis-with-circos-output">Analysis with Circos output</h3>
+<p>Add <code>circos</code> on a separate line:</p>
+<pre><code class="language-text">circos
+2026-SEQ-0001
+2026-SEQ-0002
+2026-SEQ-0003
+</code></pre>
+<p>This adds the <code>--circos</code> option to the QUAST command.</p>
+<h3 id="formatting-requirements">Formatting requirements</h3>
+<ul>
+<li>Enter one SEQID per line.</li>
+<li>Do not separate SEQIDs with commas.</li>
+<li>The setting name <code>circos</code> must be lowercase.</li>
+<li>Lines that do not contain <code>circos</code> are treated as SEQIDs.</li>
+<li>Blank lines should be avoided.</li>
+</ul>
+<hr />
+<h2 id="arguments">Arguments</h2>
+<h3 id="circos"><code>circos</code></h3>
+<p>Requests QUAST Circos output.</p>
+<pre><code class="language-text">circos
+</code></pre>
+<p>When supplied, the automator adds:</p>
+<pre><code class="language-text">--circos
+</code></pre>
+<hr />
+<h2 id="analysis-workflow">Analysis Workflow</h2>
+<h3 id="1-initialize-the-automator">1. Initialize the automator</h3>
+<p>The automator:</p>
+<ul>
+<li>Disables <code>urllib3</code> warnings.</li>
+<li>Initializes Sentry error reporting.</li>
+<li>Unpickles the Redmine API instance.</li>
+<li>Unpickles the Redmine issue.</li>
+<li>Unpickles the parsed issue description.</li>
+</ul>
+<h3 id="2-parse-the-issue-description">2. Parse the issue description</h3>
+<p>Each line is processed as follows:</p>
+<ul>
+<li>A line containing <code>circos</code> enables Circos output.</li>
+<li>Every other line is treated as a SEQID.</li>
+</ul>
+<p>If no SEQIDs are supplied, the automator updates the issue with:</p>
+<pre><code class="language-text">WARNING: No SEQIDs provided!
+</code></pre>
+<p>The issue is then closed without running QUAST.</p>
+<h3 id="3-retrieve-assemblies">3. Retrieve assemblies</h3>
+<p>The automator creates:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/sequences
+</code></pre>
+<p>It then uses <code>nastools.retrieve_nas_files()</code> to retrieve FASTA assemblies from the OLC NAS:</p>
+<pre><code class="language-python">retrieve_nas_files(
+    seqids=seqids,
+    outdir=seq_dir,
+    filetype=&quot;fasta&quot;,
+    copyflag=False,
+)
+</code></pre>
+<p>Because <code>copyflag</code> is set to <code>False</code>, the retrieval utility may create links rather than copying the assembly files, depending on the implementation of <code>nastools</code>.</p>
+<h3 id="4-check-for-missing-fasta-files">4. Check for missing FASTA files</h3>
+<p>For each requested SEQID, the automator searches for a matching file using:</p>
+<pre><code class="language-text">&lt;SEQID&gt;*fasta*
+</code></pre>
+<p>If a requested assembly cannot be found, the issue is updated with a warning listing the missing SEQIDs.</p>
+<p>The current implementation reports missing assemblies but does not stop the analysis. QUAST continues with any FASTA files that were successfully retrieved.</p>
+<h3 id="5-construct-the-quast-command">5. Construct the QUAST command</h3>
+<p>The base command is:</p>
+<pre><code class="language-bash">quast -t 12 -o &lt;work_dir&gt;/quast_output_&lt;issue_id&gt;
+</code></pre>
+<p>Optional arguments are appended based on the issue description.</p>
+<p>A run without optional arguments resembles:</p>
+<pre><code class="language-bash">quast -t 12 \
+  -o &lt;work_dir&gt;/quast_output_&lt;issue_id&gt; \
+  &lt;work_dir&gt;/sequences/*.fasta
+</code></pre>
+<p>The complete command is added to the Redmine issue before execution.</p>
+<h3 id="6-run-quast">6. Run QUAST</h3>
+<p>The automator activates the QUAST Conda environment:</p>
+<pre><code class="language-bash">source /home/ubuntu/miniconda3/etc/profile.d/conda.sh &amp;&amp;
+conda activate /mnt/nas2/virtual_environments/quast
+</code></pre>
+<p>It writes the activation and QUAST commands to:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/run_quast.sh
+</code></pre>
+<p>The generated shell script is then executed.</p>
+<h3 id="7-convert-the-report-to-excel">7. Convert the report to Excel</h3>
+<p>QUAST produces:</p>
+<pre><code class="language-text">quast_output_&lt;issue_id&gt;/transposed_report.tsv
+</code></pre>
+<p>The automator converts this file to:</p>
+<pre><code class="language-text">Quast_results_redmine&lt;issue_id&gt;.xlsx
+</code></pre>
+<p>The Excel report is copied to the Redmine issue work directory and prepared as an issue attachment.</p>
+<h3 id="8-determine-the-quast-version">8. Determine the QUAST version</h3>
+<p>The automator obtains the installed QUAST version using the executable located at:</p>
+<pre><code class="language-text">/mnt/nas2/virtual_environments/quast/bin/quast
+</code></pre>
+<p>The version is included in the final Redmine update.</p>
+<h3 id="9-compress-and-upload-the-complete-results">9. Compress and upload the complete results</h3>
+<p>The complete QUAST output directory is compressed as:</p>
+<pre><code class="language-text">quast_output_&lt;issue_id&gt;.zip
+</code></pre>
+<p>The ZIP archive is uploaded to Dropbox. If successful, the returned download URL is included in the final issue update.</p>
+<h3 id="10-complete-the-issue">10. Complete the issue</h3>
+<p>When the analysis and upload succeed, the automator:</p>
+<ul>
+<li>Attaches the Excel report.</li>
+<li>Reports the QUAST version.</li>
+<li>Provides the Dropbox download URL.</li>
+<li>Changes the issue status to <code>4</code>.</li>
+</ul>
+<p>The final message resembles:</p>
+<pre><code class="language-text">Quast analysis complete!
+Quast version is &lt;version&gt;
+
+Report file has been attached to this issue.
+Full Results are available at the following URL:
+&lt;Dropbox URL&gt;
+</code></pre>
+<p>If the Dropbox upload fails, the Excel report is still attached and the issue is updated with:</p>
+<pre><code class="language-text">Upload of results to dropbox was unsuccessful due to connectivity issues.
+Please try again later.
+</code></pre>
+<hr />
+<h2 id="outputs">Outputs</h2>
+<h3 id="excel-report">Excel report</h3>
+<pre><code class="language-text">Quast_results_redmine&lt;issue_id&gt;.xlsx
+</code></pre>
+<p>This file is generated from QUAST's <code>transposed_report.tsv</code> and attached directly to the Redmine issue.</p>
+<h3 id="complete-output-archive">Complete output archive</h3>
+<pre><code class="language-text">quast_output_&lt;issue_id&gt;.zip
+</code></pre>
+<p>This archive contains the complete QUAST output and is uploaded to Dropbox.</p>
+<p>Depending on the QUAST options and input data, the archive may include:</p>
+<ul>
+<li>HTML reports</li>
+<li>Text reports</li>
+<li>TSV reports</li>
+<li>Transposed reports</li>
+<li>PDF reports</li>
+<li>Contig statistics</li>
+<li>Circos-related output</li>
+</ul>
+<h3 id="redmine-updates">Redmine updates</h3>
+<p>The issue receives updates for:</p>
+<ul>
+<li>Missing SEQIDs</li>
+<li>The complete QUAST command</li>
+<li>Successful completion</li>
+<li>QUAST version</li>
+<li>Dropbox download URL</li>
+<li>Dropbox upload failure</li>
+<li>Unexpected processing errors</li>
+</ul>
+<hr />
+<h2 id="interpreting-common-quast-metrics">Interpreting Common QUAST Metrics</h2>
+<h3 id="number-of-contigs">Number of contigs</h3>
+<p>The total number of contigs in the assembly.</p>
+<p>A lower number often indicates a more contiguous assembly, but the expected value depends on the organism, sequencing technology, and assembly method.</p>
+<h3 id="largest-contig">Largest contig</h3>
+<p>The length of the longest contig in the assembly.</p>
+<h3 id="total-length">Total length</h3>
+<p>The combined length of all contigs in the assembly.</p>
+<p>Compare this value with the expected genome size. A substantially larger or smaller assembly may indicate contamination, missing sequence, duplicated sequence, or assembly problems.</p>
+<h3 id="n50">N50</h3>
+<p>The contig length at which at least 50% of the total assembly length is contained in contigs of that length or longer.</p>
+<p>A larger N50 generally indicates a more contiguous assembly. N50 should not be interpreted by itself because assemblies with contamination or incorrectly joined contigs can also have high N50 values.</p>
+<h3 id="l50">L50</h3>
+<p>The minimum number of largest contigs needed to account for at least 50% of the total assembly length.</p>
+<p>A lower L50 generally indicates a more contiguous assembly.</p>
+<h3 id="gc-content">GC content</h3>
+<p>The percentage of bases in the assembly that are guanine or cytosine.</p>
+<p>Unexpected GC content may indicate contamination, an incorrect species assignment, or poor assembly quality.</p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="no-seqids-provided">No SEQIDs provided</h3>
+<p><strong>Redmine message:</strong></p>
+<pre><code class="language-text">WARNING: No SEQIDs provided!
+</code></pre>
+<p><strong>Cause:</strong> The issue description did not contain any lines that the automator recognized as SEQIDs.</p>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>Add at least one SEQID.</li>
+<li>Enter one SEQID per line.</li>
+<li>Ensure that the description does not contain only <code>circos</code> settings.</li>
+</ul>
+<hr />
+<h3 id="one-or-more-fasta-files-could-not-be-found">One or more FASTA files could not be found</h3>
+<p><strong>Redmine message:</strong></p>
+<pre><code class="language-text">WARNING: Could not find the following requested SEQIDs on the OLC NAS:
+[...]
+</code></pre>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>The SEQID is incorrect.</li>
+<li>The assembly has not been generated.</li>
+<li>The assembly is not stored in the expected NAS location.</li>
+<li>The assembly filename does not match the expected <code>&lt;SEQID&gt;*fasta*</code> pattern.</li>
+<li>The NAS is unavailable.</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ol>
+<li>Verify the SEQID spelling.</li>
+<li>Confirm that the assembly exists on the NAS.</li>
+<li>Confirm that its filename begins with the requested SEQID.</li>
+<li>Confirm that the filename contains <code>fasta</code>.</li>
+<li>Retry once NAS connectivity has been restored.</li>
+</ol>
+<p>The analysis may still finish using the assemblies that were found.</p>
+<hr />
+<h3 id="circos-output-is-missing">Circos output is missing</h3>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li><code>circos</code> was not included in the issue description.</li>
+<li>The line used an unexpected spelling or capitalization.</li>
+<li>QUAST could not generate Circos output for the supplied inputs.</li>
+<li>A required external Circos dependency is unavailable.</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<p>Add the following on a separate line:</p>
+<pre><code class="language-text">circos
+</code></pre>
+<p>Review the complete QUAST output archive for warnings or errors.</p>
+<hr />
+<h3 id="excel-report-was-not-generated">Excel report was not generated</h3>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>QUAST failed before creating <code>transposed_report.tsv</code>.</li>
+<li>The shell script did not run successfully.</li>
+<li>The QUAST environment could not be activated.</li>
+<li>The output directory was not writable.</li>
+<li>The TSV-to-XLSX conversion failed.</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ol>
+<li>Review the traceback posted to the issue.</li>
+<li>Review the QUAST command posted to the issue.</li>
+<li>Confirm that the QUAST Conda environment exists.</li>
+<li>Confirm that <code>transposed_report.tsv</code> was generated.</li>
+<li>Confirm that the issue work directory is writable.</li>
+</ol>
+<hr />
+<h3 id="dropbox-upload-failed">Dropbox upload failed</h3>
+<p><strong>Redmine message:</strong></p>
+<pre><code class="language-text">Upload of results to dropbox was unsuccessful due to connectivity issues.
+Please try again later.
+</code></pre>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>Network connectivity problems.</li>
+<li>Expired or invalid Dropbox credentials.</li>
+<li>Dropbox API availability issues.</li>
+<li>Insufficient Dropbox storage.</li>
+<li>A missing ZIP archive.</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>Retry the analysis later.</li>
+<li>Verify the configured Dropbox credentials.</li>
+<li>Confirm that the ZIP archive was created successfully.</li>
+<li>Check network connectivity from the automator host.</li>
+</ul>
+<p>The Excel summary report should still be attached to the issue.</p>
+<hr />
+<h3 id="unexpected-automator-error">Unexpected automator error</h3>
+<p><strong>Redmine message begins with:</strong></p>
+<pre><code class="language-text">Something went wrong! Please contact a bioinformatician to investigate:
+</code></pre>
+<p>The remainder of the update contains the Python traceback.</p>
+<p><strong>Resolution:</strong></p>
+<p>Provide the following information to a bioinformatician:</p>
+<ul>
+<li>Redmine issue number</li>
+<li>Full traceback</li>
+<li>QUAST command posted to the issue</li>
+<li>Requested SEQIDs</li>
+<li>Whether Circos output was requested</li>
+</ul>
+<p>The exception is also sent to Sentry.</p>
+<hr />
+<h2 id="temporary-files-and-cleanup">Temporary Files and Cleanup</h2>
+<p>After successful completion, the automator removes:</p>
+<pre><code class="language-text">&lt;work_dir&gt;/sequences
+&lt;work_dir&gt;/quast_output_&lt;issue_id&gt;
+&lt;work_dir&gt;/quast_output_&lt;issue_id&gt;.zip
+</code></pre>
+<p>The Excel report copied to the work directory is not explicitly removed by this script.</p>
+<p>If an exception occurs before cleanup, temporary sequence, output, and ZIP files may remain in the issue work directory.</p>
+<hr />
+<h2 id="implementation-notes">Implementation Notes</h2>
+<p>The automator currently has several implementation details that maintainers should be aware of:</p>
+<ul>
+<li>QUAST always runs with eight threads.</li>
+<li>Missing FASTA files generate a warning but do not stop the analysis.</li>
+<li>The input glob includes every <code>*.fasta</code> file in the sequence directory.</li>
+<li>The Redmine issue is assigned status ID <code>4</code> after normal completion.</li>
+<li>The same status is assigned when no SEQIDs are supplied.</li>
+<li>The shell script is executed with <code>os.system()</code>.</li>
+<li>The return code from <code>os.system()</code> is not currently checked.</li>
+<li>Cleanup occurs only after the final Redmine update.</li>
+<li>Exceptions are reported to both Sentry and the Redmine issue.</li>
+<li>The traceback may contain internal paths and command details.</li>
+<li>Dropbox credentials are imported from the local <code>tokens</code> module.</li>
+</ul>
+<hr />
+<h2 id="maintainer-warnings">Maintainer Warnings</h2>
+<p>The source contains some duplicated or unused elements that should be reviewed during future maintenance:</p>
+<ul>
+<li><code>pandas</code> is imported twice.</li>
+<li>Several imports appear unused.</li>
+<li><code>verify_fasta_files_present</code>, <code>make_executable</code>, and <code>zip_folder</code> are imported from <code>methods</code> and then redefined locally.</li>
+<li><code>check_fastqs_present()</code> is unrelated to the QUAST FASTA workflow.</li>
+<li>The <code>argument_flags</code> dictionary is defined but not used.</li>
+<li>The locally defined <code>verify_fasta_files_present()</code> docstring initially refers to FASTQ files instead of FASTA files.</li>
+<li>The constructed QUAST command is not shell-quoted, so paths containing spaces or shell-special characters could cause failures.</li>
+<li>Settings are currently case-sensitive.</li>
+<li>Blank lines may be added to the SEQID list.</li>
+<li>The Dropbox failure message attributes all failures to connectivity, although authentication or API errors may also be responsible.</li>
+</ul>
+<p>These issues do not necessarily prevent normal operation, but they should be considered when modifying or troubleshooting the automator.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../psortb/" class="btn btn-neutral float-left" title="PSORTb"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../resfinder/" class="btn btn-neutral float-right" title="ResFinder">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/OLC-LOC-Bioinformatics/OLCRedmineAutomator" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../psortb/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../resfinder/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

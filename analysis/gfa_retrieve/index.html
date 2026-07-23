@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -94,27 +96,45 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-the-automator">How do I use the automator?</a>
+    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-do-i-download-bandage-and-view-the-assembly">How do I download Bandage and view the assembly?</a>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#download-and-open-bandage">Download and open Bandage</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#bandage-graph-interpretation">Bandage Graph Interpretation</a>
+    <li class="toctree-l3"><a class="reference internal" href="#example-of-a-simple-hybrid-assembly-graph">Example of a simple hybrid assembly graph</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-of-a-problematic-hybrid-assembly-graph">Example of a problematic hybrid assembly graph</a>
     </li>
         </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#bandage-tutorial">Bandage Tutorial</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#an-older-min-assembly-has-no-gfa-file">An older MIN assembly has no GFA file</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bandage-cannot-use-an-integrated-blast-function">Bandage cannot use an integrated BLAST function</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-graph-is-highly-fragmented-or-tangled">The graph is highly fragmented or tangled</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -129,6 +149,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../mashtree/">Mashtree</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
@@ -147,6 +169,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -167,8 +191,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -222,48 +244,86 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="gfa-retrieve-and-bandage-diagram-hybrid-assembly-viewer">GFA Retrieve and Bandage Diagram - Hybrid Assembly Viewer</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>The GFA retrieve function will retrieve GFA files (.gfa - graph fragment assembly) that are created by the hybrid assembly pipeline. The program Bandage can be used to visualise these files. <a href="https://rrwick.github.io/Bandage/">Bandage</a> displays connections which are not present in the contigs (assembly) file.</p>
-<h3 id="how-do-i-use-the-automator">How do I use the automator?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>gfaretrieve</code>.</p>
-<h4 id="description">Description</h4>
-<p><strong>Required Components</strong></p>
-<p>All you need to put in the description is a list of SEQIDs you want to process, one per line.
-</br> 
-<strong>Currently, only the hybrid pipeline outputs .gfa files, so SEQIDs should be YYYY-MIN-NNNN</strong></p>
-<h4 id="example">Example</h4>
-<p>For an example gfa retrieve, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/33691">issue 33691</a>.</p>
-<h3 id="how-do-i-download-bandage-and-view-the-assembly">How do I download Bandage and view the assembly?</h3>
-<p>Bandage can (currently) be downloaded and used on windows corporate laptops. However, additional tools like BLAST are unfortunately not currently usable with the program on corporate Windows laptops/tablets (at the moment). To download, navigate to the <a href="https://rrwick.github.io/Bandage/">Bandage website</a> and click "Download Windows". Extract the zip file to a location of your choosing. Within the unzipped folder, you will find a folder titled "Bandage", within this is "Bandage.exe". If you double-click "Bandage.exe" it should open the Bandage GUI for you:</p>
-<p><img alt="Bandage GUI" src="../../img/bandage_gui.jpg" /></p>
+                <h1 id="gfa-retrieve-and-bandage-diagram-hybrid-assembly-viewer">GFA Retrieve and Bandage Diagram — Hybrid Assembly Viewer</h1>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>GFA Retrieve</strong> to obtain Graphical Fragment Assembly (<code>.gfa</code>) files produced by the hybrid assembly pipeline. A GFA file represents assembly-graph connections that are not visible in a standard contig FASTA file.</p>
+<p>Use <a href="https://rrwick.github.io/Bandage/">Bandage</a> to draw and inspect the graph. The graph can help identify simple, well-resolved assemblies and complex assemblies that may need further investigation.</p>
+<p>Only the hybrid assembly pipeline currently produces GFA files, so requests should use MIN identifiers in the form <code>YYYY-MIN-NNNN</code>.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">gfaretrieve
+</code></pre>
+<h3 id="description">Description</h3>
+<p>In the <strong>Description</strong> field, enter one hybrid-assembly <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-MIN-0001
+2026-MIN-0002
+</code></pre>
+<p>Older MIN assemblies may not have a GFA file if they were created before the pipeline produced this output.</p>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. GFA Retrieve locates the graph file associated with each requested hybrid assembly.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for GFA Retrieve.</p>
+<h3 id="example">Example</h3>
+<pre><code class="language-text">2026-MIN-0001
+2026-MIN-0002
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/33691">issue 33691</a> for an example GFA Retrieve request.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>Open each <code>.gfa</code> file in Bandage to visualize the assembly graph.</p>
+<p>A simple graph with a small number of separate components can be consistent with a well-resolved hybrid assembly. For example, one large component may represent the chromosome and smaller components may represent plasmids. Graph structure alone is not definitive proof of chromosome or plasmid identity.</p>
+<p>A tangled graph with many components or unresolved connections can indicate a complex or problematic assembly. Potential causes include incorrect read pairing, contamination, repeated regions, insufficient data, or combining Illumina and Nanopore reads from different isolates. Review the source data and consult a bioinformatician before drawing conclusions.</p>
+<h2 id="download-and-open-bandage">Download and open Bandage</h2>
+<p>Bandage can currently be downloaded and used on corporate Windows laptops. Additional tools integrated with Bandage, such as BLAST, may not be available in that environment.</p>
+<ol>
+<li>Go to the <a href="https://rrwick.github.io/Bandage/">Bandage website</a>.</li>
+<li>Select <strong>Download Windows</strong>.</li>
+<li>Extract the downloaded ZIP archive.</li>
+<li>Open the extracted <code>Bandage</code> folder.</li>
+<li>Double-click <code>Bandage.exe</code>.</li>
+</ol>
+<p>The initial interface should resemble:</p>
+<p><img alt="Bandage graphical user interface" src="../../img/bandage_gui.jpg" /></p>
+<p>To load and draw a graph:</p>
+<ol>
+<li>Select <strong>File → Load graph</strong>.</li>
+<li>Choose the <code>.gfa</code> file.</li>
+<li>After the file loads, select <strong>Draw graph</strong> in the <strong>Graph drawing</strong> panel.</li>
+</ol>
+<p>A loaded graph should resemble:</p>
+<p><img alt="Bandage with a loaded GFA graph" src="../../img/bandage_gfa_loaded.jpg" /></p>
+<h3 id="example-of-a-simple-hybrid-assembly-graph">Example of a simple hybrid assembly graph</h3>
+<p>The following example is <code>2024-MIN-0073</code>, a <em>Klebsiella</em> hybrid assembly with three separate components. These may represent one chromosome and two plasmids.</p>
+<p><img alt="Example of a simple hybrid assembly graph" src="../../img/good_hybrid_assembly.jpg" /></p>
+<h3 id="example-of-a-problematic-hybrid-assembly-graph">Example of a problematic hybrid assembly graph</h3>
+<p>The following example used Illumina reads from an <em>Acinetobacter</em> isolate with Nanopore reads from a <em>Klebsiella</em> isolate. The resulting graph contains 93 contigs and is difficult to interpret.</p>
+<p><img alt="Example of a problematic hybrid assembly graph" src="../../img/bad_hybrid_assembly.jpg" /></p>
+<p>If a graph resembles this example, verify that the Illumina and Nanopore reads came from the same isolate and discuss the assembly with a bioinformatician.</p>
+<p>For additional instructions, see the <a href="https://github.com/rrwick/Bandage/wiki/Getting-started">Bandage getting-started tutorial</a>.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>GFA retrieval time depends on the number of requested <code>SEQID</code>s, file availability, and current service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences or graph files.</p>
+<p><strong>Likely cause:</strong> The <code>SEQID</code> is incorrect, the hybrid assembly is unavailable, or the assembly has no GFA output.</p>
+<p><strong>What to do:</strong> Verify the <code>SEQID</code> and confirm that it is a hybrid <code>YYYY-MIN-NNNN</code> assembly.</p>
+<h3 id="an-older-min-assembly-has-no-gfa-file">An older MIN assembly has no GFA file</h3>
+<p><strong>Symptom:</strong> The assembly exists, but GFA Retrieve cannot return a graph file.</p>
+<p><strong>Likely cause:</strong> The assembly was generated before the hybrid pipeline produced GFA files.</p>
+<p><strong>What to do:</strong> Consult a bioinformatician to determine whether the graph can be regenerated.</p>
+<h3 id="bandage-cannot-use-an-integrated-blast-function">Bandage cannot use an integrated BLAST function</h3>
+<p><strong>Symptom:</strong> Bandage opens and draws a graph, but an additional BLAST-dependent feature does not work on the corporate Windows device.</p>
+<p><strong>Likely cause:</strong> The supporting BLAST programs are not available in the corporate Windows environment.</p>
+<p><strong>What to do:</strong> Use Bandage for graph visualization and consult a bioinformatician if BLAST-assisted graph analysis is required.</p>
+<h3 id="the-graph-is-highly-fragmented-or-tangled">The graph is highly fragmented or tangled</h3>
+<p><strong>Symptom:</strong> Bandage shows many components or complex unresolved connections.</p>
+<p><strong>Likely cause:</strong> The assembly may contain mismatched reads, contamination, repeated regions, insufficient data, or another assembly-quality issue.</p>
+<p><strong>What to do:</strong> Verify that the Illumina and Nanopore reads belong to the same isolate, review sequence quality, and consult a bioinformatician.</p>
+<h2 id="related-automators">Related automators</h2>
 <ul>
-<li>You can then open your .gfa files in the GUI, by clicking File &gt; Load graph<ul>
-<li>this will open a window where you can search your computer for your .gfa file</li>
-<li>once the gfa file is loaded, the GUI will look like this:
-<img alt="Load Graph GUI" src="../../img/bandage_gfa_loaded.jpg" /></li>
-<li>click "Draw graph" on the left panel, under the "Graph drawing" section, and it will draw a bandage diagram for you!</li>
+<li><a href="../sequence_extractor/">SequenceExtractor</a> — extracts a nucleotide interval or complete contig from an assembly.</li>
+<li><a href="../mobsuite/">MobSuite</a> — predicts plasmid-derived contigs and performs plasmid typing in draft genome assemblies.</li>
 </ul>
-</li>
-</ul>
-<h5 id="bandage-graph-interpretation">Bandage Graph Interpretation</h5>
-<p><strong>Good Hybrid Assembly</strong></p>
-<ul>
-<li>the below diagram is for 2024-MIN-0073, which is a <em>Klebsiella</em>. You can see that the hybrid assembly resulted in 3 separate contigs, likely one large contig for the chromosome and two smaller plasmids.
-<img alt="Good Bandage" src="../../img/good_hybrid_assembly.jpg" /></li>
-</ul>
-<p><strong>Bad Hybrid Assembly</strong></p>
-<ul>
-<li>the below diagram is for a hybrid assembly in which incorrect Illumina reads were used. Illumina reads for an <em>Acinetobacter</em> isolate sequence were mapped to nanopore reads from a <em>Klebsiella</em> isolate sequence, which resulted in 93 contigs (instead of 3). You can see that the assembly is messy and very difficult to visualize/interpret. If your hybrid assembly looks like this, you should re-evaluate what sequences were used and/or speak with a bioinformatician.
-<img alt="Bad Bandage" src="../../img/bad_hybrid_assembly.jpg" /></li>
-</ul>
-<h3 id="bandage-tutorial">Bandage Tutorial</h3>
-<p>The <a href="https://github.com/rrwick/Bandage/wiki/Getting-started">Bandage wiki</a> has a great tutorial of how to load data, as well as descriptions on how to visualize and manipulate data.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>The time required for gfa file retrieval will depend on the number of SEQIDs in your request.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it. This is likely to happen for older MIN sequences, where the pipeline did not create .gfa files.</p>
               
             </div>
           </div><footer>

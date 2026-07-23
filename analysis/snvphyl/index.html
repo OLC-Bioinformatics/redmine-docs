@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../fastqc/">Fastqc</a>
@@ -104,6 +106,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
@@ -121,6 +125,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -142,17 +148,57 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    <li class="toctree-l3"><a class="reference internal" href="#use-a-reference-seqid">Use a reference SEQID</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
+    <li class="toctree-l3"><a class="reference internal" href="#use-an-attached-reference">Use an attached reference</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#input-validation-and-warnings">Input validation and warnings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#snvmatrixtsv">snvMatrix.tsv</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#phylogenetictreenewick">phylogeneticTree.newick</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#snvtabletsv">snvTable.tsv</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#vcf2coretsv">vcf2core.tsv</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#snvalignmentphy">snvAlignment.phy</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#metadatatsv">metadata.tsv</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pipeline-information-files">Pipeline-information files</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#no-reference-or-multiple-references-are-supplied">No reference or multiple references are supplied</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    <li class="toctree-l3"><a class="reference internal" href="#the-reference-cannot-be-found">The reference cannot be found</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attached-is-specified-without-an-attachment">attached is specified without an attachment</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#query-fastq-data-are-missing-or-incomplete">Query FASTQ data are missing or incomplete</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-query-is-too-divergent-from-the-reference">A query is too divergent from the reference</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-nextflow-or-singularity-pipeline-fails">The Nextflow or Singularity pipeline fails</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#no-matching-results-are-produced">No matching results are produced</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#software-versions">Software versions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -163,8 +209,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -219,71 +263,129 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="snvphyl">SNVPhyl</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>SNVPhyl is a pipeline developed by the Public Health Agency of Canada for evaluating the number of SNPs between a
-reference strain and other closely related strains. It also builds a phylogenetic tree to attempt to show the
-relatedness of these strains. Lots more info can be found at the <a href="https://snvphyl.readthedocs.io/en/latest/">SNVPhyl readthedocs site</a>.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>SNVPhyl</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p>The first line of your description needs to be <code>reference</code>, and the second line the SEQID of the strain you want to act
-as your reference strain. Ideally, you'll want to pick a high-quality assembly for your reference.</p>
-<p>If you wish to attach a reference file instead of providing a SEQID, the second line must be <code>attached</code></p>
-<p>The third line of your description should be <code>compare</code>, and lines after that the SEQIDs for strains you want to compare
-your reference to.</p>
-<h4 id="example">Example</h4>
-<p>For an example SNVPhyl, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/12494">issue 12494</a>.</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>The zip file uploaded on SNVPhyl completion should contain 10 files. Important files are:</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>SNVPhyl</strong> to evaluate single-nucleotide variants between one reference genome and a set of closely related query isolates.</p>
+<p>The automator retrieves a reference assembly and paired-end FASTQ files for the query isolates, checks whether the queries are sufficiently similar to the reference, and runs the SNVPhyl Nextflow pipeline with Singularity.</p>
+<p>The output includes pairwise SNV counts, a phylogenetic tree, SNV tables, core-genome statistics, alignments, sample metadata, and pipeline-execution information.</p>
+<p>SNVPhyl currently requires paired-end query reads containing both R1 and R2 files. Use <a href="../snippy/">Snippy</a> when an analysis must combine paired-end and single-end raw-read inputs.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">SNVPhyl
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>Identify exactly one reference and at least one query isolate using this structure:</p>
+<pre><code class="language-text">reference
+REFERENCE-SEQID
+compare
+QUERY-SEQID-1
+QUERY-SEQID-2
+</code></pre>
+<p>Rules:</p>
 <ul>
-<li>snvMatrix.tsv: Shows the number of SNVs between every strain submitted.</li>
-<li>vcf2core.tsv: Shows how much of the genome was covered by the analysis (look at the <code>Percentage of all positions that are valid, included, and part of the core genome</code>
-column in the <code>all</code> row). This should be at least 90 percent, or the strains you were comparing were probably too far apart
-to get good results.</li>
-<li>phylogeneticTree.nwk: The phylogenetic tree created by SNVPhyl. If you want to view this tree, you can use a program such as
-<a href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> or a web-based viewer like <a href="http://phylo.io">phylo.io</a>.</li>
+<li>the line after <code>reference</code> must contain exactly one reference <code>SEQID</code> or <code>attached</code>;</li>
+<li>every line after <code>compare</code> is treated as a query <code>SEQID</code>;</li>
+<li>blank lines are ignored;</li>
+<li>each query must have paired-end FASTQ files containing both R1 and R2 reads.</li>
 </ul>
-<p>Other files can also be important - see the <a href="https://snvphyl.readthedocs.io/en/latest/user/output/">docs on SNVPhyl Output files</a>
-for more information.</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>Most SNVPhyl requests take ~1 hour to complete. If you submit a request for a larger SNVPhyl (&gt;30 strains), it may take
-substantially longer.</p>
-<details>
-  <summary><b>How to check if your SNVPhyl will fail using Galaxy Docker</b></summary> <br><ol>
-
-<li>Log into the head node by typing the following in the terminal
-<code>ssh ubuntu@head</code> or <code>ssh ubuntu@192.168.1.5</code></li>
-
-<li>If prompted for a password enter the standard bioinformatics password.</li>
-
-<li>Enter <code>watch squeue</code>. Under the column <code>NAME</code> there will be a list of biorequests running. In the same row as your biorequest note your Job ID and the node in which your issue is running under <code>JOBID</code> and <code>NODELIST</code>.</li>
-
-<li>On a web browser of your choice search <code>http://<b>[IP_address]</b>.<b>[node#]</b>:<b>[jobID]</b></code>. (Eg. for a job on node 03 with the ID 34595 the url would be: <u>http://[IP_address].3:34595/</u>)
-    <ul>
-    <li>Please ask a bioinformatician or Cathy for the IP address.</li>
-    </ul>
-</li>
-
-<li>Under the tab user cick log in and login with the following credentials:<b> user: admin@galaxy.org; password: admin.</b></li>
-
-<li>On the right there will be a tab labeled <code>history</code> that will display all the steps the the SNVPhyl runs. If there are many tabs with red x's it will likely fail.</li>
-
-</ol></details>
-<p><br></p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>A few things can go wrong with this process:</p>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning
-message informing you of it.</p>
-<p>2) Strains too far apart. SNVPhyl requires that the strains you want to compare to the reference be closely related to
-the reference. If you ask for a SNVPhyl with things that are not very related, you will get a warning telling you so.</p>
-<p>3) No output files. Sometimes, SNVPhyl will say it has completed, but the typical output files will not be present. This
-is either because:</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;a. there are no SNVs between the two strains, and so SNVPhyl crashes. If you want to confirm that there are no SNVs between your two strains you can add a third strain to your description that is related enough to run (eg. try a strain with the same rMLST) but may have variants.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;b. SNVPhyl crashed for an unknown reason, which does happen occasionally. If this happens, your best bet is to try running the SNVPhyl again.</p>
-<p>If SNVPhyl keeps crashing even after subsequent attempts, let us know and we'll do our best to fix things.</p>
-<h3 id="version">Version</h3>
-<p>SNVPhyl on redmine is version 1.0.1 with snvphyl_cli_version=1.3 (as of 2024-04-05)</p>
+<p>Choose a high-quality assembly that is closely related to all query isolates as the reference.</p>
+<h3 id="use-a-reference-seqid">Use a reference <code>SEQID</code></h3>
+<pre><code class="language-text">reference
+2026-SEQ-0001
+compare
+2026-SEQ-0002
+2026-SEQ-0003
+2026-SEQ-0004
+</code></pre>
+<h3 id="use-an-attached-reference">Use an attached reference</h3>
+<p>Put <code>attached</code> after <code>reference</code> and attach one FASTA-formatted reference file:</p>
+<pre><code class="language-text">reference
+attached
+compare
+2026-SEQ-0002
+2026-SEQ-0003
+2026-SEQ-0004
+</code></pre>
+<p>If <code>attached</code> is specified without an attachment, the request stops with an error.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional SNVPhyl analysis parameters beyond selecting a reference by <code>SEQID</code> or attachment.</p>
+<h2 id="input-validation-and-warnings">Input validation and warnings</h2>
+<p>Before starting the pipeline, the automator checks that:</p>
+<ul>
+<li>exactly one reference is specified;</li>
+<li>a reference <code>SEQID</code> resolves to a FASTA assembly;</li>
+<li>an attachment is present when <code>attached</code> is used;</li>
+<li>query <code>SEQID</code>s resolve to FASTQ data;</li>
+<li>each included query has both R1 and R2 reads.</li>
+</ul>
+<p>Missing query data are reported in the Redmine issue. Queries that appear divergent from the reference generate a warning, but the automator continues with available inputs.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When SNVPhyl finishes, it uploads:</p>
+<pre><code class="language-text">SNVPhyl_&lt;issue-number&gt;.zip
+</code></pre>
+<p>The archive is flattened: output files appear at the top level rather than in their original pipeline directories. If multiple files have the same name, a numeric suffix is added to preserve unique archive filenames.</p>
+<p>Important outputs include:</p>
+<h3 id="snvmatrixtsv"><code>snvMatrix.tsv</code></h3>
+<p>Contains pairwise SNV counts between analyzed samples. Use this file to review the number of SNVs separating each sample pair.</p>
+<p>SNV counts should be interpreted together with core-genome coverage, reference suitability, and epidemiological context. A universal relatedness threshold is not defined by this documentation.</p>
+<h3 id="phylogenetictreenewick"><code>phylogeneticTree.newick</code></h3>
+<p>Contains the inferred phylogenetic tree in Newick format. Open it in a Newick-compatible viewer such as FigTree.</p>
+<h3 id="snvtabletsv"><code>snvTable.tsv</code></h3>
+<p>Contains the table of SNVs identified by the workflow.</p>
+<h3 id="vcf2coretsv"><code>vcf2core.tsv</code></h3>
+<p>Contains core-genome and valid-position statistics. Use it to evaluate how much of the reference genome was included in the analysis.</p>
+<p>Low core-genome coverage can indicate that one or more queries are too divergent from the reference for a reliable comparison.</p>
+<h3 id="snvalignmentphy"><code>snvAlignment.phy</code></h3>
+<p>Contains the SNV alignment in PHYLIP format.</p>
+<h3 id="metadatatsv"><code>metadata.tsv</code></h3>
+<p>Contains sample metadata generated by the pipeline.</p>
+<h3 id="pipeline-information-files">Pipeline-information files</h3>
+<p>The archive can contain Nextflow execution reports, software information, and other pipeline metadata. Additional output types may include <code>.tsv</code>, <code>.json</code>, <code>.txt</code>, <code>.newick</code>, <code>.bed</code>, <code>.html</code>, <code>.yml</code>, <code>.yaml</code>, and <code>.phy</code> files.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>Runtime depends on the number of query isolates, read size and coverage, similarity to the reference, and available compute resources. Larger requests generally take longer than small requests.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="no-reference-or-multiple-references-are-supplied">No reference or multiple references are supplied</h3>
+<p><strong>Symptom:</strong> The automator rejects the request before pipeline execution.</p>
+<p><strong>Likely cause:</strong> The Description does not identify exactly one reference.</p>
+<p><strong>What to do:</strong> Submit a new issue using the documented <code>reference</code> and <code>compare</code> structure.</p>
+<h3 id="the-reference-cannot-be-found">The reference cannot be found</h3>
+<p><strong>Symptom:</strong> The issue reports that the reference <code>SEQID</code> does not resolve to a FASTA file.</p>
+<p><strong>Likely cause:</strong> The <code>SEQID</code> is incorrect or its assembly is unavailable.</p>
+<p><strong>What to do:</strong> Verify the reference identifier or attach one valid FASTA reference.</p>
+<h3 id="attached-is-specified-without-an-attachment"><code>attached</code> is specified without an attachment</h3>
+<p><strong>Symptom:</strong> The request stops with an attachment error.</p>
+<p><strong>Likely cause:</strong> No reference FASTA file was attached.</p>
+<p><strong>What to do:</strong> Attach one FASTA-formatted reference and submit a new issue.</p>
+<h3 id="query-fastq-data-are-missing-or-incomplete">Query FASTQ data are missing or incomplete</h3>
+<p><strong>Symptom:</strong> The issue warns about missing queries, or a sample is omitted from the pipeline sample sheet.</p>
+<p><strong>Likely cause:</strong> The query cannot be found or does not have both R1 and R2 files.</p>
+<p><strong>What to do:</strong> Verify the query <code>SEQID</code> and ensure both paired-end files are available.</p>
+<h3 id="a-query-is-too-divergent-from-the-reference">A query is too divergent from the reference</h3>
+<p><strong>Symptom:</strong> The issue reports a divergence warning or <code>vcf2core.tsv</code> shows low core-genome coverage.</p>
+<p><strong>Likely cause:</strong> The reference is not sufficiently close to one or more queries.</p>
+<p><strong>What to do:</strong> Remove divergent queries or choose a more representative reference and submit a new analysis.</p>
+<h3 id="the-nextflow-or-singularity-pipeline-fails">The Nextflow or Singularity pipeline fails</h3>
+<p><strong>Symptom:</strong> The issue closes with an error note and may contain only partial output.</p>
+<p><strong>Likely cause:</strong> The pipeline or execution environment failed after processing began.</p>
+<p><strong>What to do:</strong> Review uploaded pipeline-information files and escalate persistent failures to the bioinformatics team.</p>
+<h3 id="no-matching-results-are-produced">No matching results are produced</h3>
+<p><strong>Symptom:</strong> The archive contains <code>NO_RESULTS.txt</code>.</p>
+<p><strong>Likely cause:</strong> No expected result or pipeline-information files were found.</p>
+<p><strong>What to do:</strong> Review the issue errors and input validation, then correct the request or escalate the failure.</p>
+<h2 id="software-versions">Software versions</h2>
+<p>When the issue closes, the automator reports the versions of:</p>
+<ul>
+<li>Nextflow;</li>
+<li>Singularity;</li>
+<li>the SNVPhyl Nextflow pipeline.</li>
+</ul>
+<p>Record these values when reproducibility is important.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../snippy/">Snippy</a> — performs rapid haploid variant calling and can combine paired-end and single-end raw-read inputs.</li>
+<li><a href="../cowsnphr/">COWSNPhR</a> — maps raw query reads to a reference, calls variants with DeepVariant, annotates variant locations, and builds a tree.</li>
+</ul>
               
             </div>
           </div><footer>

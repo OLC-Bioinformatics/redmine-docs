@@ -82,6 +82,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../downsample/">Downsample</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../downsample_reformat_options/">Downsample Options</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../drep/">dRep-ANI</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Fastqc</a>
@@ -94,17 +96,27 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attachments">Attachments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#interpreting-results">Interpreting Results</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interpreting-results">Interpreting results</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-long-does-it-take">How long does it take?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-can-go-wrong">What can go wrong?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-requested-seqid-is-unavailable">A requested SEQID is unavailable</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#version">Version</a>
+    <li class="toctree-l3"><a class="reference internal" href="#the-report-package-is-too-large-for-a-redmine-attachment">The report package is too large for a Redmine attachment</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-automators">Related automators</a>
     </li>
     </ul>
                   </li>
@@ -126,6 +138,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
@@ -143,6 +157,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -163,8 +179,6 @@
                   <li class="toctree-l1"><a class="reference internal" href="../strainmash/">StrainMash</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../unknownisolate/">Unknownisolate</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wgsassembly/">WGS Assembly</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Internal Use</span></p>
@@ -219,25 +233,61 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="fastqcmultiqc">FastQC/MultiQC</h1>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>FastQC is a tool for conducting quality control checks on raw sequence data. MultiQC is a tool to aggregate FastQC reports from multiple sequences into a single file/report.</p>
-<p>For more information, see the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC website</a>, and <a href="https://multiqc.info/">MultiQC website</a>.</p>
-<h3 id="how-do-i-use-it">How do I use it?</h3>
-<h4 id="subject">Subject</h4>
-<p>In the <code>Subject</code> field, put <code>fastqc</code>. Spelling counts, but case sensitivity doesn't.</p>
-<h4 id="description">Description</h4>
-<p><strong>Required Components</strong></p>
-<p>You must include a list of SEQIDs one per line.</p>
-<h4 id="example">Example</h4>
-<p>For an example FastQC analysis, see <a href="https://redmine.biodiversity.agr.gc.ca/issues/30311">issue 30311</a>. The zip file has been attached to this request as an example (the ftp links expire after approx. 2 weeks).</p>
-<h4 id="interpreting-results">Interpreting Results</h4>
-<p>FastQC/MultiQC will upload the multiqc report and a zipped folder called <code>fastqc_redmineID.zip</code> to both redmine and the ftp once it has completed. This will contain report files for individual sequences, and the multiqc report. (Files are uploaded to both redmine and the ftp in case a large number of sequences are analysed, and therefore reports are too large to be uploaded directly to redmine).</p>
-<h3 id="how-long-does-it-take">How long does it take?</h3>
-<p>FastQC is usually pretty fast, &lt;1 minute per sequence. The time required for analysis will depend on the number of sequences requested.</p>
-<h3 id="what-can-go-wrong">What can go wrong?</h3>
-<p>1) Requested SEQIDs are not available. If we can't find some of the SEQIDs that you request, you will get a warning message informing you of it.</p>
-<h3 id="version">Version</h3>
-<p>Version 0.11.9 is currently available at the OLC. (as of 2024-07-4)</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>Use <strong>FastQC/MultiQC</strong> to assess the quality of raw sequence data and review quality-control results across multiple requested sequences.</p>
+<p>The automator runs:</p>
+<ul>
+<li><strong>FastQC</strong> — performs quality-control checks on raw sequence data and creates an individual report for each sequence;</li>
+<li><strong>MultiQC</strong> — aggregates the individual FastQC results into a combined report for comparison across the request.</li>
+</ul>
+<p>For background, see the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC website</a> and <a href="https://multiqc.info/">MultiQC website</a>.</p>
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+<h3 id="subject">Subject</h3>
+<p>In the <strong>Subject</strong> field, enter:</p>
+<pre><code class="language-text">fastqc
+</code></pre>
+<p>Spelling matters, but matching is not case-sensitive.</p>
+<h3 id="description">Description</h3>
+<p>In the <strong>Description</strong> field, enter one <code>SEQID</code> per line:</p>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>The requested <code>SEQID</code>s must have raw sequence data available.</p>
+<h3 id="attachments">Attachments</h3>
+<p>No attachment is required. The automator retrieves the raw sequence data associated with each requested <code>SEQID</code>.</p>
+<h3 id="optional-parameters">Optional parameters</h3>
+<p>The supplied documentation does not identify optional parameters for the Redmine FastQC/MultiQC automator.</p>
+<h3 id="example">Example</h3>
+<pre><code class="language-text">2026-SEQ-0001
+2026-SEQ-0002
+</code></pre>
+<p>See <a href="https://redmine-dev.cloud-nuage.inspection.gc.ca/issues/30311">issue 30311</a> for an example FastQC/MultiQC request. Temporary result-download links associated with the issue may expire.</p>
+<h2 id="interpreting-results">Interpreting results</h2>
+<p>When the analysis finishes, the automator uploads:</p>
+<ul>
+<li>the combined MultiQC report; and</li>
+<li>a ZIP archive named using the Redmine issue identifier:</li>
+</ul>
+<pre><code class="language-text">fastqc_redmineID.zip
+</code></pre>
+<p>The archive contains individual FastQC report files and the combined MultiQC report.</p>
+<p>Results are uploaded to both Redmine and Dropbox. This provides a download option when a request includes enough sequences that the complete report package is too large to attach directly to Redmine.</p>
+<p>Use the individual FastQC reports to inspect per-sequence quality metrics. Use the MultiQC report to compare those metrics across all sequences in the request. The supplied documentation does not define project-specific pass/fail thresholds, so interpret warnings and failures in the context of the sequencing platform, intended downstream analysis, and expected library characteristics.</p>
+<h2 id="how-long-does-it-take">How long does it take?</h2>
+<p>FastQC usually takes less than one minute per sequence. Total runtime depends on the number and size of the requested sequence files and current service workload.</p>
+<h2 id="what-can-go-wrong">What can go wrong?</h2>
+<h3 id="a-requested-seqid-is-unavailable">A requested <code>SEQID</code> is unavailable</h3>
+<p><strong>Symptom:</strong> The Redmine issue receives a warning identifying unavailable sequences.</p>
+<p><strong>Likely cause:</strong> The automator cannot locate raw sequence data for the requested <code>SEQID</code>.</p>
+<p><strong>What to do:</strong> Verify each <code>SEQID</code>, confirm that its raw sequence files are available, and submit a corrected request.</p>
+<h3 id="the-report-package-is-too-large-for-a-redmine-attachment">The report package is too large for a Redmine attachment</h3>
+<p><strong>Symptom:</strong> The complete report package is not attached directly to the Redmine issue.</p>
+<p><strong>Likely cause:</strong> A request containing many sequences produced reports that exceed the practical Redmine attachment size.</p>
+<p><strong>What to do:</strong> Use the Dropbox download provided by the automator.</p>
+<h2 id="related-automators">Related automators</h2>
+<ul>
+<li><a href="../downsample/">Downsample</a> — reduces raw FASTQ data by coverage, output size, read count, base count, or other supported BBMap options.</li>
+</ul>
               
             </div>
           </div><footer>
