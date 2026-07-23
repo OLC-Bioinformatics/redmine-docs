@@ -2,7 +2,7 @@
 
 ## What does it do?
 
-Use **Sipprverse** to detect predefined or custom gene targets directly in raw, paired-end FASTQ reads. Sipprverse operates on unassembled read data; use [GeneSeekr](geneseekr.md) when the targets must be detected in FASTA-formatted assemblies.
+Use **Sipprverse** to detect predefined or custom gene targets directly in raw or paired-end FASTQ reads. Sipprverse operates on unassembled read data; use [GeneSeekr](geneseekr.md) when the targets must be detected in FASTA-formatted assemblies. KMA can also analyze raw reads, but Sipprverse is the workflow intended for the supplied Sipprverse target analyses.
 
 ## How do I use it?
 
