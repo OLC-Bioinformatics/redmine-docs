@@ -2,11 +2,27 @@
 
 ## What does it do?
 
-Use **ConFindr** when raw sequencing reads may be contaminated. ConFindr detects evidence of both intra-species and inter-species contamination before assembly or downstream analysis.
+Use **ConFindr** when you think raw sequencing reads may be contaminated or
+when you need to check raw FASTQ data for contamination before assembly.
+ConFindr detects evidence of both intra-species and inter-species
+contamination before assembly or downstream analysis.
 
-Contaminated reads can produce misassemblies and misleading downstream results. ConFindr is therefore a quality-control tool for raw reads, not a general species-identification workflow.
+Contaminated reads can produce misassemblies and misleading downstream
+results. ConFindr is therefore a quality-control tool for raw reads, not a
+general species-identification workflow.
 
-For background, see the [ConFindr documentation](https://lowandrew.github.io/ConFindr/).
+For background, see the
+[ConFindr documentation](https://lowandrew.github.io/ConFindr/).
+
+## What should I run if I think my raw reads are contaminated?
+
+Run **ConFindr** when you suspect contamination in raw FASTQ reads.
+ConFindr checks raw sequencing reads for evidence of intra-species and
+inter-species contamination before assembly or downstream analysis.
+
+Use ConFindr for a contamination assessment. Do not use Downsample,
+FastQC, AutoCLARK, or a raw-read retrieval workflow as a substitute for
+the ConFindr contamination call.
 
 ## How do I use it?
 
