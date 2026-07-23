@@ -91,4 +91,6 @@ MobSuite generally takes approximately one minute per requested `SEQID`. Total r
 
 - [AMRsummary](amrsummary.md) — combines ResFinder acquired-AMR results with MOB-suite plasmid-location predictions.
 - [Plasmid-Borne Identity](plasmidborneidentity.md) — searches assemblies for user-supplied targets and predicts whether matching targets are plasmid-borne.
-- [PHASTEST](phastest.md) — detects prophage regions in bacterial genomes and plasmids rather than reconstructing plasmids.
+- [PHASTEST](phastest.md) — detects prophage regions in assembled bacterial
+  genomes. Use MobSuite for predicted plasmids and PHASTEST for prophages
+  when both types of mobile genetic element must be investigated.

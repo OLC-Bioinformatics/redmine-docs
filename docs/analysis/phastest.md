@@ -140,5 +140,7 @@ Available sequences can still be analyzed when some requested identifiers are mi
 
 ## Related automators
 
-- [MobSuite](mobsuite.md) — reconstructs and types predicted plasmids in draft genome assemblies.
+- [MobSuite](mobsuite.md) — detects, reconstructs, and types predicted
+  plasmids. Use PHASTEST for prophage regions and MobSuite for plasmids when
+  both types of mobile genetic element must be investigated in an assembly.
 - [Prokka](prokka.md) — performs general genome annotation without PHASTEST's prophage-focused detection and visualization.
