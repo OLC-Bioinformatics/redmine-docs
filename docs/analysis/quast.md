@@ -156,7 +156,7 @@ The current implementation reports missing assemblies but does not stop the anal
 The base command is:
 
 ```bash
-quast -t 8 -o <work_dir>/quast_output_<issue_id>
+quast -t 12 -o <work_dir>/quast_output_<issue_id>
 ```
 
 Optional arguments are appended based on the issue description.
@@ -164,7 +164,7 @@ Optional arguments are appended based on the issue description.
 A run without optional arguments resembles:
 
 ```bash
-quast -t 8 \
+quast -t 12 \
   -o <work_dir>/quast_output_<issue_id> \
   <work_dir>/sequences/*.fasta
 ```
