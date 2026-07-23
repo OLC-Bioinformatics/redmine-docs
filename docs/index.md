@@ -22,6 +22,8 @@ Automator requests report tool and database versions when available. If a comple
 ### Assess, combine, or reduce raw-read data
 
 - [FastQC/MultiQC](analysis/fastqc.md) — creates per-sample read-quality reports and a combined MultiQC report.
+- [QUAST](analysis/quast.md) - evaluates genome assemblies by computing various metrics
+- [MetaQUAST](analysis/metaquast.md) - evaluates metagenome assemblies by computing various metrics
 - [Downsample](analysis/downsample.md) — reduces FASTQ data by coverage, compressed size, read count, base count, sampling fraction, or supported BBMap options.
 - [Downsample option reference](analysis/downsample_reformat_options.md) — lists additional supported `reformat.sh` options and defaults.
 - [fastqmerge](analysis/fastqmerge.md) — combines FASTQ files from multiple sequencing runs of the same biological sample.
@@ -51,9 +53,18 @@ GeneSeekr, Sipprverse, and KMA also provide AMR-related target-screening modes. 
 - [AutoCLARK](analysis/autoclark.md) — reports species represented in raw reads or draft assemblies.
 - [Kraken2/Bracken](analysis/kraken2.md) — performs taxonomic classification and refined abundance estimation using selectable databases.
 - [MetaPhlAn4](analysis/metaphlan.md) — profiles microbial communities using clade-specific marker genes.
-- [ConFindr](analysis/confindr.md) — detects intra-species and inter-species contamination in raw sequencing reads.
 
-AutoCLARK, Kraken2/Bracken, and MetaPhlAn4 are taxonomic-analysis workflows. ConFindr is the dedicated raw-read contamination workflow.
+AutoCLARK, Kraken2/Bracken, and MetaPhlAn4 are taxonomic-analysis workflows.
+
+#### Suspected contamination in raw reads
+
+If you think raw FASTQ reads might be contaminated, run
+[ConFindr](analysis/confindr.md). ConFindr checks for evidence of
+intra-species and inter-species contamination before assembly or downstream
+analysis.
+
+Do not use Downsample, External Retrieve, or AutoCLARK as substitutes for a
+ConFindr contamination assessment.
 
 ### Type an isolate
 
@@ -89,7 +100,7 @@ All three workflows require a suitable reference and closely related query isola
 
 - [Prokka](analysis/prokka.md) — annotates genome assemblies and produces standard feature, nucleotide, and protein outputs.
 - [MobSuite](analysis/mobsuite.md) — reconstructs and types predicted plasmids in draft genome assemblies.
-- [PHASTEST](analysis/phastest.md) — identifies, annotates, and visualizes prophage regions in bacterial genomes and plasmids.
+- [PHASTEST](analysis/phastest.md) — identifies, annotates, and visualizes prophage regions in assembled bacterial genomes and plasmids.
 
 ### Extract or inspect assembly data
 
