@@ -72,6 +72,8 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-does-it-do">What does it do?</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-should-i-run-if-i-think-my-raw-reads-are-contaminated">What should I run if I think my raw reads are contaminated?</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-do-i-use-it">How do I use it?</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#subject">Subject</a>
@@ -146,6 +148,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mlst/">MLST</a>
@@ -163,6 +167,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../resfinder/">ResFinder</a>
                   </li>
@@ -238,9 +244,22 @@
               
                 <h1 id="confindr">ConFindr</h1>
 <h2 id="what-does-it-do">What does it do?</h2>
-<p>Use <strong>ConFindr</strong> when raw sequencing reads may be contaminated. ConFindr detects evidence of both intra-species and inter-species contamination before assembly or downstream analysis.</p>
-<p>Contaminated reads can produce misassemblies and misleading downstream results. ConFindr is therefore a quality-control tool for raw reads, not a general species-identification workflow.</p>
-<p>For background, see the <a href="https://lowandrew.github.io/ConFindr/">ConFindr documentation</a>.</p>
+<p>Use <strong>ConFindr</strong> when you think raw sequencing reads may be contaminated or
+when you need to check raw FASTQ data for contamination before assembly.
+ConFindr detects evidence of both intra-species and inter-species
+contamination before assembly or downstream analysis.</p>
+<p>Contaminated reads can produce misassemblies and misleading downstream
+results. ConFindr is therefore a quality-control tool for raw reads, not a
+general species-identification workflow.</p>
+<p>For background, see the
+<a href="https://lowandrew.github.io/ConFindr/">ConFindr documentation</a>.</p>
+<h2 id="what-should-i-run-if-i-think-my-raw-reads-are-contaminated">What should I run if I think my raw reads are contaminated?</h2>
+<p>Run <strong>ConFindr</strong> when you suspect contamination in raw FASTQ reads.
+ConFindr checks raw sequencing reads for evidence of intra-species and
+inter-species contamination before assembly or downstream analysis.</p>
+<p>Use ConFindr for a contamination assessment. Do not use Downsample,
+FastQC, AutoCLARK, or a raw-read retrieval workflow as a substitute for
+the ConFindr contamination call.</p>
 <h2 id="how-do-i-use-it">How do I use it?</h2>
 <h3 id="subject">Subject</h3>
 <p>In the <strong>Subject</strong> field, enter:</p>

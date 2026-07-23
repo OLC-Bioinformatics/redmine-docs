@@ -55,6 +55,10 @@
     <li class="toctree-l3"><a class="reference internal" href="#detect-or-summarize-antimicrobial-resistance">Detect or summarize antimicrobial resistance</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#identify-an-organism-profile-taxonomy-or-investigate-contamination">Identify an organism, profile taxonomy, or investigate contamination</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#suspected-contamination-in-raw-reads">Suspected contamination in raw reads</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#type-an-isolate">Type an isolate</a>
     </li>
@@ -140,6 +144,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="analysis/metaphlan/">Metaphlan4</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/metaquast/">MetaQUAST</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="analysis/mobsuite/">MobSuite</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="analysis/mlst/">MLST</a>
@@ -157,6 +163,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="analysis/prokka/">Prokka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="analysis/psortb/">PSORTb</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="analysis/quast/">QUAST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="analysis/resfinder/">ResFinder</a>
                   </li>
@@ -249,6 +257,8 @@
 <h3 id="assess-combine-or-reduce-raw-read-data">Assess, combine, or reduce raw-read data</h3>
 <ul>
 <li><a href="analysis/fastqc/">FastQC/MultiQC</a> — creates per-sample read-quality reports and a combined MultiQC report.</li>
+<li><a href="analysis/quast/">QUAST</a> - evaluates genome assemblies by computing various metrics</li>
+<li><a href="analysis/metaquast/">MetaQUAST</a> - evaluates metagenome assemblies by computing various metrics</li>
 <li><a href="analysis/downsample/">Downsample</a> — reduces FASTQ data by coverage, compressed size, read count, base count, sampling fraction, or supported BBMap options.</li>
 <li><a href="analysis/downsample_reformat_options/">Downsample option reference</a> — lists additional supported <code>reformat.sh</code> options and defaults.</li>
 <li><a href="analysis/fastqmerge/">fastqmerge</a> — combines FASTQ files from multiple sequencing runs of the same biological sample.</li>
@@ -277,9 +287,15 @@
 <li><a href="analysis/autoclark/">AutoCLARK</a> — reports species represented in raw reads or draft assemblies.</li>
 <li><a href="analysis/kraken2/">Kraken2/Bracken</a> — performs taxonomic classification and refined abundance estimation using selectable databases.</li>
 <li><a href="analysis/metaphlan/">MetaPhlAn4</a> — profiles microbial communities using clade-specific marker genes.</li>
-<li><a href="analysis/confindr/">ConFindr</a> — detects intra-species and inter-species contamination in raw sequencing reads.</li>
 </ul>
-<p>AutoCLARK, Kraken2/Bracken, and MetaPhlAn4 are taxonomic-analysis workflows. ConFindr is the dedicated raw-read contamination workflow.</p>
+<p>AutoCLARK, Kraken2/Bracken, and MetaPhlAn4 are taxonomic-analysis workflows.</p>
+<h4 id="suspected-contamination-in-raw-reads">Suspected contamination in raw reads</h4>
+<p>If you think raw FASTQ reads might be contaminated, run
+<a href="analysis/confindr/">ConFindr</a>. ConFindr checks for evidence of
+intra-species and inter-species contamination before assembly or downstream
+analysis.</p>
+<p>Do not use Downsample, External Retrieve, or AutoCLARK as substitutes for a
+ConFindr contamination assessment.</p>
 <h3 id="type-an-isolate">Type an isolate</h3>
 <ul>
 <li><a href="analysis/mlst/">MLST</a> — determines an organism- and scheme-specific multilocus sequence type.</li>
@@ -313,7 +329,7 @@
 <ul>
 <li><a href="analysis/prokka/">Prokka</a> — annotates genome assemblies and produces standard feature, nucleotide, and protein outputs.</li>
 <li><a href="analysis/mobsuite/">MobSuite</a> — reconstructs and types predicted plasmids in draft genome assemblies.</li>
-<li><a href="analysis/phastest/">PHASTEST</a> — identifies, annotates, and visualizes prophage regions in bacterial genomes and plasmids.</li>
+<li><a href="analysis/phastest/">PHASTEST</a> — identifies, annotates, and visualizes prophage regions in assembled bacterial genomes and plasmids.</li>
 </ul>
 <h3 id="extract-or-inspect-assembly-data">Extract or inspect assembly data</h3>
 <ul>
@@ -386,5 +402,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-07-20 13:50:01.788243+00:00
+Build Date UTC : 2026-07-23 18:25:50.561897+00:00
 -->
